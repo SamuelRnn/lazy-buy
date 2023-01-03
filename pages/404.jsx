@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import Image from "next/image";
 import React from "react";
 
 const errorPage = () => {
@@ -28,12 +29,12 @@ const errorPage = () => {
             </div>
           </div>
           <div>
-            <img src="https://i.ibb.co/G9DC8S0/404-2.png" />
+            <Image src="https://i.ibb.co/G9DC8S0/404-2.png" />
           </div>
         </div>
       </div>
       <div>
-        <img src="https://i.ibb.co/ck1SGFJ/Group.png" />
+        <Image src="https://i.ibb.co/ck1SGFJ/Group.png" />
       </div>
     </div>
   );
