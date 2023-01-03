@@ -2,7 +2,7 @@ import { product } from "../../../prisma";
 
 export default async function createProduct(req, res) {
   const { name, description, price, stock, isActive } = req.body;
-  const { companyId } = req.params;
+  const { companyId } = req.query;
 
   if (!name || !description || !price || !stock)
     return res.status(400).send({ message: "Not enough data" });
@@ -16,6 +16,7 @@ export default async function createProduct(req, res) {
     isActive,
     companyId,
   };
+  
   await product.create({
     data: {
       ...newProduct,
