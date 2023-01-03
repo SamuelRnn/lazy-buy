@@ -29,12 +29,12 @@ const errorPage = () => {
             </div>
           </div>
           <div>
-            <Image src="https://i.ibb.co/G9DC8S0/404-2.png" />
+            <Image width={600} height={600} src="https://i.ibb.co/G9DC8S0/404-2.png" object-fit="cover"/>
           </div>
         </div>
       </div>
       <div>
-        <Image src="https://i.ibb.co/ck1SGFJ/Group.png" />
+        <Image width={600} height={600} src="https://i.ibb.co/ck1SGFJ/Group.png" object-fit="cover"/>
       </div>
     </div>
   );
