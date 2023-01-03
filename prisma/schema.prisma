@@ -27,6 +27,7 @@ model User {
 model Company {
   id           String        @id @default(uuid())
   name         String        @unique
+  password     String
   city         String
   country      String
   plan         PlanType      @default(Basic)
