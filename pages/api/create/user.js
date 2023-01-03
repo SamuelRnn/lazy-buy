@@ -1,6 +1,9 @@
 import { user } from "../../../prisma";
 
 export default async function createUser(req, res) {
+  if (req.method !== "POST")
+    return res.status(400).send({ message: "Not found" });
+
   const {
     isAdmin,
     fullName,

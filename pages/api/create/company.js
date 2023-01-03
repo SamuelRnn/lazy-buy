@@ -1,6 +1,9 @@
 import { company } from "../../../prisma";
 
 export default async function createCompany(req, res) {
+  if (req.method !== "POST")
+    return res.status(400).send({ message: "Not found" });
+
   const { name, owner, password, city, country, plan, profilePicture } =
     req.body;
 

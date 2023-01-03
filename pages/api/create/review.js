@@ -1,10 +1,10 @@
 import { review } from "../../../prisma";
 
 export default async function createReview(req, res) {
-  const { commentTitle, commentBody, rating, userId, productId } = req.body;
-
   if (req.method !== "POST")
     return res.status(400).send({ message: "Not found" });
+
+  const { commentTitle, commentBody, rating, userId, productId } = req.body;
 
   if (!commentTitle || !commentBody || !rating || !userId || !productId)
     return res.status(400).send({ message: "Not enough data" });
