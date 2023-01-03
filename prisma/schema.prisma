@@ -9,30 +9,34 @@ datasource db {
 
 model User {
   id             String        @id @default(uuid())
-  isAdmin        Boolean       @default(false)
-  fullName       String
+  fullName       String?
   userName       String        @unique
   email          String        @unique
-  password       String
-  profilePicture String
+  password       String?
+  profilePicture String //TODO: agregar default
   city           String?
   country        String?
   reviews        Review[]
   transactions   Transaction[]
 
+  isAdmin   Boolean  @default(false)
+  isActive  Boolean  @default(true)
+  isBanned  Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model Company {
-  id           String        @id @default(uuid())
-  name         String        @unique
-  password     String
-  city         String
-  country      String
-  plan         PlanType      @default(Basic)
-  products     Product[]
-  transactions Transaction[]
+  id             String        @id @default(uuid())
+  name           String        @unique
+  password       String
+  owner          String
+  city           String
+  country        String
+  profilePicture String
+  plan           PlanType      @default(Basic)
+  products       Product[]
+  transactions   Transaction[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
