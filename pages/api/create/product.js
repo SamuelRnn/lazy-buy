@@ -2,6 +2,7 @@ import { product } from "../../../prisma";
 
 export default async function createProduct(req, res) {
   const { name, description, price, stock, isActive } = req.body;
+
   const { companyId } = req.params;
 
   if (!name || !description || !price || !stock)
@@ -16,6 +17,7 @@ export default async function createProduct(req, res) {
     isActive,
     companyId,
   };
+  
   await product.create({
     data: {
       ...newProduct,
