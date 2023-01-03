@@ -4,17 +4,16 @@ const Card = () => {
   return (
     <div className="bg-white max-w-sm mx-auto rounded-lg shadow-xl">
     <div className="py-4 px-6 flex flex-col gap-2">
-        <a href="#" className="text-2xl font-bold text-gray-700">Adidas</a>
+        <a href="#" className="text-2xl font-bold text-gray-700">Renault</a>
         <p className="text-gray-500">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac
-            aliquam ligula.
+            Bicicleta deportiva seminueva, color azul.
         </p>
     </div>
     <div>
         <img
-          src="https://img.freepik.com/foto-gratis/zapatos-deportivos-correr_1203-7549.jpg?w=2000&t=st=1660341556~exp=1660342156~hmac=c7d13c9ad31180c781643f1734272498db39b21af8b9dd20f735e5e509c8ba02"
+          src="https://bicialtea.labici.net/images/bicialtea.png"
           alt="Adidas"
-          className="w-full object-cover"
+          className="h-44 mx-auto object-cover"
         />
     </div>
     <div className="py-4 px-6 flex items-center justify-between bg-pry-600 rounded-bl-lg rounded-br-lg">
