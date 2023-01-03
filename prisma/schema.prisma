@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -8,4 +5,98 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String        @id @default(uuid())
+  fullName       String?
+  userName       String        @unique
+  email          String        @unique
+  password       String?
+  profilePicture String //TODO: agregar default
+  city           String?
+  country        String?
+  reviews        Review[]
+  transactions   Transaction[]
+
+  isAdmin   Boolean  @default(false)
+  isActive  Boolean  @default(true)
+  isBanned  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Company {
+  id             String        @id @default(uuid())
+  name           String        @unique
+  password       String
+  owner          String
+  city           String
+  country        String
+  profilePicture String
+  plan           PlanType      @default(Basic)
+  products       Product[]
+  transactions   Transaction[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Plan {
+  id                  Int      @id @default(autoincrement())
+  planType            PlanType
+  productsLimit       Int
+  activeProductsLimit Int
+  productPriority     Int
+
+  @@index([productPriority])
+}
+
+enum PlanType {
+  Basic
+  Standard
+  Premium
+}
+
+model Product {
+  id            Int           @id @default(autoincrement())
+  name          String
+  slug          String        @unique //id-name
+  description   String
+  price         Float
+  averageRating Float?
+  stock         Int
+  isActive      Boolean
+  company       Company       @relation(fields: [companyId], references: [id])
+  companyId     String
+  reviews       Review[]
+  transactions  Transaction[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([name, description])
+}
+
+model Review {
+  id           String   @id @default(uuid())
+  commentTitle String
+  commentBody  String
+  rating       Float
+  user         User?    @relation(fields: [userId], references: [id])
+  userId       String?
+  product      Product? @relation(fields: [productId], references: [id])
+  productId    Int?
+
+  createdAt DateTime @default(now())
+}
+
+model Transaction {
+  id        String  @id @default(uuid())
+  company   Company @relation(fields: [companyId], references: [id])
+  companyId String
+  user      User    @relation(fields: [userId], references: [id])
+  userId    String
+  product   Product @relation(fields: [productId], references: [id])
+  productId Int
 }
