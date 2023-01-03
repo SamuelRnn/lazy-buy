@@ -6,7 +6,25 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors:{
+        fondo: {
+          '50':  '#f9ebeb',
+          '100': '#eec4c4',
+          '200': '#e29c9c',
+          '300': '#d77575',
+          '400': '#cb4d4d',
+          '500': '#b23434',
+          '600': '#8a2828',
+          '700': '#631d1d',
+          '800': '#3b1111',
+          '900': '#140606',
+        },
+        textH1:{
+          '50': '#FF8787'
+        }
+      }
+    },
   },
   plugins: [
     plugin(function ({ addUtilities }) {
