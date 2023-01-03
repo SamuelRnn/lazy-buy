@@ -26,10 +26,11 @@ model User {
 
 model Company {
   id           String        @id @default(uuid())
+  name         String        @unique
+  password     String
   city         String
   country      String
-  plan         Plan?         @relation(fields: [planId], references: [id])
-  planId       Int?          @default(1)
+  plan         PlanType      @default(Basic)
   products     Product[]
   transactions Transaction[]
 
@@ -38,14 +39,19 @@ model Company {
 }
 
 model Plan {
-  id                  Int       @id @default(autoincrement())
-  planName            String
+  id                  Int      @id @default(autoincrement())
+  planType            PlanType
   productsLimit       Int
   activeProductsLimit Int
   productPriority     Int
-  company             Company[]
 
   @@index([productPriority])
+}
+
+enum PlanType {
+  Basic
+  Standard
+  Premium
 }
 
 model Product {
