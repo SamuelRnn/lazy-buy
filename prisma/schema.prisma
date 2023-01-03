@@ -48,6 +48,7 @@ model Plan {
   productsLimit       Int
   activeProductsLimit Int
   productPriority     Int
+  price               Float
 
   @@index([productPriority])
 }
