@@ -1,12 +1,13 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const Footer = () => {
   return (
-    <div className="bg-zinc-200 w-full p-8">
-      <div className="grid grid-rows-1 gap-8 md:grid-cols-12 xl:gap-8">
+    <div className="bg-zinc-100 w-full py-8">
+      <div className="main grid grid-rows-1 gap-8 md:grid-cols-12 xl:gap-8">
         <div className="md:col-span-12 xl:col-span-4 flex flex-col gap-4">
-          <h1 className="text-3xl font-bold text-gray-900">Brand</h1>
+          <h1 className="text-3xl font-bold text-gray-900">Lazy Buy</h1>
           <p className="text-gray-600 text-justify hover:text-fondo-300">
             Lorem Ipsum ha sido el texto de relleno estándar de las industrias
             desde el año 1500, cuando un impresor (N. del T. persona que se
@@ -17,21 +18,21 @@ const Footer = () => {
         <div className="md:col-span-4 xl:col-span-2">
           <h2 className="font-bold mb-6 uppercase">Menu</h2>
           <nav className="flex flex-col gap-4">
-            <a href="#" className="hover:underline hover:text-fondo-300">
+            <Link href="/" className="hover:underline hover:text-fondo-300">
               Inicio
-            </a>
-            <a href="#" className="hover:underline hover:text-fondo-300">
+            </Link>
+            <Link href="/" className="hover:underline hover:text-fondo-300">
               Nosotros
-            </a>
-            <a href="#" className="hover:underline hover:text-fondo-300">
+            </Link>
+            <Link href="/" className="hover:underline hover:text-fondo-300">
               Servicios
-            </a>
-            <a href="#" className="hover:underline hover:text-fondo-300">
+            </Link>
+            <Link href="/" className="hover:underline hover:text-fondo-300">
               Blog
-            </a>
-            <a href="#" className="hover:underline hover:text-fondo-300">
+            </Link>
+            <Link href="/" className="hover:underline hover:text-fondo-300">
               Contacto
-            </a>
+            </Link>
           </nav>
         </div>
         <div className="md:col-span-4 xl:col-span-3">
@@ -143,14 +144,16 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <hr className="my-4" />
-      <div className="flex flex-col xl:flex-row gap-4 items-center justify-between">
-        <p className="text-gray-800 text-center md:text-left  w-full">
+      <div className="py-4">
+        <hr className="main" />
+      </div>
+      <div className="main">
+        <p className="text-gray-800 text-center w-full">
           &copy; 2023
           <span className="text-gray-900 font-bold text-center">
-            GP #14 Devs.
+            {" Lazy buy"}
           </span>{" "}
-          Todos los derechos reservados.
+          | Todos los derechos reservados.
         </p>
       </div>
     </div>
