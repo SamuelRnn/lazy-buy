@@ -62,6 +62,7 @@ export default function LandingPage() {
           </svg>
           Sign in with Google
         </button>
+        <Link className="hover:text-fondo-300 mt-3 hover:bg-white text-white font-semibold flex rounded-xl border-2 py-3 border-fondo-200 items-center justify-center gap-4ease-in-out transition-all bg-fondo-200"  href='./signup'>Sign Up!</Link>
       </div>
     </div>
   </div>
