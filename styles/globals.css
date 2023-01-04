@@ -71,3 +71,23 @@
     transform: translateY(0);
   }
 }
+
+.carousel-i{
+  padding: 2px 20px;
+}
+.carousel-i > button{
+  background-color: #d77575;
+  z-index: 99;
+}
+
+.carousel-i > button:hover{
+  
+  background-color: #8a2828;
+}
+
+.carousel-i  .react-multiple-carousel__arrow--left{
+  left: calc(5% + -72px);
+}
+.carousel-i  .react-multiple-carousel__arrow--right{
+  right: calc(6% + -87px);
+}
