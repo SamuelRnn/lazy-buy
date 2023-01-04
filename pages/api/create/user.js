@@ -22,7 +22,7 @@ export default async function createUser(req, res) {
   if (!fullName || !email || !password)
     return res.status(400).send({ message: "Not enough data" });
 
-  const upToCloud = await cloud.uploader(profilePicture, {
+  const upToCloud = await cloud.uploader.upload(profilePicture, {
     folder: "userProfilePictures",
   });
 
