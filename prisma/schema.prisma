@@ -13,7 +13,7 @@ model User {
   userName       String        @unique
   email          String        @unique
   password       String?
-  profilePicture String
+  profilePicture Json
   city           String?
   country        String?
   reviews        Review[]
@@ -33,7 +33,7 @@ model Company {
   owner          String
   city           String
   country        String
-  profilePicture String
+  profilePicture Json
   plan           PlanType      @default(Basic)
   products       Product[]
   transactions   Transaction[]
@@ -65,6 +65,7 @@ model Product {
   slug          String        @unique //id-name
   description   String
   price         Float
+  image         Json
   averageRating Float?
   stock         Int
   isActive      Boolean
