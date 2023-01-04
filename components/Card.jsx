@@ -1,16 +1,18 @@
-import React from 'react'
-import Image from 'next/image'
-
+import React from "react";
+import Image from "next/image";
+//TODO: refactor class "card_width"
 const Card = () => {
   return (
-    <div className="bg-white max-w-sm mx-auto rounded-lg shadow-xl">
-    <div className="py-4 px-6 flex flex-col gap-2">
-        <a href="#" className="text-2xl font-bold text-gray-700">Renault</a>
+    <div className="bg-white max-w-sm mx-auto rounded-lg shadow-xl card_width">
+      <div className="py-4 px-6 flex flex-col gap-2">
+        <a href="#" className="text-2xl font-bold text-gray-700">
+          Renault
+        </a>
         <p className="text-gray-500">
-            Bicicleta deportiva seminueva, color azul.
+          Bicicleta deportiva seminueva, color azul.
         </p>
-    </div>
-    <div>
+      </div>
+      <div>
         <Image
           src="https://bicialtea.labici.net/images/bicialtea.png"
           alt="Adidas"
@@ -19,15 +21,15 @@ const Card = () => {
           width={150}
           object-fit="cover"
         />
-    </div>
-    <div className="py-4 px-6 flex items-center justify-between bg-pry-600 rounded-bl-lg rounded-br-lg">
+      </div>
+      <div className="py-4 px-6 flex items-center justify-between bg-pry-600 rounded-bl-lg rounded-br-lg">
         <span className="text-white font-bold">$1,500.00</span>
         <button className="text-gray-200 hover:text-white transition-colors font-semibold outline-none">
-            Agregar al carrito
+          Agregar al carrito
         </button>
+      </div>
     </div>
-  </div>
-  )
-}
+  );
+};
 
-export default Card
+export default Card;

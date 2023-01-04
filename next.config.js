@@ -2,7 +2,12 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["i.ibb.co", "cdn-icons-png.flaticon.com","bicialtea.labici.net"],
+    domains: [
+      "i.ibb.co",
+      "i.imgur.com",
+      "cdn-icons-png.flaticon.com",
+      "bicialtea.labici.net",
+    ],
   },
 };
 
