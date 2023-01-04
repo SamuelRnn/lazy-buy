@@ -2,18 +2,16 @@ import Link from "next/link";
 import { useState } from "react";
 
 const signup = () => {
-
-
-
+  
   return (
     <>
-      <section class="bg-white dark:bg-gray-900">
+      <section class="bg-white">
         <div class="flex justify-center min-h-screen">
           <div class="hidden bg-cover lg:block lg:w-2/5" id="bg-video"></div>
 
           <div class="flex items-center w-full max-w-3xl  mx-auto lg:px-12 lg:w-3/5">
             <div class="w-full bg-white p-5 rounded-xl">
-              <h1 class="text-2xl font-bold tracking-wider text-fondo-300 capitalize dark:text-white">
+              <h1 class="text-2xl font-bold tracking-wider text-fondo-300 capitalize">
                 Get your free account now.
               </h1>
 
@@ -23,12 +21,12 @@ const signup = () => {
               </p>
 
               <div class="mt-6">
-                <h1 class="text-gray-500 dark:text-gray-300">
+                <h1 class="text-gray-50">
                   Select type of account
                 </h1>
 
                 <div class="mt-3 md:flex md:items-center md:-mx-2">
-                  <button class="flex justify-center w-full px-6 py-3 text-white font-bold bg-fondo-200 hover:bg-white hover:text-fondo-400 border border-fondo-200 transition-all rounded-md md:w-auto md:mx-2 focus:outline-none">
+                  <button class="mt-1 flex justify-center w-full px-6 py-3 text-white font-bold bg-fondo-200 hover:bg-white hover:text-fondo-400 border border-fondo-200 transition-all rounded-md md:w-auto md:mx-2 focus:outline-none">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       class="w-6 h-6"
@@ -68,7 +66,7 @@ const signup = () => {
                 </div>
               </div>
 
-              <form class="grid grid-cols-1 gap-6 mt-8 md:grid-cols-2">
+              <form class="grid grid-cols-1 gap-6 mt-6 md:grid-cols-2">
                 <div>
                   <label class="block mb-2 text-sm text-gray-600 dark:text-gray-200">
                     First Name
@@ -76,7 +74,7 @@ const signup = () => {
                   <input
                     type="text"
                     placeholder="John"
-                    class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                    class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-md focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   />
                 </div>
 
@@ -87,7 +85,7 @@ const signup = () => {
                   <input
                     type="text"
                     placeholder="Snow"
-                    class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                    class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-md focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   />
                 </div>
 
@@ -98,7 +96,7 @@ const signup = () => {
                   <input
                     type="text"
                     placeholder="XXX-XX-XXXX-XXX"
-                    class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                    class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-md focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   />
                 </div>
 
@@ -109,7 +107,7 @@ const signup = () => {
                   <input
                     type="email"
                     placeholder="johnsnow@example.com"
-                    class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                    class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-md focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   />
                 </div>
 
@@ -120,7 +118,7 @@ const signup = () => {
                   <input
                     type="password"
                     placeholder="Enter your password"
-                    class="border-fondo-200 block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                    class="border-fondo-200 block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border rounded-md focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   />
                 </div>
 
@@ -131,7 +129,7 @@ const signup = () => {
                   <input
                     type="password"
                     placeholder="Enter your password"
-                    class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                    class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-md focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   />
                 </div>
                 <button className="hover:text-fondo-300 hover:bg-white text-white font-semibold flex rounded-xl border-2 py-3 border-fondo-200 items-center justify-center gap-4ease-in-out transition-all bg-fondo-200">
