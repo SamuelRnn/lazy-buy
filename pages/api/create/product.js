@@ -1,6 +1,9 @@
 import { product } from "../../../prisma";
 
 export default async function createProduct(req, res) {
+  if (req.method !== "POST")
+    return res.status(400).send({ message: "Not found" });
+
   const { name, description, price, stock, isActive } = req.body;
 
   const { companyId } = req.query;
@@ -17,7 +20,7 @@ export default async function createProduct(req, res) {
     isActive,
     companyId,
   };
-  
+
   await product.create({
     data: {
       ...newProduct,

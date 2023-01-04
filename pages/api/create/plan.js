@@ -1,6 +1,9 @@
 import { plan } from "../../../prisma";
 
 export default async function createPlan(req, res) {
+  if (req.method !== "POST")
+    return res.status(400).send({ message: "Not found" });
+    
   const {
     planType,
     productsLimit,
