@@ -27,3 +27,20 @@
     background-position: center;
   }
 }
+.main {
+  margin: 0 auto;
+  width: 95%;
+}
+.carousel_btn {
+  @apply p-2 bg-fondo-200 rounded;
+}
+.card_width {
+  min-width: 320px;
+  width: 320px;
+} /*agregar como clase tailwind "w-card"*/
+.banner_img {
+  background-image: url(https://www.novagric.com/images/empresa/trabaja-con-nosotros.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
