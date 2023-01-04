@@ -34,7 +34,7 @@ model Company {
   city           String
   country        String
   profilePicture Json
-  plan           PlanType      @default(Basic)
+  plan           PlanType
   products       Product[]
   transactions   Transaction[]
 
@@ -66,7 +66,8 @@ model Product {
   description   String
   price         Float
   image         Json
-  averageRating Float?
+  averageRating Float?        @default(0)
+  reviewsCount  Int?          @default(0)
   stock         Int
   isActive      Boolean
   company       Company       @relation(fields: [companyId], references: [id])
@@ -94,11 +95,13 @@ model Review {
 }
 
 model Transaction {
-  id        String  @id @default(uuid())
-  company   Company @relation(fields: [companyId], references: [id])
-  companyId String
-  user      User    @relation(fields: [userId], references: [id])
-  userId    String
-  product   Product @relation(fields: [productId], references: [id])
-  productId Int
+  id            String   @id @default(uuid())
+  company       Company  @relation(fields: [companyId], references: [id])
+  companyId     String
+  user          User     @relation(fields: [userId], references: [id])
+  userId        String
+  product       Product  @relation(fields: [productId], references: [id])
+  productId     Int
+  productAmount Int
+  createdAt     DateTime @default(now())
 }

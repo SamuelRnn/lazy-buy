@@ -2,14 +2,14 @@ import Image from "next/image";
 import logo from "../public/lazycartremove.png";
 import { MdShoppingCart } from "react-icons/md";
 import Link from "next/link";
-import Categories from "./Categories"
+import Categories from "./Categories";
 import { useState } from "react";
 
 const NavBar = () => {
-  const [activeCategoriesModal, setActiveCategoriesModal] = useState(false)
+  const [activeCategoriesModal, setActiveCategoriesModal] = useState(false);
 
   return (
-    <header className="fixed w-full">
+    <header className="w-full">
       <div className="w-full bg-fondo-200 py-2 flex flex-1 flex-wrap gap-2 items-center justify-evenly ">
         <div className="">
           <Link href="/home" className="flex items-center">
@@ -58,7 +58,7 @@ const NavBar = () => {
           <a
             href="#"
             className="xl:py-1 xl:px-2 rounded-lg hover:bg-fondo-100 transition-colors text-zinc-700 font-semibold"
-            onClick={() => setActiveCategoriesModal(state => !state)}
+            onClick={() => setActiveCategoriesModal((state) => !state)}
           >
             Categorias
           </a>
@@ -70,8 +70,10 @@ const NavBar = () => {
           </button>
         </nav>
       </div>
-      <Categories sourceArray={["Juguetes", "Jesucristo", "Panes", "Carros", "Ferraris"]} isActive={activeCategoriesModal}/>
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae minima repellendus rerum at hic nisi, alias ad dolore a harum. A distinctio minus dolore, totam ipsa nostrum. Necessitatibus, ab quaerat.
+      <Categories
+        sourceArray={["Juguetes", "Jesucristo", "Panes", "Carros", "Ferraris"]}
+        isActive={activeCategoriesModal}
+      />
     </header>
   );
 };
