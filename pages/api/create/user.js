@@ -17,10 +17,10 @@ export default async function createUser(req, res) {
     country,
   } = req.body;
 
-  const passwordHashed = await bcrypt.hash(password, 8);
-
   if (!fullName || !email || !password)
     return res.status(400).send({ message: "Not enough data" });
+
+  const passwordHashed = await bcrypt.hash(password, 8);
 
   const upToCloud = await cloud.uploader.upload(profilePicture, {
     folder: "userProfilePictures",
