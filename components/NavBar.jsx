@@ -4,9 +4,11 @@ import { MdShoppingCart } from "react-icons/md";
 import Link from "next/link";
 import Categories from "./Categories";
 import { useState } from "react";
+import Register from "./Register";
 
 const NavBar = () => {
   const [activeCategoriesModal, setActiveCategoriesModal] = useState(false);
+  const [activeRegModal, setActiveRegModal] = useState(false)
 
   return (
     <header className="w-full">
@@ -62,6 +64,13 @@ const NavBar = () => {
           >
             Categorias
           </a>
+          <a
+            href="#"
+            className="xl:py-1 xl:px-2 rounded-lg hover:bg-fondo-100 transition-colors text-zinc-700 font-semibold"
+            onClick={() => setActiveRegModal((state) => !state)}
+          >
+            Register
+          </a>
           <button
             href="#"
             className="xl:py-1 xl:px-2 rounded-lg hover:bg-fondo-100 transition-colors"
@@ -74,6 +83,7 @@ const NavBar = () => {
         sourceArray={["Juguetes", "Jesucristo", "Panes", "Carros", "Ferraris"]}
         isActive={activeCategoriesModal}
       />
+      <Register registerArray={["Log In", "Sign Up"]} isActive={activeRegModal}/>
     </header>
   );
 };
