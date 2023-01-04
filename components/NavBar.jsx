@@ -12,7 +12,7 @@ const NavBar = () => {
     <header className="w-full">
       <div className="w-full bg-fondo-200 py-2 flex flex-1 flex-wrap gap-2 items-center justify-evenly ">
         <div className="">
-          <Link href="/home" className="flex items-center">
+          <Link href="/" className="flex items-center">
             <Image src={logo} alt="logo" width={45} height={45} />
             <h1 className="m-2 font-bold text-fondo-500 text-xl hover:text-white transition ease-in-out">
               Lazy Buy
