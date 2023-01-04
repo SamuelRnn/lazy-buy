@@ -1,4 +1,5 @@
 import { user } from "../../../prisma";
+import bcrypt from "bcryptjs";
 
 export default async function createUser(req, res) {
   if (req.method !== "POST")
@@ -15,12 +16,14 @@ export default async function createUser(req, res) {
     country,
   } = req.body;
 
+  const passwordHash = await bcrypt.hash(password, 8);
+
   if (!fullName || !email || !password)
     return res.status(400).send({ message: "Not enough data" });
 
   await user.create({
-    data: { ...req.body },
+    data: { ...req.body, password: passwordHash },
   });
 
-  return res.status(200).json(req.body);
+  return res.status(200).json({ ...req.body, password: passwordHash });
 }
