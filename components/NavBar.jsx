@@ -2,14 +2,12 @@ import Image from "next/image";
 import logo from "../public/lazycartremove.png";
 import { MdShoppingCart } from "react-icons/md";
 import Link from "next/link";
-import Categories from "./Categories";
 import SearchBar from "./SearchBar";
+import NavSubMenu from "./NavSubMenu";
 import { useState } from "react";
-import Register from "./Register";
-
 const NavBar = () => {
   const [activeCategoriesModal, setActiveCategoriesModal] = useState(false);
-  const [activeRegModal, setActiveRegModal] = useState(false)
+  const [activeRegModal, setActiveRegModal] = useState(false);
 
   return (
     <header className="w-full">
@@ -24,45 +22,54 @@ const NavBar = () => {
         </div>
         <SearchBar />
         <nav className="md:col-span-6 flex items-center gap-4 justify-end">
-          <a
-            href="#"
+          <Link
+            href=""
             className="xl:py-1 xl:px-2 rounded-lg hover:bg-fondo-100 transition-colors text-zinc-700 font-semibold"
           >
             Inicio
-          </a>
-          <a
-            href="#"
+          </Link>
+          <Link
+            href=""
             className="xl:py-1 xl:px-2 rounded-lg hover:bg-fondo-100 transition-colors text-zinc-700 font-semibold"
           >
             Nosotros
-          </a>
-          <a
-            href="#"
+          </Link>
+          <Link
+            href=""
             className="xl:py-1 xl:px-2 rounded-lg hover:bg-fondo-100 transition-colors text-zinc-700 font-semibold"
-            onClick={() => setActiveCategoriesModal((state) => !state)}
+            onClick={() => {
+              setActiveCategoriesModal((state) => !state);
+              setActiveRegModal(false);
+            }}
           >
             Categorias
-          </a>
-          <a
-            href="#"
+          </Link>
+          <Link
+            href=""
             className="xl:py-1 xl:px-2 rounded-lg hover:bg-fondo-100 transition-colors text-zinc-700 font-semibold"
-            onClick={() => setActiveRegModal((state) => !state)}
+            onClick={() => {
+              setActiveRegModal((state) => !state);
+              setActiveCategoriesModal(false);
+            }}
           >
             Register
-          </a>
+          </Link>
           <button
-            href="#"
+            href=""
             className="xl:py-1 xl:px-2 rounded-lg hover:bg-fondo-100 transition-colors"
           >
             <MdShoppingCart className="text-3xl text-fondo-400" />
           </button>
         </nav>
       </div>
-      <Categories
+      <NavSubMenu
         sourceArray={["Juguetes", "Jesucristo", "Panes", "Carros", "Ferraris"]}
         isActive={activeCategoriesModal}
       />
-      <Register registerArray={["Log In", "Sign Up"]} isActive={activeRegModal}/>
+      <NavSubMenu
+        sourceArray={["Log In", "Sign Up"]}
+        isActive={activeRegModal}
+      />
     </header>
   );
 };

@@ -44,3 +44,30 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+.img_anim {
+  animation-name: appear_logo;
+  animation-duration: 0.4s;
+  animation-timing-function: cubic-bezier(0.08, 0.7, 0, 1.04);
+  animation-delay: 0.2s;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: backwards;
+}
+.title_anim {
+  animation-name: appear_logo;
+  animation-duration: 0.4s;
+  animation-timing-function: cubic-bezier(0.08, 0.7, 0, 1.04);
+  animation-delay: 0;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: backwards;
+}
+
+@keyframes appear_logo {
+  from {
+    transform: translateY(500px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
