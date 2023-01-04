@@ -21,7 +21,7 @@ const signup = () => {
               </p>
 
               <div class="mt-6">
-                <h1 class="text-gray-50">
+                <h1 class="text-fondo-300 font-bold">
                   Select type of account
                 </h1>
 
