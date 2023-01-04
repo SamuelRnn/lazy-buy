@@ -4,7 +4,12 @@ export default async function getProduct(req, res) {
   if (req.method !== "GET")
     return res.status(400).send({ message: "Not found" });
 
-  const products = await product.findMany();
+  const { productId } = req.query;
+    const productFound = await product.findUnique({
+    where: {
+      id: productId,
+    },
+  });
 
-  return res.status(200).json(products);
+  return res.status(200).json(productFound);
 }
