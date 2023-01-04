@@ -13,7 +13,7 @@ model User {
   userName       String        @unique
   email          String        @unique
   password       String?
-  profilePicture String //TODO: agregar default
+  profilePicture String
   city           String?
   country        String?
   reviews        Review[]
