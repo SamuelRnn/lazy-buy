@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image'
 
 const Card = () => {
   return (
@@ -10,10 +11,13 @@ const Card = () => {
         </p>
     </div>
     <div>
-        <img
+        <Image
           src="https://bicialtea.labici.net/images/bicialtea.png"
           alt="Adidas"
           className="h-44 mx-auto object-cover"
+          height={44}
+          width={150}
+          object-fit="cover"
         />
     </div>
     <div className="py-4 px-6 flex items-center justify-between bg-pry-600 rounded-bl-lg rounded-br-lg">

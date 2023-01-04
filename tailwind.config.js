@@ -25,6 +25,7 @@ module.exports = {
         }
       }
     },
+    
   },
   plugins: [
     plugin(function ({ addUtilities }) {
