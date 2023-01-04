@@ -31,6 +31,10 @@
   margin: 0 auto;
   width: 95%;
 }
+.nav {
+  margin: 0 auto;
+  width: min(1200px, 95%);
+}
 .carousel_btn {
   @apply p-2 bg-fondo-200 rounded;
 }
