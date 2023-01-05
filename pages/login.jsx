@@ -3,7 +3,7 @@ import Image from 'next/image'
 import AnimatedLogo from '../components/AnimatedLogo'
 import Layout from '../components/layout'
 import { signIn } from 'next-auth/react'
-import { Formik } from 'formik'
+import { ErrorMessage, Formik } from 'formik'
 
 // const callbackUrl = process.env.BASE_URL || 'http://localhost:3000'
 
@@ -31,23 +31,27 @@ export default function Loading() {
             }}
             validate={(valores) =>{
               let errors = {}
+              // Validate email
               if(!valores.email){
                 errors.email = 'Por favor ingresa un email'
+              }else if(!/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(valores.email)){
+                errors.email = 'Se requiere un mail valido'
               }
+
+
               if(!valores.password){
                 errors.password = 'Por favor ingresa un password'
               }
               return errors
             }}
-            onSubmit={(valores) =>{
-              // console.log(valores) 
+            onSubmit={(valores, {resetForm}) =>{
+              resetForm()
               console.log('Formulario enviado')
             }}
           >
-            {( {errors, values, handleSubmit, handleChange, handleBlur }) => (
+            {( {errors, values, touched, handleSubmit, handleChange, handleBlur }) => (
                  <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-                  {/* {console.log(props)} propiedades del formik */}
-                  {console.log(errors)}
+                
                  {/* Email */}
                  <div>
                    <label htmlFor="email" className="text-zinc-600">
@@ -61,9 +65,9 @@ export default function Loading() {
                      placeholder="Ingresa tu correo electrónico"
                      value={values.email}
                      onChange={handleChange}
-                    //  onBlur={handleBlur}
+                     onBlur={handleBlur}
                    />
-                   {errors.email && <div className='text-red-600 mt-2 pl-5'>{errors.email}</div>}
+                   {touched.email && errors.email && <div className='text-red-600 mt-2 pl-5'>{errors.email}</div>}
                  </div>
                  {/* Contraseña */}
                  <div>
@@ -78,9 +82,9 @@ export default function Loading() {
                      placeholder="Ingresa tu contraseña"
                      value={values.password}
                      onChange={handleChange}
-                    //  onBlur={handleBlur}
+                     onBlur={handleBlur}
                    />
-                   {errors.password && <div className='text-red-600 mt-2 pl-5'>{errors.password}</div>}
+                   {touched.password && errors.password && <div className='text-red-600 mt-2 pl-5'>{errors.password}</div>}
                  </div>
                  <div className="flex flex-col md:flex-row items-center justify-between gap-4 order-2 md:order-1">
                    <span className="text-gray-800">
