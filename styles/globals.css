@@ -50,16 +50,16 @@
 }
 .img_anim {
   animation-name: appear_logo;
-  animation-duration: 0.4s;
+  animation-duration: 0.3s;
   animation-timing-function: cubic-bezier(0.08, 0.7, 0, 1.04);
-  animation-delay: 0.2s;
+  animation-delay: 0.15s;
   animation-iteration-count: 1;
   animation-direction: normal;
   animation-fill-mode: backwards;
 }
 .title_anim {
   animation-name: appear_logo;
-  animation-duration: 0.4s;
+  animation-duration: 0.35s;
   animation-timing-function: cubic-bezier(0.08, 0.7, 0, 1.04);
   animation-delay: 0;
   animation-iteration-count: 1;
@@ -76,22 +76,21 @@
   }
 }
 
-.carousel-i{
+.carousel-i {
   padding: 2px 20px;
 }
-.carousel-i > button{
+.carousel-i > button {
   background-color: #d77575;
   z-index: 99;
 }
 
-.carousel-i > button:hover{
-  
+.carousel-i > button:hover {
   background-color: #8a2828;
 }
 
-.carousel-i  .react-multiple-carousel__arrow--left{
+.carousel-i .react-multiple-carousel__arrow--left {
   left: calc(5% + -72px);
 }
-.carousel-i  .react-multiple-carousel__arrow--right{
+.carousel-i .react-multiple-carousel__arrow--right {
   right: calc(6% + -87px);
 }
