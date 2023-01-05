@@ -1,133 +1,138 @@
 import Link from "next/link";
 import { useState } from "react";
 import Image from "next/image";
+import AnimatedLogo from "../components/AnimatedLogo";
 
 const signup = () => {
   return (
     <>
-      <section class="bg-white">
-        <div class="flex justify-center min-h-screen">
-          <div class="hidden bg-cover lg:block lg:w-2/5" id="bg-video"></div>
+      <section className="bg-white">
+        <div className="flex justify-center min-h-screen">
+          <div className="hidden lg:flex lg:w-2/5 justify-center items-center">
+            <AnimatedLogo />
+          </div>
 
-          <div class="flex items-center w-full max-w-3xl  mx-auto lg:px-12 lg:w-3/5">
-            <div class="w-full bg-white p-5 rounded-xl">
-              <h1 class="text-2xl font-bold tracking-wider text-fondo-300 capitalize">
+          <div className="flex items-center w-full max-w-3xl  mx-auto lg:px-12 lg:w-3/5">
+            <div className="w-full bg-white p-5 rounded-xl">
+              <h1 className="text-2xl font-bold tracking-wider text-fondo-300 capitalize">
                 Get your free account now.
               </h1>
 
-              <p class="mt-4 text-fondo-300 font-bold">
+              <p className="mt-4 text-fondo-300 font-bold">
                 Let’s get you all set up so you can verify your personal account
                 and begin setting up your profile.
               </p>
 
-              <div class="mt-6">
-                <h1 class="text-fondo-300 font-bold">Select type of account</h1>
+              <div className="mt-6">
+                <h1 className="text-fondo-300 font-bold">
+                  Select type of account
+                </h1>
 
-                <div class="mt-3 md:flex md:items-center md:-mx-2">
-                  <button class="mt-1 flex justify-center w-full px-6 py-3 text-white font-bold bg-fondo-200 hover:bg-white hover:text-fondo-400 border border-fondo-200 transition-all rounded-md md:w-auto md:mx-2 focus:outline-none">
+                <div className="mt-3 md:flex md:items-center md:-mx-2">
+                  <button className="mt-1 flex justify-center w-full px-6 py-3 text-white font-bold bg-fondo-200 hover:bg-white hover:text-fondo-400 border border-fondo-200 transition-all rounded-md md:w-auto md:mx-2 focus:outline-none">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      class="w-6 h-6"
+                      className="w-6 h-6"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
-                      stroke-width="2"
+                      strokeWidth="2"
                     >
                       <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                         d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                       />
                     </svg>
 
-                    <span class="mx-2">Company</span>
+                    <span className="mx-2">Company</span>
                   </button>
 
-                  <button class="mt-1 flex justify-center w-full px-6 py-3 text-white font-bold bg-fondo-200 hover:bg-white hover:text-fondo-400 border border-fondo-200 transition-all rounded-md md:w-auto md:mx-2 focus:outline-none">
+                  <button className="mt-1 flex justify-center w-full px-6 py-3 text-white font-bold bg-fondo-200 hover:bg-white hover:text-fondo-400 border border-fondo-200 transition-all rounded-md md:w-auto md:mx-2 focus:outline-none">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      class="w-6 h-6"
+                      className="w-6 h-6"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
-                      stroke-width="2"
+                      strokeWidth="2"
                     >
                       <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                         d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
                       />
                     </svg>
 
-                    <span class="mx-2">Client</span>
+                    <span className="mx-2">Client</span>
                   </button>
                 </div>
               </div>
 
-              <form class="grid grid-cols-1 gap-6 mt-6 md:grid-cols-2">
+              <form className="grid grid-cols-1 gap-6 mt-6 md:grid-cols-2">
                 <div>
-                  <label class="block mb-2 text-sm text-gray-600 dark:text-gray-200">
+                  <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">
                     First Name
                   </label>
                   <input
                     type="text"
                     placeholder="John"
-                    class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-md focus:border-zinc-700 dark:focus:border-zinc-700 focus:ring-zinc-700 focus:outline-none focus:ring focus:ring-opacity-40"
+                    className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-md focus:border-zinc-700 dark:focus:border-zinc-700 focus:ring-zinc-700 focus:outline-none focus:ring focus:ring-opacity-40"
                   />
                 </div>
 
                 <div>
-                  <label class="block mb-2 text-sm text-gray-600 dark:text-gray-200">
+                  <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">
                     Last name
                   </label>
                   <input
                     type="text"
                     placeholder="Snow"
-                    class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-md focus:border-zinc-700 dark:focus:border-zinc-700 focus:ring-zinc-700 focus:outline-none focus:ring focus:ring-opacity-40"
+                    className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-md focus:border-zinc-700 dark:focus:border-zinc-700 focus:ring-zinc-700 focus:outline-none focus:ring focus:ring-opacity-40"
                   />
                 </div>
 
                 <div>
-                  <label class="block mb-2 text-sm text-gray-600 dark:text-gray-200">
+                  <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">
                     Phone number
                   </label>
                   <input
                     type="text"
                     placeholder="XXX-XX-XXXX-XXX"
-                    class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-md focus:border-zinc-700 dark:focus:border-zinc-700 focus:ring-zinc-700 focus:outline-none focus:ring focus:ring-opacity-40"
+                    className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-md focus:border-zinc-700 dark:focus:border-zinc-700 focus:ring-zinc-700 focus:outline-none focus:ring focus:ring-opacity-40"
                   />
                 </div>
 
                 <div>
-                  <label class="block mb-2 text-sm text-gray-600 dark:text-gray-200">
+                  <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">
                     Email address
                   </label>
                   <input
                     type="email"
                     placeholder="johnsnow@example.com"
-                    class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-md focus:border-zinc-700 dark:focus:border-zinc-700 focus:ring-zinc-700 focus:outline-none focus:ring focus:ring-opacity-40"
+                    className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-md focus:border-zinc-700 dark:focus:border-zinc-700 focus:ring-zinc-700 focus:outline-none focus:ring focus:ring-opacity-40"
                   />
                 </div>
 
                 <div>
-                  <label class="block mb-2 text-sm text-gray-600 dark:text-gray-200">
+                  <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">
                     Password
                   </label>
                   <input
                     type="password"
                     placeholder="Enter your password"
-                    class="border-fondo-200 block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border rounded-md focus:border-zinc-700 dark:focus:border-zinc-700 focus:ring-zinc-700 focus:outline-none focus:ring focus:ring-opacity-40"
+                    className="border-fondo-200 block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border rounded-md focus:border-zinc-700 dark:focus:border-zinc-700 focus:ring-zinc-700 focus:outline-none focus:ring focus:ring-opacity-40"
                   />
                 </div>
 
                 <div>
-                  <label class="block mb-2 text-sm text-gray-600 dark:text-gray-200">
+                  <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">
                     Confirm password
                   </label>
                   <input
                     type="password"
                     placeholder="Enter your password"
-                    class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-md focus:border-zinc-700 dark:focus:border-zinc-700 focus:ring-zinc-700 focus:outline-none focus:ring focus:ring-opacity-40"
+                    className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-md focus:border-zinc-700 dark:focus:border-zinc-700 focus:ring-zinc-700 focus:outline-none focus:ring focus:ring-opacity-40"
                   />
                 </div>
                 <button className="hover:text-black hover:bg-white text-white font-semibold flex rounded-xl border-2 p-3 border-black items-center justify-center gap-4 ease-in-out transition-all bg-black">
@@ -149,9 +154,9 @@ const signup = () => {
                     fill="currentColor"
                   >
                     <path
-                      fill-rule="evenodd"
+                      fillRule="evenodd"
                       d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                      clip-rule="evenodd"
+                      clipRule="evenodd"
                     />
                   </svg>
                 </button>

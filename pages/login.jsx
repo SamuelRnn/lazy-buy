@@ -84,7 +84,7 @@ export default function Loading() {
         </form>
       </div>
       {/* AnimatedLogo */}
-      <div className="flex items-center justify-center">
+      <div className="hidden lg:flex items-center justify-center">
         <AnimatedLogo />
       </div>
     </div>
