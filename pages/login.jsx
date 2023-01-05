@@ -10,7 +10,7 @@ import { ErrorMessage, Formik } from 'formik'
 export default function Loading() {
   // async function googleSignin() {
   //   await signIn('google', { callbackUrl })
-  
+
   return (
     <Layout noLayout={true}>
       <div className="min-h-screen bg-[#ffffff] grid grid-cols-1 lg:grid-cols-2">
@@ -26,8 +26,8 @@ export default function Loading() {
 
           <Formik
             initialValues={{
-              email: '',
-              password: ''
+              email: "",
+              password: "",
             }}
             validate={(valores) =>{
               let errors = {}
@@ -42,7 +42,7 @@ export default function Loading() {
               if(!valores.password){
                 errors.password = 'Por favor ingresa un password'
               }
-              return errors
+              return errors;
             }}
             onSubmit={(valores, {resetForm}) =>{
               resetForm()
@@ -107,28 +107,28 @@ export default function Loading() {
                  <div className="w-full mt-4">
                    <button
                     //  onClick={googleSignin}
-                     type="button"
-                     className="transition delay-125 ease-in-out w-full flex items-center justify-center gap-2 border p-2 px-4 rounded-full bg-black hover:bg-white hover:text-black"
-                   >
-                     <Image
-                       width={20}
-                       height={20}
-                       src="https://cdn-icons-png.flaticon.com/512/281/281764.png"
-                       alt="Google"
-                     />
-                     <span className="ml-2">Ingresar con Google</span>
-                   </button>
-                 </div>
-   
-                 <div className="mt-4 order-1 md:order-2">
-                   <button
-                     type="submit"
-                     className="border w-full font-semibold bg-fondo-300 p-2 rounded-full hover:bg-white hover:rounded-full hover:border hover:text-fondo-300 transition-colors"
-                   >
-                     Iniciar sesión
-                   </button>
-                 </div>
-               </form>
+                    type="button"
+                    className="transition delay-125 ease-in-out w-full flex items-center justify-center gap-2 border p-2 px-4 rounded-full bg-black hover:bg-white hover:text-black"
+                  >
+                    <Image
+                      width={20}
+                      height={20}
+                      src="https://cdn-icons-png.flaticon.com/512/281/281764.png"
+                      alt="Google"
+                    />
+                    <span className="ml-2">Ingresar con Google</span>
+                  </button>
+                </div>
+
+                <div className="mt-4 order-1 md:order-2">
+                  <button
+                    type="submit"
+                    className="border w-full font-semibold bg-fondo-300 p-2 rounded-full hover:bg-white hover:rounded-full hover:border hover:text-fondo-300 transition-colors"
+                  >
+                    Iniciar sesión
+                  </button>
+                </div>
+              </form>
             )}
           </Formik>
         </div>
@@ -138,5 +138,5 @@ export default function Loading() {
         </div>
       </div>
     </Layout>
-  )
+  );
 }
