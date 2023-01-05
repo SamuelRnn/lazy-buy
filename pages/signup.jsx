@@ -13,8 +13,11 @@ const signup = () => {
             <AnimatedLogo />
           </div>
 
-          <div className="flex items-center w-full max-w-3xl  mx-auto lg:px-12 lg:w-3/5">
-            <div className="w-full bg-white p-5 rounded-xl">
+          <div
+            className="flex items-center w-full max-w-3xl  mx-auto lg:px-12 lg:w-3/5"
+            id="signup_div"
+          >
+            <div className="w-full bg-white p-5">
               <h1 className="text-2xl font-bold tracking-wider text-fondo-300 capitalize">
                 Get your free account now.
               </h1>
@@ -28,7 +31,7 @@ const signup = () => {
                 <h1 className="text-fondo-300 font-bold">
                   Select type of account
                 </h1>
-
+                {/* login type buttons */}
                 <div className="mt-3 md:flex md:items-center md:-mx-2">
                   <button className="mt-1 flex justify-center w-full px-6 py-3 text-white font-bold bg-fondo-200 hover:bg-white hover:text-fondo-400 border border-fondo-200 transition-all rounded-md md:w-auto md:mx-2 focus:outline-none">
                     <svg
@@ -72,7 +75,7 @@ const signup = () => {
 
               <form className="grid grid-cols-1 gap-6 mt-6 md:grid-cols-2">
                 <div>
-                  <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">
+                  <label className="block mb-2 text-sm text-gray-800">
                     First Name
                   </label>
                   <input
@@ -83,7 +86,7 @@ const signup = () => {
                 </div>
 
                 <div>
-                  <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">
+                  <label className="block mb-2 text-sm text-gray-800">
                     Last name
                   </label>
                   <input
@@ -94,7 +97,7 @@ const signup = () => {
                 </div>
 
                 <div>
-                  <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">
+                  <label className="block mb-2 text-sm text-gray-800">
                     Phone number
                   </label>
                   <input
@@ -105,7 +108,7 @@ const signup = () => {
                 </div>
 
                 <div>
-                  <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">
+                  <label className="block mb-2 text-sm text-gray-800">
                     Email address
                   </label>
                   <input
@@ -116,7 +119,7 @@ const signup = () => {
                 </div>
 
                 <div>
-                  <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">
+                  <label className="block mb-2 text-sm text-gray-800">
                     Password
                   </label>
                   <input
@@ -127,7 +130,7 @@ const signup = () => {
                 </div>
 
                 <div>
-                  <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">
+                  <label className="block mb-2 text-sm text-gray-800">
                     Confirm password
                   </label>
                   <input
@@ -150,7 +153,7 @@ const signup = () => {
 
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    class="w-5 h-5 rtl:-scale-x-100"
+                    className="w-5 h-5 rtl:-scale-x-100"
                     viewBox="0 0 20 20"
                     fill="currentColor"
                   >

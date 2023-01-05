@@ -1,25 +1,24 @@
 import Layout from "../components/layout.jsx";
 import Banner from "../components/Banner.jsx";
-import Carousel from "../components/Carousel.jsx";
 import CardCarousel from "../components/CardCarousel.jsx";
 
 export default function Home() {
   return (
     <Layout>
-      <br />
-      <br />
-      <h1 className="font-bold text-fondo-500 text-xl">New Products</h1>
-      <br />
-      <CardCarousel />
-      <br />
-      <br />
-      <Banner />
-      <br />
-      <br />
-      <h1 className="font-bold text-fondo-500 text-xl">Ofertas del día</h1>
-      <br />
-      <CardCarousel />
-      <br />
+      <div className="py-12">
+        <h1 className="main home_titles">Nuevos productos</h1>
+        <CardCarousel />
+        <div className="py-12">
+          <Banner />
+        </div>
+        <h1 className="main home_titles">Ofertas del día</h1>
+        <CardCarousel />
+        <br />
+        <hr className="main my-4 text-zinc-300" />
+        <br />
+        <h1 className="main home_titles">{"Descuentos!(?"}</h1>
+        <CardCarousel />
+      </div>
     </Layout>
   );
 }

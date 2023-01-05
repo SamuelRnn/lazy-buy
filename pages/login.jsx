@@ -3,7 +3,13 @@ import Image from "next/image";
 import AnimatedLogo from "../components/AnimatedLogo";
 import Layout from "../components/layout";
 import { signIn } from "next-auth/react";
+
+const callbackUrl = process.env.BASE_URL || "http://localhost:3000";
+
 export default function Loading() {
+  async function googleSignin() {
+    await signIn("google", { callbackUrl });
+  }
   return (
     <Layout noLayout={true}>
       <div className="min-h-screen bg-[#ffffff] grid grid-cols-1 lg:grid-cols-2">
@@ -62,7 +68,7 @@ export default function Loading() {
 
             <div className="w-full mt-4">
               <button
-                onClick={() => signIn("google")}
+                onClick={googleSignin}
                 type="button"
                 className="transition delay-125 ease-in-out w-full flex items-center justify-center gap-2 border p-2 px-4 rounded-full bg-black hover:bg-white hover:text-black"
               >
