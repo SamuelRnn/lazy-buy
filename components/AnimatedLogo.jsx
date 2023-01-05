@@ -1,8 +1,9 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const AnimatedLogo = () => {
   return (
-    <div>
+    <Link href='/'>
       <div className="relative w-[500px] h-[400px]">
         <div className="h-full overflow-hidden absolute bottom-0 right-0">
           <Image
@@ -23,7 +24,7 @@ const AnimatedLogo = () => {
           ></Image>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
