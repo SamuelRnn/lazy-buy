@@ -29,11 +29,12 @@ model User {
 model Company {
   id             String        @id @default(uuid())
   name           String        @unique
+  email          String
   password       String
+  profilePicture Json
   owner          String
   city           String
   country        String
-  profilePicture Json
   plan           PlanType
   products       Product[]
   transactions   Transaction[]
