@@ -150,7 +150,7 @@ const signup = () => {
 
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    class="w-5 h-5 rtl:-scale-x-100"
+                    className="w-5 h-5 rtl:-scale-x-100"
                     viewBox="0 0 20 20"
                     fill="currentColor"
                   >
