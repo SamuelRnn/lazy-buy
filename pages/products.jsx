@@ -198,5 +198,3 @@ const Store = () => {
 };
 
 export default Store;
-
-export async function getServerSideProps() {}
