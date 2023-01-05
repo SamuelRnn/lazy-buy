@@ -27,16 +27,18 @@
     background-position: center;
   }
 }
+/* main width for the layout */
 .main {
   margin: 0 auto;
   width: 95%;
 }
+.home_titles {
+  @apply font-bold text-fondo-500 text-2xl pb-6;
+}
+/* width for navbar */
 .nav {
   margin: 0 auto;
   width: min(1200px, 95%);
-}
-.carousel_btn {
-  @apply p-2 bg-fondo-200 rounded;
 }
 .card_width {
   min-width: 320px;
@@ -89,8 +91,8 @@
 }
 
 .carousel-i .react-multiple-carousel__arrow--left {
-  left: calc(5% + -72px);
+  /* left: calc(5% + -72px); */
 }
 .carousel-i .react-multiple-carousel__arrow--right {
-  right: calc(6% + -87px);
+  /* right: calc(6% + -87px); */
 }

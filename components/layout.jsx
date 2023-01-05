@@ -14,7 +14,7 @@ const Layout = ({ children, title = "Lazy Buy", noLayout = false }) => {
         <title>{title}</title>
       </Head>
       {!noLayout && <NavBar />}
-      <main className="main">{children}</main>
+      <main>{children}</main>
       {!noLayout && <Footer />}
     </>
   );
