@@ -6,7 +6,7 @@ import SearchBar from "./SearchBar";
 import NavSubMenu from "./NavSubMenu";
 import { useState } from "react";
 const NavBar = () => {
-  const [activeCategoriesModal, setActiveCategoriesModal] = useState(false);
+  const [activeCatModal, setActiveCatModal] = useState(false);
   const [activeRegModal, setActiveRegModal] = useState(false);
   return (
     <header className="w-full bg-fondo-200">
@@ -26,34 +26,28 @@ const NavBar = () => {
         {/* navlinks */}
         <div className="flex justify-center">
           <nav className="flex items-center gap-x-4">
-            <Link
-              href="/nosotros"
-              className="p-2 rounded-lg hover:bg-fondo-100 transition-colors text-zinc-700 font-semibold"
-            >
+            <Link href="/nosotros" className="nav_links">
               Nosotros
             </Link>
             <button
-              className="p-2 rounded-lg hover:bg-fondo-100 transition-colors text-zinc-700 font-semibold"
+              className={`nav_links ${activeCatModal ? "underline" : ""}`}
               onClick={() => {
-                setActiveCategoriesModal((state) => !state);
+                setActiveCatModal((state) => !state);
                 setActiveRegModal(false);
               }}
             >
               Categorias
             </button>
             <button
-              className="p-2 rounded-lg hover:bg-fondo-100 transition-colors text-zinc-700 font-semibold"
+              className={`nav_links ${activeRegModal ? "underline" : ""}`}
               onClick={() => {
                 setActiveRegModal((state) => !state);
-                setActiveCategoriesModal(false);
+                setActiveCatModal(false);
               }}
             >
               Acceder
             </button>
-            <button
-              href=""
-              className="p-2 rounded-lg hover:bg-fondo-100 transition-colors"
-            >
+            <button href="" className="nav_links">
               <MdShoppingCart className="text-[28px] text-fondo-400" />
             </button>
           </nav>
@@ -67,7 +61,7 @@ const NavBar = () => {
           { title: "Carros", link: "/categories/carros" },
           { title: "Azul", link: "/categories/azul" },
         ]}
-        isActive={activeCategoriesModal}
+        isActive={activeCatModal}
       />
       <NavSubMenu
         sourceArray={[

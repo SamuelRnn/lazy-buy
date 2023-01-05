@@ -2,31 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-#bg-video {
-  background-image: url("../public/lazygif.gif");
-  background-size: cover;
-}
-
-#logo_home {
-  background-image: url("../public/lazygif.gif");
-  background-size: cover;
-}
-
-@media (min-width: 1024px) {
-  #bg-video {
-    background-image: url("../public/lazygif.gif");
-    background-size: auto;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-
-  #logo_home {
-    background-image: url("../public/lazygif.gif");
-    background-size: auto;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-}
 /* main width for the layout */
 .main {
   margin: 0 auto;
@@ -34,6 +9,9 @@
 }
 .home_titles {
   @apply font-bold text-fondo-500 text-2xl pb-6;
+}
+.nav_links {
+  @apply p-2 rounded-lg hover:bg-fondo-100 transition-colors text-zinc-700 font-semibold;
 }
 /* width for navbar */
 .nav {
@@ -44,12 +22,6 @@
   min-width: 320px;
   width: 320px;
 } /*agregar como clase tailwind "w-card"*/
-.banner_img {
-  background-image: url(https://www.novagric.com/images/empresa/trabaja-con-nosotros.jpg);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
 .img_anim {
   animation-name: appear_logo;
   animation-duration: 0.3s;
@@ -77,22 +49,15 @@
     transform: translateY(0);
   }
 }
-
-.carousel-i {
-  padding: 2px 20px;
-}
 .carousel-i > button {
-  background-color: #d77575;
-  z-index: 99;
+  /* background-color: #d77575; */
+  @apply bg-fondo-300 transition-all;
 }
 
 .carousel-i > button:hover {
-  background-color: #8a2828;
+  /* background-color: #8a2828; */
+  @apply bg-fondo-500;
 }
-
-.carousel-i .react-multiple-carousel__arrow--left {
-  /* left: calc(5% + -72px); */
-}
-.carousel-i .react-multiple-carousel__arrow--right {
-  /* right: calc(6% + -87px); */
+.carousel-i:not(:hover) > button {
+  opacity: 0;
 }

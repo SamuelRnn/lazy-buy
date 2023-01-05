@@ -3,7 +3,10 @@ import Link from "next/link";
 
 function Banner() {
   return (
-    <div className="w-full min-h-[400px] banner_img relative">
+    <div
+      className="w-full min-h-[400px] bg-center bg-cover bg-no-repeat relative 
+      bg-[url(https://www.novagric.com/images/empresa/trabaja-con-nosotros.jpg)]"
+    >
       <div className="absulute w-full h-full min-h-[400px] bg-opacity-50 bg-zinc-800 pt-[80px] pb-12">
         <div className="main flex flex-col">
           <h2 className="text-[50px] text-white font-semibold leading-[70px]">

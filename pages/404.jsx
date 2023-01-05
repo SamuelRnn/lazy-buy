@@ -3,6 +3,7 @@ import Image from "next/image";
 import React from "react";
 
 const errorPage = () => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const Router = useRouter();
   const handleClick = () => {
     Router.push("/");
@@ -14,7 +15,7 @@ const errorPage = () => {
           <div className="absolute">
             <div className="">
               <h1 className="my-2 text-fondo-400 font-bold text-2xl">
-                Looks like you've found the doorway to the great nothing
+                Looks like you&apos;ve found the doorway to the great nothing
               </h1>
               <p className="my-2 text-fondo-300">
                 Sorry about that! Please visit our hompage to get where you need
