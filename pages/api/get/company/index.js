@@ -1,4 +1,4 @@
-import { company } from "../../../prisma";
+import { company } from "../../../../prisma";
 
 export default async function getCompany(req, res) {
   if (req.method !== "GET")
