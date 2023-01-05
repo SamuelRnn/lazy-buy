@@ -2,10 +2,11 @@ import Link from "next/link";
 import { useState } from "react";
 import Image from "next/image";
 import AnimatedLogo from "../components/AnimatedLogo";
+import Layout from "../components/layout";
 
 const signup = () => {
   return (
-    <>
+    <Layout noLayout={true}>
       <section className="bg-white">
         <div className="flex justify-center min-h-screen">
           <div className="hidden lg:flex lg:w-2/5 justify-center items-center">
@@ -173,7 +174,7 @@ const signup = () => {
           </div>
         </div>
       </section>
-    </>
+    </Layout>
   );
 };
 
