@@ -1,6 +1,7 @@
 import Layout from "../components/layout.jsx";
 import Banner from "../components/Banner.jsx";
 import Carousel from "../components/Carousel.jsx";
+import CardCarousel from "../components/CardCarousel.jsx";
 
 export default function Home() {
   return (
@@ -9,7 +10,7 @@ export default function Home() {
       <br />
       <h1 className="font-bold text-fondo-500 text-xl">New Products</h1>
       <br />
-      <Carousel />
+      <CardCarousel />
       <br />
       <br />
       <Banner />
@@ -17,7 +18,7 @@ export default function Home() {
       <br />
       <h1 className="font-bold text-fondo-500 text-xl">Ofertas del día</h1>
       <br />
-      <Carousel />
+      <CardCarousel />
       <br />
     </Layout>
   );
