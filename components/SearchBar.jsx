@@ -1,10 +1,23 @@
+import { useRouter } from "next/router";
+import { useState } from "react";
+
 const SearchBar = () => {
+  const router = useRouter();
+  const [search, setSearch] = useState("");
+  const handleSearch = () => {
+    router.push(`/products?name=${search.split(" ").join("-")}`);
+  };
   return (
-    <form className="flex items-center justify-center gap-2 w-96 bg-white rounded-lg overflow-hidden">
+    <form
+      onSubmit={handleSearch}
+      className="flex items-center justify-center gap-2 w-80 bg-white rounded-lg overflow-hidden"
+    >
       <input
+        onChange={({ target: { value } }) => setSearch(value)}
         type="text"
         className="outline-none p-2 w-full"
         placeholder="Buscar"
+        value={search}
       />
       <div className="px-2">
         <svg
