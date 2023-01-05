@@ -2,7 +2,7 @@ import NavBar from "./NavBar";
 import Footer from "./Footer";
 import Head from "next/head";
 
-const Layout = ({ children, title = "Lazy Buy" }) => {
+const Layout = ({ children, title = "Lazy Buy", noLayout = false }) => {
   return (
     <>
       <Head>
@@ -13,9 +13,9 @@ const Layout = ({ children, title = "Lazy Buy" }) => {
         />
         <title>{title}</title>
       </Head>
-      <NavBar />
+      {!noLayout && <NavBar />}
       <main className="main">{children}</main>
-      <Footer />
+      {!noLayout && <Footer />}
     </>
   );
 };
