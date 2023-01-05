@@ -52,7 +52,7 @@
   animation-name: appear_logo;
   animation-duration: 0.3s;
   animation-timing-function: cubic-bezier(0.08, 0.7, 0, 1.04);
-  animation-delay: 0.15s;
+  animation-delay: 0.3s;
   animation-iteration-count: 1;
   animation-direction: normal;
   animation-fill-mode: backwards;
@@ -61,7 +61,7 @@
   animation-name: appear_logo;
   animation-duration: 0.35s;
   animation-timing-function: cubic-bezier(0.08, 0.7, 0, 1.04);
-  animation-delay: 0;
+  animation-delay: 0.15s;
   animation-iteration-count: 1;
   animation-direction: normal;
   animation-fill-mode: backwards;
