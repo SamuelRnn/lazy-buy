@@ -1,14 +1,13 @@
-import { product } from "../../../prisma";
+import { product } from "../../../../prisma";
 
 export default async function getProductById(req, res) {
   if (req.method !== "GET")
-    return res.status(400).send({ message: "Not found" });
+    return res.status(405).json({ message: "Not found" });
 
-  const { productId } = req.query;
+  let { id } = req.query;
+  id = parseInt(id);
   const productFound = await product.findUnique({
-    where: {
-      id: productId,
-    },
+    where: { id },
   });
 
   return res.status(200).json(productFound);

@@ -8,6 +8,10 @@ export default async function getCompanyById(req, res) {
   try {
     const companyFound = await company.findUnique({
       where: { id },
+      include: {
+        products: true,
+        transactions: true,
+      },
     });
     if (!companyFound) {
       return res.status(404).json({ message: "Company not found, id invalid" });
