@@ -5,6 +5,7 @@ import AnimatedLogo from "../components/AnimatedLogo";
 import Layout from "../components/layout";
 import SignupCompany from "../components/signCompany";
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/router";
 
 const Signup = () => {
   const [typeAccount, setTypeAccount] = useState({
@@ -13,9 +14,34 @@ const Signup = () => {
     // active: false
   });
 
-  async function handleGoogleSignin(e) {
+  const [input, setInput] = useState({
+    name: "",
+    email: "",
+    owner: "",
+    plan: "",
+    country: "",
+    city: "",
+    password: "",
+    profilePicture:
+      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fyt3.ggpht.com%2Fa%2FAATXAJwZPDlnkoRCuk4qbGQT5DR5VP3xgx1OUk3gDQ%3Ds900-c-k-c0xffffffff-no-rj-mo&f=1&nofb=1&ipt=ceb791eb8fb616305474afa861beb486008509ace4b6be71935f8529c8bbde25&ipo=images",
+  });
+
+  const router = useRouter();
+
+  async function handleSignUp(e) {
     e.preventDefault();
-    signIn("google", { callbackUrl: "/dashboard" });
+    const options = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(input),
+    };
+
+    await fetch("http://localhost:3000/api/create/company", options)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data) router.push("http://localhost:3000/login");
+      });
+    router.push("/login");
   }
 
   const handleClick = () => {
@@ -101,48 +127,98 @@ const Signup = () => {
 
                 <form
                   className="grid grid-cols-1 gap-6 mt-6 md:grid-cols-2"
-                  onSubmit={handleGoogleSignin}
+                  onSubmit={handleSignUp}
                 >
                   <div>
                     <label className="block mb-2 text-sm text-gray-800">
-                      First Name
+                      Company Name
                     </label>
                     <input
+                      onChange={(e) =>
+                        setInput({ ...input, [e.target.name]: e.target.value })
+                      }
+                      name="name"
+                      value={input.name}
                       type="text"
-                      placeholder="John"
+                      placeholder="Apple Inc."
                       className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-md focus:border-zinc-700 dark:focus:border-zinc-700 focus:ring-zinc-700 focus:outline-none focus:ring focus:ring-opacity-40"
                     />
                   </div>
 
                   <div>
                     <label className="block mb-2 text-sm text-gray-800">
-                      Last name
+                      Email
                     </label>
                     <input
-                      type="text"
-                      placeholder="Snow"
-                      className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-md focus:border-zinc-700 dark:focus:border-zinc-700 focus:ring-zinc-700 focus:outline-none focus:ring focus:ring-opacity-40"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block mb-2 text-sm text-gray-800">
-                      Phone number
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="XXX-XX-XXXX-XXX"
-                      className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-md focus:border-zinc-700 dark:focus:border-zinc-700 focus:ring-zinc-700 focus:outline-none focus:ring focus:ring-opacity-40"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block mb-2 text-sm text-gray-800">
-                      Email address
-                    </label>
-                    <input
+                      onChange={(e) =>
+                        setInput({ ...input, [e.target.name]: e.target.value })
+                      }
+                      value={input.email}
+                      name="email"
                       type="email"
-                      placeholder="johnsnow@example.com"
+                      placeholder="stevejobs@gmail.com"
+                      className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-md focus:border-zinc-700 dark:focus:border-zinc-700 focus:ring-zinc-700 focus:outline-none focus:ring focus:ring-opacity-40"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block mb-2 text-sm text-gray-800">
+                      Owner
+                    </label>
+                    <input
+                      onChange={(e) =>
+                        setInput({ ...input, [e.target.name]: e.target.value })
+                      }
+                      value={input.owner}
+                      name="owner"
+                      type="text"
+                      placeholder="Steve Jobs"
+                      className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-md focus:border-zinc-700 dark:focus:border-zinc-700 focus:ring-zinc-700 focus:outline-none focus:ring focus:ring-opacity-40"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block mb-2 text-sm text-gray-800">
+                      Plan
+                    </label>
+                    <input
+                      onChange={(e) =>
+                        setInput({ ...input, [e.target.name]: e.target.value })
+                      }
+                      value={input.plan}
+                      name="plan"
+                      type="text"
+                      placeholder="Plan: Basic | Standard | Premium"
+                      className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-md focus:border-zinc-700 dark:focus:border-zinc-700 focus:ring-zinc-700 focus:outline-none focus:ring focus:ring-opacity-40"
+                    />
+                  </div>
+                  <div>
+                    <label className="block mb-2 text-sm text-gray-800">
+                      Country
+                    </label>
+                    <input
+                      onChange={(e) =>
+                        setInput({ ...input, [e.target.name]: e.target.value })
+                      }
+                      value={input.country}
+                      name="country"
+                      type="text"
+                      placeholder="United States"
+                      className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-md focus:border-zinc-700 dark:focus:border-zinc-700 focus:ring-zinc-700 focus:outline-none focus:ring focus:ring-opacity-40"
+                    />
+                  </div>
+                  <div>
+                    <label className="block mb-2 text-sm text-gray-800">
+                      City
+                    </label>
+                    <input
+                      onChange={(e) =>
+                        setInput({ ...input, [e.target.name]: e.target.value })
+                      }
+                      value={input.city}
+                      name="city"
+                      type="text"
+                      placeholder="Palo Alto"
                       className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-md focus:border-zinc-700 dark:focus:border-zinc-700 focus:ring-zinc-700 focus:outline-none focus:ring focus:ring-opacity-40"
                     />
                   </div>
@@ -152,6 +228,11 @@ const Signup = () => {
                       Password
                     </label>
                     <input
+                      onChange={(e) =>
+                        setInput({ ...input, [e.target.name]: e.target.value })
+                      }
+                      value={input.password}
+                      name="password"
                       type="password"
                       placeholder="Enter your password"
                       className="border-fondo-200 block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border rounded-md focus:border-zinc-700 dark:focus:border-zinc-700 focus:ring-zinc-700 focus:outline-none focus:ring focus:ring-opacity-40"
@@ -163,6 +244,10 @@ const Signup = () => {
                       Confirm password
                     </label>
                     <input
+                      /* onChange={(e) =>
+                        setInput({ ...input, [e.target.name]: e.target.value })
+                      }
+                      value={input.password} */
                       type="password"
                       placeholder="Enter your password"
                       className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-md focus:border-zinc-700 dark:focus:border-zinc-700 focus:ring-zinc-700 focus:outline-none focus:ring focus:ring-opacity-40"
