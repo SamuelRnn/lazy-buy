@@ -9,8 +9,10 @@ import {
 import { BellIcon, CheckIcon } from "@heroicons/react/24/outline";
 import { Menu, Transition, Popover } from "@headlessui/react";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 export default function TopBar({ showNav, setShowNav }) {
+  const { data: session } = useSession();
   return (
     <div
       className={`fixed w-full h-16 flex justify-between items-center transition-all duration-[400ms] ${
@@ -24,7 +26,7 @@ export default function TopBar({ showNav, setShowNav }) {
         />
       </div>
       <div className="flex items-center pr-4 md:pr-16">
-        <Popover className="relative">
+        {/* <Popover className="relative">
           <Popover.Button className="outline-none mr-5 md:mr-8 cursor-pointer text-gray-700">
             <BellIcon className="h-6 w-6" />
           </Popover.Button>
@@ -102,7 +104,7 @@ export default function TopBar({ showNav, setShowNav }) {
               </div>
             </Popover.Panel>
           </Transition>
-        </Popover>
+        </Popover> */}
         <Menu as="div" className="relative inline-block text-left">
           <div>
             <Menu.Button className="inline-flex w-full justify-center items-center">
@@ -114,7 +116,7 @@ export default function TopBar({ showNav, setShowNav }) {
                 />
               </picture>
               <span className="hidden md:block font-medium text-gray-700">
-                Sojo506
+                {session.user.name}
               </span>
               <ChevronDownIcon className="ml-2 h-4 w-4 text-gray-700" />
             </Menu.Button>
