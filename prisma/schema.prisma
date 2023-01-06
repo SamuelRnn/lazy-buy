@@ -7,39 +7,55 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+//---------------------------------------
+//TODO: implementar correctamente el borrado logico de las tablas
+//---------------------------------------
 model User {
   id             String        @id @default(uuid())
   fullName       String?
   userName       String        @unique
   email          String        @unique
-  password       String?
+  access         Access?
   profilePicture Json
   city           String?
   country        String?
-  reviews        Review[]
-  transactions   Transaction[]
+  isAdmin        Boolean       @default(false)
+  isActive       Boolean       @default(true)
+  isBanned       Boolean       @default(false)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  Review         Review[]
+  Transaction    Transaction[]
+}
 
-  isAdmin   Boolean  @default(false)
-  isActive  Boolean  @default(true)
-  isBanned  Boolean  @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model Access {
+  id       Int    @default(autoincrement())
+  password String
+  userId   String @unique
+  User     User   @relation(fields: [userId], references: [id])
+}
+
+model CompanyAccess {
+  id       Int     @default(autoincrement())
+  password String
+  userId   String  @unique
+  User     Company @relation(fields: [userId], references: [id])
 }
 
 model Company {
-  id             String        @id @default(uuid())
-  name           String        @unique
-  password       String
+  id             String         @id @default(uuid())
+  name           String         @unique
+  email          String         @unique
+  access         CompanyAccess?
+  profilePicture Json
   owner          String
   city           String
   country        String
-  profilePicture Json
   plan           PlanType
   products       Product[]
   transactions   Transaction[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
 }
 
 model Plan {
@@ -60,23 +76,24 @@ enum PlanType {
 }
 
 model Product {
-  id            Int           @id @default(autoincrement())
-  name          String
-  slug          String        @unique //id-name
-  description   String
-  price         Float
-  image         Json
-  averageRating Float?        @default(0)
-  reviewsCount  Int?          @default(0)
-  stock         Int
-  isActive      Boolean
-  company       Company       @relation(fields: [companyId], references: [id])
-  companyId     String
-  reviews       Review[]
-  transactions  Transaction[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id             Int           @id @default(autoincrement())
+  name           String
+  slug           String        @unique //id-name
+  description    String
+  price          Float
+  mainImage      Json
+  carouselImages Json?
+  averageRating  Float?        @default(0)
+  reviewsCount   Int?          @default(0)
+  stock          Int
+  isActive       Boolean
+  company        Company       @relation(fields: [companyId], references: [id])
+  companyId      String
+  category       String
+  reviews        Review[]
+  transactions   Transaction[]
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
 
   @@unique([name, description])
 }
@@ -90,8 +107,7 @@ model Review {
   userId       String?
   product      Product? @relation(fields: [productId], references: [id])
   productId    Int?
-
-  createdAt DateTime @default(now())
+  createdAt    DateTime @default(now())
 }
 
 model Transaction {

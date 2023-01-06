@@ -1,47 +1,59 @@
 import { company } from "../../../prisma";
 import bcrypt from "bcryptjs";
 import cloud from "../../../utils/cloudinary";
+//------------------------------------------
+//TODO: foto no obligatoria en la creacion de la cuenta
+//------------------------------------------
 
 export default async function createCompany(req, res) {
-  if (req.method !== "POST")
-    return res.status(400).send({ message: "Not found" });
-
-  const { name, owner, password, city, country, plan, profilePicture } =
-    req.body;
-
+  if (req.method !== "POST") {
+    return res.status(405).json({ message: "Method not allowed" });
+  }
+  const companyData = req.body;
   if (
-    !name ||
-    !owner ||
-    !password ||
-    !city ||
-    !country ||
-    !plan ||
-    !profilePicture
-  )
-    return res.status(400).send({ message: "Not enough data" });
+    !companyData.name ||
+    !companyData.owner ||
+    !companyData.email ||
+    !companyData.password ||
+    !companyData.city ||
+    !companyData.country ||
+    !companyData.plan ||
+    !companyData.profilePicture
+  ) {
+    return res.status(400).json({
+      message: "Datos incompletos, asegurese de llenar todos los campos",
+    });
+  }
+  const hashedPassword = await bcrypt.hash(companyData.password, 8);
+  companyData.password = hashedPassword;
 
-  const passwordHash = await bcrypt.hash(password, 8);
+  try {
+    const cloudUpload = await cloud.uploader.upload(
+      companyData.profilePicture,
+      { folder: "lazy-buy" }
+    );
+    companyData.profilePicture = {
+      public_id: cloudUpload.public_id,
+      url: cloudUpload.secure_url,
+    };
 
-  const upToCloud = await cloud.uploader.upload(profilePicture, {
-    folder: "userProfilePictures",
-  });
-
-  const jsonProfilePicture = {
-    public_id: upToCloud.public_id,
-    url: upToCloud.secure_url,
-  };
-
-  await company.create({
-    data: {
-      ...req.body,
-      password: passwordHash,
-      profilePicture: jsonProfilePicture,
-    },
-  });
-
-  return res.status(200).json({
-    ...req.body,
-    password: passwordHash,
-    profilePicture: jsonProfilePicture,
-  });
+    const newCompany = await company.create({
+      data: {
+        name: companyData.name,
+        owner: companyData.name,
+        email: companyData.email,
+        city: companyData.city,
+        country: companyData.country,
+        profilePicture: companyData.profilePicture,
+        plan: companyData.plan,
+        access: {
+          create: { password: companyData.password },
+        },
+      },
+    });
+    return res.status(200).json(newCompany);
+  } catch (error) {
+    console.log({ error, message: error.message });
+    return res.status(500).json({ error });
+  }
 }

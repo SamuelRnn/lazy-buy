@@ -1,42 +1,54 @@
 import { product } from "../../../prisma";
 import cloud from "../../../utils/cloudinary";
 
+async function uploadImage(image) {
+  const cloudUpload = await cloud.uploader.upload(image, {
+    folder: "lazy-buy",
+  });
+  return cloudUpload;
+}
+function getSlug({ id, name }) {
+  return `${id + ""}-${name.toLowerCase().split(" ").join("-")}`;
+}
+
 export default async function createProduct(req, res) {
-  if (req.method !== "POST")
+  if (req.method !== "POST") {
     return res.status(400).send({ message: "Not found" });
+  }
+  const productData = req.body;
 
-  const { name, description, price, image, stock, isActive } = req.body;
+  if (
+    !productData.name ||
+    !productData.description ||
+    !productData.price ||
+    !productData.mainImage ||
+    !productData.stock ||
+    !productData.isActive ||
+    !productData.companyId
+  ) {
+    return res.status(400).json({
+      message: "Datos incompletos, asegurese de llenar todos los campos",
+    });
+  }
 
-  const { companyId } = req.query;
-
-  if (!name || !description || !price || !stock)
-    return res.status(400).send({ message: "Not enough data" });
-
-  const upToCloud = await cloud.uploader.upload(image, {
-    folder: "userProfilePictures",
-  });
-
-  const jsonProfilePicture = {
-    public_id: upToCloud.public_id,
-    url: upToCloud.secure_url,
+  const mainUpload = await uploadImage(productData.mainImage);
+  productData.mainImage = {
+    public_id: mainUpload.public_id,
+    url: mainUpload.secure_url,
   };
 
-  const newProduct = {
-    name,
-    slug: `09-${name.split(" ").join("-")}`,
-    description,
-    price,
-    image: jsonProfilePicture,
-    stock,
-    isActive,
-    companyId,
-  };
+  if (productData.carouselImages) {
+    const promiseArray = productData.map((img) => uploadImage(img));
+    const images = await Promise.all(promiseArray);
+    productData.carouselImages = images;
+  }
+  productData.slug = "available";
 
-  await product.create({
-    data: {
-      ...newProduct,
-    },
+  let newProduct = await product.create({ data: productData });
+  newProduct = await product.update({
+    where: { id: newProduct.id },
+    data: { slug: getSlug(newProduct) },
   });
 
-  return res.status(200).json(newProduct);
+  return res.status(201).json(newProduct);
 }

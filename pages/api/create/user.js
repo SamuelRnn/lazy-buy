@@ -5,17 +5,11 @@ import cloud from "../../../utils/cloudinary";
 export default async function createUser(req, res) {
   if (req.method !== "POST")
     return res.status(400).send({ message: "Not found" });
+    
+  const { isAdmin, fullName, userName, password, email, profilePicture, city, country } =
+    req.body;
 
-  const {
-    isAdmin,
-    fullName,
-    userName,
-    email,
-    password,
-    profilePicture,
-    city,
-    country,
-  } = req.body;
+  delete req.body["password"];
 
   if (!fullName || !email || !password)
     return res.status(400).send({ message: "Not enough data" });
@@ -34,8 +28,12 @@ export default async function createUser(req, res) {
   await user.create({
     data: {
       ...req.body,
-      password: passwordHashed,
       profilePicture: jsonProfilePicture,
+      access: {
+        create: {
+          password: passwordHashed,
+        },
+      },
     },
   });
 
