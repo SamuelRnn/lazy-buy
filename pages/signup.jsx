@@ -6,7 +6,7 @@ import Layout from "../components/layout";
 import SignupCompany from "../components/signCompany";
 import { signIn } from "next-auth/react";
 
-const signup = () => {
+const Signup = () => {
   const [typeAccount, setTypeAccount] = useState({
     client: true,
     company: false,
@@ -14,7 +14,7 @@ const signup = () => {
   });
 
   async function handleGoogleSignin(e) {
-    e.preventDefault()
+    e.preventDefault();
     signIn("google", { callbackUrl: "/dashboard" });
   }
 
@@ -25,7 +25,7 @@ const signup = () => {
   };
 
   return (
-    <Layout noLayout={true}>
+    <Layout noLayout={true} title="Lazy Buy | SignUp">
       {!typeAccount.company ? (
         <section className="bg-white">
           <div className="flex justify-center min-h-screen">
@@ -99,7 +99,10 @@ const signup = () => {
                   </div>
                 </div>
 
-                <form className="grid grid-cols-1 gap-6 mt-6 md:grid-cols-2" onSubmit={handleGoogleSignin}>
+                <form
+                  className="grid grid-cols-1 gap-6 mt-6 md:grid-cols-2"
+                  onSubmit={handleGoogleSignin}
+                >
                   <div>
                     <label className="block mb-2 text-sm text-gray-800">
                       First Name
@@ -216,4 +219,4 @@ const signup = () => {
   );
 };
 
-export default signup;
+export default Signup;
