@@ -60,11 +60,10 @@ const NavBar = () => {
       </div>
       <NavSubMenu
         sourceArray={[
-          { title: "Juguetes", link: "/categories/juguetes" },
-          { title: "Jesucristo", link: "/categories/jesucristo" },
-          { title: "Panes", link: "/categories/panes" },
-          { title: "Carros", link: "/categories/carros" },
-          { title: "Azul", link: "/categories/azul" },
+          { title: "Zapatillas", link: "/products" },
+          { title: "Remeras", link: "/products" },
+          { title: "Pantalones", link: "/products" },
+          { title: "Accesorios", link: "/products" },
         ]}
         isActive={activeCatModal}
       />

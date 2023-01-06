@@ -9,10 +9,10 @@ const Footer = () => {
         <div className="md:col-span-12 xl:col-span-4 flex flex-col gap-4">
           <h1 className="text-3xl font-bold text-gray-900">Lazy Buy</h1>
           <p className="text-gray-600 text-justify hover:text-fondo-300">
-            Lorem Ipsum ha sido el texto de relleno estándar de las industrias
-            desde el año 1500, cuando un impresor (N. del T. persona que se
-            dedica a la imprenta) desconocido usó una galería de textos y los
-            mezcló de tal manera que logró hacer un libro de textos especimen.
+            Somos una empresa de formato E-Commerce, orientada al micro
+            emprendedor. Qué busca otorgar un espacio de crecimiento para
+            aquellos emprendedores que se encuentran dando sus primeros pasos
+            con su negocio.
           </p>
         </div>
         <div className="md:col-span-4 xl:col-span-2">

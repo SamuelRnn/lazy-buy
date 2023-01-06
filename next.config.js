@@ -3,6 +3,9 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     domains: [
+      "fakestoreapi.com",
+      "static.nike.com",
+      "encrypted-tbn0.gstatic.com",
       "res.cloudinary.com",
       "i.ibb.co",
       "i.imgur.com",

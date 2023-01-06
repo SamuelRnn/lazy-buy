@@ -1,7 +1,7 @@
 import { TfiClose } from "react-icons/tfi";
 import { motion, AnimatePresence } from "framer-motion";
 import Filters from "./Filters";
-const ModalFilters = ({ active, setActive }) => {
+const ModalFilters = ({ active, setActive, setProducts, products }) => {
   return (
     <>
       <AnimatePresence>
@@ -33,7 +33,7 @@ const ModalFilters = ({ active, setActive }) => {
               transition={{ delay: 0.1, lease: "anticipate" }}
               className="filters_modal"
             >
-              <Filters />
+              <Filters products={products} setProducts={setProducts} />
             </motion.div>
           </div>
         )}

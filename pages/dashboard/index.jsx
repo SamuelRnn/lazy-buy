@@ -22,18 +22,18 @@ const Dashboard = () => {
 
 export default Dashboard;
 
-export async function getServerSideProps(context) {
-  const { req } = context;
-  const session = await getSession({
-    req,
-  });
+// export async function getServerSideProps(context) {
+//   const { req } = context;
+//   const session = await getSession({
+//     req,
+//   });
 
-  // if user isn't is auth
-  if (!session)
-    return { redirect: { destination: "/login", permanent: false } };
+//   // if user isn't is auth
+//   if (!session)
+//     return { redirect: { destination: "/login", permanent: false } };
 
-  // if user is is auth
-  return {
-    props: { session },
-  };
-}
+//   // if user is is auth
+//   return {
+//     props: { session },
+//   };
+// }

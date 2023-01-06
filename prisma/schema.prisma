@@ -42,7 +42,6 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
-
 model User {
   id            String        @id @default(cuid())
   name          String?
@@ -88,7 +87,6 @@ enum PlanType {
   Standard
   Premium
 }
-
 model Product {
   id             Int           @id @default(autoincrement())
   name           String
