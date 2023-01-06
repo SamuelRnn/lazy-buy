@@ -10,49 +10,29 @@ datasource db {
 //---------------------------------------
 //TODO: implementar correctamente el borrado logico de las tablas
 //---------------------------------------
-model Account {
-  id                String  @id @default(cuid())
-  userId            String
-  type              String
-  provider          String
-  providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String? @db.Text
-  session_state     String?
-
-  User User @relation(fields: [userId], references: [id])
-}
-
-model Session {
-  id           String   @id @default(cuid())
-  sessionToken String   @unique
-  userId       String
-  expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
-model VerificationToken {
-  identifier String
-  token      String   @unique
-  expires    DateTime
-
-  @@unique([identifier, token])
-}
-
 model User {
-  id            String        @id @default(cuid())
-  name          String?
-  email         String?       @unique
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
-  Review        Review[]
-  Transaction   Transaction[]
+  id             String        @id @default(uuid())
+  fullName       String?
+  userName       String        @unique
+  email          String        @unique
+  access         Access?
+  profilePicture Json
+  city           String?
+  country        String?
+  isAdmin        Boolean       @default(false)
+  isActive       Boolean       @default(true)
+  isBanned       Boolean       @default(false)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  Review         Review[]
+  Transaction    Transaction[]
+}
+
+model Access {
+  id       Int    @default(autoincrement())
+  password String
+  userId   String @unique
+  User     User   @relation(fields: [userId], references: [id])
 }
 
 model Company {
@@ -67,9 +47,8 @@ model Company {
   plan           PlanType
   products       Product[]
   transactions   Transaction[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
 }
 
 model Plan {
@@ -106,9 +85,8 @@ model Product {
   category       String
   reviews        Review[]
   transactions   Transaction[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
 
   @@unique([name, description])
 }
@@ -122,8 +100,7 @@ model Review {
   userId       String?
   product      Product? @relation(fields: [productId], references: [id])
   productId    Int?
-
-  createdAt DateTime @default(now())
+  createdAt    DateTime @default(now())
 }
 
 model Transaction {
