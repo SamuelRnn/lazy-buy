@@ -38,7 +38,18 @@ export default async function createCompany(req, res) {
     };
 
     const newCompany = await company.create({
-      data: companyData,
+      data: {
+        name: companyData.name,
+        owner: companyData.name,
+        email: companyData.email,
+        city: companyData.city,
+        country: companyData.country,
+        profilePicture: companyData.profilePicture,
+        plan: companyData.plan,
+        access: {
+          create: { password: companyData.password },
+        },
+      },
     });
     return res.status(200).json(newCompany);
   } catch (error) {
