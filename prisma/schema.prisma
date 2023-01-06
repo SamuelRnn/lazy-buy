@@ -7,6 +7,9 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+//---------------------------------------
+//TODO: implementar correctamente el borrado logico de las tablas
+//---------------------------------------
 model User {
   id             String        @id @default(uuid())
   fullName       String?
@@ -61,20 +64,21 @@ enum PlanType {
 }
 
 model Product {
-  id            Int           @id @default(autoincrement())
-  name          String
-  slug          String        @unique //id-name
-  description   String
-  price         Float
-  image         Json
-  averageRating Float?        @default(0)
-  reviewsCount  Int?          @default(0)
-  stock         Int
-  isActive      Boolean
-  company       Company       @relation(fields: [companyId], references: [id])
-  companyId     String
-  reviews       Review[]
-  transactions  Transaction[]
+  id             Int           @id @default(autoincrement())
+  name           String
+  slug           String        @unique //id-name
+  description    String
+  price          Float
+  mainImage      Json
+  carouselImages Json?
+  averageRating  Float?        @default(0)
+  reviewsCount   Int?          @default(0)
+  stock          Int
+  isActive       Boolean
+  company        Company       @relation(fields: [companyId], references: [id])
+  companyId      String
+  reviews        Review[]
+  transactions   Transaction[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
