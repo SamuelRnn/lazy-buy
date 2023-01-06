@@ -11,6 +11,11 @@ export default function Loading() {
   // async function googleSignin() {
   //   await signIn('google', { callbackUrl })
 
+  async function handleGoogleSignin(e) {
+    e.preventDefault();
+    signIn("google", { callbackUrl: "/dashboard" });
+  }
+
   return (
     <Layout noLayout={true} title="Lazy Buy | Login">
       <div className="min-h-screen bg-[#ffffff] grid grid-cols-1 lg:grid-cols-2">
@@ -60,6 +65,7 @@ export default function Loading() {
               handleChange,
               handleBlur,
             }) => (
+              <form className="flex flex-col gap-4" onSubmit={handleGoogleSignin}>
               <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
                 {/* Email */}
                 <div>
@@ -122,7 +128,7 @@ export default function Loading() {
                 <div className="w-full mt-4">
                   <button
                     //  onClick={googleSignin}
-                    type="button"
+                    type="submit"
                     className="transition delay-125 ease-in-out w-full flex items-center justify-center gap-2 border p-2 px-4 rounded-full bg-black hover:bg-white hover:text-black"
                   >
                     <Image

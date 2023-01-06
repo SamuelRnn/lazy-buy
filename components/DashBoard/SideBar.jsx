@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { TfiLayoutListThumb } from "react-icons/tfi";
 import { DiGoogleAnalytics } from "react-icons/di";
 import { BiLogIn } from "react-icons/bi";
+import { signOut } from "next-auth/react";
 
 const SideBar = forwardRef(({ showNav }, ref) => {
   const router = useRouter();
@@ -97,7 +98,7 @@ const SideBar = forwardRef(({ showNav }, ref) => {
             <div className="mr-2">
               <BiLogIn className="h-5 w-5" />
             </div>
-            <div>
+            <div onClick={() => signOut()}>
               <p>LogOut</p>
             </div>
           </div>
