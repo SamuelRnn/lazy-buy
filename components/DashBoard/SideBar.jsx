@@ -98,7 +98,7 @@ const SideBar = forwardRef(({ showNav }, ref) => {
             <div className="mr-2">
               <BiLogIn className="h-5 w-5" />
             </div>
-            <div onClick={() => signOut()}>
+            <div onClick={() => signOut({ redirect: false, callbackUrl: "/" })}>
               <p>LogOut</p>
             </div>
           </div>
