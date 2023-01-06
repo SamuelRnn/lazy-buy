@@ -23,21 +23,8 @@ model Account {
   scope             String?
   id_token          String? @db.Text
   session_state     String?
-model User {
-  id             String        @id @default(uuid())
-  fullName       String?
-  userName       String        @unique
-  email          String        @unique
-  password       String?
-  profilePicture Json
-  city           String?
-  country        String?
-  reviews        Review[]
-  transactions   Transaction[]
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([provider, providerAccountId])
+  User User @relation(fields: [userId], references: [id])
 }
 
 model Session {
