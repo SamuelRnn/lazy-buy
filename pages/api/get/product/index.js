@@ -1,5 +1,7 @@
 import { product } from "../../../../prisma";
-
+//------------------------------------------
+//TODO: error managment
+//------------------------------------------
 export default async function getProduct(req, res) {
   if (req.method !== "GET")
     return res.status(405).json({ message: "Not found" });
