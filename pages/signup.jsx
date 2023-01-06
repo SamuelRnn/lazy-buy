@@ -4,6 +4,7 @@ import Image from "next/image";
 import AnimatedLogo from "../components/AnimatedLogo";
 import Layout from "../components/layout";
 import SignupCompany from "../components/signCompany";
+import { signIn } from "next-auth/react";
 
 const signup = () => {
   const [typeAccount, setTypeAccount] = useState({
@@ -11,6 +12,11 @@ const signup = () => {
     company: false,
     // active: false
   });
+
+  async function handleGoogleSignin(e) {
+    e.preventDefault()
+    signIn("google", { callbackUrl: "/dashboard" });
+  }
 
   const handleClick = () => {
     !typeAccount.company && setTypeAccount({ client: false, company: true });
@@ -93,7 +99,7 @@ const signup = () => {
                   </div>
                 </div>
 
-                <form className="grid grid-cols-1 gap-6 mt-6 md:grid-cols-2">
+                <form className="grid grid-cols-1 gap-6 mt-6 md:grid-cols-2" onSubmit={handleGoogleSignin}>
                   <div>
                     <label className="block mb-2 text-sm text-gray-800">
                       First Name
@@ -159,7 +165,10 @@ const signup = () => {
                       className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-md focus:border-zinc-700 dark:focus:border-zinc-700 focus:ring-zinc-700 focus:outline-none focus:ring focus:ring-opacity-40"
                     />
                   </div>
-                  <button className="hover:text-black hover:bg-white text-white font-semibold flex rounded-xl border-2 p-3 border-black items-center justify-center gap-4 ease-in-out transition-all bg-black">
+                  <button
+                    className="hover:text-black hover:bg-white text-white font-semibold flex rounded-xl border-2 p-3 border-black items-center justify-center gap-4 ease-in-out transition-all bg-black"
+                    type="submit"
+                  >
                     <Image
                       width={20}
                       height={20}
@@ -198,7 +207,10 @@ const signup = () => {
           </div>
         </section>
       ) : (
-        <SignupCompany typeAccount={typeAccount} setTypeAccount={setTypeAccount}/>
+        <SignupCompany
+          typeAccount={typeAccount}
+          setTypeAccount={setTypeAccount}
+        />
       )}
     </Layout>
   );
