@@ -13,6 +13,20 @@
 .nav_links {
   @apply p-2 rounded-lg hover:bg-fondo-100 transition-colors text-zinc-700 font-semibold;
 }
+.filter_btn {
+  @apply w-[150px] h-12 px-2 text-zinc-600 bg-zinc-200 rounded flex justify-between items-center;
+}
+.filters_modal {
+  position: fixed;
+  bottom: 0;
+  height: 100vh;
+  width: 400px;
+  padding-left: 110px;
+  @apply bg-fondo-200;
+}
+.modal_bg {
+  background-color: rgba(0, 0, 0, 0.5);
+}
 /* width for navbar */
 .nav {
   margin: 0 auto;
@@ -60,4 +74,10 @@
 }
 .carousel-i:not(:hover) > button {
   opacity: 0;
+}
+/* store */
+.grid_store {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  column-gap: 40px;
 }
