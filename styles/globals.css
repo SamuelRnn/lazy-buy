@@ -23,9 +23,11 @@
   width: 400px;
   padding-left: 110px;
   @apply bg-fondo-200;
+  z-index: 1001;
 }
 .modal_bg {
   background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
 }
 /* width for navbar */
 .nav {

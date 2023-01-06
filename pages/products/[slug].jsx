@@ -1,13 +1,11 @@
-import { useRouter } from "next/router";
 import React from "react";
 import Layout from "../../components/layout";
 import Image from "next/image";
+import { PrismaClient } from "@prisma/client";
 
-const detail = () => {
-  const Router = useRouter();
-
+const Detail = ({ product }) => {
   return (
-    <Layout title="Detalle - Producto">
+    <Layout title={"Lazy Buy | " + product.name}>
       <br />
       <br />
       <br />
@@ -17,41 +15,41 @@ const detail = () => {
           <div className="grid items-start grid-cols-1 gap-8 md:grid-cols-2">
             <div className="grid grid-cols-2 gap-4 md:grid-cols-1">
               <Image
-              width={1500}
-              height={1000}
+                width={400}
+                height={400}
                 alt="Les Paul"
-                src="https://images.unsplash.com/photo-1456948927036-ad533e53865c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+                src={product.mainImage.url}
                 className="object-cover w-full aspect-square rounded-xl"
               />
 
               <div className="grid grid-cols-2 gap-4 lg:mt-4">
                 <Image
-                width={1500}
-                height={1000}
+                  width={1500}
+                  height={1000}
                   alt="Les Paul"
                   src="https://images.unsplash.com/photo-1456948927036-ad533e53865c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
                   className="object-cover w-full aspect-square rounded-xl"
                 />
 
                 <Image
-                width={1500}
-                height={1000}
+                  width={1500}
+                  height={1000}
                   alt="Les Paul"
                   src="https://images.unsplash.com/photo-1456948927036-ad533e53865c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
                   className="object-cover w-full aspect-square rounded-xl"
                 />
 
                 <Image
-                width={1500}
-                height={1000}
+                  width={1500}
+                  height={1000}
                   alt="Les Paul"
                   src="https://images.unsplash.com/photo-1456948927036-ad533e53865c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
                   className="object-cover w-full aspect-square rounded-xl"
                 />
 
                 <Image
-                width={1500}
-                height={1000}
+                  width={1500}
+                  height={1000}
                   alt="Les Paul"
                   src="https://images.unsplash.com/photo-1456948927036-ad533e53865c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
                   className="object-cover w-full aspect-square rounded-xl"
@@ -66,12 +64,11 @@ const detail = () => {
 
               <div className="flex justify-between mt-8">
                 <div className="max-w-[35ch]">
-                  <h1 className="text-2xl font-bold">
-                    Sérum Niacinamide 10% + Zinc 1% The Ordinary día/noche para
-                    todo tipo de piel de 30mL
-                  </h1>
+                  <h1 className="text-2xl font-bold">{product.name}</h1>
 
-                  <p className="mt-0.5 text-sm">Producto con descuento...!!!</p>
+                  <p className="mt-0.5 text-sm text-zinc-700">
+                    {product.company.name}
+                  </p>
 
                   <div className="mt-2 -ml-0.5 flex">
                     <svg
@@ -85,40 +82,23 @@ const detail = () => {
                   </div>
                 </div>
 
-                <p className="text-lg font-bold">S/. 119.99</p>
+                <p className="text-lg font-bold">${product.price.toFixed(2)}</p>
               </div>
 
               <details className="group relative mt-4 [&_summary::-webkit-details-marker]:hidden">
                 <summary className="block">
                   <div>
                     <div className="prose max-w-none group-open:hidden">
-                      <p>
-                        The Ordinary es una marca que ofrece una variedad de
-                        productos para el cuidado de la piel facial. Si buscas
-                        protegerla y mantenerla en forma, esta puede ser una
-                        buena opción. Libre de crueldad Este producto es
-                        elaborado sin lastimar a ningún animal. Es vegano Este
-                        producto es realizado en base a elementos naturales de
-                        origen vegetal.
-                      </p>
+                      <p>{product.description}</p>
                     </div>
 
                     <span className="mt-4 text-sm font-medium underline cursor-pointer group-open:absolute group-open:bottom-0 group-open:left-0 group-open:mt-0">
-                      Leer mass...
+                      Leer más...
                     </span>
                   </div>
                 </summary>
 
                 <div className="pb-6 prose max-w-none">
-                  <p>
-                    The Ordinary es una marca que ofrece una variedad de
-                    productos para el cuidado de la piel facial. Si buscas
-                    protegerla y mantenerla en forma, esta puede ser una buena
-                    opción. Libre de crueldad Este producto es elaborado sin
-                    lastimar a ningún animal. Es vegano Este producto es
-                    realizado en base a elementos naturales de origen vegetal.
-                  </p>
-
                   <p>
                     The Ordinary es una marca que ofrece una variedad de
                     productos para el cuidado de la piel facial. Si buscas
@@ -186,4 +166,31 @@ const detail = () => {
   );
 };
 
-export default detail;
+export default Detail;
+
+export async function getServerSideProps({ res, query: { slug } }) {
+  const { product, $disconnect } = new PrismaClient();
+  const fetchedProduct = await product.findUnique({
+    where: { slug },
+    include: {
+      company: true,
+    },
+  });
+  if (!fetchedProduct) {
+    res.setHeader("Location", "/404");
+    res.statusCode = 302;
+    res.end();
+    return {
+      props: {},
+    };
+  }
+  fetchedProduct.updatedAt = toString(fetchedProduct.updatedAt);
+  fetchedProduct.createdAt = toString(fetchedProduct.createdAt);
+  fetchedProduct.company.createdAt = toString(fetchedProduct.company.createdAt);
+  fetchedProduct.company.updatedAt = toString(fetchedProduct.company.updatedAt);
+  return {
+    props: {
+      product: fetchedProduct,
+    },
+  };
+}

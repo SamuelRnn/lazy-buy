@@ -5,7 +5,7 @@ import { product } from "../../../../prisma";
 export default async function getProduct(req, res) {
   if (req.method !== "GET")
     return res.status(405).json({ message: "Not found" });
-
+  const filters = req.query;
   const products = await product.findMany({
     include: {
       company: {
@@ -18,7 +18,6 @@ export default async function getProduct(req, res) {
 
   return res.status(200).json(products);
 }
-
 
 // export default async function filterProductsByCat (req, res) {
 //     if(req.method !== "GET")

@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
-import Layout from "../components/layout";
-import Card from "../components/Card";
-import Spinner from "../components/Spinner";
-import ModalFilters from "../components/FiltersModal/Modal";
-import OrderSelect from "../components/OrderSelect";
+import Layout from "../../components/layout";
+import Card from "../../components/Card";
+import Spinner from "../../components/Spinner";
+import ModalFilters from "../../components/FiltersModal/Modal";
+import OrderSelect from "../../components/OrderSelect";
 import { useState } from "react";
 import { IoMdOptions } from "react-icons/io";
 const Store = ({ products }) => {
