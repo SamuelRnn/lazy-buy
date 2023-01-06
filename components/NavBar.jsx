@@ -5,9 +5,11 @@ import Link from "next/link";
 import SearchBar from "./SearchBar";
 import NavSubMenu from "./NavSubMenu";
 import { useState } from "react";
+import ModalCart from "./CartModal/Modal";
 const NavBar = () => {
   const [activeCatModal, setActiveCatModal] = useState(false);
   const [activeRegModal, setActiveRegModal] = useState(false);
+  const [activeCartModal, setActiveCartModal] = useState(false);
   return (
     <header className="w-full bg-fondo-200">
       <div className="nav py-2 flex flex-wrap gap-x-4 gap-y-2 items-center justify-between max-lg:justify-center">
@@ -47,7 +49,10 @@ const NavBar = () => {
             >
               Acceder
             </button>
-            <button href="" className="nav_links">
+            <button
+              onClick={() => setActiveCartModal(true)}
+              className="nav_links"
+            >
               <MdShoppingCart className="text-[28px] text-fondo-400" />
             </button>
           </nav>
@@ -70,6 +75,7 @@ const NavBar = () => {
         ]}
         isActive={activeRegModal}
       />
+      <ModalCart active={activeCartModal} setActive={setActiveCartModal} />
     </header>
   );
 };
