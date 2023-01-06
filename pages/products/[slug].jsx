@@ -177,11 +177,8 @@ export async function getServerSideProps({ res, query: { slug } }) {
     },
   });
   if (!fetchedProduct) {
-    res.setHeader("Location", "/404");
-    res.statusCode = 302;
-    res.end();
     return {
-      props: {},
+      notFound: true,
     };
   }
   fetchedProduct.updatedAt = toString(fetchedProduct.updatedAt);
