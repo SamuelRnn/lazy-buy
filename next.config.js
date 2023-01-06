@@ -7,6 +7,7 @@ const nextConfig = {
       "i.imgur.com",
       "cdn-icons-png.flaticon.com",
       "bicialtea.labici.net",
+      "images.unsplash.com",
     ],
   },
 };
