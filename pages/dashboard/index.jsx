@@ -1,6 +1,9 @@
 import Layout from "../../components/DashBoard/Layout";
+import { useSession, getSession } from "next-auth/react";
 
 const Dashboard = () => {
+  const { data: session } = useSession();
+
   return (
     <Layout>
       <>
@@ -18,3 +21,19 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
+export async function getServerSideProps(context) {
+  const { req } = context;
+  const session = await getSession({
+    req,
+  });
+
+  // if user isn't is auth
+  if (!session)
+    return { redirect: { destination: "/login", permanent: false } };
+
+  // if user is is auth
+  return {
+    props: { session },
+  };
+}
