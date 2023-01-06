@@ -6,15 +6,12 @@ export default async function getProduct(req, res) {
   if (req.method !== "GET")
     return res.status(405).json({ message: "Not found" });
 
-  const filters = req.query
-
-
   const filters = req.query;
 
   const products = await product.findMany({
-    where: {
-      filters
-    },
+    // where: {
+    //   filters
+    // },
     include: {
       company: {
         select: {
