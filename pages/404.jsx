@@ -17,9 +17,9 @@ const ErrorPage = () => {
             <div className="absolute">
               <div className="">
                 <h1 className="my-2 text-fondo-400 font-bold text-2xl">
-                  Looks like you&apos;ve found the doorway to the great nothing
+                  Parece que encontraste algo que no debía ser encontrado...
                 </h1>
-                <p>Se te redigirá en un par de segundos...</p>
+                <p>Se te redigirá en un par de segundos</p>
               </div>
             </div>
             <div>
