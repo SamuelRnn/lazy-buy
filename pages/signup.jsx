@@ -6,6 +6,7 @@ import Layout from "../components/layout";
 import SignupCompany from "../components/signCompany";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
+import { useFormik } from "formik";
 
 const Signup = () => {
   const [typeAccount, setTypeAccount] = useState({
@@ -14,23 +15,27 @@ const Signup = () => {
     // active: false
   });
 
-  const [input, setInput] = useState({
-    name: "",
-    email: "",
-    owner: "",
-    plan: "",
-    country: "",
-    city: "",
-    password: "",
-    profilePicture:
-      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fyt3.ggpht.com%2Fa%2FAATXAJwZPDlnkoRCuk4qbGQT5DR5VP3xgx1OUk3gDQ%3Ds900-c-k-c0xffffffff-no-rj-mo&f=1&nofb=1&ipt=ceb791eb8fb616305474afa861beb486008509ace4b6be71935f8529c8bbde25&ipo=images",
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      owner: "",
+      plan: "",
+      country: "",
+      city: "",
+      password: "",
+      cpassword: "",
+      profilePicture:
+        "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fyt3.ggpht.com%2Fa%2FAATXAJwZPDlnkoRCuk4qbGQT5DR5VP3xgx1OUk3gDQ%3Ds900-c-k-c0xffffffff-no-rj-mo&f=1&nofb=1&ipt=ceb791eb8fb616305474afa861beb486008509ace4b6be71935f8529c8bbde25&ipo=images",
+    },
+    onSubmit,
   });
 
   const router = useRouter();
 
-  async function handleSignUp(e) {
-    e.preventDefault();
-    const options = {
+  async function onSubmit(values) {
+    console.log(values);
+    /* const options = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(input),
@@ -40,8 +45,7 @@ const Signup = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data) router.push("http://localhost:3000/login");
-      });
-    router.push("/login");
+      }); */
   }
 
   const handleClick = () => {
@@ -127,21 +131,18 @@ const Signup = () => {
 
                 <form
                   className="grid grid-cols-1 gap-6 mt-6 md:grid-cols-2"
-                  onSubmit={handleSignUp}
+                  onSubmit={formik.handleSubmit}
                 >
                   <div>
                     <label className="block mb-2 text-sm text-gray-800">
                       Company Name
                     </label>
                     <input
-                      onChange={(e) =>
-                        setInput({ ...input, [e.target.name]: e.target.value })
-                      }
                       name="name"
-                      value={input.name}
                       type="text"
                       placeholder="Apple Inc."
                       className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-md focus:border-zinc-700 dark:focus:border-zinc-700 focus:ring-zinc-700 focus:outline-none focus:ring focus:ring-opacity-40"
+                      {...formik.getFieldProps("name")}
                     />
                   </div>
 
@@ -150,14 +151,11 @@ const Signup = () => {
                       Email
                     </label>
                     <input
-                      onChange={(e) =>
-                        setInput({ ...input, [e.target.name]: e.target.value })
-                      }
-                      value={input.email}
                       name="email"
                       type="email"
                       placeholder="stevejobs@gmail.com"
                       className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-md focus:border-zinc-700 dark:focus:border-zinc-700 focus:ring-zinc-700 focus:outline-none focus:ring focus:ring-opacity-40"
+                      {...formik.getFieldProps("email")}
                     />
                   </div>
 
@@ -166,14 +164,11 @@ const Signup = () => {
                       Owner
                     </label>
                     <input
-                      onChange={(e) =>
-                        setInput({ ...input, [e.target.name]: e.target.value })
-                      }
-                      value={input.owner}
                       name="owner"
                       type="text"
                       placeholder="Steve Jobs"
                       className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-md focus:border-zinc-700 dark:focus:border-zinc-700 focus:ring-zinc-700 focus:outline-none focus:ring focus:ring-opacity-40"
+                      {...formik.getFieldProps("owner")}
                     />
                   </div>
 
@@ -182,14 +177,11 @@ const Signup = () => {
                       Plan
                     </label>
                     <input
-                      onChange={(e) =>
-                        setInput({ ...input, [e.target.name]: e.target.value })
-                      }
-                      value={input.plan}
                       name="plan"
                       type="text"
                       placeholder="Plan: Basic | Standard | Premium"
                       className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-md focus:border-zinc-700 dark:focus:border-zinc-700 focus:ring-zinc-700 focus:outline-none focus:ring focus:ring-opacity-40"
+                      {...formik.getFieldProps("plan")}
                     />
                   </div>
                   <div>
@@ -197,14 +189,11 @@ const Signup = () => {
                       Country
                     </label>
                     <input
-                      onChange={(e) =>
-                        setInput({ ...input, [e.target.name]: e.target.value })
-                      }
-                      value={input.country}
                       name="country"
                       type="text"
                       placeholder="United States"
                       className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-md focus:border-zinc-700 dark:focus:border-zinc-700 focus:ring-zinc-700 focus:outline-none focus:ring focus:ring-opacity-40"
+                      {...formik.getFieldProps("country")}
                     />
                   </div>
                   <div>
@@ -212,14 +201,11 @@ const Signup = () => {
                       City
                     </label>
                     <input
-                      onChange={(e) =>
-                        setInput({ ...input, [e.target.name]: e.target.value })
-                      }
-                      value={input.city}
                       name="city"
                       type="text"
                       placeholder="Palo Alto"
                       className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-md focus:border-zinc-700 dark:focus:border-zinc-700 focus:ring-zinc-700 focus:outline-none focus:ring focus:ring-opacity-40"
+                      {...formik.getFieldProps("city")}
                     />
                   </div>
 
@@ -228,14 +214,11 @@ const Signup = () => {
                       Password
                     </label>
                     <input
-                      onChange={(e) =>
-                        setInput({ ...input, [e.target.name]: e.target.value })
-                      }
-                      value={input.password}
                       name="password"
                       type="password"
                       placeholder="Enter your password"
                       className="border-fondo-200 block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border rounded-md focus:border-zinc-700 dark:focus:border-zinc-700 focus:ring-zinc-700 focus:outline-none focus:ring focus:ring-opacity-40"
+                      {...formik.getFieldProps("password")}
                     />
                   </div>
 
@@ -244,13 +227,10 @@ const Signup = () => {
                       Confirm password
                     </label>
                     <input
-                      /* onChange={(e) =>
-                        setInput({ ...input, [e.target.name]: e.target.value })
-                      }
-                      value={input.password} */
                       type="password"
                       placeholder="Enter your password"
                       className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-md focus:border-zinc-700 dark:focus:border-zinc-700 focus:ring-zinc-700 focus:outline-none focus:ring focus:ring-opacity-40"
+                      {...formik.getFieldProps("cpassword")}
                     />
                   </div>
                   <button
