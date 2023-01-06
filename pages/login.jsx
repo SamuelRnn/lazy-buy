@@ -4,18 +4,31 @@ import AnimatedLogo from "../components/AnimatedLogo";
 import Layout from "../components/layout";
 import { signIn } from "next-auth/react";
 import { ErrorMessage, Formik } from "formik";
+import { useRouter } from "next/router";
 
 // const callbackUrl = process.env.BASE_URL || 'http://localhost:3000'
 
 export default function Loading() {
   // async function googleSignin() {
   //   await signIn('google', { callbackUrl })
-
-  async function handleGoogleSignin(e) {
-    e.preventDefault();
-    signIn("google", { callbackUrl: "/dashboard" });
+  const router = useRouter();
+  // async function handleGoogleSignin(e) {
+  //   e.preventDefault();
+  //   signIn("google", { callbackUrl: "/dashboard" });
+  // }
+  async function handleLogin(event) {
+    event.preventDefault();
+    const email = event.currentTarget[0].value;
+    const password = event.currentTarget[1].value;
+    console.log(email, password);
+    const status = await signIn("credentials", {
+      redirect: false,
+      email,
+      password,
+      callbackUrl: "/dashboard",
+    });
+    if (status.ok) router.push(status.url);
   }
-
   return (
     <Layout noLayout={true} title="Lazy Buy | LogIn">
       <div className="min-h-screen bg-[#ffffff] grid grid-cols-1 lg:grid-cols-2">
@@ -54,7 +67,7 @@ export default function Loading() {
             }}
             onSubmit={(valores, { resetForm }) => {
               resetForm();
-              console.log("Formulario enviado");
+              console.log(valores);
             }}
           >
             {({
@@ -65,10 +78,7 @@ export default function Loading() {
               handleChange,
               handleBlur,
             }) => (
-              <form
-                className="flex flex-col gap-4"
-                onSubmit={handleGoogleSignin}
-              >
+              <form className="flex flex-col gap-4" onSubmit={handleLogin}>
                 {/* Email */}
                 <div>
                   <label htmlFor="email" className="text-zinc-600">

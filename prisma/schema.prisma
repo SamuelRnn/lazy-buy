@@ -35,11 +35,18 @@ model Access {
   User     User   @relation(fields: [userId], references: [id])
 }
 
+model CompanyAccess {
+  id       Int     @default(autoincrement())
+  password String
+  userId   String  @unique
+  User     Company @relation(fields: [userId], references: [id])
+}
+
 model Company {
-  id             String        @id @default(uuid())
-  name           String        @unique
-  email          String
-  password       String
+  id             String         @id @default(uuid())
+  name           String         @unique
+  email          String         @unique
+  access         CompanyAccess?
   profilePicture Json
   owner          String
   city           String
@@ -47,8 +54,8 @@ model Company {
   plan           PlanType
   products       Product[]
   transactions   Transaction[]
-  createdAt      DateTime      @default(now())
-  updatedAt      DateTime      @updatedAt
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
 }
 
 model Plan {
