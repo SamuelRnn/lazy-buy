@@ -9,7 +9,7 @@ const ModalCart = ({ active, setActive }) => {
           <div>
             <motion.div
               onClick={() => setActive(false)}
-              className="fixed top-0 right-0 w-screen h-screen flex justify-start p-6 items-start modal_bg"
+              className="fixed top-0 right-0 w-full h-screen flex justify-start p-6 items-start modal_bg"
               initial={{ x: 0, opacity: 0 }}
               animate={{ opacity: 100 }}
               exit={{ opacity: 0 }}

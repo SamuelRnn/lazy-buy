@@ -17,7 +17,7 @@ export default function Loading() {
   }
 
   return (
-    <Layout noLayout={true}>
+    <Layout noLayout={true} title="Lazy Buy | LogIn">
       <div className="min-h-screen bg-[#ffffff] grid grid-cols-1 lg:grid-cols-2">
         <div className="text-white flex flex-col items-center justify-center gap-8 p-8 max-w-lg mx-auto">
           <div className="flex flex-col gap-1 w-full">
@@ -65,7 +65,10 @@ export default function Loading() {
               handleChange,
               handleBlur,
             }) => (
-              <form className="flex flex-col gap-4" onSubmit={handleGoogleSignin}>
+              <form
+                className="flex flex-col gap-4"
+                onSubmit={handleGoogleSignin}
+              >
                 {/* Email */}
                 <div>
                   <label htmlFor="email" className="text-zinc-600">
