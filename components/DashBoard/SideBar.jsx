@@ -13,7 +13,6 @@ const SideBar = forwardRef(({ setActive }, ref) => {
 
   function handleSignOut() {
     signOut();
-    console.log("Hola");
   }
 
   return (

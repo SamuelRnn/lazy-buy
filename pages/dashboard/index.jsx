@@ -8,7 +8,6 @@ import Account from "../../components/DashBoard/Account";
 import Plan from "../../components/DashBoard/Plan";
 
 const Dashboard = ({ company }) => {
-  console.log("🚀 ~ file: index.jsx:10 ~ Dashboard ~ company", company);
   const [active, setActive] = useState({
     home: true,
     account: false,
