@@ -1,7 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
-import { productApi } from "./App";
-
+import { productApi } from "./productsApi";
 export const store = configureStore({
   reducer: {
     [productApi.reducerPath]: productApi.reducer,

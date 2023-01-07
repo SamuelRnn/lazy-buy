@@ -1,11 +1,14 @@
-import { useRouter } from "next/router";
 import { useState } from "react";
 
+function slugify(str) {
+  return str.split(" ").join("-");
+}
+
 const SearchBar = () => {
-  const router = useRouter();
   const [search, setSearch] = useState("");
-  const handleSearch = () => {
-    router.push(`/products?name=${search.split(" ").join("-")}`);
+  const handleSearch = (event) => {
+    event.preventDefault();
+    window.location.href = `/products?search=${slugify(search)}`;
   };
   return (
     <form

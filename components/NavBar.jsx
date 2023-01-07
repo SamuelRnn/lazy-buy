@@ -16,12 +16,13 @@ const NavBar = () => {
         {/* logo */}
         {/* SearchBar */}
         <div className="flex items-center gap-x-4 justify-center flex-wrap gap-y-2">
-          <Link href="/" className="flex items-center">
+          {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+          <a href="/" className="flex items-center">
             <Image src={logo} alt="logo" width={45} height={45} />
             <h1 className="mx-2 font-bold text-fondo-500 hover:text-white text-xl transition-colors ease-in-out">
               Lazy Buy
             </h1>
-          </Link>
+          </a>
           <SearchBar />
         </div>
 
@@ -59,13 +60,12 @@ const NavBar = () => {
         </div>
       </div>
       <NavSubMenu
-        sourceArray={[
-          { title: "Juguetes", link: "/categories/juguetes" },
-          { title: "Jesucristo", link: "/categories/jesucristo" },
-          { title: "Panes", link: "/categories/panes" },
-          { title: "Carros", link: "/categories/carros" },
-          { title: "Azul", link: "/categories/azul" },
-        ]}
+        sourceArray={["Textiles", "Accesorios", "Consumibles", "Artesanal"].map(
+          (str) => ({
+            title: str,
+            link: `/products?category=${str.toLowerCase()}`,
+          })
+        )}
         isActive={activeCatModal}
       />
       <NavSubMenu

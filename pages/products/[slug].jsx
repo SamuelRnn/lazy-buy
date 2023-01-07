@@ -111,6 +111,7 @@ const Detail = ({ product }) => {
               </details>
 
               <form className="mt-8">
+                {/* //add props extra to model  */}
                 <fieldset>
                   <legend className="mb-1 text-sm font-medium">Color</legend>
 
