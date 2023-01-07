@@ -1,44 +1,9 @@
 import Image from "next/image";
+import Devs from "../components/Devs";
 import Layout from "../components/layout";
 
 const About = () => {
-  const integrantes = [
-    {
-      img: "https://i.ibb.co/7nSJPXQ/Rectangle-121.png",
-      alt_img: "https://i.ibb.co/ThZBWxH/Rectangle-121.png",
-      name: "Franco",
-    },
-    {
-      img: "https://i.ibb.co/7nSJPXQ/Rectangle-121.png",
-      alt_img: "https://i.ibb.co/ThZBWxH/Rectangle-121.png",
-      name: "Brayan",
-    },
-    {
-      img: "https://i.ibb.co/7nSJPXQ/Rectangle-121.png",
-      alt_img: "https://i.ibb.co/ThZBWxH/Rectangle-121.png",
-      name: "Juan",
-    },
-    {
-      img: "https://i.ibb.co/7nSJPXQ/Rectangle-121.png",
-      alt_img: "https://i.ibb.co/ThZBWxH/Rectangle-121.png",
-      name: "Juanpi",
-    },
-    {
-      img: "https://i.ibb.co/7nSJPXQ/Rectangle-121.png",
-      alt_img: "https://i.ibb.co/ThZBWxH/Rectangle-121.png",
-      name: "Samuel",
-    },
-    {
-      img: "https://i.ibb.co/7nSJPXQ/Rectangle-121.png",
-      alt_img: "https://i.ibb.co/ThZBWxH/Rectangle-121.png",
-      name: "Agus",
-    },
-    {
-      img: "https://i.ibb.co/7nSJPXQ/Rectangle-121.png",
-      alt_img: "https://i.ibb.co/ThZBWxH/Rectangle-121.png",
-      name: "Sojo",
-    },
-  ];
+  
   return (
     <Layout>
       <div className="2xl:container 2xl:mx-auto lg:py-16 lg:px-20 md:py-12 md:px-6 py-9 px-4">
@@ -82,31 +47,8 @@ const About = () => {
             </p>
           </div>
           <div className="w-full lg:w-8/12 lg:pt-8">
-            <div className="grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 lg:gap-4 shadow-lg rounded-md">
-              {integrantes.map((dev) => (
-                <div
-                  key={dev.name}
-                  className="p-4 pb-6 flex justify-center flex-col items-center"
-                >
-                  <Image
-                    width={50}
-                    height={50}
-                    className="md:block hidden"
-                    src={dev.img}
-                    alt="dev img"
-                  />
-                  <Image
-                    width={200}
-                    height={100}
-                    className="md:hidden block"
-                    src={dev.alt_img}
-                    alt="dev img"
-                  />
-                  <p className="font-medium text-xl leading-5 text-gray-800 mt-4">
-                    {dev.name}
-                  </p>
-                </div>
-              ))}
+            <div className="flex flex-row items-center rounded-md shadow-lg justify-between flex-wrap gap-0 md:gap-5 p-1 md:p-5">
+                <Devs  />
             </div>
           </div>
         </div>
