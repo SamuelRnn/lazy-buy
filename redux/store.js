@@ -13,4 +13,3 @@ export const store = configureStore({
 });
 
 //optional
-setupListeners(store.dispatch);

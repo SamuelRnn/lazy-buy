@@ -10,10 +10,13 @@ export const cartSlice = createSlice({
   reducers: {
     setCartItem: (state, action) => {},
     cutCartItem: (state, action) => {},
+    dev: (state, action) => {
+      state.subtotal++;
+    },
   },
 });
-export const { setCartItem, cutCartItem } = cartSlice.actions;
+export const { setCartItem, cutCartItem, dev } = cartSlice.actions;
 //custom selector function => useSelector(getCart) instead of useSelector(state => state.counter)
-export default function getCart(state) {
-  return state.counter;
+export function getCart(state) {
+  return state.cart;
 }
