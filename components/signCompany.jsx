@@ -85,7 +85,7 @@ const SignupCompany = ({ typeAccount, setTypeAccount }) => {
                       </button>
 
                       <button
-                        className="mt-1 flex justify-center w-full px-6 py-3 text-zinc-100 font-bold bg-fondo-200 hover:border-zinc-500 hover:text-fondo-200 transition-all hover:bg-white border border-zinc-500 rounded-md md:w-auto md:mx-2 focus:outline-none"
+                        className="mt-1 flex justify-center w-full px-6 py-3 text-zinc-100 font-bold bg-fondo-200 hover:border-zinc-500 hover:text-fondo-200 transition-all hover:bg-white border border-fondo-200 rounded-md md:w-auto md:mx-2 focus:outline-none"
                         onClick={handleClick}
                       >
                         <svg
