@@ -6,14 +6,20 @@ import {
   CreditCardIcon,
   Cog8ToothIcon,
 } from "@heroicons/react/24/solid";
+import { BiLogIn } from "react-icons/bi";
 import { BellIcon, CheckIcon } from "@heroicons/react/24/outline";
 import { Menu, Transition, Popover } from "@headlessui/react";
 import Link from "next/link";
 import { useSession, getSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 
 export default function TopBar({ showNav, setShowNav }) {
   const { data: session } = useSession();
-  
+
+  function handleSignOut() {
+    signOut();
+  }
+
   return (
     <div
       className={`fixed w-full h-16 flex justify-between items-center transition-all duration-[400ms] ${
@@ -139,16 +145,7 @@ export default function TopBar({ showNav, setShowNav }) {
                     className="flex hover:bg-orange-500 hover:text-white text-gray-700 rounded p-2 text-sm group transition-colors items-center"
                   >
                     <PencilIcon className="h-4 w-4 mr-2" />
-                    ChiquitiBoom
-                  </Link>
-                </Menu.Item>
-                <Menu.Item>
-                  <Link
-                    href="#"
-                    className="flex hover:bg-orange-500 hover:text-white text-gray-700 rounded p-2 text-sm group transition-colors items-center"
-                  >
-                    <CreditCardIcon className="h-4 w-4 mr-2" />
-                    PinPan
+                    Edit
                   </Link>
                 </Menu.Item>
                 <Menu.Item>
@@ -157,8 +154,17 @@ export default function TopBar({ showNav, setShowNav }) {
                     className="flex hover:bg-orange-500 hover:text-white text-gray-700 rounded p-2 text-sm group transition-colors items-center"
                   >
                     <Cog8ToothIcon className="h-4 w-4 mr-2" />
-                    LogOut
+                    Settings
                   </Link>
+                </Menu.Item>
+                <Menu.Item>
+                  <div
+                    onClick={handleSignOut}
+                    className="flex hover:bg-orange-500 hover:text-white text-gray-700 rounded p-2 text-sm group transition-colors items-center cursor-pointer"
+                  >
+                    <BiLogIn className="h-4 w-4 mr-2" />
+                    LogOut
+                  </div>
                 </Menu.Item>
               </div>
             </Menu.Items>
