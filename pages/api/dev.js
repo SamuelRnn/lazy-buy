@@ -6,9 +6,9 @@ function getSlug({ id, name }) {
 }
 const companyData = {
   password: "dev",
-  name: "Dev Co.",
-  owner: "Armando Mendoza",
-  email: "dev@dev.com",
+  name: "Dev3 Co.",
+  owner: "Armando Mendozas3",
+  email: "dev3@dev.com",
   city: "Sao Paolo",
   country: "Brasil",
   profilePicture: {
@@ -61,259 +61,372 @@ let productos = [
     companyId: "",
   },
   {
-    name: "i Phone 15",
-    description:
-      "la reencarnacion de steve jobs hecha telefono, con gran pantalla de alta resolucion",
-    price: 800.3,
+    name: "Samsung Galaxy A13",
+    description: "Dispositivo móvil",
+    price: 730.4,
     mainImage: {
       url: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673033931/lazy-buy/fodpv8nlpc1uynqep0lf.jpg",
       public_id: "lazy-buy/fodpv8nlpc1uynqep0lf",
     },
-    stock: 10,
+    stock: 8,
     isActive: true,
     category: "tecnología",
     companyId: "",
   },
   {
-    name: "prueba 1",
-    description:
-      "la reencarnacion de steve jobs hecha telefono, con gran pantalla de alta resolucion",
-    price: 800.3,
+    name: "Zakapillas Nike Downshiffter 11",
+    description: "Zapatillas deporitivas, comodas para hacer deportes",
+    price: 950,
     mainImage: {
       url: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673033931/lazy-buy/fodpv8nlpc1uynqep0lf.jpg",
       public_id: "lazy-buy/fodpv8nlpc1uynqep0lf",
     },
-    stock: 10,
+    stock: 5,
+    isActive: true,
+    category: "Calzado",
+    companyId: "",
+  },
+  {
+    name: "Camisa Manga Larga",
+    description: "Camisa de Algodon, ",
+    price: 755.3,
+    mainImage: {
+      url: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673033931/lazy-buy/fodpv8nlpc1uynqep0lf.jpg",
+      public_id: "lazy-buy/fodpv8nlpc1uynqep0lf",
+    },
+    stock: 21,
+    isActive: true,
+    category: "Vestimenta",
+    companyId: "",
+  },
+  {
+    name: "Smartwach Bracelet",
+    description: "Reloj comodo, para aplicaciones moviles",
+    price: 555.3,
+    mainImage: {
+      url: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673033931/lazy-buy/fodpv8nlpc1uynqep0lf.jpg",
+      public_id: "lazy-buy/fodpv8nlpc1uynqep0lf",
+    },
+    stock: 14,
     isActive: true,
     category: "tecnología",
     companyId: "",
   },
   {
-    name: "prueba 2",
-    description:
-      "la reencarnacion de steve jobs hecha telefono, con gran pantalla de alta resolucion",
-    price: 800.3,
+    name: "Teclado Organo Musical",
+    description: "Instrumento de musica, con teclas",
+    price: 367.65,
     mainImage: {
       url: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673033931/lazy-buy/fodpv8nlpc1uynqep0lf.jpg",
       public_id: "lazy-buy/fodpv8nlpc1uynqep0lf",
     },
-    stock: 10,
+    stock: 15,
+    isActive: true,
+    category: "Musica",
+    companyId: "",
+  },
+  {
+    name: "Moto E20",
+    description: "Dispositivo movil, larga duracion de bateria ",
+    price: 850.3,
+    mainImage: {
+      url: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673033931/lazy-buy/fodpv8nlpc1uynqep0lf.jpg",
+      public_id: "lazy-buy/fodpv8nlpc1uynqep0lf",
+    },
+    stock: 18,
     isActive: true,
     category: "tecnología",
     companyId: "",
   },
   {
-    name: "i Phone 15",
-    description:
-      "la reencarnacion de steve jobs hecha telefono, con gran pantalla de alta resolucion",
-    price: 800.3,
+    name: "Disco Solido Interno",
+    description: "Tarjeta de memoria ram, para computadoras",
+    price: 250.3,
+    mainImage: {
+      url: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673033931/lazy-buy/fodpv8nlpc1uynqep0lf.jpg",
+      public_id: "lazy-buy/fodpv8nlpc1uynqep0lf",
+    },
+    stock: 6,
+    isActive: true,
+    category: "computacion",
+    companyId: "",
+  },
+  {
+    name: "Zapatillas Waffle Trainer",
+    description: "Zapatillas para activida fisica, ligeras, y super comodas",
+    price: 675.3,
+    mainImage: {
+      url: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673033931/lazy-buy/fodpv8nlpc1uynqep0lf.jpg",
+      public_id: "lazy-buy/fodpv8nlpc1uynqep0lf",
+    },
+    stock: 5,
+    isActive: true,
+    category: "Calzados",
+    companyId: "",
+  },
+  {
+    name: "Buzo Canguro Capucha",
+    description: "Vestimenta abrigada, 100% algodon ",
+    price: 675.3,
+    mainImage: {
+      url: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673033931/lazy-buy/fodpv8nlpc1uynqep0lf.jpg",
+      public_id: "lazy-buy/fodpv8nlpc1uynqep0lf",
+    },
+    stock: 6,
+    isActive: true,
+    category: "Vestimenta",
+    companyId: "",
+  },
+  {
+    name: "Flauta Dulce Yamaha",
+    description: "Instrumento de viento",
+    price: 222.5,
     mainImage: {
       url: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673033931/lazy-buy/fodpv8nlpc1uynqep0lf.jpg",
       public_id: "lazy-buy/fodpv8nlpc1uynqep0lf",
     },
     stock: 10,
+    isActive: true,
+    category: "Musica",
+    companyId: "",
+  },
+  {
+    name: "iPhone SE",
+    description: "Dispositivo movil",
+    price: 973.5,
+    mainImage: {
+      url: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673033931/lazy-buy/fodpv8nlpc1uynqep0lf.jpg",
+      public_id: "lazy-buy/fodpv8nlpc1uynqep0lf",
+    },
+    stock: 3,
     isActive: true,
     category: "tecnología",
     companyId: "",
   },
   {
-    name: "prueba 1",
-    description:
-      "la reencarnacion de steve jobs hecha telefono, con gran pantalla de alta resolucion",
-    price: 800.3,
+    name: "Zapatos de Vestir Cuero",
+    description: "Zapatos de vestir, ideales para ir a trabajar, 100% cuero",
+    price: 750.3,
     mainImage: {
       url: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673033931/lazy-buy/fodpv8nlpc1uynqep0lf.jpg",
       public_id: "lazy-buy/fodpv8nlpc1uynqep0lf",
     },
-    stock: 10,
+    stock: 16,
+    isActive: true,
+    category: "Calzado",
+    companyId: "",
+  },
+  {
+    name: "Fuente Solarmax",
+    description: "Fuente de 700w, ideal para computadoras",
+    price: 769.85,
+    mainImage: {
+      url: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673033931/lazy-buy/fodpv8nlpc1uynqep0lf.jpg",
+      public_id: "lazy-buy/fodpv8nlpc1uynqep0lf",
+    },
+    stock: 5,
+    isActive: true,
+    category: "computacion",
+    companyId: "",
+  },
+  {
+    name: "Sweater Hombre Tipo Polera",
+    description: "Polera, ideal para el otoño/invierno, 100% poliéster",
+    price: 355,
+    mainImage: {
+      url: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673033931/lazy-buy/fodpv8nlpc1uynqep0lf.jpg",
+      public_id: "lazy-buy/fodpv8nlpc1uynqep0lf",
+    },
+    stock: 4,
+    isActive: true,
+    category: "Vestimenta",
+    companyId: "",
+  },
+  {
+    name: "Audiculares in-ear",
+    description: "Audiculares, manolibre, ideal para deportes o videojuegos",
+    price: 666,
+    mainImage: {
+      url: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673033931/lazy-buy/fodpv8nlpc1uynqep0lf.jpg",
+      public_id: "lazy-buy/fodpv8nlpc1uynqep0lf",
+    },
+    stock: 4,
+    isActive: true,
+    category: "Musica",
+    companyId: "",
+  },
+  {
+    name: "Xioami Redmi 9C",
+    description: "Dispositivo movil, con excelente calidad de imagen",
+    price: 656.4,
+    mainImage: {
+      url: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673033931/lazy-buy/fodpv8nlpc1uynqep0lf.jpg",
+      public_id: "lazy-buy/fodpv8nlpc1uynqep0lf",
+    },
+    stock: 14,
     isActive: true,
     category: "tecnología",
     companyId: "",
   },
   {
-    name: "prueba 2",
-    description:
-      "la reencarnacion de steve jobs hecha telefono, con gran pantalla de alta resolucion",
-    price: 800.3,
+    name: "Ojota Mujer de Cuero",
+    description: "Ojotas, para uso diario, 100% cuero",
+    price: 975,
     mainImage: {
       url: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673033931/lazy-buy/fodpv8nlpc1uynqep0lf.jpg",
       public_id: "lazy-buy/fodpv8nlpc1uynqep0lf",
     },
-    stock: 10,
+    stock: 11,
+    isActive: true,
+    category: "Calzado",
+    companyId: "",
+  },
+  {
+    name: "Gabinete RedDragon",
+    description: "Gabinete para computadora, con RGB",
+    price: 999,
+    mainImage: {
+      url: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673033931/lazy-buy/fodpv8nlpc1uynqep0lf.jpg",
+      public_id: "lazy-buy/fodpv8nlpc1uynqep0lf",
+    },
+    stock: 3,
+    isActive: true,
+    category: "Computacion",
+    companyId: "",
+  },
+  {
+    name: "Bateria Acustica",
+    description: "Instrumento musical, de percusion  ",
+    price: 333.5,
+    mainImage: {
+      url: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673033931/lazy-buy/fodpv8nlpc1uynqep0lf.jpg",
+      public_id: "lazy-buy/fodpv8nlpc1uynqep0lf",
+    },
+    stock: 3,
+    isActive: true,
+    category: "Musica",
+    companyId: "",
+  },
+  {
+    name: "Campera Deporitva Rompeviento",
+    description:
+      "Campera ideal para la primavera/verano, Gimnasio, Running, Rompeviento",
+    price: 767,
+    mainImage: {
+      url: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673033931/lazy-buy/fodpv8nlpc1uynqep0lf.jpg",
+      public_id: "lazy-buy/fodpv8nlpc1uynqep0lf",
+    },
+    stock: 6,
+    isActive: true,
+    category: "Vestimenta",
+    companyId: "",
+  },
+  {
+    name: "Motorola Edge 30",
+    description: "Dispositivo Movil, con excelente calidad de imagen",
+    price: 444.5,
+    mainImage: {
+      url: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673033931/lazy-buy/fodpv8nlpc1uynqep0lf.jpg",
+      public_id: "lazy-buy/fodpv8nlpc1uynqep0lf",
+    },
+    stock: 37,
     isActive: true,
     category: "tecnología",
     companyId: "",
   },
   {
-    name: "i Phone 15",
-    description:
-      "la reencarnacion de steve jobs hecha telefono, con gran pantalla de alta resolucion",
-    price: 800.3,
+    name: "Guitarra criolla",
+    description: "Dispositivo Movil, con excelente calidad de imagen",
+    price: 664,
     mainImage: {
       url: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673033931/lazy-buy/fodpv8nlpc1uynqep0lf.jpg",
       public_id: "lazy-buy/fodpv8nlpc1uynqep0lf",
     },
-    stock: 10,
+    stock: 23,
+    isActive: true,
+    category: "Musica",
+    companyId: "",
+  },
+  {
+    name: "Smart TV Samsung 43Pulgadas",
+    description: "Pantalla 4k, Pantalla Oled inteligencia cognitiva, Smart TV",
+    price: 609,
+    mainImage: {
+      url: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673033931/lazy-buy/fodpv8nlpc1uynqep0lf.jpg",
+      public_id: "lazy-buy/fodpv8nlpc1uynqep0lf",
+    },
+    stock: 12,
     isActive: true,
     category: "tecnología",
     companyId: "",
   },
   {
-    name: "prueba 1",
-    description:
-      "la reencarnacion de steve jobs hecha telefono, con gran pantalla de alta resolucion",
-    price: 800.3,
+    name: "Sansung Galaxy S20",
+    description: "Dispositivo movil, 4K de camara frontal",
+    price: 999,
     mainImage: {
       url: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673033931/lazy-buy/fodpv8nlpc1uynqep0lf.jpg",
       public_id: "lazy-buy/fodpv8nlpc1uynqep0lf",
     },
-    stock: 10,
+    stock: 3,
     isActive: true,
     category: "tecnología",
     companyId: "",
   },
   {
-    name: "prueba 2",
-    description:
-      "la reencarnacion de steve jobs hecha telefono, con gran pantalla de alta resolucion",
-    price: 800.3,
+    name: "Campera de cuero",
+    description: "Campera 100% cuero, temporada Otoño/Invierno",
+    price: 753,
     mainImage: {
       url: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673033931/lazy-buy/fodpv8nlpc1uynqep0lf.jpg",
       public_id: "lazy-buy/fodpv8nlpc1uynqep0lf",
     },
-    stock: 10,
+    stock: 2,
     isActive: true,
-    category: "tecnología",
+    category: "vestimenta",
     companyId: "",
   },
   {
-    name: "i Phone 15",
-    description:
-      "la reencarnacion de steve jobs hecha telefono, con gran pantalla de alta resolucion",
-    price: 800.3,
+    name: "Parlante Aliver Iggy",
+    description: "Parlante de musica, con tiras led ",
+    price: 456,
     mainImage: {
       url: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673033931/lazy-buy/fodpv8nlpc1uynqep0lf.jpg",
       public_id: "lazy-buy/fodpv8nlpc1uynqep0lf",
     },
-    stock: 10,
+    stock: 6,
     isActive: true,
-    category: "tecnología",
+    category: "Musica",
     companyId: "",
   },
   {
-    name: "prueba 1",
+    name: "Aire acondicionado",
     description:
-      "la reencarnacion de steve jobs hecha telefono, con gran pantalla de alta resolucion",
-    price: 800.3,
+      "Electrodoméstico, con frio/calor, ideal para el verano/invierno ",
+    price: 332,
     mainImage: {
       url: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673033931/lazy-buy/fodpv8nlpc1uynqep0lf.jpg",
       public_id: "lazy-buy/fodpv8nlpc1uynqep0lf",
     },
-    stock: 10,
+    stock: 3,
     isActive: true,
-    category: "tecnología",
+    category: "electrodoméstico",
     companyId: "",
   },
   {
-    name: "prueba 2",
-    description:
-      "la reencarnacion de steve jobs hecha telefono, con gran pantalla de alta resolucion",
-    price: 800.3,
+    name: "Microondas",
+    description: "Electrodoméstico, ideal para recalentar comidas ",
+    price: 332,
     mainImage: {
       url: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673033931/lazy-buy/fodpv8nlpc1uynqep0lf.jpg",
       public_id: "lazy-buy/fodpv8nlpc1uynqep0lf",
     },
-    stock: 10,
+    stock: 7,
     isActive: true,
-    category: "tecnología",
-    companyId: "",
-  },
-  {
-    name: "i Phone 15",
-    description:
-      "la reencarnacion de steve jobs hecha telefono, con gran pantalla de alta resolucion",
-    price: 800.3,
-    mainImage: {
-      url: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673033931/lazy-buy/fodpv8nlpc1uynqep0lf.jpg",
-      public_id: "lazy-buy/fodpv8nlpc1uynqep0lf",
-    },
-    stock: 10,
-    isActive: true,
-    category: "tecnología",
-    companyId: "",
-  },
-  {
-    name: "prueba 1",
-    description:
-      "la reencarnacion de steve jobs hecha telefono, con gran pantalla de alta resolucion",
-    price: 800.3,
-    mainImage: {
-      url: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673033931/lazy-buy/fodpv8nlpc1uynqep0lf.jpg",
-      public_id: "lazy-buy/fodpv8nlpc1uynqep0lf",
-    },
-    stock: 10,
-    isActive: true,
-    category: "tecnología",
-    companyId: "",
-  },
-  {
-    name: "prueba 2",
-    description:
-      "la reencarnacion de steve jobs hecha telefono, con gran pantalla de alta resolucion",
-    price: 800.3,
-    mainImage: {
-      url: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673033931/lazy-buy/fodpv8nlpc1uynqep0lf.jpg",
-      public_id: "lazy-buy/fodpv8nlpc1uynqep0lf",
-    },
-    stock: 10,
-    isActive: true,
-    category: "tecnología",
-    companyId: "",
-  },
-  {
-    name: "i Phone 15",
-    description:
-      "la reencarnacion de steve jobs hecha telefono, con gran pantalla de alta resolucion",
-    price: 800.3,
-    mainImage: {
-      url: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673033931/lazy-buy/fodpv8nlpc1uynqep0lf.jpg",
-      public_id: "lazy-buy/fodpv8nlpc1uynqep0lf",
-    },
-    stock: 10,
-    isActive: true,
-    category: "tecnología",
-    companyId: "",
-  },
-  {
-    name: "prueba 1",
-    description:
-      "la reencarnacion de steve jobs hecha telefono, con gran pantalla de alta resolucion",
-    price: 800.3,
-    mainImage: {
-      url: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673033931/lazy-buy/fodpv8nlpc1uynqep0lf.jpg",
-      public_id: "lazy-buy/fodpv8nlpc1uynqep0lf",
-    },
-    stock: 10,
-    isActive: true,
-    category: "tecnología",
-    companyId: "",
-  },
-  {
-    name: "prueba 2",
-    description:
-      "la reencarnacion de steve jobs hecha telefono, con gran pantalla de alta resolucion",
-    price: 800.3,
-    mainImage: {
-      url: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673033931/lazy-buy/fodpv8nlpc1uynqep0lf.jpg",
-      public_id: "lazy-buy/fodpv8nlpc1uynqep0lf",
-    },
-    stock: 10,
-    isActive: true,
-    category: "tecnología",
+    category: "electrodoméstico",
     companyId: "",
   },
 ];
-
 export default async function handler(req, res) {
   companyData.password = await hash(companyData.password, 12);
 
@@ -331,18 +444,35 @@ export default async function handler(req, res) {
       },
     },
   });
+  // productos.map(async (productData) => {
 
-  await Promise.all(
-    productos.map(async (productData) => {
-      productData.slug = "available";
-      productData.companyId = newCompany.id;
+  //   productData.slug = product.name;
+  //   productData.companyId = newCompany.id;
+  //   let newProduct = await product.create({ data: productData });
+  //   newProduct = await product.update({
+  //     where: { id: newProduct.id },
+  //     data: { slug: getSlug(newProduct) },
+  //   });
+
+  // });
+  productos.map((productData, index) => {
+    productData.slug = productData.name;
+    productData.companyId = newCompany.id;
+
+    (async () => {
       let newProduct = await product.create({ data: productData });
-      newProduct = await product.update({
-        where: { id: newProduct.id },
-        data: { slug: getSlug(newProduct) },
-      });
-    })
-  );
+
+      console.log("product creado!(?");
+      console.log(newProduct);
+
+      await product
+        .update({
+          where: { id: newProduct.id },
+          data: { slug: getSlug(newProduct) },
+        })
+        .then((res) => console.log(index, res));
+    })();
+  });
 
   res.status(201).json({ ok: true });
 }

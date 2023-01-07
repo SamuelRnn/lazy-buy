@@ -24,7 +24,8 @@ export default async function createProduct(req, res) {
     !productData.mainImage ||
     !productData.stock ||
     !productData.isActive ||
-    !productData.companyId
+    !productData.companyId ||
+    !productData.category
   ) {
     return res.status(400).json({
       message: "Datos incompletos, asegurese de llenar todos los campos",
@@ -42,8 +43,9 @@ export default async function createProduct(req, res) {
     const images = await Promise.all(promiseArray);
     productData.carouselImages = images;
   }
+  //create product
   productData.slug = "available";
-
+  console.log(productData);
   let newProduct = await product.create({ data: productData });
   newProduct = await product.update({
     where: { id: newProduct.id },
