@@ -126,7 +126,7 @@ const Signup = () => {
 
                           <button
                             disabled={typeAccount.client ? true : null}
-                            className="mt-1 flex justify-center w-full px-6 py-3 text-white font-bold bg-fondo-200 hover:bg-fondo-100 hover:text-white hover:border-fondo-200 border border-fondo-200 transition-all rounded-lg md:w-auto md:mx-2 focus:outline-none"
+                            className="mt-1 flex justify-center w-full px-6 py-3 text-white font-bold bg-fondo-200 border border-fondo-200 transition-all rounded-lg md:w-auto md:mx-2 focus:outline-none"
                             onClick={handleClick}
                           >
                             <svg

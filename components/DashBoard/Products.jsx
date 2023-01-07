@@ -1,16 +1,22 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useState } from "react";
-
-const Products = ({ isActive }) => {
+import { Fragment, useEffect, useState } from "react";
+import Image from "next/image";
+import { useRouter } from "next/router";
+const Products = ({ isActive, company }) => {
   let [isOpen, setIsOpen] = useState(true);
-  
+
   const [input, setInput] = useState({
     name: "",
     description: "",
+    category: "",
     price: "",
-    picture: "",
+    mainImage: "",
     stock: "",
+    isActive: true,
+    companyId: company.id,
   });
+
+  const router = useRouter();
 
   function closeModal() {
     setIsOpen(false);
@@ -21,9 +27,24 @@ const Products = ({ isActive }) => {
   }
 
   async function handleSubmit() {
-    console.log(input);
+    input.stock = parseInt(input.stock)
+    input.price = parseFloat(input.price)
+    console.log("INPUT ", input);
+    const options = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(input),
+    };
 
-    closeModal()
+    await fetch("api/create/product", options)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data) {
+          router.push("http://localhost:3000/dashboard");
+          console.log("DATA ", data);
+          closeModal();
+        }
+      });
   }
 
   return (
@@ -72,9 +93,7 @@ const Products = ({ isActive }) => {
                       >
                         Create Product
                       </Dialog.Title>
-                      <form
-                        className="mt-2 flex flex-col gap-4"
-                      >
+                      <form className="mt-2 flex flex-col gap-4">
                         <div className="flex gap-3">
                           <label htmlFor="name" className="select-none">
                             Name:
@@ -117,6 +136,26 @@ const Products = ({ isActive }) => {
                           />
                         </div>
                         <div className="flex gap-3">
+                          <label htmlFor="category" className="select-none">
+                            Category:
+                          </label>
+                          <input
+                            id="category"
+                            type="text"
+                            name="category"
+                            placeholder="e.g. Computer"
+                            rows="4"
+                            maxLength="127"
+                            onChange={(e) =>
+                              setInput({
+                                ...input,
+                                [e.target.name]: e.target.value,
+                              })
+                            }
+                            value={input.category}
+                          />
+                        </div>
+                        <div className="flex gap-3">
                           <label htmlFor="price" className="select-none">
                             Price:
                           </label>
@@ -136,14 +175,14 @@ const Products = ({ isActive }) => {
                             value={input.price}
                           />
                         </div>
-                        <div className="flex justify-between">
+                        <div className="flex gap-3">
                           <label htmlFor="picture" className="select-none">
                             Picture:
                           </label>
                           <input
                             id="picture"
-                            type="file"
-                            name="picture"
+                            type="text"
+                            name="mainImage"
                             placeholder="e.g. 20"
                             className="outline-none"
                             onChange={(e) =>
@@ -152,7 +191,7 @@ const Products = ({ isActive }) => {
                                 [e.target.name]: e.target.value,
                               })
                             }
-                            value={input.picture}
+                            value={input.mainImage}
                           />
                         </div>
                         <div className="flex gap-5">
@@ -192,6 +231,28 @@ const Products = ({ isActive }) => {
               </div>
             </Dialog>
           </Transition>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 w-full h-full gap-4 place-content-center py-5 ">
+            {company.products &&
+              company.products.map((p) => {
+                return (
+                  <div
+                    key={p.id}
+                    className="flex flex-col mx- hover:cursor-pointer gap-1 text-center "
+                  >
+                    <h2>{p.name}</h2>
+                    <picture className="self-center">
+                      <img
+                        src={p.mainImage.url}
+                        alt={p.name}
+                        className="object-cover w-full max-w-xs object-center h-full"
+                      />
+                    </picture>
+                    <p>${p.price}</p>
+                    <p>{p.stock}</p>
+                  </div>
+                );
+              })}
+          </div>
         </>
       ) : (
         ""

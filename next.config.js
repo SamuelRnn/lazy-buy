@@ -9,6 +9,7 @@ const nextConfig = {
       "cdn-icons-png.flaticon.com",
       "bicialtea.labici.net",
       "images.unsplash.com",
+      "res.cloudinary.com"
     ],
   },
 };

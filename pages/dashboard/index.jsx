@@ -20,7 +20,7 @@ const Dashboard = ({ company }) => {
     <Layout setActive={setActive}>
       <Home isActive={active} company={company} />
       <Account isActive={active} company={company} />
-      <Products isActive={active} />
+      <Products isActive={active} company={company} />
       <Performance isActive={active} />
       <Plan isActive={active} company={company} />
     </Layout>
@@ -48,7 +48,7 @@ export async function getServerSideProps(context) {
   dataCompany.forEach((c) => {
     if (c.email === session.user.email) return (company = c);
   });
-
+  //console.log(company.products)
   // if user is is auth
   return {
     props: { company },
