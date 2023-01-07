@@ -5,6 +5,7 @@ import Layout from "../components/layout";
 import { signIn } from "next-auth/react";
 import { ErrorMessage, Formik } from "formik";
 import { useRouter } from "next/router";
+import { motion } from "framer-motion";
 
 // const callbackUrl = process.env.BASE_URL || 'http://localhost:3000'
 
@@ -31,8 +32,13 @@ export default function Loading() {
   }
   return (
     <Layout noLayout={true} title="Lazy Buy | LogIn">
-      <div className="min-h-screen bg-[#ffffff] grid grid-cols-1 lg:grid-cols-2">
-        <div className="text-white flex flex-col items-center justify-center gap-8 p-8 max-w-lg mx-auto">
+      <div className="min-h-screen bg-fondo-50 grid grid-cols-1 lg:grid-cols-2">
+      <div className="bg-white overflow-hidden mx-16">
+        <motion.div
+        initial={{opacity: 0, y: -500, scale: 1}}
+        animate={{opacity: 1, y: 0, scale: 1}}
+        transition={{}}
+        className="text-white h-screen flex flex-col items-center justify-center gap-8 p-8 max-w-lg mx-auto bg-white">
           <div className="flex flex-col gap-1 w-full">
             <h1 className="text-4xl font-medium text-fondo-200">
               Iniciar sesión
@@ -164,7 +170,9 @@ export default function Loading() {
               </form>
             )}
           </Formik>
-        </div>
+        </motion.div>
+      </div>
+
         {/* AnimatedLogo */}
         <div className="hidden lg:flex items-center justify-center">
           <AnimatedLogo />
