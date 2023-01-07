@@ -14,4 +14,6 @@ export const cartSlice = createSlice({
 });
 export const { setCartItem, cutCartItem } = cartSlice.actions;
 //custom selector function => useSelector(getCart) instead of useSelector(state => state.counter)
-export default getCart = (state) => state.counter;
+export default function getCart(state) {
+  return state.counter;
+}
