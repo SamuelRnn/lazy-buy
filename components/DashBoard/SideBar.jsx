@@ -5,8 +5,8 @@ import { useRouter } from "next/router";
 import { TfiLayoutListThumb } from "react-icons/tfi";
 import { DiGoogleAnalytics } from "react-icons/di";
 import { BiLogIn } from "react-icons/bi";
+import { GiUpgrade } from "react-icons/gi";
 import { signOut } from "next-auth/react";
-import { useSession, getSession } from "next-auth/react";
 
 const SideBar = forwardRef(({ setActive }, ref) => {
   const router = useRouter();
@@ -36,6 +36,7 @@ const SideBar = forwardRef(({ setActive }, ref) => {
               products: false,
               performance: false,
               home: true,
+              plan: false,
             })
           }
         >
@@ -61,6 +62,7 @@ const SideBar = forwardRef(({ setActive }, ref) => {
               account: true,
               products: false,
               performance: false,
+              plan: false,
             })
           }
         >
@@ -86,6 +88,7 @@ const SideBar = forwardRef(({ setActive }, ref) => {
               account: false,
               products: true,
               performance: false,
+              plan: false,
             })
           }
         >
@@ -112,6 +115,7 @@ const SideBar = forwardRef(({ setActive }, ref) => {
                 account: false,
                 products: false,
                 performance: true,
+                plan: false,
               })
             }
             className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
@@ -125,6 +129,31 @@ const SideBar = forwardRef(({ setActive }, ref) => {
             </div>
             <div>
               <p>Performance</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div
+            onClick={() =>
+              setActive({
+                home: false,
+                account: false,
+                products: false,
+                performance: false,
+                plan: true,
+              })
+            }
+            className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
+              router.pathname == "/billing"
+                ? "bg-orange-100 text-orange-500"
+                : "text-gray-400 hover:bg-orange-100 hover:text-orange-500"
+            }`}
+          >
+            <div className="mr-2">
+              <GiUpgrade className="h-5 w-5" />
+            </div>
+            <div>
+              <p>Plan</p>
             </div>
           </div>
         </div>
@@ -153,7 +182,7 @@ const SideBar = forwardRef(({ setActive }, ref) => {
 SideBar.displayName = "SideBar";
 
 export default SideBar;
-
+/* 
 export async function getServerSideProps(context) {
   const { req } = context;
   const session = await getSession({
@@ -168,4 +197,4 @@ export async function getServerSideProps(context) {
   return {
     props: { session },
   };
-}
+} */

@@ -5,14 +5,16 @@ import Performance from "../../components/DashBoard/Performance";
 import { useEffect, useState } from "react";
 import Home from "../../components/DashBoard/Home";
 import Account from "../../components/DashBoard/Account";
+import Plan from "../../components/DashBoard/Plan";
 
 const Dashboard = ({ company }) => {
-  console.log("🚀 ~ file: index.jsx:10 ~ Dashboard ~ company", company)
+  console.log("🚀 ~ file: index.jsx:10 ~ Dashboard ~ company", company);
   const [active, setActive] = useState({
     home: true,
     account: false,
     products: false,
     performance: false,
+    plan: false,
   });
 
   return (
@@ -21,6 +23,7 @@ const Dashboard = ({ company }) => {
       <Account isActive={active} company={company} />
       <Products isActive={active} />
       <Performance isActive={active} />
+      <Plan isActive={active} company={company} />
     </Layout>
   );
 };
@@ -46,7 +49,7 @@ export async function getServerSideProps(context) {
   dataCompany.forEach((c) => {
     if (c.email === session.user.email) return (company = c);
   });
-  
+
   // if user is is auth
   return {
     props: { company },
