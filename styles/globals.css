@@ -93,3 +93,16 @@
   grid-template-columns: 1fr 4fr;
   column-gap: 40px;
 }
+/* loader */
+@keyframes loader-rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.loader {
+  border-right-color: transparent;
+  animation: loader-rotate 1s linear infinite;
+}

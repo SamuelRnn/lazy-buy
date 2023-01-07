@@ -2,7 +2,7 @@ import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Card from "./Card";
-
+import { motion } from "framer-motion";
 const CardCarousel = ({ products }) => {
   const responsive = {
     desktop: {
@@ -27,7 +27,12 @@ const CardCarousel = ({ products }) => {
     },
   };
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0, x: -100 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.3 }}
+    >
       <Carousel
         className="carousel-i"
         responsive={responsive}
@@ -49,7 +54,7 @@ const CardCarousel = ({ products }) => {
         <Card />
         <Card />
       </Carousel>
-    </div>
+    </motion.div>
   );
 };
 
