@@ -9,10 +9,11 @@ import {
 import { BellIcon, CheckIcon } from "@heroicons/react/24/outline";
 import { Menu, Transition, Popover } from "@headlessui/react";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
+import { useSession, getSession } from "next-auth/react";
 
 export default function TopBar({ showNav, setShowNav }) {
   const { data: session } = useSession();
+  
   return (
     <div
       className={`fixed w-full h-16 flex justify-between items-center transition-all duration-[400ms] ${
@@ -116,7 +117,7 @@ export default function TopBar({ showNav, setShowNav }) {
                 />
               </picture>
               <span className="hidden md:block font-medium text-gray-700">
-                {session.user.name}
+                {session && session.user.name}
               </span>
               <ChevronDownIcon className="ml-2 h-4 w-4 text-gray-700" />
             </Menu.Button>
@@ -156,7 +157,7 @@ export default function TopBar({ showNav, setShowNav }) {
                     className="flex hover:bg-orange-500 hover:text-white text-gray-700 rounded p-2 text-sm group transition-colors items-center"
                   >
                     <Cog8ToothIcon className="h-4 w-4 mr-2" />
-                    Tengo Miedo
+                    LogOut
                   </Link>
                 </Menu.Item>
               </div>
@@ -166,4 +167,20 @@ export default function TopBar({ showNav, setShowNav }) {
       </div>
     </div>
   );
+}
+
+export async function getServerSideProps(context) {
+  const { req } = context;
+  const session = await getSession({
+    req,
+  });
+
+  // if user isn't is auth
+  if (!session)
+    return { redirect: { destination: "/login", permanent: false } };
+
+  // if user is is auth
+  return {
+    props: { session },
+  };
 }

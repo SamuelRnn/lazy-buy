@@ -4,7 +4,7 @@ import TopBar from "../../components/DashBoard/TopBar";
 import { Transition } from "@headlessui/react";
 import { Fragment } from "react";
 
-const Dashboard = ({children}) => {
+const Dashboard = ({children, setActive}) => {
   const [showNav, setShowNav] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -40,7 +40,7 @@ const Dashboard = ({children}) => {
         leaveFrom="translate-x-0"
         leaveTo="-translate-x-full"
       >
-        <SideBar showNav={showNav} />
+        <SideBar showNav={showNav} setActive={setActive} />
       </Transition>
       <main
         className={`pt-16 transition-all duration-[400ms] ${

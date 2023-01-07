@@ -6,9 +6,15 @@ import { TfiLayoutListThumb } from "react-icons/tfi";
 import { DiGoogleAnalytics } from "react-icons/di";
 import { BiLogIn } from "react-icons/bi";
 import { signOut } from "next-auth/react";
+import { useSession, getSession } from "next-auth/react";
 
-const SideBar = forwardRef(({ showNav }, ref) => {
+const SideBar = forwardRef(({ setActive }, ref) => {
   const router = useRouter();
+
+  function handleSignOut() {
+    signOut();
+    console.log("Hola");
+  }
 
   return (
     <div ref={ref} className="fixed w-56 h-full bg-white shadow-sm">
@@ -23,7 +29,16 @@ const SideBar = forwardRef(({ showNav }, ref) => {
       </div>
 
       <div className="flex flex-col">
-        <Link href="/">
+        <div
+          onClick={() =>
+            setActive({
+              account: false,
+              products: false,
+              performance: false,
+              home: true,
+            })
+          }
+        >
           <div
             className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
               router.pathname == "/"
@@ -38,8 +53,17 @@ const SideBar = forwardRef(({ showNav }, ref) => {
               <p>Home</p>
             </div>
           </div>
-        </Link>
-        <Link href="/dashboard/account">
+        </div>
+        <div
+          onClick={() =>
+            setActive({
+              home: false,
+              account: true,
+              products: false,
+              performance: false,
+            })
+          }
+        >
           <div
             className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
               router.pathname == "/account"
@@ -54,8 +78,17 @@ const SideBar = forwardRef(({ showNav }, ref) => {
               <p>Account</p>
             </div>
           </div>
-        </Link>
-        <Link href="/dashboard/products">
+        </div>
+        <div
+          onClick={() =>
+            setActive({
+              home: false,
+              account: false,
+              products: true,
+              performance: false,
+            })
+          }
+        >
           <div
             className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
               router.pathname == "/billing"
@@ -70,9 +103,17 @@ const SideBar = forwardRef(({ showNav }, ref) => {
               <p>Products</p>
             </div>
           </div>
-        </Link>
-        <Link href="/dashboard/performance">
+        </div>
+        <div>
           <div
+            onClick={() =>
+              setActive({
+                home: false,
+                account: false,
+                products: false,
+                performance: true,
+              })
+            }
             className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
               router.pathname == "/billing"
                 ? "bg-orange-100 text-orange-500"
@@ -86,8 +127,9 @@ const SideBar = forwardRef(({ showNav }, ref) => {
               <p>Performance</p>
             </div>
           </div>
-        </Link>
-        <Link href="/signout">
+        </div>
+
+        <div onClick={handleSignOut}>
           <div
             className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
               router.pathname == "/billing"
@@ -98,11 +140,11 @@ const SideBar = forwardRef(({ showNav }, ref) => {
             <div className="mr-2">
               <BiLogIn className="h-5 w-5" />
             </div>
-            <div onClick={() => signOut({ redirect: false, callbackUrl: "/" })}>
+            <div>
               <p>LogOut</p>
             </div>
           </div>
-        </Link>
+        </div>
       </div>
     </div>
   );
@@ -111,3 +153,19 @@ const SideBar = forwardRef(({ showNav }, ref) => {
 SideBar.displayName = "SideBar";
 
 export default SideBar;
+
+export async function getServerSideProps(context) {
+  const { req } = context;
+  const session = await getSession({
+    req,
+  });
+
+  // if user isn't is auth
+  if (!session)
+    return { redirect: { destination: "/login", permanent: false } };
+
+  // if user is is auth
+  return {
+    props: { session },
+  };
+}
