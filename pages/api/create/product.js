@@ -16,7 +16,7 @@ export default async function createProduct(req, res) {
     return res.status(400).send({ message: "Not found" });
   }
   const productData = req.body;
-
+  console.log(productData)
   if (
     !productData.name ||
     !productData.description ||
