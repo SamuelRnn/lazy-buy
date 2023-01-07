@@ -25,9 +25,9 @@ const Store = (initialParams) => {
           <div className="mt-4 flex justify-between items-center gap-6 max-sm:flex-col max-sm:">
             <h2 className="text-lg text-fondo-300 font-bold max-sm:self-start">
               {initialParams.search
-                ? ` ${productos?.length} Resultados para "${initialParams.search
-                    .split("-")
-                    .join(" ")}"`
+                ? `${productos?.length} Resultado${
+                    productos?.length > 1 ? "s" : ""
+                  } para "${initialParams.search.split("-").join(" ")}"`
                 : initialParams.category
                 ? camelize(initialParams.category)
                 : "Lista de productos"}

@@ -1,11 +1,12 @@
+/* eslint-disable @next/next/no-html-link-for-pages */
 import Image from "next/image";
 import logo from "../public/lazycartremove.png";
 import { MdShoppingCart } from "react-icons/md";
-import Link from "next/link";
 import SearchBar from "./SearchBar";
 import NavSubMenu from "./NavSubMenu";
 import { useState } from "react";
 import ModalCart from "./CartModal/Modal";
+
 const NavBar = () => {
   const [activeCatModal, setActiveCatModal] = useState(false);
   const [activeRegModal, setActiveRegModal] = useState(false);
@@ -16,7 +17,6 @@ const NavBar = () => {
         {/* logo */}
         {/* SearchBar */}
         <div className="flex items-center gap-x-4 justify-center flex-wrap gap-y-2">
-          {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
           <a href="/" className="flex items-center">
             <Image src={logo} alt="logo" width={45} height={45} />
             <h1 className="mx-2 font-bold text-fondo-500 hover:text-white text-xl transition-colors ease-in-out">
@@ -29,9 +29,9 @@ const NavBar = () => {
         {/* navlinks */}
         <div className="flex justify-center">
           <nav className="flex items-center gap-x-4">
-            <Link href="/nosotros" className="nav_links">
+            <a href="/nosotros" className="nav_links">
               Nosotros
-            </Link>
+            </a>
             <button
               className={`nav_links ${activeCatModal ? "underline" : ""}`}
               onClick={() => {
