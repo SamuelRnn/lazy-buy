@@ -18,7 +18,8 @@ const Card = ({ product = mock_product, style = "card", delay }) => {
       {style === "card" && (
         <motion.div
           initial={{ scale: 1 }}
-          whileHover={{ scale: 0.9 }}
+          whileHover={{ scale: 0.95 }}
+          transition={{ bounce: true, ease: "backOut" }}
           className="bg-white max-w-sm mx-auto rounded-lg shadow-xl card_width"
         >
           <div className="py-4 px-6 flex flex-col gap-2">
