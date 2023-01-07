@@ -40,7 +40,7 @@ export default async function createCompany(req, res) {
     const newCompany = await company.create({
       data: {
         name: companyData.name,
-        owner: companyData.name,
+        owner: companyData.owner,
         email: companyData.email,
         city: companyData.city,
         country: companyData.country,
