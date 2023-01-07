@@ -1,59 +1,70 @@
-import Link from "next/link";
-import { useState } from "react";
-import Image from "next/image";
-import AnimatedLogo from "../components/AnimatedLogo";
-import Layout from "../components/layout";
-import SignupCompany from "../components/signCompany";
-import { signIn } from "next-auth/react";
-import { useRouter } from "next/router";
-import { useFormik } from "formik";
-import { motion, AnimatePresence } from "framer-motion";
+import Link from 'next/link'
+import { useState } from 'react'
+import Image from 'next/image'
+import AnimatedLogo from '../components/AnimatedLogo'
+import Layout from '../components/layout'
+import SignupCompany from '../components/signCompany'
+import { signIn } from 'next-auth/react'
+import { useRouter } from 'next/router'
+import { useFormik } from 'formik'
+import { motion, AnimatePresence } from 'framer-motion'
+import { registerValidate } from '../utils/validateForm'
+import { Formik } from 'formik'
 
 const Signup = () => {
   const [typeAccount, setTypeAccount] = useState({
     client: true,
     company: false,
     active: false,
-  });
+  })
 
+  // FirstName
+  // Last Name
+  //Email
+  //User Name
+  // Password
+  // Confirm password
   const formik = useFormik({
     initialValues: {
-      name: "",
-      email: "",
-      owner: "",
-      plan: "",
-      country: "",
-      city: "",
-      password: "",
-      cpassword: "",
-      profilePicture:
-        "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fyt3.ggpht.com%2Fa%2FAATXAJwZPDlnkoRCuk4qbGQT5DR5VP3xgx1OUk3gDQ%3Ds900-c-k-c0xffffffff-no-rj-mo&f=1&nofb=1&ipt=ceb791eb8fb616305474afa861beb486008509ace4b6be71935f8529c8bbde25&ipo=images",
+      firstname: '',
+      lastname: '',
+      email: '',
+      username: '',
+      password: '',
+      cpassword: '',
     },
+    validate: registerValidate,
     onSubmit,
-  });
+  })
+  // console.log('error formik',formik.errors);
 
-  const router = useRouter();
-
-  async function onSubmit(values) {
-    console.log(values);
-    /* const options = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(input),
-    };
-
-    await fetch("http://localhost:3000/api/create/company", options)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data) router.push("http://localhost:3000/login");
-      }); */
+  function onSubmit(values) {
+    // console.log('Hola')
+    console.log('Enviando...', values)
   }
 
+  const router = useRouter()
+
+  // async function onSubmit(values) {
+  //   console.log(values);
+  //   /* const options = {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify(input),
+  //   };
+
+  //   await fetch("http://localhost:3000/api/create/company", options)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       if (data) router.push("http://localhost:3000/login");
+  //     }); */
+  // }
+
   const handleClick = () => {
-    !typeAccount.company && setTypeAccount({ client: false, company: true });
-    !typeAccount.client && setTypeAccount({ client: true, company: false });
+    !typeAccount.company && setTypeAccount({ client: false, company: true })
+    !typeAccount.client && setTypeAccount({ client: true, company: false })
     // !typeAccount.active && setTypeAccount({active: true})
-  };
+  }
 
   return (
     <Layout noLayout={true} title="Lazy Buy | SignUp">
@@ -137,21 +148,32 @@ const Signup = () => {
                           </button>
                         </div>
                       </div>
+
+                      {/* Formulario controlado */}
                       <form
                         className="grid grid-cols-2 gap-6 mt-6 md:grid-cols-2"
                         onSubmit={formik.handleSubmit}
+                        // onBlur={formik.handleBlur}
                       >
                         <div>
                           <label className="block mb-2 text-sm text-gray-800">
                             First Name
                           </label>
                           <input
-                            name="name"
+                            name="firstname"
                             type="text"
                             placeholder="John"
                             className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-lg focus:outline-none"
-                            {...formik.getFieldProps("name")}
+                            {...formik.getFieldProps('firstname')}
+                            // onBlur={formik.handleBlur}
                           />
+                          {formik.touched.firstname && formik.errors.firstname ? (
+                            <div className="text-red-600 mt-2 pl-2">
+                              {formik.errors.firstname}
+                            </div>
+                          ) : (
+                            null
+                          )}
                         </div>
 
                         <div>
@@ -163,8 +185,15 @@ const Signup = () => {
                             type="text"
                             placeholder="Wick"
                             className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-lg focus:outline-none"
-                            {...formik.getFieldProps("email")}
+                            {...formik.getFieldProps('lastname')}
                           />
+                          {formik.errors.lastname ? (
+                            <div className="text-red-600 mt-2 pl-2">
+                              {formik.errors.lastname}
+                            </div>
+                          ) : (
+                            <></>
+                          )}
                         </div>
 
                         <div>
@@ -176,8 +205,15 @@ const Signup = () => {
                             type="email"
                             placeholder="jwick@missmypuppy.com"
                             className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-lg focus:outline-none"
-                            {...formik.getFieldProps("owner")}
+                            {...formik.getFieldProps('email')}
                           />
+                          {formik.errors.email ? (
+                            <div className="text-red-600 mt-2 pl-2">
+                              {formik.errors.email }
+                            </div>
+                          ) : (
+                            <></>
+                          )}
                         </div>
 
                         <div>
@@ -189,8 +225,15 @@ const Signup = () => {
                             type="text"
                             placeholder="Lazy Wick"
                             className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-lg focus:outline-none"
-                            {...formik.getFieldProps("plan")}
+                            {...formik.getFieldProps('username')}
                           />
+                          {formik.errors.username ? (
+                            <div className="text-red-600 mt-2 pl-2">
+                              {formik.errors.username}
+                            </div>
+                          ) : (
+                            <></>
+                          )}
                         </div>
 
                         <div>
@@ -202,8 +245,15 @@ const Signup = () => {
                             type="password"
                             placeholder="Enter your password"
                             className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-lg focus:outline-none"
-                            {...formik.getFieldProps("password")}
+                            {...formik.getFieldProps('password')}
                           />
+                          {formik.errors.password ? (
+                            <div className="text-red-600 mt-2 pl-2">
+                              {formik.errors.password}
+                            </div>
+                          ) : (
+                            <></>
+                          )}
                         </div>
 
                         <div>
@@ -214,8 +264,16 @@ const Signup = () => {
                             type="password"
                             placeholder="Enter your password"
                             className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-lg focus:outline-none"
-                            {...formik.getFieldProps("cpassword")}
+                            {...formik.getFieldProps('cpassword')}
                           />
+                          {formik.errors.cpassword ? (
+                            
+                            <div className="text-red-600 mt-2 pl-2">
+                              {formik.errors.cpassword}
+                            </div>
+                          ) : (
+                            <></>
+                          )}
                         </div>
                         {/* <button
                           className="hover:text-black hover:bg-white text-white font-semibold flex rounded-xl border-2 p-3 border-black items-center justify-center gap-4 ease-in-out transition-all bg-black"
@@ -229,7 +287,11 @@ const Signup = () => {
                           />
                           Sign in with Google
                         </button> */}
-                        <button className="hover:text-fondo-300 hover:bg-fondo-50 text-white font-semibold flex rounded-xl border-2 p-3 border-fondo-200 items-center justify-center gap-4 ease-in-out transition-all bg-fondo-200 col-span-2">
+
+                        <button
+                          type="submit"
+                          className="hover:text-fondo-300 hover:bg-fondo-50 text-white font-semibold flex rounded-xl border-2 p-3 border-fondo-200 items-center justify-center gap-4 ease-in-out transition-all bg-fondo-200 col-span-2"
+                        >
                           <span>Sign Up </span>
 
                           <svg
@@ -246,6 +308,7 @@ const Signup = () => {
                           </svg>
                         </button>
                       </form>
+
                       <div>
                         <Link
                           className="hover:text-fondo-300 mt-3 hover:bg-fondo-50 text-white font-semibold flex rounded-xl border-2 py-3 border-fondo-200 items-center justify-center gap-4ease-in-out transition-all bg-fondo-200"
@@ -268,7 +331,7 @@ const Signup = () => {
         />
       )}
     </Layout>
-  );
-};
+  )
+}
 
-export default Signup;
+export default Signup
