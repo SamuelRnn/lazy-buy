@@ -2,24 +2,27 @@ import { product, $disconnect } from "../../../../prisma";
 //------------------------------------------
 //TODO: error managment
 //------------------------------------------
+/*
+query params =
+  page=1 default
+  search= str
+  category= str
+  sort= str
+  company= str
+
+*/
 export default async function getProduct(req, res) {
   if (req.method !== "GET")
     return res.status(405).json({ message: "Not found" });
-
-  const filters = req.query;
-  console.log(filters);
-  if (filters.search === "null") {
-    const productsSinQuery = await product.findMany({
-      include: {
-        company: {
-          select: {
-            name: true,
-          },
-        },
+  const filters = JSON.parse(
+    JSON.stringify(
+      req.query,
+      (key, value) => {
+        return value === "null" ? null : value;
       },
-    });
-    return res.status(200).json(productsSinQuery);
-  }
+      2
+    )
+  );
   if (filters.search) {
     let products = await product.findMany({
       where: {
@@ -62,17 +65,33 @@ export default async function getProduct(req, res) {
     });
     return res.status(200).json(products);
   }
+
+  if (filters.category) {
+    const productsSinQuery = await product.findMany({
+      where: {
+        category: {
+          contains: filters.category,
+        },
+      },
+      include: {
+        company: {
+          select: {
+            name: true,
+          },
+        },
+      },
+    });
+    return res.status(200).json(productsSinQuery);
+  }
+
+  const productsSinQuery = await product.findMany({
+    include: {
+      company: {
+        select: {
+          name: true,
+        },
+      },
+    },
+  });
+  return res.status(200).json(productsSinQuery);
 }
-
-// export default async function filterProductsByCat (req, res) {
-//     if(req.method !== "GET")
-//     return res.status(405).json({ message: "Not found" });
-
-//     const category = req.query
-//     const filteredProductsByCat = await product.findMany({
-//         where: {
-//             category,
-//         }
-//     })
-//     return res.status(200).json(filteredProductsByCat)
-// }
