@@ -3,7 +3,6 @@ import Devs from "../components/Devs";
 import Layout from "../components/layout";
 
 const About = () => {
-  
   return (
     <Layout>
       <div className="2xl:container 2xl:mx-auto lg:py-16 lg:px-20 md:py-12 md:px-6 py-9 px-4">
@@ -47,8 +46,8 @@ const About = () => {
             </p>
           </div>
           <div className="w-full lg:w-8/12 lg:pt-8">
-            <div className="flex flex-row items-center rounded-md shadow-lg justify-between flex-wrap gap-0 md:gap-5 p-1 md:p-5">
-                <Devs  />
+            <div className="flex flex-row items-center rounded-md shadow-lg justify-center flex-wrap gap-4 md:gap-5 p-1 md:p-5">
+              <Devs />
             </div>
           </div>
         </div>

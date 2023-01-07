@@ -70,21 +70,21 @@ const Devs = ({ dev = integrantes }) => {
               <a
                 href="#"
                 target="_blank"
-                class="p-2 hover:bg-gray-100 hover:rounded-lg transition-all"
+                className="p-2 hover:bg-gray-100 hover:rounded-lg transition-all"
               >
                 <ImFacebook />
               </a>
               <a
                 href="#"
                 target="_blank"
-                class="p-2 hover:bg-gray-100 hover:rounded-lg transition-all"
+                className="p-2 hover:bg-gray-100 hover:rounded-lg transition-all"
               >
                 <BsGithub />
               </a>
               <a
                 href="#"
                 target="_blank"
-                class="p-2 hover:bg-gray-100 hover:rounded-lg transition-all"
+                className="p-2 hover:bg-gray-100 hover:rounded-lg transition-all"
               >
                 <BsLinkedin />
               </a>
