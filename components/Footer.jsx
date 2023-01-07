@@ -9,10 +9,13 @@ const Footer = () => {
         <div className="md:col-span-12 xl:col-span-4 flex flex-col gap-4">
           <h1 className="text-3xl font-bold text-gray-900">Lazy Buy</h1>
           <p className="text-gray-600 text-justify hover:text-fondo-300">
-            Lorem Ipsum ha sido el texto de relleno estándar de las industrias
-            desde el año 1500, cuando un impresor (N. del T. persona que se
-            dedica a la imprenta) desconocido usó una galería de textos y los
-            mezcló de tal manera que logró hacer un libro de textos especimen.
+            Lazzy Buy es un proyecto realizado por un grupo de 7 estudiantes de
+            Henry Bootcamp. El proyecto se basa en la creación de un sitio web
+            completamente funcional. En nuestro caso, decidimos hacer una
+            especie de comercio electrónico que incluyera nuestro propio método
+            de pago implementado en la aplicación principal. En este proyecto
+            estuvimos trabajando con las siguientes tecnologías: Next.JS, JSX,
+            Tailwind & Prisma
           </p>
         </div>
         <div className="md:col-span-4 xl:col-span-2">
@@ -21,17 +24,14 @@ const Footer = () => {
             <Link href="/" className="hover:underline hover:text-fondo-300">
               Inicio
             </Link>
-            <Link href="/" className="hover:underline hover:text-fondo-300">
+            <Link
+              href="/nosotros"
+              className="hover:underline hover:text-fondo-300"
+            >
               Nosotros
             </Link>
-            <Link href="/" className="hover:underline hover:text-fondo-300">
-              Servicios
-            </Link>
-            <Link href="/" className="hover:underline hover:text-fondo-300">
-              Blog
-            </Link>
-            <Link href="/" className="hover:underline hover:text-fondo-300">
-              Contacto
+            <Link href="/faqs" className="hover:underline hover:text-fondo-300">
+              Preguntas frecuentes
             </Link>
           </nav>
         </div>
