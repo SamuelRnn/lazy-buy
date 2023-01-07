@@ -1,21 +1,26 @@
 import Layout from "../../components/DashBoard/Layout";
 import { useSession, getSession } from "next-auth/react";
+import Products from "../../components/DashBoard/Products";
+import Performance from "../../components/DashBoard/Performance";
+import { useEffect, useState } from "react";
+import Home from "../../components/DashBoard/Home";
+import Account from "../../components/DashBoard/Account";
 
-const Dashboard = () => {
-  const { data: session } = useSession();
+const Dashboard = ({ company }) => {
+  console.log("🚀 ~ file: index.jsx:10 ~ Dashboard ~ company", company)
+  const [active, setActive] = useState({
+    home: true,
+    account: false,
+    products: false,
+    performance: false,
+  });
 
   return (
-    <Layout>
-      <>
-        <p className="text-gray-700 text-3xl mb-16 font-bold">Dashboard</p>
-
-        <div className="grid lg:grid-cols-3 gap-5 mb-16">
-          <div className="rounded bg-gray-900 h-40 shadow-sm"></div>
-          <div className="rounded bg-gray-900 h-40 shadow-sm"></div>
-          <div className="rounded bg-gray-900 h-40 shadow-sm"></div>
-        </div>
-        <div className="grid col-1 bg-gray-900 h-96 shadow-sm"></div>
-      </>
+    <Layout setActive={setActive}>
+      <Home isActive={active} company={company} />
+      <Account isActive={active} company={company} />
+      <Products isActive={active} />
+      <Performance isActive={active} />
     </Layout>
   );
 };
@@ -28,12 +33,22 @@ export async function getServerSideProps(context) {
     req,
   });
 
-  // if user isn't is auth
-  if (!session)
-    return { redirect: { destination: "/login", permanent: false } };
+  let dataCompany;
+  let company;
 
+  // if user isn't is auth
+  if (!session) return { redirect: { destination: "/", permanent: false } };
+
+  await fetch(`http://localhost:3000/api/get/company`)
+    .then((res) => res.json())
+    .then((data) => (dataCompany = data));
+
+  dataCompany.forEach((c) => {
+    if (c.email === session.user.email) return (company = c);
+  });
+  
   // if user is is auth
   return {
-    props: { session },
+    props: { company },
   };
 }
