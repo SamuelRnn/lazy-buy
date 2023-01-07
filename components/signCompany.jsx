@@ -2,6 +2,7 @@ import AnimatedLogo from "../components/AnimatedLogo";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import { Listbox } from "@headlessui/react";
 
 const SignupCompany = ({ typeAccount, setTypeAccount }) => {
   async function handleSignUp(e) {
@@ -22,7 +23,10 @@ const SignupCompany = ({ typeAccount, setTypeAccount }) => {
   const handleClick = () => {
     !typeAccount.company && setTypeAccount({ client: false, company: true });
     !typeAccount.client && setTypeAccount({ client: true, company: false });
+    !typeAccount.active && setTypeAccount({ active: true });
   };
+
+  
 
   return (
     <AnimatePresence>
@@ -33,17 +37,17 @@ const SignupCompany = ({ typeAccount, setTypeAccount }) => {
         >
           <section className="bg-gradient-to-t to-zinc-100 from-fondo-200">
             <div className="flex justify-center min-h-screen">
-              <div className="hidden lg:flex lg:w-2/5 justify-center items-center">
+              <div className="hidden lg:flex lg:w-2/4 justify-center items-center p-">
                 <AnimatedLogo />
               </div>
 
               <div
-                className="flex items-center w-full max-w-3xl  mx-auto lg:px-12 lg:w-3/5"
+                className="flex items-center w-full max-w-3xl mx-auto lg:px-2 lg:w-3/5 bg-white"
                 id="signup_div"
               >
                 <div className="w-fullbg-gradient-to-t to-zinc-400 from-fondo-200 p-5">
                   <h1 className="text-2xl font-bold tracking-wider text-zinc-700 capitalize">
-                    Get your free account now.
+                    Become a lazy-seller and grow your business
                   </h1>
 
                   <p className="mt-4 text-zinc-500 font-bold">
@@ -59,7 +63,7 @@ const SignupCompany = ({ typeAccount, setTypeAccount }) => {
                     <div className="mt-3 md:flex md:items-center md:-mx-2">
                       <button
                         disabled={typeAccount.company ? true : null}
-                        className="mt-1 flex justify-center w-full px-6 py-3 text-zinc-100 font-bold bg-zinc-400 active:bg-gradient-to-tl active:to-zinc-400 active:from-fondo-200 border-fondo-200 rounded-md md:w-auto md:mx-2 focus:outline-none"
+                        className="border mt-1 flex justify-center w-full px-6 py-3 text-zinc-100 font-bold border-zinc-500 bg-zinc-500 rounded-md md:w-auto md:mx-2"
                         onClick={handleClick}
                       >
                         <svg
@@ -81,7 +85,7 @@ const SignupCompany = ({ typeAccount, setTypeAccount }) => {
                       </button>
 
                       <button
-                        className="mt-1 flex justify-center w-full px-6 py-3 text-zinc-100 font-bold bg-zinc-400 hover:bg-gradient-to-tl hover:to-zinc-400 hover:from-fondo-200 border-fondo-200 rounded-md md:w-auto md:mx-2 focus:outline-none"
+                        className="mt-1 flex justify-center w-full px-6 py-3 text-zinc-100 font-bold bg-fondo-200 hover:border-zinc-500 hover:text-fondo-200 transition-all hover:bg-white border border-zinc-500 rounded-md md:w-auto md:mx-2 focus:outline-none"
                         onClick={handleClick}
                       >
                         <svg
@@ -108,7 +112,7 @@ const SignupCompany = ({ typeAccount, setTypeAccount }) => {
                     className="grid grid-cols-1 gap-6 mt-6 md:grid-cols-2"
                     onSubmit={handleSignUp}
                   >
-                    <div>
+                    <div className="col-span-2">
                       <label className="block mb-2 text-sm text-gray-800">
                         Company Name
                       </label>
@@ -116,7 +120,7 @@ const SignupCompany = ({ typeAccount, setTypeAccount }) => {
                         name="name"
                         type="text"
                         placeholder="Apple Inc."
-                        className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-md focus:border-zinc-700 dark:focus:border-zinc-700 focus:ring-zinc-700 focus:outline-none focus:ring focus:ring-opacity-40"
+                        className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-zinc-500 rounded-lg focus:outline-none col-span-3"
                       />
                     </div>
 
@@ -128,7 +132,7 @@ const SignupCompany = ({ typeAccount, setTypeAccount }) => {
                         name="email"
                         type="email"
                         placeholder="stevejobs@gmail.com"
-                        className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-md focus:border-zinc-700 dark:focus:border-zinc-700 focus:ring-zinc-700 focus:outline-none focus:ring focus:ring-opacity-40"
+                        className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-zinc-500 rounded-lg focus:outline-none"
                       />
                     </div>
 
@@ -140,19 +144,7 @@ const SignupCompany = ({ typeAccount, setTypeAccount }) => {
                         name="owner"
                         type="text"
                         placeholder="Steve Jobs"
-                        className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-md focus:border-zinc-700 dark:focus:border-zinc-700 focus:ring-zinc-700 focus:outline-none focus:ring focus:ring-opacity-40"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block mb-2 text-sm text-gray-800">
-                        Plan
-                      </label>
-                      <input
-                        name="plan"
-                        type="text"
-                        placeholder="Plan: Basic | Standard | Premium"
-                        className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-md focus:border-zinc-700 dark:focus:border-zinc-700 focus:ring-zinc-700 focus:outline-none focus:ring focus:ring-opacity-40"
+                        className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-zinc-500 rounded-lg focus:outline-none"
                       />
                     </div>
                     <div>
@@ -163,7 +155,7 @@ const SignupCompany = ({ typeAccount, setTypeAccount }) => {
                         name="country"
                         type="text"
                         placeholder="United States"
-                        className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-md focus:border-zinc-700 dark:focus:border-zinc-700 focus:ring-zinc-700 focus:outline-none focus:ring focus:ring-opacity-40"
+                        className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-zinc-500 rounded-lg focus:outline-none"
                       />
                     </div>
                     <div>
@@ -174,10 +166,10 @@ const SignupCompany = ({ typeAccount, setTypeAccount }) => {
                         name="city"
                         type="text"
                         placeholder="Palo Alto"
-                        className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-md focus:border-zinc-700 dark:focus:border-zinc-700 focus:ring-zinc-700 focus:outline-none focus:ring focus:ring-opacity-40"
+                        className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-zinc-500 rounded-lg focus:outline-none"
                       />
                     </div>
-
+              
                     <div>
                       <label className="block mb-2 text-sm text-gray-800">
                         Password
@@ -186,9 +178,10 @@ const SignupCompany = ({ typeAccount, setTypeAccount }) => {
                         name="password"
                         type="password"
                         placeholder="Enter your password"
-                        className="border-fondo-200 block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border rounded-md focus:border-zinc-700 dark:focus:border-zinc-700 focus:ring-zinc-700 focus:outline-none focus:ring focus:ring-opacity-40"
+                        className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-zinc-500 rounded-lg focus:outline-none"
                       />
                     </div>
+
 
                     <div>
                       <label className="block mb-2 text-sm text-gray-800">
@@ -197,11 +190,11 @@ const SignupCompany = ({ typeAccount, setTypeAccount }) => {
                       <input
                         type="password"
                         placeholder="Enter your password"
-                        className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-md focus:border-zinc-700 dark:focus:border-zinc-700 focus:ring-zinc-700 focus:outline-none focus:ring focus:ring-opacity-40"
+                        className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-zinc-500 rounded-lg focus:outline-none"
                       />
                     </div>
-                    <button
-                      className="hover:text-black hover:bg-white text-white font-semibold flex rounded-xl border-2 p-3 border-black items-center justify-center gap-4 ease-in-out transition-all bg-black"
+                    {/* <button
+                      className="hover:text-black hover:bg-white text-white font-semibold flex rounded-xl border-2 p-3 border-black items-center justify-center w-full gap-4 ease-in-out transition-all bg-black"
                       type="submit"
                     >
                       <Image
@@ -211,8 +204,8 @@ const SignupCompany = ({ typeAccount, setTypeAccount }) => {
                         alt="Google"
                       />
                       Sign in with Google
-                    </button>
-                    <button className="hover:text-fondo-300 hover:bg-white text-white font-semibold flex rounded-xl border-2 p-3 border-fondo-200 items-center justify-center gap-4 ease-in-out transition-all bg-fondo-200">
+                    </button> */}
+                    <button className="hover:text-zinc-700 hover:bg-zinc-300 hover:border-zinc-300 text-zinc-100 font-semibold flex rounded-xl border-2 p-3 border-zinc-500 items-center justify-center gap-4 ease-in-out transition-all bg-zinc-500 col-span-2">
                       <span>Sign Up </span>
 
                       <svg
@@ -231,7 +224,7 @@ const SignupCompany = ({ typeAccount, setTypeAccount }) => {
                   </form>
                   <div>
                     <Link
-                      className="hover:text-fondo-300 mt-3 hover:bg-white text-white font-semibold flex rounded-xl border-2 py-3 border-fondo-200 items-center justify-center gap-4ease-in-out transition-all bg-fondo-200"
+                      className="hover:text-zinc-700 mt-3 hover:bg-zinc-300 hover:border-zinc-300 text-zinc-100 font-semibold flex rounded-xl border-2 py-3 border-zinc-500 items-center justify-center gap-4ease-in-out transition-all bg-zinc-500"
                       href="./login"
                     >
                       Already have an account?
