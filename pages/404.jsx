@@ -7,7 +7,11 @@ import Layout from "../components/layout";
 const ErrorPage = () => {
   const router = useRouter();
   useEffect(() => {
-    setTimeout(() => router.push("/"), 5000);
+    const id = setTimeout(() => router.push("/"), 5000);
+    return () => {
+      clearTimeout(id);
+      console.log("me voy");
+    };
   }, []);
   return (
     <Layout noLayout={true} title="Página no encontrada!">
