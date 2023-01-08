@@ -8,12 +8,14 @@ import { DiGoogleAnalytics } from "react-icons/di";
 import { BiLogIn } from "react-icons/bi";
 import { GiUpgrade } from "react-icons/gi";
 import { signOut } from "next-auth/react";
+import { toast } from "react-hot-toast";
 
 const SideBar = forwardRef(({ setActive }, ref) => {
   const router = useRouter();
-
   function handleSignOut() {
-    signOut();
+    signOut({
+      callbackUrl: "/login?session=log-out",
+    });
   }
 
   return (
@@ -31,10 +33,10 @@ const SideBar = forwardRef(({ setActive }, ref) => {
       </div>
 
       <div className="flex flex-col">
-        <Link href="/dev-dashboard">
+        <Link href="/dashboard">
           <div
             className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
-              router.pathname === "/dev-dashboard"
+              router.pathname === "/dashboard"
                 ? "bg-fondo-100 text-fondo-500"
                 : "text-gray-400 hover:bg-fondo-100 hover:text-fondo-500"
             }`}
@@ -47,10 +49,10 @@ const SideBar = forwardRef(({ setActive }, ref) => {
             </div>
           </div>
         </Link>
-        <Link href="/dev-dashboard/account">
+        <Link href="/dashboard/account">
           <div
             className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
-              router.pathname == "/dev-dashboard/account"
+              router.pathname == "/dashboard/account"
                 ? "bg-fondo-100 text-fondo-500"
                 : "text-gray-400 hover:bg-fondo-100 hover:text-fondo-500"
             }`}
@@ -63,10 +65,10 @@ const SideBar = forwardRef(({ setActive }, ref) => {
             </div>
           </div>
         </Link>
-        <Link href="/dev-dashboard/products">
+        <Link href="/dashboard/products">
           <div
             className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
-              router.pathname == "/billing"
+              router.pathname == "/dashboard/products"
                 ? "bg-fondo-100 text-fondo-500"
                 : "text-gray-400 hover:bg-fondo-100 hover:text-fondo-500"
             }`}
@@ -80,9 +82,9 @@ const SideBar = forwardRef(({ setActive }, ref) => {
           </div>
         </Link>
         <Link
-          href="/dev-dashboard/performance"
+          href="/dashboard/performance"
           className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
-            router.pathname == "/performance"
+            router.pathname == "/dashboard/performance"
               ? "bg-fondo-100 text-fondo-500"
               : "text-gray-400 hover:bg-fondo-100 hover:text-fondo-500"
           }`}
@@ -95,7 +97,7 @@ const SideBar = forwardRef(({ setActive }, ref) => {
           </div>
         </Link>
         <Link
-          href="/dev-dashboard/plan"
+          href="/dashboard/plan"
           className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
             router.pathname == "/plan"
               ? "bg-fondo-100 text-fondo-500"
