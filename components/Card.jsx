@@ -40,7 +40,7 @@ const Card = ({ product = mock_product, style = "card", delay }) => {
               ${product.price.toFixed(2)}
             </span>
             <button className="text-gray-200 hover:text-white transition-colors font-semibold outline-none">
-              Agregar al carrito
+              Add to cart
             </button>
           </div>
         </motion.div>

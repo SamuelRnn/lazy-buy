@@ -6,18 +6,17 @@ export default function Home() {
   return (
     <Layout>
       <div className="py-12">
-        <h1 className="main home_titles">Nuevos productos</h1>
+        <h1 className="main home_titles">New Products</h1>
         <CardCarousel />
         <div className="py-12">
           <Banner />
         </div>
-        <h1 className="main home_titles">Ofertas del día</h1>
+        <h1 className="main home_titles">Day Offers</h1>
         <CardCarousel />
         <br />
         <hr className="main my-4 text-zinc-300" />
         <br />
-        {console.log("mundo hola")}
-        <h1 className="main home_titles">{"Descuentos!(?"}</h1>
+        <h1 className="main home_titles">Rampage Offers</h1>
         <CardCarousel />
       </div>
     </Layout>
