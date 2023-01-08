@@ -8,7 +8,7 @@ import { combineReducers } from "@reduxjs/toolkit";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["cart"],
+  whitelist: ["cart", productApi.reducerPath],
 };
 
 const rootReducer = combineReducers({
@@ -21,7 +21,9 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({serializableCheck: false}).concat(productApi.middleware),
+    getDefaultMiddleware({ serializableCheck: false }).concat(
+      productApi.middleware
+    ),
 });
 
 //optional

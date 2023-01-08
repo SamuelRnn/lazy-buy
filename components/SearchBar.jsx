@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { toast } from "react-hot-toast";
 function slugify(str) {
   return str.split(" ").join("-");
 }
@@ -8,6 +8,12 @@ const SearchBar = () => {
   const [search, setSearch] = useState("");
   const handleSearch = (event) => {
     event.preventDefault();
+    if (!search) {
+      event.target[0].blur();
+      return toast.error("There's nothing to search for!", {
+        duration: 2300,
+      });
+    }
     window.location.href = `/products?search=${slugify(search)}`;
   };
   return (
