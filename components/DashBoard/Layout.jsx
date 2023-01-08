@@ -5,6 +5,7 @@ import { Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { AnimatePresence } from "framer-motion";
 import Head from "next/head";
+import { Toaster } from "react-hot-toast";
 
 const DashboardLayout = ({
   children,
@@ -43,6 +44,7 @@ const DashboardLayout = ({
         />
         <title>{title}</title>
       </Head>
+      <Toaster position="top-center" />
       <AnimatePresence>
         <div>
           <TopBar showNav={showNav} setShowNav={setShowNav} />

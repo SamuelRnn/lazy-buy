@@ -1,35 +1,27 @@
-import Layout from "../../components/DashBoard/Layout";
-import { useSession, getSession } from "next-auth/react";
-import Products from "../../components/DashBoard/views/Products";
-import Performance from "../../components/DashBoard/views/Performance";
-import { useEffect, useState } from "react";
-import Home from "../../components/DashBoard/views/Home";
-import Account from "../../components/DashBoard/views/Account";
-import Plan from "../../components/DashBoard/views/Plan";
+import { motion } from "framer-motion";
+import { getSession } from "next-auth/react";
+import DashboardLayout from "../../components/DashBoard/Layout";
 
-const Dashboard = ({ company }) => {
-  const [active, setActive] = useState({
-    home: true,
-    account: false,
-    products: false,
-    performance: false,
-    plan: false,
-  });
-
+const Home = ({ company }) => {
   return (
-    <Layout setActive={setActive}>
-      <Home isActive={active} company={company} />
-      <Account isActive={active} company={company} />
-      <Products isActive={active} company={company} />
-      <Performance isActive={active} />
-      <Plan isActive={active} company={company} />
-    </Layout>
+    <DashboardLayout>
+      <motion.div
+        initial={{ x: -400, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        exit={{ x: 400, opacity: 0 }}
+        className="bg-zinc-200 min-h-screen"
+      >
+        <div>
+          <h1>Home</h1>
+        </div>
+      </motion.div>
+    </DashboardLayout>
   );
 };
 
-export default Dashboard;
-
+export default Home;
 export async function getServerSideProps(context) {
+  //TODO: move logic to redux Api
   const { req } = context;
   const session = await getSession({
     req,

@@ -1,7 +1,7 @@
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import Head from "next/head";
-
+import { Toaster } from "react-hot-toast";
 const Layout = ({ children, title = "Lazy Buy", noLayout = false }) => {
   return (
     <>
@@ -13,6 +13,7 @@ const Layout = ({ children, title = "Lazy Buy", noLayout = false }) => {
         />
         <title>{title}</title>
       </Head>
+      <Toaster position="top-center" />
       {!noLayout && <NavBar />}
       <main>{children}</main>
       {!noLayout && <Footer />}

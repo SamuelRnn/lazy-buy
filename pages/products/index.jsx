@@ -6,6 +6,7 @@ import OrderSelect from "../../components/OrderSelect";
 import { useState } from "react";
 import { IoMdOptions } from "react-icons/io";
 import { useGetProductsQuery } from "../../redux/productsApi";
+import MiniSpinner from "../../components/miniSpinner";
 
 function camelize(str) {
   const aux = str.split("");
@@ -16,22 +17,23 @@ function camelize(str) {
 const Store = (initialParams) => {
   const [activeFiltersModal, setActiveFiltersModal] = useState(false);
   const { isLoading, data: productos } = useGetProductsQuery(initialParams);
-  console.log(productos);
   return (
     <>
       <Layout>
-        {/* [count] resultados en [name] */}
         <section className="main">
           <div className="mt-4 flex justify-between items-center gap-6 max-sm:flex-col max-sm:">
-            <h2 className="text-lg text-fondo-300 font-bold max-sm:self-start">
-              {initialParams.search
-                ? `${productos?.length} Resultado${
-                    productos?.length > 1 ? "s" : ""
-                  } para "${initialParams.search.split("-").join(" ")}"`
-                : initialParams.category
-                ? camelize(initialParams.category)
-                : "Lista de productos"}
-            </h2>
+            {initialParams.search && (
+              <h2 className="text-lg text-fondo-300 font-medium max-sm:self-start transition-all align-middle">
+                {productos ? productos.length : <MiniSpinner />}
+                {` result(s) for "${initialParams.search}"`}
+              </h2>
+            )}
+            {initialParams.category && (
+              <h2 className="text-lg text-fondo-300 font-bold max-sm:self-start transition-all align-middle">
+                {`${camelize(initialParams.category)} `}
+                {productos ? `(${productos.length})` : <MiniSpinner />}
+              </h2>
+            )}
             <div className="flex gap-4 max-sm:w-full max-sm:justify-between">
               <button
                 onClick={() => setActiveFiltersModal((state) => !state)}
@@ -40,12 +42,12 @@ const Store = (initialParams) => {
                 <p>Filters</p>
                 <IoMdOptions />
               </button>
-              <OrderSelect />
+              <OrderSelect initialParams={initialParams} />
             </div>
           </div>
           <hr className="my-4" />
           <div className="bg-zinc-100 w-full rounded-xl mt-6 mb-12">
-            <div className="flex flex-col gap-y-10 items-center py-10 min-h-[164px] justify-center">
+            <div className="flex flex-col gap-y-10 items-center py-10 min-h-[164px] justify-center overflow-hidden ">
               {isLoading && <Spinner />}
               {productos?.map((product, index) => (
                 <Card

@@ -1,4 +1,4 @@
-import { product, $disconnect } from "../../../../prisma";
+import { product } from "../../../../prisma";
 //------------------------------------------
 //TODO: error managment
 //------------------------------------------
@@ -65,12 +65,12 @@ export default async function getProduct(req, res) {
     });
     return res.status(200).json(products);
   }
-
   if (filters.category) {
-    const productsSinQuery = await product.findMany({
+    let products = await product.findMany({
       where: {
         category: {
           contains: filters.category,
+          mode: "insensitive",
         },
       },
       include: {
@@ -81,9 +81,27 @@ export default async function getProduct(req, res) {
         },
       },
     });
-    return res.status(200).json(productsSinQuery);
+    return res.status(200).json(products);
   }
-
+  //   //------------------------------------------
+  //   if (filters.category) {
+  //     const productsSinQuery = await product.findMany({
+  //       where: {
+  //         category: {
+  //           contains: filters.category,
+  //         },
+  //       },
+  //       include: {
+  //         company: {
+  //           select: {
+  //             name: true,
+  //           },
+  //         },
+  //       },
+  //     });
+  //     return res.status(200).json(productsSinQuery);
+  //   }
+  //   //------------------------------------------
   const productsSinQuery = await product.findMany({
     include: {
       company: {

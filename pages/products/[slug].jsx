@@ -2,14 +2,17 @@ import React from "react";
 import Layout from "../../components/layout";
 import Image from "next/image";
 import { PrismaClient } from "@prisma/client";
+import { useRouter } from "next/router";
 
 const Detail = ({ product }) => {
+  const router = useRouter();
+
   return (
     <Layout title={"Lazy Buy | " + product.name}>
       <br />
       <br />
       <br />
-
+      <button onClick={() => router.back()}>Back</button>
       <section>
         <div className="relative max-w-screen-xl px-4 py-8 mx-auto">
           <div className="grid items-start grid-cols-1 gap-8 md:grid-cols-2">

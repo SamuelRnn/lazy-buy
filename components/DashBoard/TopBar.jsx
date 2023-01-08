@@ -17,12 +17,14 @@ export default function TopBar({ showNav, setShowNav }) {
   const { data: session } = useSession();
 
   function handleSignOut() {
-    signOut();
+    signOut({
+      callbackUrl: "/login?session=signed-out",
+    });
   }
 
   return (
     <div
-      className={`fixed w-full h-16 flex justify-between items-center transition-all duration-[400ms] ${
+      className={`bg-fondo-100 fixed w-full h-16 flex justify-between items-center transition-all duration-[400ms] ${
         showNav ? "pl-56" : ""
       }`}
     >

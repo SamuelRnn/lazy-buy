@@ -1,7 +1,10 @@
 const OrderSelect = () => {
+  const handleChange = ({ target }) => {
+    r;
+  };
   return (
     <select
-      onChange={({ target }) => console.log(target.value)}
+      onChange={handleChange}
       name=""
       id=""
       className="filter_btn"
