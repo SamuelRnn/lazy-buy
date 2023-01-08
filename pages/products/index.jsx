@@ -45,6 +45,7 @@ const Store = (initialParams) => {
               <OrderSelect initialParams={initialParams} />
             </div>
           </div>
+          {console.log("test")}
           <hr className="my-4" />
           <div className="bg-zinc-100 w-full rounded-xl mt-6 mb-12">
             <div className="flex flex-col gap-y-10 items-center py-10 min-h-[164px] justify-center overflow-hidden ">
