@@ -167,12 +167,12 @@ const Signup = () => {
                             {...formik.getFieldProps('firstname')}
                             // onBlur={formik.handleBlur}
                           />
-                          {formik.touched.firstname && formik.errors.firstname ? (
+                          {formik.errors.firstname  && formik.touched.firstname? (
                             <div className="text-red-600 mt-2 pl-2">
                               {formik.errors.firstname}
                             </div>
                           ) : (
-                            null
+                            <></>
                           )}
                         </div>
 
@@ -187,7 +187,7 @@ const Signup = () => {
                             className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-lg focus:outline-none"
                             {...formik.getFieldProps('lastname')}
                           />
-                          {formik.errors.lastname ? (
+                          {formik.errors.lastname && formik.touched.lastname ?  (
                             <div className="text-red-600 mt-2 pl-2">
                               {formik.errors.lastname}
                             </div>
@@ -207,7 +207,7 @@ const Signup = () => {
                             className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-lg focus:outline-none"
                             {...formik.getFieldProps('email')}
                           />
-                          {formik.errors.email ? (
+                          {formik.errors.email && formik.touched.email ? (
                             <div className="text-red-600 mt-2 pl-2">
                               {formik.errors.email }
                             </div>
@@ -227,7 +227,7 @@ const Signup = () => {
                             className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-lg focus:outline-none"
                             {...formik.getFieldProps('username')}
                           />
-                          {formik.errors.username ? (
+                          {formik.errors.username && formik.touched.username ? (
                             <div className="text-red-600 mt-2 pl-2">
                               {formik.errors.username}
                             </div>
@@ -247,7 +247,7 @@ const Signup = () => {
                             className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-lg focus:outline-none"
                             {...formik.getFieldProps('password')}
                           />
-                          {formik.errors.password ? (
+                          {formik.errors.password && formik.touched.password ? (
                             <div className="text-red-600 mt-2 pl-2">
                               {formik.errors.password}
                             </div>
@@ -266,7 +266,7 @@ const Signup = () => {
                             className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-lg focus:outline-none"
                             {...formik.getFieldProps('cpassword')}
                           />
-                          {formik.errors.cpassword ? (
+                          {formik.errors.cpassword && formik.touched.cpassword ? (
                             
                             <div className="text-red-600 mt-2 pl-2">
                               {formik.errors.cpassword}
