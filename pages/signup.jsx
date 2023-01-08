@@ -155,7 +155,7 @@ const Signup = () => {
                         onSubmit={formik.handleSubmit}
                         // onBlur={formik.handleBlur}
                       >
-                        <div>
+                        <div className="col-span-2 sm:col-span-1">
                           <label className="block mb-2 text-sm text-gray-800">
                             First Name
                           </label>
@@ -176,7 +176,7 @@ const Signup = () => {
                           )}
                         </div>
 
-                        <div>
+                        <div className="col-span-2 sm:col-span-1">
                           <label className="block mb-2 text-sm text-gray-800">
                             Last Name
                           </label>
@@ -196,7 +196,7 @@ const Signup = () => {
                           )}
                         </div>
 
-                        <div>
+                        <div className="col-span-2 sm:col-span-1">
                           <label className="block mb-2 text-sm text-gray-800">
                             Email
                           </label>
@@ -216,7 +216,7 @@ const Signup = () => {
                           )}
                         </div>
 
-                        <div>
+                        <div className="col-span-2 sm:col-span-1">
                           <label className="block mb-2 text-sm text-gray-800">
                             User Name
                           </label>
@@ -236,7 +236,7 @@ const Signup = () => {
                           )}
                         </div>
 
-                        <div>
+                        <div className="col-span-2 sm:col-span-1">
                           <label className="block mb-2 text-sm text-gray-800">
                             Password
                           </label>
@@ -256,7 +256,7 @@ const Signup = () => {
                           )}
                         </div>
 
-                        <div>
+                        <div className="col-span-2 sm:col-span-1">
                           <label className="block mb-2 text-sm text-gray-800">
                             Confirm password
                           </label>
