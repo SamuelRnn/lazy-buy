@@ -16,12 +16,16 @@ export default function Home() {
         <br />
         <hr className="main my-4 text-zinc-300" />
         <br />
-        {
-          console.log("mundo hola")
-        }
+        {console.log("mundo hola")}
         <h1 className="main home_titles">{"Descuentos!(?"}</h1>
         <CardCarousel />
       </div>
     </Layout>
   );
+}
+
+export async function getServerSideProps() {
+  return {
+    props: {},
+  };
 }

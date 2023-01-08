@@ -1,14 +1,12 @@
-const Performance = ({ isActive }) => {
+import DashboardLayout from "../../components/DashBoard/Layout";
+
+const Performance = () => {
   return (
-    <div>
-      {isActive.performance ? (
-        <div>
-          <h1>Performance</h1>
-        </div>
-      ) : (
-        ""
-      )}
-    </div>
+    <DashboardLayout>
+      <div>
+        <h1>Performance</h1>
+      </div>
+    </DashboardLayout>
   );
 };
 
