@@ -3,8 +3,8 @@ import { Fragment, useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 const Products = ({ isActive, company }) => {
-  let [isOpen, setIsOpen] = useState(true);
-
+  let [isOpen, setIsOpen] = useState(false);
+  //TODO: add mutation RTQ query
   const [input, setInput] = useState({
     name: "",
     description: "",
@@ -27,8 +27,8 @@ const Products = ({ isActive, company }) => {
   }
 
   async function handleSubmit() {
-    input.stock = parseInt(input.stock)
-    input.price = parseFloat(input.price)
+    input.stock = parseInt(input.stock);
+    input.price = parseFloat(input.price);
     console.log("INPUT ", input);
     const options = {
       method: "POST",

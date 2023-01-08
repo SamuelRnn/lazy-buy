@@ -1,11 +1,11 @@
 import Layout from "../../components/DashBoard/Layout";
 import { useSession, getSession } from "next-auth/react";
-import Products from "../../components/DashBoard/Products";
-import Performance from "../../components/DashBoard/Performance";
+import Products from "../../components/DashBoard/views/Products";
+import Performance from "../../components/DashBoard/views/Performance";
 import { useEffect, useState } from "react";
-import Home from "../../components/DashBoard/Home";
-import Account from "../../components/DashBoard/Account";
-import Plan from "../../components/DashBoard/Plan";
+import Home from "../../components/DashBoard/views/Home";
+import Account from "../../components/DashBoard/views/Account";
+import Plan from "../../components/DashBoard/views/Plan";
 
 const Dashboard = ({ company }) => {
   const [active, setActive] = useState({
