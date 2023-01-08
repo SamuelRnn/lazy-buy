@@ -75,6 +75,9 @@
     transform: translateY(0);
   }
 }
+.carousel-i {
+  padding-bottom: 40px;
+}
 .carousel-i > button {
   /* background-color: #d77575; */
   @apply bg-fondo-300 transition-all;

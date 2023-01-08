@@ -3,8 +3,14 @@ import SideBar from "../../components/DashBoard/SideBar";
 import TopBar from "../../components/DashBoard/TopBar";
 import { Transition } from "@headlessui/react";
 import { Fragment } from "react";
+import { AnimatePresence } from "framer-motion";
+import Head from "next/head";
 
-const Dashboard = ({children, setActive}) => {
+const DashboardLayout = ({
+  children,
+  setActive,
+  title = "Lazy Buy | Dashboard",
+}) => {
   const [showNav, setShowNav] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -28,29 +34,41 @@ const Dashboard = ({children, setActive}) => {
   }, []);
 
   return (
-    <div>
-      <TopBar showNav={showNav} setShowNav={setShowNav} />
-      <Transition
-        as={Fragment}
-        show={showNav}
-        enter="transform transition duration-[400ms]"
-        enterFrom="-translate-x-full"
-        enterTo="translate-x-0"
-        leave="transform duration-[400ms] transition ease-in-out"
-        leaveFrom="translate-x-0"
-        leaveTo="-translate-x-full"
-      >
-        <SideBar showNav={showNav} setActive={setActive} />
-      </Transition>
-      <main
-        className={`pt-16 transition-all duration-[400ms] ${
-          showNav && !isMobile ? "pl-56" : ""
-        }`}
-      >
-        <div className="px-4 md:px-16">{children}</div>
-      </main>
-    </div>
+    <>
+      <Head>
+        <link
+          rel="shortcut icon"
+          href="/logocartremove.png"
+          type="image/x-icon"
+        />
+        <title>{title}</title>
+      </Head>
+      <AnimatePresence>
+        <div>
+          <TopBar showNav={showNav} setShowNav={setShowNav} />
+          <Transition
+            as={Fragment}
+            show={showNav}
+            enter="transform transition duration-[400ms]"
+            enterFrom="-translate-x-full"
+            enterTo="translate-x-0"
+            leave="transform duration-[400ms] transition ease-in-out"
+            leaveFrom="translate-x-0"
+            leaveTo="-translate-x-full"
+          >
+            <SideBar showNav={showNav} setActive={setActive} />
+          </Transition>
+          <main
+            className={`pt-16 transition-all duration-[400ms] ${
+              showNav && !isMobile ? "pl-56" : ""
+            }`}
+          >
+            <div className="px-4 md:px-16">{children}</div>
+          </main>
+        </div>
+      </AnimatePresence>
+    </>
   );
 };
 
-export default Dashboard;
+export default DashboardLayout;

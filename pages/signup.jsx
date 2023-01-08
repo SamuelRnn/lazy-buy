@@ -266,8 +266,7 @@ const Signup = () => {
                             className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-lg focus:outline-none"
                             {...formik.getFieldProps('cpassword')}
                           />
-                          {formik.errors.cpassword && formik.touched.cpassword ? (
-                            
+                          {formik.errors.cpassword && formik.touched.cpassword ? (   
                             <div className="text-red-600 mt-2 pl-2">
                               {formik.errors.cpassword}
                             </div>
