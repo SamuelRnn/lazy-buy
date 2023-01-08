@@ -7,6 +7,7 @@ import DashboardLayout from "../../components/DashBoard/Layout";
 const Products = ({ company }) => {
   let [isOpen, setIsOpen] = useState(false);
   //TODO: add mutation RTQ query
+  //TODO: add FORMIK
   const [input, setInput] = useState({
     name: "",
     description: "",
@@ -38,7 +39,7 @@ const Products = ({ company }) => {
       body: JSON.stringify(input),
     };
 
-    await fetch("api/create/product", options)
+    await fetch("http://localhost:3000/api/create/product", options)
       .then((res) => res.json())
       .then((data) => {
         if (data) {
