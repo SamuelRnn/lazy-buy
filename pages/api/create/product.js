@@ -1,31 +1,56 @@
 import { product } from "../../../prisma";
+import cloud from "../../../utils/cloudinary";
+
+async function uploadImage(image) {
+  const cloudUpload = await cloud.uploader.upload(image, {
+    folder: "lazy-buy",
+  });
+  return cloudUpload;
+}
+function getSlug({ id, name }) {
+  return `${id + ""}-${name.toLowerCase().split(" ").join("-")}`;
+}
 
 export default async function createProduct(req, res) {
-  if (req.method !== "POST")
+  if (req.method !== "POST") {
     return res.status(400).send({ message: "Not found" });
+  }
+  const productData = req.body;
+  console.log(productData)
+  if (
+    !productData.name ||
+    !productData.description ||
+    !productData.price ||
+    !productData.mainImage ||
+    !productData.stock ||
+    !productData.isActive ||
+    !productData.companyId ||
+    !productData.category
+  ) {
+    return res.status(400).json({
+      message: "Datos incompletos, asegurese de llenar todos los campos",
+    });
+  }
 
-  const { name, description, price, stock, isActive } = req.body;
-
-  const { companyId } = req.query;
-
-  if (!name || !description || !price || !stock)
-    return res.status(400).send({ message: "Not enough data" });
-
-  const newProduct = {
-    name,
-    slug: `09-${name.split(" ").join("-")}`,
-    description,
-    price,
-    stock,
-    isActive,
-    companyId,
+  const mainUpload = await uploadImage(productData.mainImage);
+  productData.mainImage = {
+    public_id: mainUpload.public_id,
+    url: mainUpload.secure_url,
   };
 
-  await product.create({
-    data: {
-      ...newProduct,
-    },
+  if (productData.carouselImages) {
+    const promiseArray = productData.map((img) => uploadImage(img));
+    const images = await Promise.all(promiseArray);
+    productData.carouselImages = images;
+  }
+  //create product
+  productData.slug = "available";
+  console.log(productData);
+  let newProduct = await product.create({ data: productData });
+  newProduct = await product.update({
+    where: { id: newProduct.id },
+    data: { slug: getSlug(newProduct) },
   });
 
-  return res.status(200).json(newProduct);
+  return res.status(201).json(newProduct);
 }

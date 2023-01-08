@@ -2,29 +2,110 @@
 @tailwind components;
 @tailwind utilities;
 
-
-#bg-video{
-    background-image: url('../public/lazygif.gif');
-    background-size: cover;
+/* main width for the layout */
+.main {
+  margin: 0 auto;
+  width: 95%;
+}
+.home_titles {
+  @apply font-bold text-fondo-500 text-2xl pb-6;
+}
+.nav_links {
+  @apply p-2 rounded-lg hover:bg-fondo-100 transition-colors text-zinc-700 font-semibold;
+}
+.filter_btn {
+  @apply w-[150px] h-12 px-2 text-zinc-600 bg-zinc-200 rounded flex justify-between items-center;
+}
+.filters_modal {
+  position: fixed;
+  bottom: 0;
+  height: 100vh;
+  width: 400px;
+  padding-left: 110px;
+  @apply bg-fondo-200;
+  z-index: 1001;
+}
+.cart_modal {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  height: 100vh;
+  width: 400px;
+  padding-right: 110px;
+  @apply bg-fondo-200;
+  z-index: 1001;
+}
+.modal_bg {
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+/* width for navbar */
+.nav {
+  margin: 0 auto;
+  width: min(1200px, 95%);
+}
+.card_width {
+  min-width: 320px;
+  width: 320px;
+} /*agregar como clase tailwind "w-card"*/
+.img_anim {
+  animation-name: appear_logo;
+  animation-duration: 0.3s;
+  animation-timing-function: cubic-bezier(0.08, 0.7, 0, 1.04);
+  animation-delay: 0.3s;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: backwards;
+}
+.title_anim {
+  animation-name: appear_logo;
+  animation-duration: 0.35s;
+  animation-timing-function: cubic-bezier(0.08, 0.7, 0, 1.04);
+  animation-delay: 0.15s;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: backwards;
 }
 
-#logo_home{
-    background-image: url('../public/lazygif.gif');
-    background-size: cover;
+@keyframes appear_logo {
+  from {
+    transform: translateY(500px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+.carousel-i {
+  padding-bottom: 40px;
+}
+.carousel-i > button {
+  /* background-color: #d77575; */
+  @apply bg-fondo-300 transition-all;
 }
 
-@media (min-width: 1024px){
-    #bg-video{
-        background-image: url('../public/lazygif.gif');
-        background-size: auto;
-        background-repeat: no-repeat;
-        background-position: center;
-    }
-
-    #logo_home{
-        background-image: url('../public/lazygif.gif');
-        background-size: auto;
-        background-repeat: no-repeat;
-        background-position: center;
-    }
+.carousel-i > button:hover {
+  /* background-color: #8a2828; */
+  @apply bg-fondo-500;
+}
+.carousel-i:not(:hover) > button {
+  opacity: 0;
+}
+/* store */
+.grid_store {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  column-gap: 40px;
+}
+/* loader */
+@keyframes loader-rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.loader {
+  border-right-color: transparent;
+  animation: loader-rotate 1s linear infinite;
 }

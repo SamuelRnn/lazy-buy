@@ -2,7 +2,17 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["i.ibb.co", "cdn-icons-png.flaticon.com","bicialtea.labici.net"],
+    domains: [
+      "www.novagric.com",
+      "asset.cloudinary.com",
+      "res.cloudinary.com",
+      "i.ibb.co",
+      "i.imgur.com",
+      "cdn-icons-png.flaticon.com",
+      "bicialtea.labici.net",
+      "images.unsplash.com",
+      "res.cloudinary.com",
+    ],
   },
 };
 

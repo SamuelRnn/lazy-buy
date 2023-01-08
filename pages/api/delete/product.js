@@ -10,4 +10,5 @@ export default async function handler(req, res) {
       id: productId,
     },
   });
+  res.status(202).json({ ok: true, message: "Product deleted successfully!" });
 }
