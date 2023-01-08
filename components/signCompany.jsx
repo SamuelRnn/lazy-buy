@@ -1,32 +1,51 @@
-import AnimatedLogo from "../components/AnimatedLogo";
-import Link from "next/link";
-import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
-import { Listbox } from "@headlessui/react";
+import AnimatedLogo from '../components/AnimatedLogo'
+import Link from 'next/link'
+import Image from 'next/image'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Listbox } from '@headlessui/react'
+import { useFormik } from 'formik'
+import { registerValidateCompany } from '../utils/validateFormCompany'
 
 const SignupCompany = ({ typeAccount, setTypeAccount }) => {
-  async function handleSignUp(e) {
-    e.preventDefault();
-    /* const options = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(input),
-    };
+  const formik = useFormik({
+    initialValues: {
+      companyname: '',
+      email: '',
+      owner: '',
+      country: '',
+      city: '',
+      password: '',
+      cpassword: '',
+    },
+    validate: registerValidateCompany,
+    onSubmit,
+  })
 
-    await fetch("http://localhost:3000/api/create/company", options)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data) router.push("http://localhost:3000/login");
-      });
-    router.push("/login"); */
+  // console.log('Erros: ', formik.errors)
+  async function onSubmit(values) {
+    console.log(values)
   }
-  const handleClick = () => {
-    !typeAccount.company && setTypeAccount({ client: false, company: true });
-    !typeAccount.client && setTypeAccount({ client: true, company: false });
-    !typeAccount.active && setTypeAccount({ active: true });
-  };
 
-  
+  // async function handleSignUp(e) {
+  //   e.preventDefault();
+  //   /* const options = {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify(input),
+  //   };
+
+  //   await fetch("http://localhost:3000/api/create/company", options)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       if (data) router.push("http://localhost:3000/login");
+  //     });
+  //   router.push("/login"); */
+  // }
+  const handleClick = () => {
+    !typeAccount.company && setTypeAccount({ client: false, company: true })
+    !typeAccount.client && setTypeAccount({ client: true, company: false })
+    !typeAccount.active && setTypeAccount({ active: true })
+  }
 
   return (
     <AnimatePresence>
@@ -108,20 +127,30 @@ const SignupCompany = ({ typeAccount, setTypeAccount }) => {
                     </div>
                   </div>
 
+                  {/* Form controlado */}
                   <form
                     className="grid grid-cols-1 gap-6 mt-6 md:grid-cols-2"
-                    onSubmit={handleSignUp}
+                    // onSubmit={handleSignUp}
+                    onSubmit={formik.handleSubmit}
                   >
                     <div className="col-span-2">
                       <label className="block mb-2 text-sm text-gray-800">
                         Company Name
                       </label>
                       <input
-                        name="name"
+                        name="companyname"
                         type="text"
                         placeholder="Apple Inc."
                         className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-zinc-500 rounded-lg focus:outline-none col-span-3"
+                        {...formik.getFieldProps('companyname')}
                       />
+                      {formik.errors.companyname && formik.touched.companyname ? (
+                        <div className="text-red-600 mt-2 pl-2">
+                          {formik.errors.companyname}
+                        </div>
+                      ) : (
+                        <></>
+                      )}
                     </div>
 
                     <div>
@@ -133,7 +162,15 @@ const SignupCompany = ({ typeAccount, setTypeAccount }) => {
                         type="email"
                         placeholder="stevejobs@gmail.com"
                         className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-zinc-500 rounded-lg focus:outline-none"
+                        {...formik.getFieldProps('email')}
                       />
+                      {formik.errors.email && formik.touched.email ? (
+                        <div className="text-red-600 mt-2 pl-2">
+                          {formik.errors.email}
+                        </div>
+                      ) : (
+                        <></>
+                      )}
                     </div>
 
                     <div>
@@ -145,7 +182,15 @@ const SignupCompany = ({ typeAccount, setTypeAccount }) => {
                         type="text"
                         placeholder="Steve Jobs"
                         className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-zinc-500 rounded-lg focus:outline-none"
+                        {...formik.getFieldProps('owner')}
                       />
+                      {formik.errors.owner && formik.touched.owner ? (
+                        <div className="text-red-600 mt-2 pl-2">
+                          {formik.errors.owner}
+                        </div>
+                      ) : (
+                        <></>
+                      )}
                     </div>
                     <div>
                       <label className="block mb-2 text-sm text-gray-800">
@@ -156,7 +201,15 @@ const SignupCompany = ({ typeAccount, setTypeAccount }) => {
                         type="text"
                         placeholder="United States"
                         className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-zinc-500 rounded-lg focus:outline-none"
+                        {...formik.getFieldProps('country')}
                       />
+                      {formik.errors.country && formik.touched.country ? (
+                        <div className="text-red-600 mt-2 pl-2">
+                          {formik.errors.country}
+                        </div>
+                      ) : (
+                        <></>
+                      )}
                     </div>
                     <div>
                       <label className="block mb-2 text-sm text-gray-800">
@@ -167,9 +220,17 @@ const SignupCompany = ({ typeAccount, setTypeAccount }) => {
                         type="text"
                         placeholder="Palo Alto"
                         className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-zinc-500 rounded-lg focus:outline-none"
+                        {...formik.getFieldProps('city')}
                       />
+                      {formik.errors.city && formik.touched.city ? (
+                        <div className="text-red-600 mt-2 pl-2">
+                          {formik.errors.city}
+                        </div>
+                      ) : (
+                        <></>
+                      )}
                     </div>
-              
+
                     <div>
                       <label className="block mb-2 text-sm text-gray-800">
                         Password
@@ -179,9 +240,16 @@ const SignupCompany = ({ typeAccount, setTypeAccount }) => {
                         type="password"
                         placeholder="Enter your password"
                         className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-zinc-500 rounded-lg focus:outline-none"
+                        {...formik.getFieldProps('password')}
                       />
+                      {formik.errors.password && formik.touched.password ? (
+                        <div className="text-red-600 mt-2 pl-2">
+                          {formik.errors.password}
+                        </div>
+                      ) : (
+                        <></>
+                      )}
                     </div>
-
 
                     <div>
                       <label className="block mb-2 text-sm text-gray-800">
@@ -191,7 +259,15 @@ const SignupCompany = ({ typeAccount, setTypeAccount }) => {
                         type="password"
                         placeholder="Enter your password"
                         className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-zinc-500 rounded-lg focus:outline-none"
+                        {...formik.getFieldProps('cpassword')}
                       />
+                      {formik.errors.cpassword && formik.touched.cpassword ? (
+                        <div className="text-red-600 mt-2 pl-2">
+                          {formik.errors.cpassword}
+                        </div>
+                      ) : (
+                        <></>
+                      )}
                     </div>
                     {/* <button
                       className="hover:text-black hover:bg-white text-white font-semibold flex rounded-xl border-2 p-3 border-black items-center justify-center w-full gap-4 ease-in-out transition-all bg-black"
@@ -205,7 +281,9 @@ const SignupCompany = ({ typeAccount, setTypeAccount }) => {
                       />
                       Sign in with Google
                     </button> */}
-                    <button className="hover:text-zinc-700 hover:bg-zinc-300 hover:border-zinc-300 text-zinc-100 font-semibold flex rounded-xl border-2 p-3 border-zinc-500 items-center justify-center gap-4 ease-in-out transition-all bg-zinc-500 col-span-2">
+                    <button 
+                    type="submit"
+                    className="hover:text-zinc-700 hover:bg-zinc-300 hover:border-zinc-300 text-zinc-100 font-semibold flex rounded-xl border-2 p-3 border-zinc-500 items-center justify-center gap-4 ease-in-out transition-all bg-zinc-500 col-span-2">
                       <span>Sign Up </span>
 
                       <svg
@@ -237,7 +315,7 @@ const SignupCompany = ({ typeAccount, setTypeAccount }) => {
         </motion.div>
       </div>
     </AnimatePresence>
-  );
-};
+  )
+}
 
-export default SignupCompany;
+export default SignupCompany
