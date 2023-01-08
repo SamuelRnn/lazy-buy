@@ -5,11 +5,7 @@ import ModalFilters from "../../components/FiltersModal/Modal";
 import OrderSelect from "../../components/OrderSelect";
 import { useState } from "react";
 import { IoMdOptions } from "react-icons/io";
-import { useRouter } from "next/router";
-import {
-  useGetProductsQuery,
-  useLazyGetProductsQuery,
-} from "../../redux/productsApi";
+import { useGetProductsQuery } from "../../redux/productsApi";
 import MiniSpinner from "../../components/miniSpinner";
 
 function camelize(str) {
@@ -19,28 +15,25 @@ function camelize(str) {
 }
 
 const Store = (initialParams) => {
-  // const router = useRouter();
-  // const initialParams = router.query;
   const [activeFiltersModal, setActiveFiltersModal] = useState(false);
   const { isLoading, data: productos } = useGetProductsQuery(initialParams);
-
   return (
     <>
       <Layout>
-        {/* [count] resultados en [name] */}
         <section className="main">
           <div className="mt-4 flex justify-between items-center gap-6 max-sm:flex-col max-sm:">
-            <h2 className="text-lg text-fondo-300 font-medium max-sm:self-start transition-all align-middle">
-              {productos ? productos.length : <MiniSpinner />}
-              {` result(s) for "${initialParams.search}"`}
-            </h2>
-            {/* {initialParams.search && productos
-                ? `${productos?.length} Resultado${
-                    productos?.length > 1 ? "s" : ""
-                  } para "${initialParams.search.split("-").join(" ")}"`
-                : initialParams.category
-                ? camelize(initialParams.category)
-                : "Lista de productos"} */}
+            {initialParams.search && (
+              <h2 className="text-lg text-fondo-300 font-medium max-sm:self-start transition-all align-middle">
+                {productos ? productos.length : <MiniSpinner />}
+                {` result(s) for "${initialParams.search}"`}
+              </h2>
+            )}
+            {initialParams.category && (
+              <h2 className="text-lg text-fondo-300 font-bold max-sm:self-start transition-all align-middle">
+                {`${camelize(initialParams.category)} `}
+                {productos ? `(${productos.length})` : <MiniSpinner />}
+              </h2>
+            )}
             <div className="flex gap-4 max-sm:w-full max-sm:justify-between">
               <button
                 onClick={() => setActiveFiltersModal((state) => !state)}

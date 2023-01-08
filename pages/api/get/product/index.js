@@ -23,10 +23,6 @@ export default async function getProduct(req, res) {
       2
     )
   );
-  // console.log(filters);
-  // return res.status(200).json([]);
-
-  // const query = {};
   if (filters.search) {
     let products = await product.findMany({
       where: {
@@ -58,6 +54,24 @@ export default async function getProduct(req, res) {
             },
           },
         ],
+      },
+      include: {
+        company: {
+          select: {
+            name: true,
+          },
+        },
+      },
+    });
+    return res.status(200).json(products);
+  }
+  if (filters.category) {
+    let products = await product.findMany({
+      where: {
+        category: {
+          contains: filters.category,
+          mode: "insensitive",
+        },
       },
       include: {
         company: {
