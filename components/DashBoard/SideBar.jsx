@@ -79,48 +79,36 @@ const SideBar = forwardRef(({ setActive }, ref) => {
             </div>
           </div>
         </Link>
-        <div>
-          <Link
-            href="/dev-dashboard/performance"
-            className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
-              router.pathname == "/billing"
-                ? "bg-fondo-100 text-fondo-500"
-                : "text-gray-400 hover:bg-fondo-100 hover:text-fondo-500"
-            }`}
-          >
-            <div className="mr-2">
-              <DiGoogleAnalytics className="h-5 w-5" />
-            </div>
-            <div>
-              <p>Performance</p>
-            </div>
-          </Link>
-        </div>
-        <div>
-          <div
-            onClick={() =>
-              setActive({
-                home: false,
-                account: false,
-                products: false,
-                performance: false,
-                plan: true,
-              })
-            }
-            className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
-              router.pathname == "/billing"
-                ? "bg-fondo-100 text-fondo-500"
-                : "text-gray-400 hover:bg-fondo-100 hover:text-fondo-500"
-            }`}
-          >
-            <div className="mr-2">
-              <GiUpgrade className="h-5 w-5" />
-            </div>
-            <div>
-              <p>Plan</p>
-            </div>
+        <Link
+          href="/dev-dashboard/performance"
+          className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
+            router.pathname == "/performance"
+              ? "bg-fondo-100 text-fondo-500"
+              : "text-gray-400 hover:bg-fondo-100 hover:text-fondo-500"
+          }`}
+        >
+          <div className="mr-2">
+            <DiGoogleAnalytics className="h-5 w-5" />
           </div>
-        </div>
+          <div>
+            <p>Performance</p>
+          </div>
+        </Link>
+        <Link
+          href="/dev-dashboard/plan"
+          className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
+            router.pathname == "/plan"
+              ? "bg-fondo-100 text-fondo-500"
+              : "text-gray-400 hover:bg-fondo-100 hover:text-fondo-500"
+          }`}
+        >
+          <div className="mr-2">
+            <GiUpgrade className="h-5 w-5" />
+          </div>
+          <div>
+            <p>Plan</p>
+          </div>
+        </Link>
 
         <div onClick={handleSignOut}>
           <div
@@ -138,6 +126,7 @@ const SideBar = forwardRef(({ setActive }, ref) => {
             </div>
           </div>
         </div>
+        {/* signOut */}
       </div>
     </div>
   );

@@ -24,6 +24,7 @@ const Account = ({ company }) => {
 };
 
 export default Account;
+
 export async function getServerSideProps(context) {
   const { req } = context;
   const session = await getSession({
