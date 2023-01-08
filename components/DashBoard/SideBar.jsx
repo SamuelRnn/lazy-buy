@@ -1,5 +1,6 @@
 import { forwardRef } from "react";
 import Link from "next/link";
+import Image from "next/dist/client/image";
 import { HomeIcon, UserIcon } from "@heroicons/react/24/solid";
 import { useRouter } from "next/router";
 import { TfiLayoutListThumb } from "react-icons/tfi";
@@ -19,31 +20,23 @@ const SideBar = forwardRef(({ setActive }, ref) => {
     <div ref={ref} className="fixed w-56 h-full bg-white shadow-sm">
       <div className="flex justify-center mt-6 mb-14">
         <picture>
-          <img
+          <Image
+            width={80}
+            height={80}
             className="w-32 h-auto"
-            src="lazycartremove.png"
+            src="https://res.cloudinary.com/dl5hwebwa/image/upload/v1673132716/lazy-buy/lazycartremove_lvvnie.png"
             alt="company logo"
           />
         </picture>
       </div>
 
       <div className="flex flex-col">
-        <div
-          onClick={() =>
-            setActive({
-              account: false,
-              products: false,
-              performance: false,
-              home: true,
-              plan: false,
-            })
-          }
-        >
+        <Link href="/dev-dashboard">
           <div
             className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
-              router.pathname == "/"
-                ? "bg-orange-100 text-orange-500"
-                : "text-gray-400 hover:bg-orange-100 hover:text-orange-500"
+              router.pathname === "/dev-dashboard"
+                ? "bg-fondo-100 text-fondo-500"
+                : "text-gray-400 hover:bg-fondo-100 hover:text-fondo-500"
             }`}
           >
             <div className="mr-2">
@@ -53,23 +46,13 @@ const SideBar = forwardRef(({ setActive }, ref) => {
               <p>Home</p>
             </div>
           </div>
-        </div>
-        <div
-          onClick={() =>
-            setActive({
-              home: false,
-              account: true,
-              products: false,
-              performance: false,
-              plan: false,
-            })
-          }
-        >
+        </Link>
+        <Link href="/dev-dashboard/account">
           <div
             className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
-              router.pathname == "/account"
-                ? "bg-orange-100 text-orange-500"
-                : "text-gray-400 hover:bg-orange-100 hover:text-orange-500"
+              router.pathname == "/dev-dashboard/account"
+                ? "bg-fondo-100 text-fondo-500"
+                : "text-gray-400 hover:bg-fondo-100 hover:text-fondo-500"
             }`}
           >
             <div className="mr-2">
@@ -79,23 +62,13 @@ const SideBar = forwardRef(({ setActive }, ref) => {
               <p>Account</p>
             </div>
           </div>
-        </div>
-        <div
-          onClick={() =>
-            setActive({
-              home: false,
-              account: false,
-              products: true,
-              performance: false,
-              plan: false,
-            })
-          }
-        >
+        </Link>
+        <Link href="/dev-dashboard/products">
           <div
             className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
               router.pathname == "/billing"
-                ? "bg-orange-100 text-orange-500"
-                : "text-gray-400 hover:bg-orange-100 hover:text-orange-500"
+                ? "bg-fondo-100 text-fondo-500"
+                : "text-gray-400 hover:bg-fondo-100 hover:text-fondo-500"
             }`}
           >
             <div className="mr-2">
@@ -105,22 +78,14 @@ const SideBar = forwardRef(({ setActive }, ref) => {
               <p>Products</p>
             </div>
           </div>
-        </div>
+        </Link>
         <div>
-          <div
-            onClick={() =>
-              setActive({
-                home: false,
-                account: false,
-                products: false,
-                performance: true,
-                plan: false,
-              })
-            }
+          <Link
+            href="/dev-dashboard/performance"
             className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
               router.pathname == "/billing"
-                ? "bg-orange-100 text-orange-500"
-                : "text-gray-400 hover:bg-orange-100 hover:text-orange-500"
+                ? "bg-fondo-100 text-fondo-500"
+                : "text-gray-400 hover:bg-fondo-100 hover:text-fondo-500"
             }`}
           >
             <div className="mr-2">
@@ -129,7 +94,7 @@ const SideBar = forwardRef(({ setActive }, ref) => {
             <div>
               <p>Performance</p>
             </div>
-          </div>
+          </Link>
         </div>
         <div>
           <div
@@ -144,8 +109,8 @@ const SideBar = forwardRef(({ setActive }, ref) => {
             }
             className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
               router.pathname == "/billing"
-                ? "bg-orange-100 text-orange-500"
-                : "text-gray-400 hover:bg-orange-100 hover:text-orange-500"
+                ? "bg-fondo-100 text-fondo-500"
+                : "text-gray-400 hover:bg-fondo-100 hover:text-fondo-500"
             }`}
           >
             <div className="mr-2">
@@ -161,8 +126,8 @@ const SideBar = forwardRef(({ setActive }, ref) => {
           <div
             className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
               router.pathname == "/billing"
-                ? "bg-orange-100 text-orange-500"
-                : "text-gray-400 hover:bg-orange-100 hover:text-orange-500"
+                ? "bg-fondo-100 text-fondo-500"
+                : "text-gray-400 hover:bg-fondo-100 hover:text-fondo-500"
             }`}
           >
             <div className="mr-2">
