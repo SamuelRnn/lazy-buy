@@ -667,17 +667,7 @@ export default async function handler(req, res) {
       },
     },
   });
-  // productos.map(async (productData) => {
-
-  //   productData.slug = product.name;
-  //   productData.companyId = newCompany.id;
-  //   let newProduct = await product.create({ data: productData });
-  //   newProduct = await product.update({
-  //     where: { id: newProduct.id },
-  //     data: { slug: getSlug(newProduct) },
-  //   });
-
-  // });
+  //------------------------------------------
   productos.map((productData) => {
     productData.slug = productData.name;
     productData.companyId = newCompany.id;

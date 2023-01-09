@@ -64,9 +64,12 @@ const Card = ({ product = mock_product, style = "card", delay }) => {
                 />
               </div>
               <div className="w-full px-6 bg-zinc-100 rounded pt-4">
-                <h3 className="font-bold text-xl text-gray-700">
-                  {product.name}
-                </h3>
+                <div className="flex justify-between">
+                  <h3 className="font-bold text-xl text-gray-700">
+                    {product.name}
+                  </h3>
+                  <h3>⭐{product.averageRating}</h3>
+                </div>
                 <h4 className="text-sm text-gray-500">
                   {product.company.name}
                 </h4>
