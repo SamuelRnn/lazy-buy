@@ -654,7 +654,7 @@ export default async function handler(req, res) {
   //------------------------------------------
   plans.map((planData) => {
     (async () => {
-      await product.create({ data: planData });
+      await plan.create({ data: planData });
     })();
   });
   res.status(201).json({ status: "All Created, continue" });
