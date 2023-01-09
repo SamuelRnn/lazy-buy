@@ -1,48 +1,86 @@
 import React from "react";
+import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 
-const Pagination = ({ count }) => {
-  console.log(count);
+function getPageLabels(count, perPage) {
+  const pages = Math.ceil(count / perPage);
+  const aux = [];
+  for (let i = pages; i > 0; i--) {
+    if (i === pages - 1 && pages > 4) {
+      aux.unshift("...");
+    }
+    aux.unshift(i);
+  }
+  return [aux, pages];
+}
+
+const Pagination = ({ count, filters, setFilters }) => {
   if (count == 0) {
-    return <div>No products found!</div>;
+    return <div className="text-gray-500">No products found!</div>;
   }
-  let array = [];
-  for (let i = 0; i < count; i += 10) {
-    array.push(i);
-  }
+  const ITEMS_PER_PAGE = 10;
+  let [pageLabels, maxPages] = getPageLabels(count, ITEMS_PER_PAGE);
 
+  const goToPage = (num) => {
+    if (num === "...") return;
+    setFilters({
+      ...filters,
+      page: num,
+    });
+  };
+  const nextPage = () => {
+    if (parseInt(filters.page) === maxPages) return;
+    setFilters({
+      ...filters,
+      page: parseInt(filters.page) + 1,
+    });
+  };
+  const prevPage = () => {
+    if (parseInt(filters.page) === 1) return;
+    setFilters({
+      ...filters,
+      page: parseInt(filters.page) - 1,
+    });
+  };
   return (
     <div className="flex justify-center ">
-      <nav aria-label="Page navigation example">
-        <ul className="flex gap-2 list-style-none">
-          <li className="page-item disabled">
-            <a
-              className="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-500 pointer-events-none focus:shadow-none"
-              href="#"
-              tabIndex="-1"
-              aria-disabled="true"
-            >
-              Previous
-            </a>
-          </li>
-          {array?.map((e, i) => (
-            <li key={i} className="page-item">
-              <a
-                className="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-                href="#"
-              >
-                {i + 1}
-              </a>
-            </li>
-          ))}
-          <li className="page-item">
-            <a
-              className="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-              href="#"
-            >
-              Next
-            </a>
-          </li>
-        </ul>
+      <nav className="flex gap-2 items-center">
+        <button
+          className={`grid place-content-center h-10 w-10 transition-colors rounded-full text-fondo-500 
+            hover:bg-gray-200 ${
+              parseInt(filters.page) === 1
+                ? "pointer-events-none text-zinc-400"
+                : ""
+            }`}
+          onClick={prevPage}
+          disabled={filters.page === 1}
+        >
+          <HiChevronLeft size="22px" />
+        </button>
+        {pageLabels?.map((e) => (
+          <button
+            key={e}
+            className={`h-10 w-10 transition-colors rounded-full hover:bg-gray-200 ${
+              parseInt(filters.page) === e
+                ? "bg-fondo-200 pointer-events-none text-zinc-100"
+                : "text-gray-800"
+            }`}
+            onClick={() => goToPage(e)}
+          >
+            {e}
+          </button>
+        ))}
+        <button
+          className={`grid place-content-center h-10 w-10 transition-colors rounded-full text-fondo-500 
+          hover:bg-gray-200 ${
+            parseInt(filters.page) === maxPages
+              ? "pointer-events-none text-zinc-400"
+              : ""
+          }`}
+          onClick={nextPage}
+          disabled={filters.page === maxPages}
+        >
+          <HiChevronRight size="22px" />
+        </button>
       </nav>
     </div>
   );

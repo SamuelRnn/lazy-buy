@@ -66,17 +66,17 @@ const Signup = () => {
               initial={{ x: 200, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
             >
-              <section className="bg-fondo-50">
-                <div className="flex justify-center min-h-screen">
+              <section className="bg-fondo-50 h-screen">
+                <div className="flex justify-center">
                   <div className="hidden lg:flex lg:w-2/5 justify-center items-center">
                     <AnimatedLogo />
                   </div>
 
                   <div
-                    className="flex items-center w-full max-w-3xl  mx-auto lg:px-12 lg:w-3/5"
+                    className="flex items-center w-full max-w-3xl mx-auto lg:px-12 lg:w-3/5"
                     id="signup_div"
                   >
-                    <div className="w-full bg-white p-5">
+                    <div className="w-full bg-white p-5 min-h-screen">
                       <h1 className="text-2xl font-bold tracking-wider text-fondo-300 capitalize">
                         Get your free account now.
                       </h1>

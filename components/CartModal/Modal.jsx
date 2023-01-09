@@ -1,7 +1,21 @@
 import { TfiClose } from "react-icons/tfi";
 import { motion, AnimatePresence } from "framer-motion";
 import Cart from "./Cart";
+import { useEffect } from "react";
+
 const ModalCart = ({ active, setActive }) => {
+  useEffect(() => {
+    const scapelistener = ({ keyCode }) => {
+      if (keyCode !== 27) return;
+      setActive(false);
+    };
+    console.log("hola desde add");
+    document.addEventListener("keydown", scapelistener);
+    return () => {
+      console.log("hola desde remove");
+      document.removeEventListener("keydown", scapelistener);
+    };
+  });
   return (
     <>
       <AnimatePresence>

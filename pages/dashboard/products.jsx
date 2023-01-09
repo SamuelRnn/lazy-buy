@@ -88,7 +88,7 @@ const Products = ({ company }) => {
                   leaveFrom="opacity-100 scale-100"
                   leaveTo="opacity-0 scale-95"
                 >
-                  <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                  <Dialog.Panel className="absolute w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                     <Dialog.Title
                       as="h3"
                       className="text-lg font-medium leading-6 text-gray-900 mb-5"
@@ -239,7 +239,7 @@ const Products = ({ company }) => {
               return (
                 <div
                   key={p.id}
-                  className="flex flex-col mx- hover:cursor-pointer gap-1 text-center "
+                  className="flex flex-col mx- hover:cursor-pointer gap-1 text-center bg-zinc-100 border"
                 >
                   <h2>{p.name}</h2>
                   <picture className="self-center">
