@@ -17,7 +17,7 @@ En la variable llamada `DATABASE_URL` reemplazar tus credenciales de postgres:
 [placeholder de la contraseña] => tu contraseña
 ```
 
-Crea una nueva base de datos con el nombre "lazy_buy". **En caso de ya existir, omitir este paso**
+Crea una nueva base de datos en la consola de postgres con el nombre "lazy_buy". **En caso de ya existir, omitir este paso**
 
 ```sql
 CREATE DATABASE "lazy_buy";
