@@ -127,7 +127,6 @@ export default async function getProduct(req, res) {
     } else {
       range.max_price = parseInt(range.max_price);
     }
-    console.log(range);
 
     products = products.filter((p) => {
       console.log(
