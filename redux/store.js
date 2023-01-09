@@ -8,7 +8,7 @@ import { combineReducers } from "@reduxjs/toolkit";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["cart", productApi.reducerPath],
+  whitelist: ["cart"],
 };
 
 const rootReducer = combineReducers({
