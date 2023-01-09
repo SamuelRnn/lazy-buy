@@ -1,4 +1,4 @@
-import AnimatedLogo from "../components/AnimatedLogo";
+import AnimatedLogo from "./AnimatedLogo";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";

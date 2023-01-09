@@ -14,6 +14,7 @@ query params =
 export default async function getProduct(req, res) {
   if (req.method !== "GET")
     return res.status(405).json({ message: "Not found" });
+  console.log(req.query);
   const filters = JSON.parse(
     JSON.stringify(
       req.query,
@@ -23,38 +24,46 @@ export default async function getProduct(req, res) {
       2
     )
   );
-  if (filters.search) {
-    let products = await product.findMany({
-      where: {
-        OR: [
-          {
-            name: {
-              contains: filters.search,
-              mode: "insensitive",
-            },
-          },
-          {
-            description: {
-              contains: filters.search,
-              mode: "insensitive",
-            },
-          },
-          {
-            category: {
-              contains: filters.search,
-              mode: "insensitive",
-            },
-          },
-          {
-            company: {
-              name: {
-                contains: filters.search,
-                mode: "insensitive",
-              },
-            },
-          },
-        ],
+  console.log(filters);
+  //generar variable mutable de los productos
+  let products;
+  let count;
+  let whereSearchQuery = {
+    OR: [
+      {
+        name: {
+          contains: filters.search,
+          mode: "insensitive",
+        },
       },
+      {
+        description: {
+          contains: filters.search,
+          mode: "insensitive",
+        },
+      },
+      {
+        category: {
+          contains: filters.search,
+          mode: "insensitive",
+        },
+      },
+      {
+        company: {
+          name: {
+            contains: filters.search,
+            mode: "insensitive",
+          },
+        },
+      },
+    ],
+  };
+  if (filters.search) {
+    count = await product.findMany({
+      where: whereSearchQuery,
+    });
+    products = await product.findMany({
+      where: whereSearchQuery,
       include: {
         company: {
           select: {
@@ -62,11 +71,11 @@ export default async function getProduct(req, res) {
           },
         },
       },
+      take: parseInt(filters.page) * 10,
+      skip: parseInt(filters.page) * 10 - 10,
     });
-    return res.status(200).json(products);
-  }
-  if (filters.category) {
-    let products = await product.findMany({
+  } else if (filters.category) {
+    products = await product.findMany({
       where: {
         category: {
           contains: filters.category,
@@ -81,8 +90,16 @@ export default async function getProduct(req, res) {
         },
       },
     });
-    return res.status(200).json(products);
   }
+  if (filters.sort) {
+    if (filters.sort === "price_asc") {
+      products.sort((p1, p2) => p1.price - p2.price);
+    }
+    if (filters.sort === "price_desc") {
+      products.sort((p1, p2) => p2.price - p1.price);
+    }
+  }
+  return res.status(200).json({ results: products, count: count.length });
   //   //------------------------------------------
   //   if (filters.category) {
   //     const productsSinQuery = await product.findMany({
@@ -102,14 +119,14 @@ export default async function getProduct(req, res) {
   //     return res.status(200).json(productsSinQuery);
   //   }
   //   //------------------------------------------
-  const productsSinQuery = await product.findMany({
-    include: {
-      company: {
-        select: {
-          name: true,
-        },
-      },
-    },
-  });
-  return res.status(200).json(productsSinQuery);
+  // const productsSinQuery = await product.findMany({
+  //   include: {
+  //     company: {
+  //       select: {
+  //         name: true,
+  //       },
+  //     },
+  //   },
+  // });
+  // return res.status(200).json(productsSinQuery);
 }

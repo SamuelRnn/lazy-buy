@@ -1,6 +1,15 @@
-const OrderSelect = () => {
+import { useRouter } from "next/router";
+
+const OrderSelect = ({ setFilters }) => {
+  const router = useRouter();
+  router.query;
   const handleChange = ({ target }) => {
-    r;
+    setFilters((state) => {
+      return {
+        ...state,
+        sort: target.value,
+      };
+    });
   };
   return (
     <select

@@ -1,70 +1,61 @@
-import Link from 'next/link'
-import { useState } from 'react'
-import Image from 'next/image'
-import AnimatedLogo from '../components/AnimatedLogo'
-import Layout from '../components/layout'
-import SignupCompany from '../components/signCompany'
-import { signIn } from 'next-auth/react'
-import { useRouter } from 'next/router'
-import { useFormik } from 'formik'
-import { motion, AnimatePresence } from 'framer-motion'
-import { registerValidate } from '../utils/validateForm'
-import { Formik } from 'formik'
+import Link from "next/link";
+import { useState } from "react";
+import Image from "next/image";
+import AnimatedLogo from "../components/AnimatedLogo";
+import Layout from "../components/layout";
+import SignupCompany from "../components/SignCompany";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/router";
+import { useFormik } from "formik";
+import { motion, AnimatePresence } from "framer-motion";
+import { registerValidate } from "../utils/validateForm";
+import { Formik } from "formik";
 
 const Signup = () => {
   const [typeAccount, setTypeAccount] = useState({
     client: true,
     company: false,
     active: false,
-  })
+  });
 
-  // FirstName
-  // Last Name
-  //Email
-  //User Name
-  // Password
-  // Confirm password
+  const router = useRouter();
+
   const formik = useFormik({
     initialValues: {
-      firstname: '',
-      lastname: '',
-      email: '',
-      username: '',
-      password: '',
-      cpassword: '',
+      firstname: "",
+      lastname: "",
+      email: "",
+      userName: "",
+      password: "",
+      cpassword: "",
     },
     validate: registerValidate,
     onSubmit,
-  })
-  // console.log('error formik',formik.errors);
+  });
 
-  function onSubmit(values) {
-    // console.log('Hola')
-    console.log('Enviando...', values)
+  async function onSubmit(values) {
+    values.profilePicture =
+      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fyt3.ggpht.com%2Fa%2FAATXAJyso7plus_8_qI1aWr4wS23XvBCXnikqGxVKzrdpQ%3Ds900-c-k-c0xffffffff-no-rj-mo&f=1&nofb=1&ipt=04178e62b79bda4a36a02b96e71abd3b56414327b8f8fe56c46d9a82d88d4b1b&ipo=images";
+    const options = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(values),
+    };
+
+    await fetch("http://localhost:3000/api/create/user", options)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("🚀 ~ file: signCompany.jsx:42 ~ .then ~ data", data);
+        if (data) router.push("http://localhost:3000/login");
+      })
+      .catch((error) => console.log(error));
   }
-
-  const router = useRouter()
-
-  // async function onSubmit(values) {
-  //   console.log(values);
-  //   /* const options = {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify(input),
-  //   };
-
-  //   await fetch("http://localhost:3000/api/create/company", options)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       if (data) router.push("http://localhost:3000/login");
-  //     }); */
-  // }
 
   const handleClick = () => {
-    !typeAccount.company && setTypeAccount({ client: false, company: true })
-    !typeAccount.client && setTypeAccount({ client: true, company: false })
+    !typeAccount.company && setTypeAccount({ client: false, company: true });
+    !typeAccount.client && setTypeAccount({ client: true, company: false });
     // !typeAccount.active && setTypeAccount({active: true})
-  }
+  };
 
   return (
     <Layout noLayout={true} title="Lazy Buy | SignUp">
@@ -164,10 +155,11 @@ const Signup = () => {
                             type="text"
                             placeholder="John"
                             className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-lg focus:outline-none"
-                            {...formik.getFieldProps('firstname')}
+                            {...formik.getFieldProps("firstname")}
                             // onBlur={formik.handleBlur}
                           />
-                          {formik.errors.firstname  && formik.touched.firstname? (
+                          {formik.errors.firstname &&
+                          formik.touched.firstname ? (
                             <div className="text-red-600 mt-2 pl-2">
                               {formik.errors.firstname}
                             </div>
@@ -185,9 +177,9 @@ const Signup = () => {
                             type="text"
                             placeholder="Wick"
                             className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-lg focus:outline-none"
-                            {...formik.getFieldProps('lastname')}
+                            {...formik.getFieldProps("lastname")}
                           />
-                          {formik.errors.lastname && formik.touched.lastname ?  (
+                          {formik.errors.lastname && formik.touched.lastname ? (
                             <div className="text-red-600 mt-2 pl-2">
                               {formik.errors.lastname}
                             </div>
@@ -205,11 +197,11 @@ const Signup = () => {
                             type="email"
                             placeholder="jwick@missmypuppy.com"
                             className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-lg focus:outline-none"
-                            {...formik.getFieldProps('email')}
+                            {...formik.getFieldProps("email")}
                           />
                           {formik.errors.email && formik.touched.email ? (
                             <div className="text-red-600 mt-2 pl-2">
-                              {formik.errors.email }
+                              {formik.errors.email}
                             </div>
                           ) : (
                             <></>
@@ -221,15 +213,15 @@ const Signup = () => {
                             User Name
                           </label>
                           <input
-                            name="username"
+                            name="userName"
                             type="text"
                             placeholder="Lazy Wick"
                             className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-lg focus:outline-none"
-                            {...formik.getFieldProps('username')}
+                            {...formik.getFieldProps("userName")}
                           />
-                          {formik.errors.username && formik.touched.username ? (
+                          {formik.errors.userName && formik.touched.userName ? (
                             <div className="text-red-600 mt-2 pl-2">
-                              {formik.errors.username}
+                              {formik.errors.userName}
                             </div>
                           ) : (
                             <></>
@@ -245,7 +237,7 @@ const Signup = () => {
                             type="password"
                             placeholder="Enter your password"
                             className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-lg focus:outline-none"
-                            {...formik.getFieldProps('password')}
+                            {...formik.getFieldProps("password")}
                           />
                           {formik.errors.password && formik.touched.password ? (
                             <div className="text-red-600 mt-2 pl-2">
@@ -264,9 +256,10 @@ const Signup = () => {
                             type="password"
                             placeholder="Enter your password"
                             className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-lg focus:outline-none"
-                            {...formik.getFieldProps('cpassword')}
+                            {...formik.getFieldProps("cpassword")}
                           />
-                          {formik.errors.cpassword && formik.touched.cpassword ? (   
+                          {formik.errors.cpassword &&
+                          formik.touched.cpassword ? (
                             <div className="text-red-600 mt-2 pl-2">
                               {formik.errors.cpassword}
                             </div>
@@ -330,7 +323,7 @@ const Signup = () => {
         />
       )}
     </Layout>
-  )
-}
+  );
+};
 
-export default Signup
+export default Signup;
