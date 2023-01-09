@@ -8,6 +8,7 @@ Clona desde la rama `main`
 cd [ruta donde se clonará la carpeta del proyecto]
 git clone "https://github.com/SamuelRnn/lazy-buy.git"
 cd lazy-buy
+code .
 ```
 Crea un archivo `.env` en la carpeta raiz del proyecto y coloca las variables allí
 En la variable llamada `DATABASE_URL` reemplazar tus credenciales de postgres:
