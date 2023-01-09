@@ -1,11 +1,10 @@
 import React from "react";
 
 const Pagination = ({ pages }) => {
-
-    let array = [];
-    for (let i = 0; i < pages; i+=15) {
-        array.push(i)
-    }
+  let array = [];
+  for (let i = 0; i < pages; i += 10) {
+    array.push(i);
+  }
 
   return (
     <div className="flex justify-center ">
@@ -21,13 +20,13 @@ const Pagination = ({ pages }) => {
               Previous
             </a>
           </li>
-          {array?.map((e,i) => (
+          {array?.map((e, i) => (
             <li key={i} className="page-item">
               <a
                 className="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
                 href="#"
               >
-                {i+1}
+                {i + 1}
               </a>
             </li>
           ))}

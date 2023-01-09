@@ -5,12 +5,14 @@ export const productApi = createApi({
   baseQuery: fetchBaseQuery("http://localhost:3000"),
   endpoints: (builder) => ({
     getProducts: builder.query({
-      query: (filters = null) => ({
+      query: (initialParams) => ({
         url: "/api/get/product",
-        params: filters,
+        params: initialParams,
       }),
+      providesTags: ["products"],
     }),
   }),
+  tagTypes: ["products"],
 });
 
-export const { useGetProductsQuery, useLazyGetProductsQuery } = productApi;
+export const { useGetProductsQuery } = productApi;

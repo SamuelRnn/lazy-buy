@@ -36,7 +36,7 @@ export default function Loading() {
   return (
     <Layout noLayout={true} title="Lazy Buy | LogIn">
       <div className="min-h-screen bg-fondo-50 grid grid-cols-1 lg:grid-cols-2">
-        <div className="bg-white overflow-hidden mx-16">
+        <div className="bg-white overflow-hidden sm:mx-16">
           <motion.div
             initial={{ opacity: 0, y: -500, scale: 1 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}

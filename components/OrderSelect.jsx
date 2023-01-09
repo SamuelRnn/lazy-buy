@@ -1,7 +1,9 @@
-const OrderSelect = () => {
-  const handleChange = ({ target }) => {
-    r;
-  };
+import { useRouter } from "next/router";
+
+const OrderSelect = ({ initialParams }) => {
+  const router = useRouter();
+  router.query;
+  const handleChange = ({ target }) => {};
   return (
     <select
       onChange={handleChange}
