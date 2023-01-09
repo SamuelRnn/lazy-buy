@@ -29,8 +29,8 @@ const NavBar = () => {
         {/* navlinks */}
         <div className="flex justify-center">
           <nav className="flex items-center gap-x-4">
-            <a href="/nosotros" className="nav_links">
-              Nosotros
+            <a href="/about" className="nav_links">
+              About
             </a>
             <button
               className={`nav_links ${activeCatModal ? "underline" : ""}`}
@@ -39,7 +39,7 @@ const NavBar = () => {
                 setActiveRegModal(false);
               }}
             >
-              Categorias
+              Categories
             </button>
             <button
               className={`nav_links ${activeRegModal ? "underline" : ""}`}
@@ -48,7 +48,7 @@ const NavBar = () => {
                 setActiveCatModal(false);
               }}
             >
-              Acceder
+              Access
             </button>
             <button
               onClick={() => setActiveCartModal(true)}
@@ -60,7 +60,7 @@ const NavBar = () => {
         </div>
       </div>
       <NavSubMenu
-        sourceArray={["Textiles", "Accesorios", "Consumibles", "Artesanal"].map(
+        sourceArray={["Textile", "Accesories", "Electronics", "Handicraft"].map(
           (str) => ({
             title: str,
             link: `/products?category=${str.toLowerCase()}`,
