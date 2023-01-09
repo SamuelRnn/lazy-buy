@@ -11,12 +11,12 @@ export default function Home() {
         <div className="py-12">
           <Banner />
         </div>
-        <h1 className="main home_titles">Day Offers</h1>
+        <h1 className="main home_titles">The best rated</h1>
         <CardCarousel />
         <br />
         <hr className="main my-4 text-zinc-300" />
         <br />
-        <h1 className="main home_titles">Rampage Offers</h1>
+        <h1 className="main home_titles">Recommended by us</h1>
         <CardCarousel />
       </div>
     </Layout>
