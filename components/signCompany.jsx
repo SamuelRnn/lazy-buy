@@ -1,51 +1,54 @@
-import AnimatedLogo from '../components/AnimatedLogo'
-import Link from 'next/link'
-import Image from 'next/image'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Listbox } from '@headlessui/react'
-import { useFormik } from 'formik'
-import { registerValidateCompany } from '../utils/validateFormCompany'
+import AnimatedLogo from "../components/AnimatedLogo";
+import Link from "next/link";
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
+import { Listbox } from "@headlessui/react";
+import { useFormik } from "formik";
+import { registerValidateCompany } from "../utils/validateFormCompany";
+import { useRouter } from "next/router";
 
 const SignupCompany = ({ typeAccount, setTypeAccount }) => {
   const formik = useFormik({
     initialValues: {
-      companyname: '',
-      email: '',
-      owner: '',
-      country: '',
-      city: '',
-      password: '',
-      cpassword: '',
+      name: "",
+      email: "",
+      owner: "",
+      country: "",
+      city: "",
+      password: "",
+      cpassword: "",
     },
     validate: registerValidateCompany,
     onSubmit,
-  })
+  });
 
-  // console.log('Erros: ', formik.errors)
+  const router = useRouter();
+
   async function onSubmit(values) {
-    console.log(values)
+    values.profilePicture =
+      "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673032247/lazy-buy/pailrl1p3kwddj5v2qtn.jpg";
+    values.plan = "Basic";
+    
+    const options = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(values),
+    };
+
+    await fetch("http://localhost:3000/api/create/company", options)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("🚀 ~ file: signCompany.jsx:42 ~ .then ~ data", data)
+        if (data) router.push("http://localhost:3000/login");
+      })
+      .catch((error) => console.log(error));
   }
 
-  // async function handleSignUp(e) {
-  //   e.preventDefault();
-  //   /* const options = {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify(input),
-  //   };
-
-  //   await fetch("http://localhost:3000/api/create/company", options)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       if (data) router.push("http://localhost:3000/login");
-  //     });
-  //   router.push("/login"); */
-  // }
   const handleClick = () => {
-    !typeAccount.company && setTypeAccount({ client: false, company: true })
-    !typeAccount.client && setTypeAccount({ client: true, company: false })
-    !typeAccount.active && setTypeAccount({ active: true })
-  }
+    !typeAccount.company && setTypeAccount({ client: false, company: true });
+    !typeAccount.client && setTypeAccount({ client: true, company: false });
+    !typeAccount.active && setTypeAccount({ active: true });
+  };
 
   return (
     <AnimatePresence>
@@ -138,22 +141,23 @@ const SignupCompany = ({ typeAccount, setTypeAccount }) => {
                         Company Name
                       </label>
                       <input
-                        name="companyname"
+                        name="name"
                         type="text"
                         placeholder="Apple Inc."
                         className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-zinc-500 rounded-lg focus:outline-none col-span-3"
-                        {...formik.getFieldProps('companyname')}
+                        {...formik.getFieldProps("name")}
                       />
-                      {formik.errors.companyname && formik.touched.companyname ? (
+                      {formik.errors.name &&
+                      formik.touched.name ? (
                         <div className="text-red-600 mt-2 pl-2">
-                          {formik.errors.companyname}
+                          {formik.errors.name}
                         </div>
                       ) : (
                         <></>
                       )}
                     </div>
 
-                    <div>
+                    <div className="col-span-2 sm:col-span-1">
                       <label className="block mb-2 text-sm text-gray-800">
                         Email
                       </label>
@@ -162,7 +166,7 @@ const SignupCompany = ({ typeAccount, setTypeAccount }) => {
                         type="email"
                         placeholder="stevejobs@gmail.com"
                         className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-zinc-500 rounded-lg focus:outline-none"
-                        {...formik.getFieldProps('email')}
+                        {...formik.getFieldProps("email")}
                       />
                       {formik.errors.email && formik.touched.email ? (
                         <div className="text-red-600 mt-2 pl-2">
@@ -173,7 +177,7 @@ const SignupCompany = ({ typeAccount, setTypeAccount }) => {
                       )}
                     </div>
 
-                    <div>
+                    <div className="col-span-2 sm:col-span-1">
                       <label className="block mb-2 text-sm text-gray-800">
                         Owner
                       </label>
@@ -182,7 +186,7 @@ const SignupCompany = ({ typeAccount, setTypeAccount }) => {
                         type="text"
                         placeholder="Steve Jobs"
                         className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-zinc-500 rounded-lg focus:outline-none"
-                        {...formik.getFieldProps('owner')}
+                        {...formik.getFieldProps("owner")}
                       />
                       {formik.errors.owner && formik.touched.owner ? (
                         <div className="text-red-600 mt-2 pl-2">
@@ -192,7 +196,7 @@ const SignupCompany = ({ typeAccount, setTypeAccount }) => {
                         <></>
                       )}
                     </div>
-                    <div>
+                    <div className="col-span-2 sm:col-span-1">
                       <label className="block mb-2 text-sm text-gray-800">
                         Country
                       </label>
@@ -201,7 +205,7 @@ const SignupCompany = ({ typeAccount, setTypeAccount }) => {
                         type="text"
                         placeholder="United States"
                         className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-zinc-500 rounded-lg focus:outline-none"
-                        {...formik.getFieldProps('country')}
+                        {...formik.getFieldProps("country")}
                       />
                       {formik.errors.country && formik.touched.country ? (
                         <div className="text-red-600 mt-2 pl-2">
@@ -211,7 +215,7 @@ const SignupCompany = ({ typeAccount, setTypeAccount }) => {
                         <></>
                       )}
                     </div>
-                    <div>
+                    <div className="col-span-2 sm:col-span-1">
                       <label className="block mb-2 text-sm text-gray-800">
                         City
                       </label>
@@ -220,7 +224,7 @@ const SignupCompany = ({ typeAccount, setTypeAccount }) => {
                         type="text"
                         placeholder="Palo Alto"
                         className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-zinc-500 rounded-lg focus:outline-none"
-                        {...formik.getFieldProps('city')}
+                        {...formik.getFieldProps("city")}
                       />
                       {formik.errors.city && formik.touched.city ? (
                         <div className="text-red-600 mt-2 pl-2">
@@ -231,7 +235,7 @@ const SignupCompany = ({ typeAccount, setTypeAccount }) => {
                       )}
                     </div>
 
-                    <div>
+                    <div className="col-span-2 sm:col-span-1">
                       <label className="block mb-2 text-sm text-gray-800">
                         Password
                       </label>
@@ -240,7 +244,7 @@ const SignupCompany = ({ typeAccount, setTypeAccount }) => {
                         type="password"
                         placeholder="Enter your password"
                         className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-zinc-500 rounded-lg focus:outline-none"
-                        {...formik.getFieldProps('password')}
+                        {...formik.getFieldProps("password")}
                       />
                       {formik.errors.password && formik.touched.password ? (
                         <div className="text-red-600 mt-2 pl-2">
@@ -251,7 +255,7 @@ const SignupCompany = ({ typeAccount, setTypeAccount }) => {
                       )}
                     </div>
 
-                    <div>
+                    <div className="col-span-2 sm:col-span-1">
                       <label className="block mb-2 text-sm text-gray-800">
                         Confirm password
                       </label>
@@ -259,7 +263,7 @@ const SignupCompany = ({ typeAccount, setTypeAccount }) => {
                         type="password"
                         placeholder="Enter your password"
                         className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-zinc-500 rounded-lg focus:outline-none"
-                        {...formik.getFieldProps('cpassword')}
+                        {...formik.getFieldProps("cpassword")}
                       />
                       {formik.errors.cpassword && formik.touched.cpassword ? (
                         <div className="text-red-600 mt-2 pl-2">
@@ -281,9 +285,10 @@ const SignupCompany = ({ typeAccount, setTypeAccount }) => {
                       />
                       Sign in with Google
                     </button> */}
-                    <button 
-                    type="submit"
-                    className="hover:text-zinc-700 hover:bg-zinc-300 hover:border-zinc-300 text-zinc-100 font-semibold flex rounded-xl border-2 p-3 border-zinc-500 items-center justify-center gap-4 ease-in-out transition-all bg-zinc-500 col-span-2">
+                    <button
+                      type="submit"
+                      className="hover:text-zinc-700 hover:bg-zinc-300 hover:border-zinc-300 text-zinc-100 font-semibold flex rounded-xl border-2 p-3 border-zinc-500 items-center justify-center gap-4 ease-in-out transition-all bg-zinc-500 col-span-2"
+                    >
                       <span>Sign Up </span>
 
                       <svg
@@ -315,7 +320,7 @@ const SignupCompany = ({ typeAccount, setTypeAccount }) => {
         </motion.div>
       </div>
     </AnimatePresence>
-  )
-}
+  );
+};
 
-export default SignupCompany
+export default SignupCompany;
