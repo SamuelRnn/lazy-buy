@@ -1,16 +1,19 @@
 import React from "react";
+import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 
 function getPageLabels(count, perPage) {
   const pages = Math.ceil(count / perPage);
   const aux = [];
   for (let i = pages; i > 0; i--) {
+    if (i === pages - 1 && pages > 4) {
+      aux.unshift("...");
+    }
     aux.unshift(i);
   }
   return [aux, pages];
 }
 
 const Pagination = ({ count, filters, setFilters }) => {
-  console.log(count, filters, setFilters);
   if (count == 0) {
     return <div className="text-gray-500">No products found!</div>;
   }
@@ -18,6 +21,7 @@ const Pagination = ({ count, filters, setFilters }) => {
   let [pageLabels, maxPages] = getPageLabels(count, ITEMS_PER_PAGE);
 
   const goToPage = (num) => {
+    if (num === "...") return;
     setFilters({
       ...filters,
       page: num,
@@ -39,38 +43,44 @@ const Pagination = ({ count, filters, setFilters }) => {
   };
   return (
     <div className="flex justify-center ">
-      <nav aria-label="Page navigation example">
-        <ul className="flex gap-2 list-style-none">
+      <nav className="flex gap-2 items-center">
+        <button
+          className={`grid place-content-center h-10 w-10 transition-colors rounded-full text-fondo-500 
+            hover:bg-gray-200 ${
+              parseInt(filters.page) === 1
+                ? "pointer-events-none text-zinc-400"
+                : ""
+            }`}
+          onClick={prevPage}
+          disabled={filters.page === 1}
+        >
+          <HiChevronLeft size="22px" />
+        </button>
+        {pageLabels?.map((e) => (
           <button
-            className="block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-500 pointer-events-none focus:shadow-none"
-            tabIndex="-1"
-            onClick={prevPage}
-            disabled={filters.page === 1}
+            key={e}
+            className={`h-10 w-10 transition-colors rounded-full hover:bg-gray-200 ${
+              parseInt(filters.page) === e
+                ? "bg-fondo-200 pointer-events-none text-zinc-100"
+                : "text-gray-800"
+            }`}
+            onClick={() => goToPage(e)}
           >
-            Previous
+            {e}
           </button>
-          {pageLabels?.map((e) => (
-            <li key={e} className="page-item">
-              <button
-                className={`block h-8 w-8 border-0 outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none ${
-                  parseInt(filters.page) === e ? "bg-zinc-400" : ""
-                }`}
-                onClick={() => goToPage(e)}
-              >
-                {e}
-              </button>
-            </li>
-          ))}
-          <li className="page-item">
-            <button
-              className="block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded-full text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-              onClick={nextPage}
-              disabled={filters.page === maxPages}
-            >
-              Next
-            </button>
-          </li>
-        </ul>
+        ))}
+        <button
+          className={`grid place-content-center h-10 w-10 transition-colors rounded-full text-fondo-500 
+          hover:bg-gray-200 ${
+            parseInt(filters.page) === maxPages
+              ? "pointer-events-none text-zinc-400"
+              : ""
+          }`}
+          onClick={nextPage}
+          disabled={filters.page === maxPages}
+        >
+          <HiChevronRight size="22px" />
+        </button>
       </nav>
     </div>
   );

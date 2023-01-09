@@ -46,7 +46,7 @@ const DashboardLayout = ({
       </Head>
       <Toaster position="top-center" />
       <AnimatePresence>
-        <div>
+        <div className="">
           <TopBar showNav={showNav} setShowNav={setShowNav} />
           <Transition
             as={Fragment}

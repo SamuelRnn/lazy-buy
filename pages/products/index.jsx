@@ -75,6 +75,7 @@ const Store = (initialParams) => {
         <ModalFilters
           active={activeFiltersModal}
           setActive={setActiveFiltersModal}
+          setActiveFiltersModal={setActiveFiltersModal}
           setFilters={setFilters}
         />
       </Layout>

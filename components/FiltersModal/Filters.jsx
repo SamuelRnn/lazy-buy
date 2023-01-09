@@ -1,7 +1,8 @@
-const Filters = ({ setFilters }) => {
+const Filters = ({ setFilters, setActiveFiltersModal }) => {
   const applyFilters = (event) => {
     event.preventDefault();
     console.log(event.target);
+    setActiveFiltersModal(false);
   };
   return (
     <div className="p-4 flex items-around">
@@ -26,5 +27,4 @@ const Filters = ({ setFilters }) => {
     </div>
   );
 };
-//logica de los filtros y RTK query
 export default Filters;
