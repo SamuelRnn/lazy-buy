@@ -15,7 +15,7 @@ export default function Loading() {
   //   await signIn('google', { callbackUrl })
   const router = useRouter();
   const { session } = router.query;
-  if (session === "log-out") toast("Esperamos verte de nuevo pronto!");
+  if (session === "signed-out") toast("Esperamos verte de nuevo pronto!");
   // async function handleGoogleSignin(e) {
   //   e.preventDefault();
   //   signIn("google", { callbackUrl: "/dashboard" });
@@ -149,7 +149,7 @@ export default function Loading() {
                   <div className="w-full mt-4">
                     <div
                       onClick={googleLogin}
-                      className="transition-colors ease-in-out w-full flex items-center justify-center gap-2 border p-2 px-4 rounded-full bg-zinc-900 hover:bg-zinc-500"
+                      className="transition-colors ease-in-out w-full flex items-center justify-center gap-2 border p-2 px-4 rounded-full bg-zinc-900 hover:bg-zinc-500 cursor-pointer"
                     >
                       <Image
                         width={20}
