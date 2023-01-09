@@ -48,6 +48,6 @@ Levantar el proyecto
 npm run dev
 ```
 
-Visita en el navegador la siguiente ruta [http://localhost:3000/api/dev](http://localhost:3000/api/dev){:target="_blank"}
+Visita en el navegador la siguiente ruta <a href="http://localhost:3000/api/dev">localhost:3000/api/dev</a>
 
 Todo listo! Visita la ruta [http://localhost:3000/](http://localhost:3000/){:target="_blank"} para empezar.
