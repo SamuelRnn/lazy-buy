@@ -10,8 +10,8 @@
 export function registerValidateCompany(values) {
     const errors = {};
   //Company Name
-    if (!values.companyname) {
-      errors.companyname = "Required Company Name";
+    if (!values.name) {
+      errors.name = "Required Company Name";
     }
   
   //Country
@@ -23,7 +23,6 @@ export function registerValidateCompany(values) {
   if (!values.owner) {
     errors.owner = "Required Owner";
   }
-  
   
   //City
   if (!values.city) {

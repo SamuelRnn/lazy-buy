@@ -4,6 +4,7 @@ import { dev, getCart } from "../../redux/cartSlice";
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+
   function handleadd() {
     dispatch(dev());
   }

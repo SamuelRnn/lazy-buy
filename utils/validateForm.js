@@ -8,8 +8,8 @@
 export function registerValidate(values) {
   const errors = {};
 //userName
-  if (!values.username) {
-    errors.username = "Required User Name";
+  if (!values.userName) {
+    errors.userName = "Required User Name";
   }
 
 //FirstName

@@ -1,22 +1,3 @@
-import { company, plan, product } from "../../prisma";
-import { hash } from "bcryptjs";
-
-function getSlug({ id, name }) {
-  return `${id + ""}-${name.toLowerCase().split(" ").join("-")}`;
-}
-const companyData = {
-  password: "dev",
-  name: "Dev3 Co.",
-  owner: "Armando Mendozas3",
-  email: "dev3@dev.com",
-  city: "Sao Paolo",
-  country: "Brasil",
-  profilePicture: {
-    url: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673033931/lazy-buy/fodpv8nlpc1uynqep0lf.jpg",
-    public_id: "lazy-buy/fodpv8nlpc1uynqep0lf",
-  },
-  plan: "Basic",
-};
 let productos = [
   {
     name: "T-Shirt",
@@ -31,7 +12,6 @@ let productos = [
     stock: 153,
     isActive: true,
     companyId: "",
-    averageRating: 3.34,
   },
   {
     name: "Denim Jeans",
@@ -46,7 +26,6 @@ let productos = [
     stock: 25,
     isActive: true,
     companyId: "",
-    averageRating: 4.39,
   },
   {
     name: "Leather Handbag",
@@ -62,7 +41,6 @@ let productos = [
     stock: 56,
     isActive: true,
     companyId: "",
-    averageRating: 0.08,
   },
   {
     name: "Hand-Knitted Scarf",
@@ -77,7 +55,6 @@ let productos = [
     stock: 173,
     isActive: true,
     companyId: "",
-    averageRating: 1.5,
   },
   {
     name: "Laptop",
@@ -93,7 +70,6 @@ let productos = [
     stock: 186,
     isActive: true,
     companyId: "",
-    averageRating: 1.06,
   },
   {
     name: "Smartphone",
@@ -109,7 +85,6 @@ let productos = [
     stock: 165,
     isActive: true,
     companyId: "",
-    averageRating: 4.05,
   },
   {
     name: "Headphones",
@@ -125,7 +100,6 @@ let productos = [
     stock: 66,
     isActive: true,
     companyId: "",
-    averageRating: 1.12,
   },
   {
     name: "Watch",
@@ -140,7 +114,6 @@ let productos = [
     stock: 27,
     isActive: true,
     companyId: "",
-    averageRating: 4.12,
   },
   {
     name: "Sunglasses",
@@ -155,7 +128,6 @@ let productos = [
     stock: 14,
     isActive: true,
     companyId: "",
-    averageRating: 3.31,
   },
   {
     name: "Tote Bag",
@@ -170,7 +142,6 @@ let productos = [
     stock: 91,
     isActive: true,
     companyId: "",
-    averageRating: 0.42,
   },
   {
     name: "Dress",
@@ -186,7 +157,6 @@ let productos = [
     stock: 34,
     isActive: true,
     companyId: "",
-    averageRating: 3.88,
   },
   {
     name: "Hand-Woven Rug",
@@ -201,7 +171,6 @@ let productos = [
     stock: 179,
     isActive: true,
     companyId: "",
-    averageRating: 4.81,
   },
   {
     name: "Ceramic Vase",
@@ -216,7 +185,6 @@ let productos = [
     stock: 119,
     isActive: true,
     companyId: "",
-    averageRating: 0.39,
   },
   {
     name: "Desktop Computer",
@@ -232,7 +200,6 @@ let productos = [
     stock: 9,
     isActive: true,
     companyId: "",
-    averageRating: 1.07,
   },
   {
     name: "Tablet",
@@ -248,7 +215,6 @@ let productos = [
     stock: 167,
     isActive: true,
     companyId: "",
-    averageRating: 4.67,
   },
   {
     name: "Linen Shirt",
@@ -264,7 +230,6 @@ let productos = [
     stock: 170,
     isActive: true,
     companyId: "",
-    averageRating: 2.74,
   },
   {
     name: "Hand-knit Scarf",
@@ -279,7 +244,6 @@ let productos = [
     stock: 125,
     isActive: true,
     companyId: "",
-    averageRating: 3.86,
   },
   {
     name: "Leather Handbag",
@@ -295,7 +259,6 @@ let productos = [
     stock: 102,
     isActive: true,
     companyId: "",
-    averageRating: 0.03,
   },
   {
     name: "Stoneware Mug",
@@ -311,7 +274,6 @@ let productos = [
     stock: 6,
     isActive: true,
     companyId: "",
-    averageRating: 2.68,
   },
   {
     name: "Smartwatch",
@@ -327,7 +289,6 @@ let productos = [
     stock: 85,
     isActive: true,
     companyId: "",
-    averageRating: 4.03,
   },
   {
     name: "Silk Pillowcase",
@@ -343,7 +304,6 @@ let productos = [
     stock: 176,
     isActive: true,
     companyId: "",
-    averageRating: 3.52,
   },
   {
     name: "Hand-woven Rug",
@@ -359,7 +319,6 @@ let productos = [
     stock: 166,
     isActive: true,
     companyId: "",
-    averageRating: 3.63,
   },
   {
     name: "Leather Wallet",
@@ -375,7 +334,6 @@ let productos = [
     stock: 159,
     isActive: true,
     companyId: "",
-    averageRating: 2.53,
   },
   {
     name: "Hand-painted Tote Bag",
@@ -391,7 +349,6 @@ let productos = [
     stock: 45,
     isActive: true,
     companyId: "",
-    averageRating: 2.44,
   },
   {
     name: "Noise-cancelling Headphones",
@@ -407,7 +364,6 @@ let productos = [
     stock: 90,
     isActive: true,
     companyId: "",
-    averageRating: 2.73,
   },
   {
     name: "Cotton Towels",
@@ -423,7 +379,6 @@ let productos = [
     stock: 49,
     isActive: true,
     companyId: "",
-    averageRating: 1.86,
   },
   {
     name: "Hand-carved Wood Bowl",
@@ -439,7 +394,6 @@ let productos = [
     stock: 140,
     isActive: true,
     companyId: "",
-    averageRating: 0.7,
   },
   {
     name: "Sterling Silver Earrings",
@@ -455,7 +409,6 @@ let productos = [
     stock: 97,
     isActive: true,
     companyId: "",
-    averageRating: 1.24,
   },
   {
     name: "Hand-embroidered Pillow",
@@ -471,7 +424,6 @@ let productos = [
     stock: 141,
     isActive: true,
     companyId: "",
-    averageRating: 2.54,
   },
   {
     name: "Cotton T-Shirt",
@@ -486,7 +438,6 @@ let productos = [
     stock: 100,
     isActive: true,
     companyId: "",
-    averageRating: 4.36,
   },
   {
     name: "Linen Napkins",
@@ -501,7 +452,6 @@ let productos = [
     stock: 82,
     isActive: true,
     companyId: "",
-    averageRating: 1.62,
   },
   {
     name: "Hand-Woven Rug",
@@ -516,7 +466,6 @@ let productos = [
     stock: 82,
     isActive: true,
     companyId: "",
-    averageRating: 2.8,
   },
   {
     name: "Ceramic Vase",
@@ -531,7 +480,6 @@ let productos = [
     stock: 116,
     isActive: true,
     companyId: "",
-    averageRating: 1.69,
   },
   {
     name: "Smartphone",
@@ -547,7 +495,6 @@ let productos = [
     stock: 41,
     isActive: true,
     companyId: "",
-    averageRating: 4.86,
   },
   {
     name: "Laptop",
@@ -563,7 +510,6 @@ let productos = [
     stock: 86,
     isActive: true,
     companyId: "",
-    averageRating: 0.09,
   },
   {
     name: "Wireless Headphones",
@@ -579,7 +525,6 @@ let productos = [
     stock: 59,
     isActive: true,
     companyId: "",
-    averageRating: 0.05,
   },
   {
     name: "Leather Wallet",
@@ -594,7 +539,6 @@ let productos = [
     stock: 137,
     isActive: true,
     companyId: "",
-    averageRating: 3.33,
   },
   {
     name: "Silk Scarf",
@@ -609,7 +553,6 @@ let productos = [
     stock: 8,
     isActive: true,
     companyId: "",
-    averageRating: 1.68,
   },
   {
     name: "Denim Jacket",
@@ -624,67 +567,10 @@ let productos = [
     stock: 69,
     isActive: true,
     companyId: "",
-    averageRating: 2.72,
   },
 ];
-let plans = [
-  {
-    planType: "Basic",
-    productsLimit: 10,
-    activeProductsLimit: 7,
-    productPriority: 1,
-    price: 1,
-  },
-  {
-    planType: "Standard",
-    productsLimit: 15,
-    activeProductsLimit: 10,
-    productPriority: 2,
-    price: 2,
-  },
-  {
-    planType: "Premium",
-    productsLimit: 9999,
-    activeProductsLimit: 9999,
-    productPriority: 3,
-    price: 3,
-  },
-];
-export default async function handler(req, res) {
-  companyData.password = await hash(companyData.password, 12);
-
-  const newCompany = await company.create({
-    data: {
-      name: companyData.name,
-      owner: companyData.owner,
-      email: companyData.email,
-      city: companyData.city,
-      country: companyData.country,
-      profilePicture: companyData.profilePicture,
-      plan: companyData.plan,
-      access: {
-        create: { password: companyData.password },
-      },
-    },
-  });
-  //------------------------------------------
-  productos.map((productData) => {
-    productData.slug = productData.name;
-    productData.companyId = newCompany.id;
-
-    (async () => {
-      let newProduct = await product.create({ data: productData });
-      await product.update({
-        where: { id: newProduct.id },
-        data: { slug: getSlug(newProduct) },
-      });
-    })();
-  });
-  //------------------------------------------
-  plans.map((planData) => {
-    (async () => {
-      await plan.create({ data: planData });
-    })();
-  });
-  res.status(201).json({ status: "All Created, continue" });
-}
+const result = productos.map((p) => ({
+  ...p,
+  averageRating: +(Math.random() * 5).toFixed(2),
+}));
+console.log(result);

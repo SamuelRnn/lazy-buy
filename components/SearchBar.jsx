@@ -14,7 +14,7 @@ const SearchBar = () => {
         duration: 2300,
       });
     }
-    window.location.href = `/products?search=${slugify(search)}`;
+    window.location.href = `/products?search=${slugify(search)}&page=1`;
   };
   return (
     <form

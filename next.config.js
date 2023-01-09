@@ -1,8 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   images: {
     domains: [
+      "www.thedigitalsalesinstitute.com",
+      "assets.entrepreneur.com",
       "www.novagric.com",
       "asset.cloudinary.com",
       "res.cloudinary.com",
