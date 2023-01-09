@@ -657,5 +657,5 @@ export default async function handler(req, res) {
       await product.create({ data: planData });
     })();
   });
-  plan.res.status(201).json({ status: "All Created, continue" });
+  res.status(201).json({ status: "All Created, continue" });
 }
