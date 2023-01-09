@@ -3,6 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     domains: [
+      "www.novagric.com",
       "asset.cloudinary.com",
       "res.cloudinary.com",
       "i.ibb.co",

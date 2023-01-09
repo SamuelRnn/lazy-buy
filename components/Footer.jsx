@@ -8,30 +8,27 @@ const Footer = () => {
       <div className="main grid grid-rows-1 gap-8 md:grid-cols-12 xl:gap-8">
         <div className="md:col-span-12 xl:col-span-4 flex flex-col gap-4">
           <h1 className="text-3xl font-bold text-gray-900">Lazy Buy</h1>
-          <p className="text-gray-600 text-justify hover:text-fondo-300">
-            Lazzy Buy es un proyecto realizado por un grupo de 7 estudiantes de
-            Henry Bootcamp. El proyecto se basa en la creación de un sitio web
-            completamente funcional. En nuestro caso, decidimos hacer una
-            especie de comercio electrónico que incluyera nuestro propio método
-            de pago implementado en la aplicación principal. En este proyecto
-            estuvimos trabajando con las siguientes tecnologías: Next.JS, JSX,
-            Tailwind & Prisma
+          <p className="text-gray-600 text-justify hover:text-fondo-300 select-none">
+            Lazy Buy is a project done by a group of 7 developers with great
+            ideas. This project is based in the creation of a website in a
+            E-COMERCE format, designed for small and medium-size companies that
+            want to take their buisiness to the next level.
           </p>
         </div>
         <div className="md:col-span-4 xl:col-span-2">
           <h2 className="font-bold mb-6 uppercase">Menu</h2>
           <nav className="flex flex-col gap-4">
             <Link href="/" className="hover:underline hover:text-fondo-300">
-              Inicio
+              Home
             </Link>
             <Link
               href="/nosotros"
               className="hover:underline hover:text-fondo-300"
             >
-              Nosotros
+              About
             </Link>
             <Link href="/faqs" className="hover:underline hover:text-fondo-300">
-              Preguntas frecuentes
+              FAQ
             </Link>
           </nav>
         </div>
