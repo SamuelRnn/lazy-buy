@@ -12,6 +12,7 @@ const ErrorPage = () => {
       clearTimeout(id);
       console.log("me voy");
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <Layout noLayout={true} title="Página no encontrada!">

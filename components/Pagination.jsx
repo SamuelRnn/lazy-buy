@@ -1,8 +1,12 @@
 import React from "react";
 
-const Pagination = ({ pages }) => {
+const Pagination = ({ count }) => {
+  console.log(count);
+  if (count == 0) {
+    return <div>No products found!</div>;
+  }
   let array = [];
-  for (let i = 0; i < pages; i += 10) {
+  for (let i = 0; i < count; i += 10) {
     array.push(i);
   }
 

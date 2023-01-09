@@ -16,8 +16,9 @@ function camelize(str) {
 }
 
 const Store = (initialParams) => {
+  const [filters, setFilters] = useState(initialParams);
   const [activeFiltersModal, setActiveFiltersModal] = useState(false);
-  const { isLoading, data: productos } = useGetProductsQuery(initialParams);
+  const { isLoading, data: productos } = useGetProductsQuery(filters);
   return (
     <>
       <Layout>
@@ -44,15 +45,16 @@ const Store = (initialParams) => {
                 <IoMdOptions />
               </button>
               {/* select filters */}
-              <OrderSelect initialParams={initialParams} />
+              <OrderSelect setFilters={setFilters} />
             </div>
           </div>
-          {console.log("test")}
           <hr className="my-4" />
           <div className="bg-zinc-100 w-full rounded-xl mt-6 mb-12">
             <div className="flex flex-col gap-y-10 items-center py-10 min-h-[164px] justify-center overflow-hidden ">
               {isLoading && <Spinner />}
-              {productos && <Pagination pages={productos.count} />}
+              {productos?.results.length && (
+                <Pagination count={productos.count} />
+              )}
               {productos?.results.map((product, index) => (
                 <Card
                   key={product.id}
