@@ -16,8 +16,7 @@ export default async function createPlan(req, res) {
     !planType ||
     !productsLimit ||
     !activeProductsLimit ||
-    !productPriority ||
-    !price
+    !productPriority
   )
     return res.status(400).send({ message: "Not enough data" });
 
