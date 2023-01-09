@@ -588,6 +588,29 @@ let productos = [
     companyId: "",
   },
 ];
+let plans = [
+  {
+    planType: "Basic",
+    productsLimit: 10,
+    activeProductsLimit: 7,
+    productPriority: 1,
+    price: 1,
+  },
+  {
+    planType: "Standard",
+    productsLimit: 15,
+    activeProductsLimit: 10,
+    productPriority: 2,
+    price: 2,
+  },
+  {
+    planType: "Premium",
+    productsLimit: 9999,
+    activeProductsLimit: 9999,
+    productPriority: 3,
+    price: 3,
+  },
+];
 export default async function handler(req, res) {
   companyData.password = await hash(companyData.password, 12);
 
@@ -616,22 +639,23 @@ export default async function handler(req, res) {
   //   });
 
   // });
-  const results = productos.map((productData, index) => {
+  productos.map((productData) => {
     productData.slug = productData.name;
     productData.companyId = newCompany.id;
 
     (async () => {
       let newProduct = await product.create({ data: productData });
-
-      console.log("product creado!(?");
-      console.log(newProduct);
-
       await product.update({
         where: { id: newProduct.id },
         data: { slug: getSlug(newProduct) },
       });
     })();
   });
-
-  res.status(201).json({ ok: true, results });
+  //------------------------------------------
+  plans.map((planData) => {
+    (async () => {
+      await product.create({ data: planData });
+    })();
+  });
+  plan.res.status(201).json({ status: "All Created, continue" });
 }

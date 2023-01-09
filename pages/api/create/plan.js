@@ -3,7 +3,7 @@ import { plan } from "../../../prisma";
 export default async function createPlan(req, res) {
   if (req.method !== "POST")
     return res.status(400).send({ message: "Not found" });
-    
+
   const {
     planType,
     productsLimit,
@@ -16,7 +16,8 @@ export default async function createPlan(req, res) {
     !planType ||
     !productsLimit ||
     !activeProductsLimit ||
-    !productPriority
+    !productPriority ||
+    !price
   )
     return res.status(400).send({ message: "Not enough data" });
 

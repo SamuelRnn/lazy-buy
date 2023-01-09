@@ -1,7 +1,17 @@
 const Filters = ({ setFilters, setActiveFiltersModal }) => {
   const applyFilters = (event) => {
     event.preventDefault();
-    console.log(event.target);
+    let price_range = ["min", "max"];
+    if (event.target[0].value !== "") {
+      price_range[0] = event.target[0].value;
+    }
+    if (event.target[1].value !== "") {
+      price_range[1] = event.target[1].value;
+    }
+    setFilters((state) => ({
+      ...state,
+      price_range,
+    }));
     setActiveFiltersModal(false);
   };
   return (
