@@ -5,10 +5,21 @@ import cloud from "../../../utils/cloudinary";
 export default async function createUser(req, res) {
   if (req.method !== "POST")
     return res.status(400).send({ message: "Not found" });
-    
-  const { isAdmin, fullName, userName, password, email, profilePicture, city, country } =
-    req.body;
+  req.body.fullName = `${req.body.firstname} ${req.body.lastname}`
+  const {
+    isAdmin,
+    fullName,
+    userName,
+    password,
+    email,
+    profilePicture,
+    city,
+    country,
+  } = req.body;
 
+  delete req.body.cpassword
+  delete req.body.lastname
+  delete req.body.firstname
   delete req.body["password"];
 
   if (!fullName || !email || !password)
