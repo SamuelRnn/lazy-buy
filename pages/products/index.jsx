@@ -8,17 +8,13 @@ import { IoMdOptions } from "react-icons/io";
 import { useGetProductsQuery } from "../../redux/productsApi";
 import MiniSpinner from "../../components/miniSpinner";
 import Pagination from "../../components/Pagination";
-
-function camelize(str) {
-  const aux = str.split("");
-  aux[0] = aux[0].toUpperCase();
-  return aux.join("");
-}
+import camelize from "../../utils/camelize";
 
 const Store = (initialParams) => {
   const [filters, setFilters] = useState(initialParams);
   const [activeFiltersModal, setActiveFiltersModal] = useState(false);
   const { isLoading, data: productos } = useGetProductsQuery(filters);
+
   return (
     <>
       <Layout>
@@ -40,20 +36,29 @@ const Store = (initialParams) => {
               <button
                 onClick={() => setActiveFiltersModal((state) => !state)}
                 className="filter_btn"
+                disabled={!productos?.count}
               >
                 <p>Filters</p>
                 <IoMdOptions />
               </button>
               {/* select filters */}
-              <OrderSelect setFilters={setFilters} />
+              <OrderSelect
+                setFilters={setFilters}
+                disabled={!productos?.count}
+              />
             </div>
           </div>
           <hr className="my-4" />
           <div className="bg-zinc-100 w-full rounded-xl mt-6 mb-12">
             <div className="flex flex-col gap-y-10 items-center py-10 min-h-[164px] justify-center overflow-hidden ">
               {isLoading && <Spinner />}
-              {productos?.results.length && (
-                <Pagination count={productos.count} />
+              {/* pagination */}
+              {productos && (
+                <Pagination
+                  count={productos.count}
+                  setFilters={setFilters}
+                  filters={filters}
+                />
               )}
               {productos?.results.map((product, index) => (
                 <Card
@@ -70,6 +75,7 @@ const Store = (initialParams) => {
         <ModalFilters
           active={activeFiltersModal}
           setActive={setActiveFiltersModal}
+          setFilters={setFilters}
         />
       </Layout>
     </>

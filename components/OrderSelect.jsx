@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 
-const OrderSelect = ({ setFilters }) => {
+const OrderSelect = ({ setFilters, disabled }) => {
   const router = useRouter();
   router.query;
   const handleChange = ({ target }) => {
@@ -12,18 +12,29 @@ const OrderSelect = ({ setFilters }) => {
     });
   };
   return (
-    <select
-      onChange={handleChange}
-      name=""
-      id=""
-      className="filter_btn"
-      defaultValue="priority"
-    >
-      <option value="priority">Recomendados</option>
-      <option value="price_des">Mayor precio</option>
-      <option value="price_asc">Menor precio</option>
-      <option value="rating">Mejor puntuación</option>
-    </select>
+    <div>
+      <select
+        disabled={disabled}
+        onChange={handleChange}
+        name=""
+        id=""
+        className="filter_btn"
+        defaultValue="priority"
+      >
+        <option value="priority" className="text-zinc-600">
+          Recomendados
+        </option>
+        <option value="price_desc" className="text-zinc-600">
+          Mayor precio
+        </option>
+        <option value="price_asc" className="text-zinc-600">
+          Menor precio
+        </option>
+        <option value="rating" className="text-zinc-600">
+          Mejor puntuación
+        </option>
+      </select>
+    </div>
   );
 };
 

@@ -60,12 +60,15 @@ const NavBar = () => {
         </div>
       </div>
       <NavSubMenu
-        sourceArray={["Textile", "Accesories", "Electronics", "Handicraft"].map(
-          (str) => ({
-            title: str,
-            link: `/products?category=${str.toLowerCase()}`,
-          })
-        )}
+        sourceArray={[
+          "Textile",
+          "Accessories",
+          "Electronics",
+          "Handicraft",
+        ].map((str) => ({
+          title: str,
+          link: `/products?category=${str.toLowerCase()}&page=1`,
+        }))}
         isActive={activeCatModal}
       />
       <NavSubMenu
