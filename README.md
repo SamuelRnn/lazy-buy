@@ -49,4 +49,4 @@ npm run dev
 
 Visita en el navegador la siguiente ruta [http://localhost:3000/api/dev](http://localhost:3000/api/dev)
 
-Todo listo! Visita la ruta [http://localhost:3000/api/dev](http://localhost:3000/api/dev) para empezar.
+Todo listo! Visita la ruta [http://localhost:3000/](http://localhost:3000/) para empezar.
