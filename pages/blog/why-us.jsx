@@ -31,7 +31,7 @@ const WhyUs = () => {
           ></Image>
           <article className="my-2">
             <h3>Take your business to the next level:</h3>
-            <p>Here in </p>
+            <p>Here in :</p>
           </article>
         </motion.div>
       </div>
