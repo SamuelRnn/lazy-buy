@@ -51,6 +51,45 @@ const Products = ({ company }) => {
       .then((res) => res.json())
       .then((data) => {
         if (data) {
+          window.location.reload();
+          //router.push("http://localhost:3000/dashboard");
+          console.log("DATA ", data);
+          closeModal();
+        }
+      });
+  }
+
+  async function handleDelete(productId) {
+    const options = {
+      method: "DELETE",
+    };
+
+    await fetch(
+      `http://localhost:3000/api/delete/product?productId=${productId}`,
+      options
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        if (data) {
+          router.push("http://localhost:3000/dashboard");
+          console.log("DATA ", data);
+          closeModal();
+        }
+      });
+  }
+
+  async function handleVisible(productId) {
+    const options = {
+      method: "PUT",
+    };
+
+    await fetch(
+      `http://localhost:3000/api/modfy/product?productId=${productId}`,
+      options
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        if (data) {
           router.push("http://localhost:3000/dashboard");
           console.log("DATA ", data);
           closeModal();
@@ -245,38 +284,43 @@ const Products = ({ company }) => {
           {company.products &&
             company.products.map((p) => {
               return (
-                <div
-                  key={p.id}
-                  className="flex flex-col mx- hover:cursor-pointer gap-5 text-center bg-zinc-100 border p-2"
-                >
-                  <div className="flex justify-between items-center">
-                    <h2 className="font-bold">{p.name}</h2>
-                    <div className="flex gap-1">
-                      <XMarkIcon className="h-5 w-5 hover:text-red-800" />
-                      <PencilSquareIcon className="h-5 w-5 hover:text-red-800" />
-                      {eye ? (
-                        <EyeSlashIcon
+                p.isActive && (
+                  <div
+                    key={p.id}
+                    className="flex flex-col mx- hover:cursor-pointer gap-5 text-center bg-zinc-100 border p-2"
+                  >
+                    <div className="flex justify-between items-center">
+                      <h2 className="font-bold">{p.name}</h2>
+                      <div className="flex gap-1">
+                        <XMarkIcon
                           className="h-5 w-5 hover:text-red-800"
-                          onClick={() => setEye(false)}
+                          onClick={() => handleDelete(p.id)}
                         />
-                      ) : (
-                        <EyeIcon
-                          className="h-5 w-5 hover:text-red-800"
-                          onClick={() => setEye(true)}
-                        />
-                      )}
+                        <PencilSquareIcon className="h-5 w-5 hover:text-red-800" />
+                        {eye ? (
+                          <EyeSlashIcon
+                            className="h-5 w-5 hover:text-red-800"
+                            onClick={() => setEye(false)}
+                          />
+                        ) : (
+                          <EyeIcon
+                            className="h-5 w-5 hover:text-red-800"
+                            onClick={() => setEye(true)}
+                          />
+                        )}
+                      </div>
                     </div>
+                    <picture className="self-center">
+                      <img
+                        src={p.mainImage.url}
+                        alt={p.name}
+                        className="object-cover w-full max-w-xs object-center h-full"
+                      />
+                    </picture>
+                    <p>${p.price}</p>
+                    <p>{p.stock}</p>
                   </div>
-                  <picture className="self-center">
-                    <img
-                      src={p.mainImage.url}
-                      alt={p.name}
-                      className="object-cover w-full max-w-xs object-center h-full"
-                    />
-                  </picture>
-                  <p>${p.price}</p>
-                  <p>{p.stock}</p>
-                </div>
+                )
               );
             })}
         </div>
