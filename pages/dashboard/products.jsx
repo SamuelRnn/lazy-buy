@@ -4,8 +4,16 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { getSession } from "next-auth/react";
 import DashboardLayout from "../../components/DashBoard/Layout";
+import {
+  PencilSquareIcon,
+  XMarkIcon,
+  EyeSlashIcon,
+  EyeIcon,
+} from "@heroicons/react/24/solid";
+
 const Products = ({ company }) => {
   let [isOpen, setIsOpen] = useState(false);
+  let [eye, setEye] = useState(true);
   //TODO: add mutation RTQ query
   //TODO: add FORMIK
   const [input, setInput] = useState({
@@ -239,9 +247,26 @@ const Products = ({ company }) => {
               return (
                 <div
                   key={p.id}
-                  className="flex flex-col mx- hover:cursor-pointer gap-1 text-center bg-zinc-100 border"
+                  className="flex flex-col mx- hover:cursor-pointer gap-5 text-center bg-zinc-100 border p-2"
                 >
-                  <h2>{p.name}</h2>
+                  <div className="flex justify-between items-center">
+                    <h2 className="font-bold">{p.name}</h2>
+                    <div className="flex gap-1">
+                      <XMarkIcon className="h-5 w-5 hover:text-red-800" />
+                      <PencilSquareIcon className="h-5 w-5 hover:text-red-800" />
+                      {eye ? (
+                        <EyeSlashIcon
+                          className="h-5 w-5 hover:text-red-800"
+                          onClick={() => setEye(false)}
+                        />
+                      ) : (
+                        <EyeIcon
+                          className="h-5 w-5 hover:text-red-800"
+                          onClick={() => setEye(true)}
+                        />
+                      )}
+                    </div>
+                  </div>
                   <picture className="self-center">
                     <img
                       src={p.mainImage.url}
