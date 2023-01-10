@@ -11,9 +11,16 @@ import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "react-hot-toast";
 import { useEffect, useState } from "react";
 import WaitingAuth from "../components/Auths/WaitingAuth";
+import { resolve } from "styled-jsx/css";
 //-----------------------------------------
 
 const EMAIL_REGEX = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+
+const simulatedDelay = async () => {
+  await new Promise((resolve, _) => {
+    setTimeout(() => resolve(), 2000);
+  });
+};
 
 export default function Loading() {
   const router = useRouter();
@@ -79,6 +86,7 @@ export default function Loading() {
                   redirect: false,
                   ...formValues,
                 });
+                await simulatedDelay();
                 triggerLogin(false);
                 if (!sessionStatus.ok) {
                   toast.error(sessionStatus.error, {
