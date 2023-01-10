@@ -2,12 +2,16 @@
 import Image from "next/image";
 import logo from "../public/lazycartremove.png";
 import { MdShoppingCart } from "react-icons/md";
+import { BsCaretDownFill } from "react-icons/bs";
 import SearchBar from "./SearchBar";
 import NavSubMenu from "./NavSubMenu";
 import { useState } from "react";
 import ModalCart from "./CartModal/Modal";
+import { useSelector } from "react-redux";
+import { toast } from "react-hot-toast";
 
 const NavBar = () => {
+  const sessionData = useSelector((state) => state.account.session);
   const [activeCatModal, setActiveCatModal] = useState(false);
   const [activeRegModal, setActiveRegModal] = useState(false);
   const [activeCartModal, setActiveCartModal] = useState(false);
@@ -41,21 +45,45 @@ const NavBar = () => {
             >
               Categories
             </button>
-            <button
-              className={`nav_links ${activeRegModal ? "underline" : ""}`}
-              onClick={() => {
-                setActiveRegModal((state) => !state);
-                setActiveCatModal(false);
-              }}
-            >
-              Access
-            </button>
+
+            {/* conditional UI  */}
+            {sessionData === "no-session" && (
+              <button
+                className={`nav_links ${activeRegModal ? "underline" : ""}`}
+                onClick={() => {
+                  setActiveRegModal((state) => !state);
+                  setActiveCatModal(false);
+                }}
+              >
+                Access
+              </button>
+            )}
+            {sessionData !== "no-session" && sessionData.type === "company" && (
+              <a href="/dashboard" className="nav_links">
+                Dashboard
+              </a>
+            )}
             <button
               onClick={() => setActiveCartModal(true)}
               className="nav_links"
             >
               <MdShoppingCart className="text-[28px] text-fondo-400" />
             </button>
+            {sessionData !== "no-session" && (
+              <button
+                onClick={() => toast(`Hola ${sessionData.name}`)}
+                className="nav_links flex items-center gap-2"
+              >
+                <Image
+                  className="border rounded-full border-fondo-300"
+                  src={sessionData.image}
+                  width={30}
+                  height={30}
+                  alt={"pfp"}
+                />
+                <BsCaretDownFill size={15} />
+              </button>
+            )}
           </nav>
         </div>
       </div>

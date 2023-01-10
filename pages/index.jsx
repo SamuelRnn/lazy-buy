@@ -1,8 +1,19 @@
 import Layout from "../components/layout.jsx";
 import Banner from "../components/Banner.jsx";
 import CardCarousel from "../components/CardCarousel.jsx";
+import { getSession } from "next-auth/react";
+import { user, company } from "../prisma";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { setSession } from "../redux/accountSlice";
+export default function Home({ extendedSessionData }) {
+  const dispatch = useDispatch();
 
-export default function Home() {
+  useEffect(() => {
+    dispatch(setSession(extendedSessionData));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <Layout>
       <div className="py-12">
@@ -23,8 +34,27 @@ export default function Home() {
   );
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps({ req }) {
+  const session = await getSession({ req });
+  let extendedSessionData = "no-session";
+  if (session) {
+    const found_user = await user.findUnique({
+      where: { email: session.user.email },
+    });
+    const found_company = await company.findUnique({
+      where: { email: session.user.email },
+    });
+    extendedSessionData = { ...session.user };
+
+    if (found_company) {
+      extendedSessionData.type = "company";
+    }
+    if (found_user) {
+      extendedSessionData.type = "user";
+    }
+  }
+
   return {
-    props: {},
+    props: { extendedSessionData },
   };
 }
