@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { getSession } from "next-auth/react";
-import DashboardLayout from "../../components/DashBoard/Layout";
+import DashboardLayout from "../../components/Dashboard/Layout";
 
 const Home = ({ company }) => {
   return (

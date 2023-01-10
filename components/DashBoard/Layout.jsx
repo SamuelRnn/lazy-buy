@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import SideBar from "../../components/DashBoard/SideBar";
-import TopBar from "../../components/DashBoard/TopBar";
+import SideBar from "./SideBar";
+import TopBar from "./TopBar";
 import { Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { AnimatePresence } from "framer-motion";

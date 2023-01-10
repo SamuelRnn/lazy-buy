@@ -63,12 +63,15 @@ const NavBar = () => {
                 Dashboard
               </a>
             )}
-            <button
-              onClick={() => setActiveCartModal(true)}
-              className="nav_links"
-            >
-              <MdShoppingCart className="text-[28px] text-fondo-400" />
-            </button>
+            {sessionData === "no-session" ||
+              (sessionData.type !== "company" && (
+                <button
+                  onClick={() => setActiveCartModal(true)}
+                  className="nav_links"
+                >
+                  <MdShoppingCart className="text-[28px] text-fondo-400" />
+                </button>
+              ))}
             {sessionData !== "no-session" && (
               <button
                 onClick={() => toast(`Hola ${sessionData.name}`)}
