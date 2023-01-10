@@ -13,6 +13,8 @@ export const authOptions = {
     CredentialsProvider({
       name: "Credentials",
       async authorize(credentials, req) {
+        const ERROR_MESSAGE =
+          "Login failed, your email or password are incorrect, verify them before continue";
         const got_company = await company.findUnique({
           where: { email: credentials.email },
           include: { access: true },
@@ -23,18 +25,19 @@ export const authOptions = {
           include: { access: true },
         });
 
-        if (!got_company && !gotUser) throw new Error("Not Found");
+        if (!got_company && !gotUser) throw new Error(ERROR_MESSAGE);
 
         if (got_company) {
           const checkedPassword = await compare(
             credentials.password,
             got_company.access.password
           );
-          if (!checkedPassword) throw new Error("invalid password");
+          if (!checkedPassword) throw new Error(ERROR_MESSAGE);
           return {
+            type: "company",
             name: got_company.owner,
             email: got_company.email,
-            image: got_company.profilePicture.coso,
+            image: got_company.profilePicture.url,
           };
         }
 
@@ -43,8 +46,9 @@ export const authOptions = {
             credentials.password,
             gotUser.access.password
           );
-          if (!checkedPassword) throw new Error("invalid password");
+          if (!checkedPassword) throw new Error(ERROR_MESSAGE);
           return {
+            type: "user",
             name: gotUser.userName,
             email: gotUser.email,
             image: gotUser.profilePicture.coso,

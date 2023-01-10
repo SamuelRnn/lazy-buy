@@ -9,14 +9,17 @@ import { BiLogIn } from "react-icons/bi";
 import { GiUpgrade } from "react-icons/gi";
 import { signOut } from "next-auth/react";
 import { toast } from "react-hot-toast";
-
+import { useDispatch } from "react-redux";
+import { clearSession } from "../../redux/accountSlice";
 const SideBar = forwardRef(({ setActive }, ref) => {
+  const dispatch = useDispatch();
   const router = useRouter();
-  function handleSignOut() {
-    signOut({
+  const handleSignOut = async () => {
+    dispatch(clearSession());
+    await signOut({
       callbackUrl: "/login?session=signed-out",
     });
-  }
+  };
 
   return (
     <div ref={ref} className="fixed w-56 h-full bg-white shadow-sm z-50">

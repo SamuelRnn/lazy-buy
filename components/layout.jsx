@@ -2,6 +2,7 @@ import NavBar from "./NavBar";
 import Footer from "./Footer";
 import Head from "next/head";
 import { Toaster } from "react-hot-toast";
+
 const Layout = ({ children, title = "Lazy Buy", noLayout = false }) => {
   return (
     <>

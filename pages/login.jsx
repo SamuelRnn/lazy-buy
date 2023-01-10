@@ -1,49 +1,72 @@
 import Link from "next/link";
-import Image from "next/image";
 import AnimatedLogo from "../components/AnimatedLogo";
 import Layout from "../components/layout";
-import { signIn } from "next-auth/react";
+//-----------------------------------------
+import { FcGoogle } from "react-icons/fc";
+import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
+import { signIn, getSession } from "next-auth/react";
 import { ErrorMessage, Formik } from "formik";
 import { useRouter } from "next/router";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "react-hot-toast";
+import { useEffect, useState } from "react";
+import WaitingAuth from "../components/Auths/WaitingAuth";
+import { resolve } from "styled-jsx/css";
+//-----------------------------------------
 
-// const callbackUrl = process.env.BASE_URL || 'http://localhost:3000'
+const EMAIL_REGEX = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+
+const simulatedDelay = async () => {
+  await new Promise((resolve, _) => {
+    setTimeout(() => resolve(), 2000);
+  });
+};
 
 export default function Loading() {
-  // async function googleSignin() {
-  //   await signIn('google', { callbackUrl })
   const router = useRouter();
-  const { session } = router.query;
-  if (session === "signed-out") toast("Esperamos verte de nuevo pronto!");
-  // async function handleGoogleSignin(e) {
-  //   e.preventDefault();
-  //   signIn("google", { callbackUrl: "/dashboard" });
-  // }
+  const [loginIsProccesing, triggerLogin] = useState(false);
+  const [passwordIsVisible, setPasswordVisibility] = useState(false);
+  const { session: sessionQuery } = router.query;
+  useEffect(() => {
+    if (sessionQuery === "signed-out") toast("Hope we can see you again soon!");
+  }, [sessionQuery]);
+
   const googleLogin = () => {
-    toast.error("Something gone wrong D:");
+    toast.error("Something went wrong D:");
   };
-  async function handleLogin(event) {
-    event.preventDefault();
-    const email = event.currentTarget[0].value;
-    const password = event.currentTarget[1].value;
-    console.log(email, password);
-    const status = await signIn("credentials", {
-      redirect: false,
-      email,
-      password,
-      callbackUrl: "/dashboard",
-    });
-    if (status.ok) router.push(status.url);
-  }
+
+  const validateLogin = (valores) => {
+    let errors = {};
+    if (!valores.email) errors.email = "Please enter an email";
+    else if (!EMAIL_REGEX.test(valores.email)) {
+      errors.email = "A valid email is required";
+    }
+    if (!valores.password) errors.password = "Please enter a password";
+    return errors;
+  };
+
+  // const handleLogin = async (event) => {
+  //   event.preventDefault();
+  //   const email = event.currentTarget[0].value;
+  //   const password = event.currentTarget[1].value;
+  //   console.log(email, password);
+  //   const status = await signIn("credentials", {
+  //     redirect: false,
+  //     email,
+  //     password,
+  //     callbackUrl: "/dashboard",
+  //   });
+  //   if (status.ok) router.push(status.url);
+  // };
   return (
     <Layout noLayout={true} title="Lazy Buy | LogIn">
-      <div className="min-h-screen bg-fondo-50 grid grid-cols-1 lg:grid-cols-2">
-        <div className="bg-white overflow-hidden sm:mx-16">
+      <div className="bg-fondo-50 grid grid-cols-1 lg:grid-cols-2 min-h-screen overflow-hidden relative">
+        {/* waiting auth */}
+        <WaitingAuth loadingToggle={loginIsProccesing} />
+        <div className="bg-white overflow-hidden sm:mx-16 min-h-screen">
           <motion.div
-            initial={{ opacity: 0, y: -500, scale: 1 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{}}
+            initial={{ opacity: 0, y: -500 }}
+            animate={{ opacity: 1, y: 0 }}
             className="text-white h-screen flex flex-col items-center justify-center gap-8 p-8 max-w-lg mx-auto bg-white"
           >
             <div className="flex flex-col gap-1 w-full">
@@ -54,34 +77,45 @@ export default function Loading() {
             </div>
 
             <Formik
-              initialValues={{
-                email: "",
-                password: "",
-              }}
-              validate={(valores) => {
-                let errors = {};
-                // Validate email
-                if (!valores.email) {
-                  errors.email = "Please enter an email";
-                } else if (
-                  !/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(
-                    valores.email
-                  )
-                ) {
-                  errors.email = "A valid email is required";
-                }
-
-                if (!valores.password) {
-                  errors.password = "Please enter a password";
-                }
-                return errors;
-              }}
-              onSubmit={(valores, { resetForm }) => {
+              initialValues={{ email: "", password: "" }}
+              validate={validateLogin}
+              onSubmit={async (formValues, { resetForm }) => {
                 resetForm();
+                triggerLogin(true);
+                const sessionStatus = await signIn("credentials", {
+                  redirect: false,
+                  ...formValues,
+                });
+                await simulatedDelay();
+                triggerLogin(false);
+                if (!sessionStatus.ok) {
+                  toast.error(sessionStatus.error, {
+                    duration: 4000,
+                    position: "bottom-center",
+                  });
+                } else if (sessionStatus.ok) {
+                  //get type
+                  const session = await getSession();
+                  console.log(session);
+                  toast.success("Logged in :D", {
+                    position: "bottom-center",
+                  });
+                  setTimeout(() => router.push("/"), 2000);
+                }
               }}
             >
-              {({ errors, values, touched, handleChange, handleBlur }) => (
-                <form className="flex flex-col gap-4" onSubmit={handleLogin}>
+              {({
+                errors,
+                values,
+                touched,
+                handleChange,
+                handleBlur,
+                handleSubmit,
+              }) => (
+                <form
+                  className="flex flex-col gap-y-4 w-full"
+                  onSubmit={handleSubmit}
+                >
                   {/* Email */}
                   <div>
                     <div className="flex items-baseline">
@@ -98,18 +132,18 @@ export default function Loading() {
                       type="email"
                       id="email"
                       autoComplete="off"
-                      className="w-full py-2 px-4 bg-transparent border rounded-full mt-2 outline-none focus:border-fondo-400 text-black transition-colors"
+                      className="w-full py-2 px-4 bg-transparent border rounded-full mt-2 outline-none focus:border-fondo-400 text-zinc-600 transition-colors"
                       placeholder="lazy@buy.dev"
                       value={values.email}
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
                   </div>
-                  {/* Contraseña */}
+                  {/* Password */}
                   <div>
                     <div className="flex items-baseline">
                       <label htmlFor="password" className="text-zinc-600">
-                        Contraseña
+                        Password*
                       </label>
                       {touched.password && errors.password && (
                         <div className="text-red-600 pl-5 text-sm">
@@ -117,16 +151,30 @@ export default function Loading() {
                         </div>
                       )}
                     </div>
-                    <input
-                      type="password"
-                      id="password"
-                      autoComplete="off"
-                      className="w-full py-2 px-4 bg-transparent border rounded-full mt-2 outline-none focus:border-fondo-400 text-black transition-colors"
-                      placeholder="lazybuyisawesome23#"
-                      value={values.password}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    />
+                    <div className="flex items-center">
+                      <input
+                        type={passwordIsVisible ? "text" : "password"}
+                        id="password"
+                        autoComplete="off"
+                        className="w-full py-2 px-4 bg-transparent border rounded-full mt-2 outline-none focus:border-fondo-400 text-zinc-600 transition-colors"
+                        placeholder="lazybuyisawesome#1"
+                        value={values.password}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                      />
+                      <button
+                        type="button"
+                        className="text-2xl text-fondo-200 ml-[-36px] grid place-content-center mt-2 disabled:text-zinc-200"
+                        disabled={!values.password}
+                        onClick={() => setPasswordVisibility((state) => !state)}
+                      >
+                        {passwordIsVisible ? (
+                          <BsFillEyeSlashFill />
+                        ) : (
+                          <BsFillEyeFill />
+                        )}
+                      </button>
+                    </div>
                   </div>
                   <div className="flex flex-col md:flex-row items-center justify-between gap-4 order-2 md:order-1">
                     <span className="text-gray-800 text-sm">
@@ -139,34 +187,30 @@ export default function Loading() {
                       </Link>
                     </span>
                     <Link
-                      href="/#"
+                      href=""
+                      onClick={() => toast.error("Something went wrong! D:")}
                       className="text-zinc-600 hover:text-fondo-300 transition-colors text-sm"
                     >
-                      ¿Olvidaste tu contraseña?
+                      Forgot your password?
                     </Link>
                   </div>
 
                   <div className="w-full mt-4">
                     <div
                       onClick={googleLogin}
-                      className="transition-colors ease-in-out w-full flex items-center justify-center gap-2 border p-2 px-4 rounded-full bg-zinc-900 hover:bg-zinc-500 cursor-pointer"
+                      className="transition-colors flex items-center justify-center gap-2 p-2 px-4 rounded-full bg-zinc-800 hover:bg-zinc-500 cursor-pointer"
                     >
-                      <Image
-                        width={20}
-                        height={20}
-                        src="https://cdn-icons-png.flaticon.com/512/281/281764.png"
-                        alt="Google"
-                      />
-                      <span className="ml-2">Ingresar con Google</span>
+                      <FcGoogle size={22} />
+                      <span className="ml-2">Sign in with Google</span>
                     </div>
                   </div>
 
                   <div className="mt-4 order-1 md:order-2">
                     <button
                       type="submit"
-                      className="border w-full font-semibold bg-fondo-300 p-2 rounded-full hover:bg-fondo-100 hover:rounded-full hover:border  transition-colors"
+                      className="w-full font-semibold bg-fondo-300 p-2 rounded-full hover:bg-fondo-100 hover:rounded-full transition-colors"
                     >
-                      Iniciar sesión
+                      Sign in
                     </button>
                   </div>
                 </form>

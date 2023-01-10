@@ -9,10 +9,8 @@ const ModalCart = ({ active, setActive }) => {
       if (keyCode !== 27) return;
       setActive(false);
     };
-    console.log("hola desde add");
     document.addEventListener("keydown", scapelistener);
     return () => {
-      console.log("hola desde remove");
       document.removeEventListener("keydown", scapelistener);
     };
   });
