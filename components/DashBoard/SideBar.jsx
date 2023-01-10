@@ -14,7 +14,7 @@ const SideBar = forwardRef(({ setActive }, ref) => {
   const router = useRouter();
   function handleSignOut() {
     signOut({
-      callbackUrl: "/login?session=log-out",
+      callbackUrl: "/login?session=signed-out",
     });
   }
 
