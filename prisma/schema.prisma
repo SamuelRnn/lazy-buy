@@ -54,13 +54,15 @@ model Company {
   plan           PlanType
   products       Product[]
   transactions   Transaction[]
+  isActive       Boolean        @default(true)
+  isBanned       Boolean        @default(false)
   createdAt      DateTime       @default(now())
   updatedAt      DateTime       @updatedAt
 }
 
 model Plan {
   id                  Int      @id @default(autoincrement())
-  planType            PlanType
+  planType            PlanType @unique
   productsLimit       Int
   activeProductsLimit Int
   productPriority     Int
@@ -86,7 +88,8 @@ model Product {
   averageRating  Float?        @default(0)
   reviewsCount   Int?          @default(0)
   stock          Int
-  isActive       Boolean
+  isVisible      Boolean
+  isActive       Boolean       @default(true)
   company        Company       @relation(fields: [companyId], references: [id])
   companyId      String
   category       String
