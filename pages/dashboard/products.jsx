@@ -61,17 +61,16 @@ const Products = ({ company }) => {
 
   async function handleDelete(productId) {
     const options = {
-      method: "DELETE",
+      method: "PUT",
     };
 
     await fetch(
-      `http://localhost:3000/api/delete/product?productId=${productId}`,
+      `http://localhost:3000/api/modify/product_active?productId=${productId}`,
       options
     )
       .then((res) => res.json())
       .then((data) => {
         if (data) {
-          router.push("http://localhost:3000/dashboard");
           console.log("DATA ", data);
           closeModal();
         }
@@ -84,7 +83,7 @@ const Products = ({ company }) => {
     };
 
     await fetch(
-      `http://localhost:3000/api/modfy/product?productId=${productId}`,
+      `http://localhost:3000/api/modify/product_visible?productId=${productId}`,
       options
     )
       .then((res) => res.json())
@@ -287,7 +286,9 @@ const Products = ({ company }) => {
                 p.isActive && (
                   <div
                     key={p.id}
-                    className="flex flex-col mx- hover:cursor-pointer gap-5 text-center bg-zinc-100 border p-2"
+                    className={`flex flex-col mx- hover:cursor-pointer gap-5 text-center bg-zinc-100 border p-2 ${
+                      !p.isVisible && "opacity-10"
+                    }`}
                   >
                     <div className="flex justify-between items-center">
                       <h2 className="font-bold">{p.name}</h2>
@@ -297,15 +298,15 @@ const Products = ({ company }) => {
                           onClick={() => handleDelete(p.id)}
                         />
                         <PencilSquareIcon className="h-5 w-5 hover:text-red-800" />
-                        {eye ? (
+                        {p.isVisible ? (
                           <EyeSlashIcon
                             className="h-5 w-5 hover:text-red-800"
-                            onClick={() => setEye(false)}
+                            onClick={() => handleVisible(p.id)}
                           />
                         ) : (
                           <EyeIcon
                             className="h-5 w-5 hover:text-red-800"
-                            onClick={() => setEye(true)}
+                            onClick={() => handleVisible(p.id)}
                           />
                         )}
                       </div>
@@ -317,8 +318,16 @@ const Products = ({ company }) => {
                         className="object-cover w-full max-w-xs object-center h-full"
                       />
                     </picture>
-                    <p>${p.price}</p>
-                    <p>{p.stock}</p>
+                    <div className="flex justify-between p-1">
+                      <h3 className="font-bold">Price:</h3>
+                      <p>
+                        $<span className="text-red-600">{p.price}</span>
+                      </p>
+                    </div>
+                    <div className="flex justify-between p-1">
+                      <h3 className="font-bold">Stock:</h3>
+                      <p className="text-red-600">{p.stock}</p>
+                    </div>
                   </div>
                 )
               );
