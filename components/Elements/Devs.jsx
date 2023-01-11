@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const integrantes = [
   {
-    img: "https://i.ibb.co/7nSJPXQ/Rectangle-121.png",
+    img: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673462486/lazy-buy/Modarelli_Franco_s4dugd.jpg",
     name: "Franco",
     linkedIn: "",
   },
