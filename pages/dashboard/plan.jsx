@@ -1,5 +1,6 @@
 import DashboardLayout from "../../components/Dashboard/DashboardLayout";
-import { getSession } from "next-auth/react";
+import dashboardMiddleware from "../../utils/dashboardMiddleware";
+
 const Plan = ({ company, plans }) => {
   console.log("🚀 ~ file: plan.jsx:4 ~ Plan ~ company", company);
   return (
@@ -44,30 +45,5 @@ const Plan = ({ company, plans }) => {
 export default Plan;
 
 export async function getServerSideProps(context) {
-  const { req } = context;
-  const session = await getSession({
-    req,
-  });
-
-  let company;
-
-  // if user isn't is auth
-  if (!session) return { redirect: { destination: "/", permanent: false } };
-
-  const dataCompany = await fetch(`http://localhost:3000/api/get/company`).then(
-    (res) => res.json()
-  );
-
-  const plans = await fetch(`http://localhost:3000/api/get/plan`).then((res) =>
-    res.json()
-  );
-
-  dataCompany.forEach((c) => {
-    if (c.email === session.user.email) return (company = c);
-  });
-  //console.log(company.products)
-  // if user is is auth
-  return {
-    props: { company, plans },
-  };
+  return await dashboardMiddleware(context);
 }

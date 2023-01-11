@@ -3,13 +3,13 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { getSession } from "next-auth/react";
 import {
   PencilSquareIcon,
   XMarkIcon,
   EyeSlashIcon,
   EyeIcon,
 } from "@heroicons/react/24/solid";
+import dashboardMiddleware from "../../utils/dashboardMiddleware";
 
 const Products = ({ company }) => {
   let [isOpen, setIsOpen] = useState(false);
@@ -98,7 +98,7 @@ const Products = ({ company }) => {
 
   return (
     <DashboardLayout>
-      <div>
+      {/* <div>
         <div className="text-right mt-10">
           <button
             type="button"
@@ -333,7 +333,8 @@ const Products = ({ company }) => {
               );
             })}
         </div>
-      </div>
+      </div> */}
+      products
     </DashboardLayout>
   );
 };
@@ -341,27 +342,5 @@ const Products = ({ company }) => {
 export default Products;
 
 export async function getServerSideProps(context) {
-  const { req } = context;
-  const session = await getSession({
-    req,
-  });
-
-  let dataCompany;
-  let company;
-
-  // if user isn't is auth
-  if (!session) return { redirect: { destination: "/", permanent: false } };
-
-  await fetch(`http://localhost:3000/api/get/company`)
-    .then((res) => res.json())
-    .then((data) => (dataCompany = data));
-
-  dataCompany.forEach((c) => {
-    if (c.email === session.user.email) return (company = c);
-  });
-  //console.log(company.products)
-  // if user is is auth
-  return {
-    props: { company },
-  };
+  return await dashboardMiddleware(context);
 }

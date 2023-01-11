@@ -57,7 +57,16 @@ export const authOptions = {
       },
     }),
   ],
-  secret: process.env.NEXTAUT_SECRET,
+  secret: process.env.NEXTAUTH_SECRET,
+  callbacks: {
+    async signIn({ user, account }) {
+      console.log("user", user);
+      if (account.provider === "google") {
+        return "/login?error=google_verification";
+      }
+      return true;
+    },
+  },
 };
 
 export default NextAuth(authOptions);
