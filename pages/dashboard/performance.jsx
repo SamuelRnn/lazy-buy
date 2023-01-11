@@ -1,6 +1,7 @@
 import DashboardLayout from "../../components/Dashboard/DashboardLayout";
 import Chart from "chart.js/auto";
 import { Bar } from "react-chartjs-2";
+import dashboardMiddleware from "../../utils/dashboardMiddleware";
 
 const Performance = () => {
   const data = {
@@ -31,10 +32,14 @@ const Performance = () => {
   return (
     <DashboardLayout>
       <div>
-        <Bar data={data} options={options} height={200} />
+        {/* <Bar data={data} options={options} height={200} /> */}
+        Chart
       </div>
     </DashboardLayout>
   );
 };
 
 export default Performance;
+export async function getServerSideProps(context) {
+  return await dashboardMiddleware(context);
+}

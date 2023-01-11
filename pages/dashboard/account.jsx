@@ -1,9 +1,9 @@
 import DashboardLayout from "../../components/Dashboard/DashboardLayout";
-import { getSession } from "next-auth/react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { AiOutlineEdit } from "react-icons/ai";
 import { useState } from "react";
+import dashboardMiddleware from "../../utils/dashboardMiddleware";
 
 const Account = ({ company }) => {
   const [edit, setEdit] = useState(false);
@@ -12,7 +12,8 @@ const Account = ({ company }) => {
     <DashboardLayout>
       <AnimatePresence>
         <div className="overflow-hidden -z-50">
-          <motion.div
+          account
+          {/* <motion.div
             initial={{ x: 200, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
           >
@@ -27,11 +28,9 @@ const Account = ({ company }) => {
                       Company Information
                     </h1>
 
-                    {/* Formulario controlado */}
                     <form
                       className="grid grid-cols-2 gap-6 mt-6 md:grid-cols-2"
                       onSubmit=""
-                      // onBlur={formik.handleBlur}
                     >
                       <div className="col-span-2 sm:col-span-1">
                         <label className="block mb-2 text-sm text-gray-800">
@@ -45,16 +44,9 @@ const Account = ({ company }) => {
                             edit ? "cursor-text" : "cursor-not-allowed"
                           }`}
                           disabled={edit ? false : true}
-                          /* {...formik.getFieldProps("firstname")} */
-                          // onBlur={formik.handleBlur}
+                          
                         />
-                        {/* {formik.errors.firstname && formik.touched.firstname ? (
-                          <div className="text-red-600 mt-2 pl-2">
-                            {formik.errors.firstname}
-                          </div>
-                        ) : (
-                          <></>
-                        )} */}
+                        
                       </div>
 
                       <div className="col-span-2 sm:col-span-1">
@@ -67,15 +59,8 @@ const Account = ({ company }) => {
                           placeholder={company.owner}
                           className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-lg focus:outline-none"
                           disabled={edit ? false : true}
-                          /* {...formik.getFieldProps("lastname")} */
                         />
-                        {/* {formik.errors.lastname && formik.touched.lastname ? (
-                          <div className="text-red-600 mt-2 pl-2">
-                            {formik.errors.lastname}
-                          </div>
-                        ) : (
-                          <></>
-                        )} */}
+                        
                       </div>
 
                       <div className="col-span-2 sm:col-span-1">
@@ -90,15 +75,8 @@ const Account = ({ company }) => {
                             edit ? "cursor-text" : "cursor-not-allowed"
                           }`}
                           disabled={edit ? false : true}
-                          /* {...formik.getFieldProps("lastname")} */
                         />
-                        {/* {formik.errors.lastname && formik.touched.lastname ? (
-                          <div className="text-red-600 mt-2 pl-2">
-                            {formik.errors.lastname}
-                          </div>
-                        ) : (
-                          <></>
-                        )} */}
+             
                       </div>
                       <div className="col-span-2 sm:col-span-1">
                         <label className="block mb-2 text-sm text-gray-800">
@@ -112,15 +90,8 @@ const Account = ({ company }) => {
                             edit ? "cursor-text" : "cursor-not-allowed"
                           }`}
                           disabled={edit ? false : true}
-                          /* {...formik.getFieldProps("lastname")} */
                         />
-                        {/* {formik.errors.lastname && formik.touched.lastname ? (
-                          <div className="text-red-600 mt-2 pl-2">
-                            {formik.errors.lastname}
-                          </div>
-                        ) : (
-                          <></>
-                        )} */}
+                      
                       </div>
                       <div className="col-span-2">
                         <label className="block mb-2 text-sm text-gray-800">
@@ -134,7 +105,6 @@ const Account = ({ company }) => {
                               edit ? "cursor-text" : "cursor-not-allowed"
                             }`}
                             disabled={edit ? false : true}
-                            /* {...formik.getFieldProps("email")} */
                           />
                           <Image
                             className="absolute right-2 top-2 rounded-full"
@@ -144,13 +114,7 @@ const Account = ({ company }) => {
                             alt="pfp"
                           />
                         </div>
-                        {/* {formik.errors.email && formik.touched.email ? (
-                          <div className="text-red-600 mt-2 pl-2">
-                            {formik.errors.email}
-                          </div>
-                        ) : (
-                          <></>
-                        )} */}
+                     
                       </div>
 
                       <div className="col-span-2">
@@ -165,15 +129,8 @@ const Account = ({ company }) => {
                             edit ? "cursor-text" : "cursor-not-allowed"
                           }`}
                           disabled={edit ? false : true}
-                          /* {...formik.getFieldProps("password")} */
                         />
-                        {/* {formik.errors.password && formik.touched.password ? (
-                          <div className="text-red-600 mt-2 pl-2">
-                            {formik.errors.password}
-                          </div>
-                        ) : (
-                          <></>
-                        )} */}
+                       
                       </div>
 
                       <div className="col-span-2">
@@ -186,16 +143,9 @@ const Account = ({ company }) => {
                           className={`block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-lg focus:outline-none ${
                             edit ? "cursor-text" : "cursor-not-allowed"
                           }`}
-                          /* {...formik.getFieldProps("cpassword")} */
                           disabled={edit ? false : true}
                         />
-                        {/* {formik.errors.cpassword && formik.touched.cpassword ? (
-                          <div className="text-red-600 mt-2 pl-2">
-                            {formik.errors.cpassword}
-                          </div>
-                        ) : (
-                          <></>
-                        )} */}
+                        
                       </div>
                       <div className="col-span-2">
                         <label className="block mb-2 text-sm text-gray-800">
@@ -207,16 +157,9 @@ const Account = ({ company }) => {
                           className={`block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-lg focus:outline-none ${
                             edit ? "cursor-text" : "cursor-not-allowed"
                           }`}
-                          /* {...formik.getFieldProps("cpassword")} */
                           disabled={edit ? false : true}
                         />
-                        {/* {formik.errors.cpassword && formik.touched.cpassword ? (
-                          <div className="text-red-600 mt-2 pl-2">
-                            {formik.errors.cpassword}
-                          </div>
-                        ) : (
-                          <></>
-                        )} */}
+                       
                       </div>
 
                       <button
@@ -242,7 +185,7 @@ const Account = ({ company }) => {
                 </div>
               </div>
             </section>
-          </motion.div>
+          </motion.div> */}
         </div>
       </AnimatePresence>
     </DashboardLayout>
@@ -252,27 +195,5 @@ const Account = ({ company }) => {
 export default Account;
 
 export async function getServerSideProps(context) {
-  const { req } = context;
-  const session = await getSession({
-    req,
-  });
-
-  let dataCompany;
-  let company;
-
-  // if user isn't is auth
-  if (!session) return { redirect: { destination: "/", permanent: false } };
-
-  await fetch(`http://localhost:3000/api/get/company`)
-    .then((res) => res.json())
-    .then((data) => (dataCompany = data));
-
-  dataCompany.forEach((c) => {
-    if (c.email === session.user.email) return (company = c);
-  });
-  //console.log(company.products)
-  // if user is is auth
-  return {
-    props: { company },
-  };
+  return await dashboardMiddleware(context);
 }

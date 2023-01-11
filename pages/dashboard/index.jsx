@@ -1,8 +1,9 @@
 import DashboardLayout from "../../components/Dashboard/DashboardLayout";
 import { motion } from "framer-motion";
-import { getSession } from "next-auth/react";
+import dashboardMiddleware from "../../utils/dashboardMiddleware";
 
 const Home = ({ company }) => {
+  console.log(company);
   return (
     <DashboardLayout>
       <motion.div
@@ -21,28 +22,5 @@ const Home = ({ company }) => {
 
 export default Home;
 export async function getServerSideProps(context) {
-  //TODO: move logic to redux Api
-  const { req } = context;
-  const session = await getSession({
-    req,
-  });
-
-  let dataCompany;
-  let company;
-
-  // if user isn't is auth
-  if (!session) return { redirect: { destination: "/", permanent: false } };
-
-  await fetch(`http://localhost:3000/api/get/company`)
-    .then((res) => res.json())
-    .then((data) => (dataCompany = data));
-
-  dataCompany.forEach((c) => {
-    if (c.email === session.user.email) return (company = c);
-  });
-  //console.log(company.products)
-  // if user is is auth
-  return {
-    props: { company },
-  };
+  return await dashboardMiddleware(context);
 }

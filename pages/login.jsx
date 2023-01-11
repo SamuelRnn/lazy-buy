@@ -10,15 +10,10 @@ import { useRouter } from "next/router";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "react-hot-toast";
 import { useEffect, useState } from "react";
+import simulateDelay from "../utils/simulateDelay";
 //-----------------------------------------
 
 const EMAIL_REGEX = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-
-const simulatedDelay = async () => {
-  await new Promise((resolve, _) => {
-    setTimeout(() => resolve(), 2000);
-  });
-};
 
 export default function Loading() {
   const router = useRouter();
@@ -29,8 +24,10 @@ export default function Loading() {
     if (sessionQuery === "signed-out") toast("Hope we can see you again soon!");
   }, [sessionQuery]);
 
-  const googleLogin = () => {
-    toast.error("Something went wrong D:");
+  const googleLogin = async () => {
+    await signIn("google", {
+      type: "company",
+    });
   };
 
   const validateLogin = (valores) => {
@@ -41,6 +38,32 @@ export default function Loading() {
     }
     if (!valores.password) errors.password = "Please enter a password";
     return errors;
+  };
+
+  const submitForm = async (formValues, { resetForm }) => {
+    resetForm();
+    triggerLogin(true);
+    const sessionStatus = await signIn("credentials", {
+      redirect: false,
+      ...formValues,
+    });
+    await simulateDelay(2);
+    triggerLogin(false);
+    if (!sessionStatus.ok) {
+      toast.error(sessionStatus.error, {
+        duration: 4000,
+        position: "bottom-center",
+      });
+    } else if (sessionStatus.ok) {
+      //get type
+      const { user } = await getSession();
+
+      //----------------
+      toast.success("Logged in :D", {
+        position: "bottom-center",
+      });
+      setTimeout(() => router.push("/"), 2000);
+    }
   };
   return (
     <Layout noLayout={true} title="Lazy Buy | LogIn">
@@ -63,30 +86,7 @@ export default function Loading() {
             <Formik
               initialValues={{ email: "", password: "" }}
               validate={validateLogin}
-              onSubmit={async (formValues, { resetForm }) => {
-                resetForm();
-                triggerLogin(true);
-                const sessionStatus = await signIn("credentials", {
-                  redirect: false,
-                  ...formValues,
-                });
-                await simulatedDelay();
-                triggerLogin(false);
-                if (!sessionStatus.ok) {
-                  toast.error(sessionStatus.error, {
-                    duration: 4000,
-                    position: "bottom-center",
-                  });
-                } else if (sessionStatus.ok) {
-                  //get type
-                  const session = await getSession();
-                  console.log(session);
-                  toast.success("Logged in :D", {
-                    position: "bottom-center",
-                  });
-                  setTimeout(() => router.push("/"), 2000);
-                }
-              }}
+              onSubmit={submitForm}
             >
               {({
                 errors,
