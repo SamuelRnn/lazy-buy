@@ -1,13 +1,13 @@
-import Layout from "../../components/layout";
-import Card from "../../components/Card";
-import Spinner from "../../components/Spinner";
-import ModalFilters from "../../components/FiltersModal/Modal";
-import OrderSelect from "../../components/OrderSelect";
+import Layout from "../../components/Layout";
+import Card from "../../components/Elements_Cards/Card";
+import Spinner from "../../components/Spinners/Spinner";
+import ModalFilters from "../../components/Elements_Filters/ModalFilters";
+import OrderSelect from "../../components/Elements_Filters/OrderSelect";
+import MiniSpinner from "../../components/Spinners/miniSpinner";
+import Pagination from "../../components/Elements/Pagination";
 import { useState } from "react";
 import { IoMdOptions } from "react-icons/io";
 import { useGetProductsQuery } from "../../redux/productsApi";
-import MiniSpinner from "../../components/miniSpinner";
-import Pagination from "../../components/Pagination";
 import camelize from "../../utils/camelize";
 
 const Store = (initialParams) => {

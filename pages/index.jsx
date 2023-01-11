@@ -1,11 +1,12 @@
-import Layout from "../components/layout.jsx";
-import Banner from "../components/Banner.jsx";
-import CardCarousel from "../components/CardCarousel.jsx";
+import Layout from "../components/Layout";
+import Banner from "../components/Elements/Banner";
+import CardCarousel from "../components/Elements_Cards/CardCarousel";
 import { getSession } from "next-auth/react";
 import { user, company } from "../prisma";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { setSession } from "../redux/accountSlice";
+
 export default function Home({ extendedSessionData }) {
   const dispatch = useDispatch();
 

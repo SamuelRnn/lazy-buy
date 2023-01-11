@@ -1,5 +1,4 @@
-import React from "react";
-import Layout from "../../components/layout";
+import Layout from "../../components/Layout";
 import Image from "next/image";
 import { PrismaClient } from "@prisma/client";
 import { useRouter } from "next/router";

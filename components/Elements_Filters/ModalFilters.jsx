@@ -1,6 +1,6 @@
+import Filters from "./Filters";
 import { TfiClose } from "react-icons/tfi";
 import { motion, AnimatePresence } from "framer-motion";
-import Filters from "./Filters";
 
 const ModalFilters = ({
   active,

@@ -1,4 +1,4 @@
-import DashboardLayout from "../../components/Dashboard/Layout";
+import DashboardLayout from "../../components/Dashboard/DashboardLayout";
 import Chart from "chart.js/auto";
 import { Bar } from "react-chartjs-2";
 

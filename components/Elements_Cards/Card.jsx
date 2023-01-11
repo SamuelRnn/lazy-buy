@@ -1,9 +1,7 @@
-import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
-//TODO: refactor class "card_width"
 const mock_product = {
   name: "Renault modelo verano RTX kojima",
   slug: "43-renault-modelo-verano-rtx-kojimo",
@@ -11,7 +9,7 @@ const mock_product = {
   company: { name: "Crocs & Sneakers SA" },
   mainImage: { url: "https://bicialtea.labici.net/images/bicialtea.png" },
 };
-//recibe 2 styles: "card" "wider"
+//recibe 2 styles: "card" || "wider"
 const Card = ({ product = mock_product, style = "card", delay }) => {
   return (
     <Link href={"/products/" + product.slug}>

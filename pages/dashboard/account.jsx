@@ -1,7 +1,6 @@
-import DashboardLayout from "../../components/Dashboard/Layout";
+import DashboardLayout from "../../components/Dashboard/DashboardLayout";
 import { getSession } from "next-auth/react";
 import { motion, AnimatePresence } from "framer-motion";
-import { registerValidate } from "../../utils/validateForm";
 import Image from "next/image";
 import { AiOutlineEdit } from "react-icons/ai";
 import { useState } from "react";

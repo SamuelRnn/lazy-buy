@@ -1,7 +1,7 @@
+import AnimatedLogo from "../components/Elements/AnimatedLogo";
+import Layout from "../components/Layout";
+import WaitingAuthModal from "../components/Elements_AuthLoader/AuthLoaderModal";
 import Link from "next/link";
-import AnimatedLogo from "../components/AnimatedLogo";
-import Layout from "../components/layout";
-//-----------------------------------------
 import { FcGoogle } from "react-icons/fc";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 import { signIn, getSession } from "next-auth/react";
@@ -10,8 +10,6 @@ import { useRouter } from "next/router";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "react-hot-toast";
 import { useEffect, useState } from "react";
-import WaitingAuth from "../components/Auths/WaitingAuth";
-import { resolve } from "styled-jsx/css";
 //-----------------------------------------
 
 const EMAIL_REGEX = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
@@ -44,25 +42,11 @@ export default function Loading() {
     if (!valores.password) errors.password = "Please enter a password";
     return errors;
   };
-
-  // const handleLogin = async (event) => {
-  //   event.preventDefault();
-  //   const email = event.currentTarget[0].value;
-  //   const password = event.currentTarget[1].value;
-  //   console.log(email, password);
-  //   const status = await signIn("credentials", {
-  //     redirect: false,
-  //     email,
-  //     password,
-  //     callbackUrl: "/dashboard",
-  //   });
-  //   if (status.ok) router.push(status.url);
-  // };
   return (
     <Layout noLayout={true} title="Lazy Buy | LogIn">
       <div className="bg-fondo-50 grid grid-cols-1 lg:grid-cols-2 min-h-screen overflow-hidden relative">
         {/* waiting auth */}
-        <WaitingAuth loadingToggle={loginIsProccesing} />
+        <WaitingAuthModal loadingToggle={loginIsProccesing} />
         <div className="bg-white overflow-hidden sm:mx-16 min-h-screen">
           <motion.div
             initial={{ opacity: 0, y: -500 }}

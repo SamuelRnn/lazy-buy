@@ -1,13 +1,11 @@
-import AnimatedLogo from "./AnimatedLogo";
+import AnimatedLogo from "../Elements/AnimatedLogo";
 import Link from "next/link";
-import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Listbox } from "@headlessui/react";
 import { useFormik } from "formik";
-import { registerValidateCompany } from "../utils/validateFormCompany";
+import { registerValidateCompany } from "../../utils/validateFormCompany";
 import { useRouter } from "next/router";
 
-const SignupCompany = ({ typeAccount, setTypeAccount }) => {
+const SignUpCompany = ({ typeAccount, setTypeAccount }) => {
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -28,7 +26,7 @@ const SignupCompany = ({ typeAccount, setTypeAccount }) => {
     values.profilePicture =
       "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673032247/lazy-buy/pailrl1p3kwddj5v2qtn.jpg";
     values.plan = "Basic";
-    
+
     const options = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -38,7 +36,7 @@ const SignupCompany = ({ typeAccount, setTypeAccount }) => {
     await fetch("http://localhost:3000/api/create/company", options)
       .then((res) => res.json())
       .then((data) => {
-        console.log("🚀 ~ file: signCompany.jsx:42 ~ .then ~ data", data)
+        console.log("🚀 ~ file: signCompany.jsx:42 ~ .then ~ data", data);
         if (data) router.push("http://localhost:3000/login");
       })
       .catch((error) => console.log(error));
@@ -147,8 +145,7 @@ const SignupCompany = ({ typeAccount, setTypeAccount }) => {
                         className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-zinc-500 rounded-lg focus:outline-none col-span-3"
                         {...formik.getFieldProps("name")}
                       />
-                      {formik.errors.name &&
-                      formik.touched.name ? (
+                      {formik.errors.name && formik.touched.name ? (
                         <div className="text-red-600 mt-2 pl-2">
                           {formik.errors.name}
                         </div>
@@ -323,4 +320,4 @@ const SignupCompany = ({ typeAccount, setTypeAccount }) => {
   );
 };
 
-export default SignupCompany;
+export default SignUpCompany;

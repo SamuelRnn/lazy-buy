@@ -6,10 +6,10 @@ const Testimonials = () => {
       <div className="text-center md:max-w-xl lg:max-w-3xl mx-auto">
         <h3 className="text-3xl font-bold mb-6 text-gray-800">Testimonials</h3>
         <p className="mb-6 pb-2 md:mb-12 md:pb-0">
-          It's important to keep in mind that genuine and authentic testimonials
-          are the most effective. Consider asking your satisfied customers to
-          leave a review or testimonial, and be sure to include their names and
-          photos to add credibility.
+          It&apos;s important to keep in mind that genuine and authentic
+          testimonials are the most effective. Consider asking your satisfied
+          customers to leave a review or testimonial, and be sure to include
+          their names and photos to add credibility.
         </p>
       </div>
 
@@ -21,6 +21,7 @@ const Testimonials = () => {
               height={500}
               src="https://mdbootstrap.com/img/Photos/Avatars/img%20(1).jpg"
               className="rounded-full shadow-lg w-32"
+              alt="avatar"
             />
           </div>
           <h5 className="text-xl font-semibold mb-4">Maria Smantha</h5>
@@ -139,17 +140,16 @@ const Testimonials = () => {
         </div>
         <div className="mb-12 md:mb-0">
           <div className="flex justify-center mb-6">
-            <Image 
-                  width={500}
-                  height={500}
+            <Image
+              width={500}
+              height={500}
               src="https://mdbootstrap.com/img/Photos/Avatars/img%20(2).jpg"
               className="rounded-full shadow-lg w-32"
+              alt="avatar"
             />
           </div>
           <h5 className="text-xl font-semibold mb-4">Lisa Cudrow</h5>
-          <h6 className="font-semibold text-blue-600 mb-4">
-            Make-up seller
-          </h6>
+          <h6 className="font-semibold text-blue-600 mb-4">Make-up seller</h6>
           <p className="mb-4">
             <svg
               aria-hidden="true"
@@ -264,11 +264,12 @@ const Testimonials = () => {
         </div>
         <div className="mb-0">
           <div className="flex justify-center mb-6">
-            <Image 
-                  width={500}
-                  height={500}  
+            <Image
+              width={500}
+              height={500}
               src="https://mdbootstrap.com/img/Photos/Avatars/img%20(9).jpg"
               className="rounded-full shadow-lg w-32"
+              alt="avatar"
             />
           </div>
           <h5 className="text-xl font-semibold mb-4">John Smith</h5>
@@ -393,7 +394,5 @@ const Testimonials = () => {
     </section>
   );
 };
-
-
 
 export default Testimonials;

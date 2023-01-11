@@ -1,4 +1,4 @@
-import DashboardLayout from "../../components/Dashboard/Layout";
+import DashboardLayout from "../../components/Dashboard/DashboardLayout";
 import { getSession } from "next-auth/react";
 const Plan = ({ company, plans }) => {
   console.log("🚀 ~ file: plan.jsx:4 ~ Plan ~ company", company);
