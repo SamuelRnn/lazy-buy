@@ -1,18 +1,19 @@
 import { company } from "../../../../prisma";
-
+import simulateDelay from "../../../../utils/simulateDelay";
 export default async function getCompanyById(req, res) {
   if (req.method !== "GET")
     return res.status(400).json({ message: "Not found" });
 
-  const { id } = req.query;
+  const { email } = req.query;
   try {
     const companyFound = await company.findUnique({
-      where: { id },
+      where: { email },
       include: {
         products: true,
         transactions: true,
       },
     });
+    await simulateDelay(3);
     if (!companyFound) {
       return res.status(404).json({ message: "Company not found, id invalid" });
     }
