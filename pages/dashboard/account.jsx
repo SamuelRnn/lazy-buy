@@ -1,8 +1,7 @@
-import DashboardLayout from "../../components/DashBoard/Layout";
+import DashboardLayout from "../../components/Dashboard/DashboardLayout";
 import { getSession } from "next-auth/react";
 import { motion, AnimatePresence } from "framer-motion";
-import { registerValidate } from "../../utils/validateForm";
-import Link from "next/link";
+import Image from "next/image";
 import { AiOutlineEdit } from "react-icons/ai";
 import { useState } from "react";
 
@@ -19,10 +18,6 @@ const Account = ({ company }) => {
           >
             <section className="">
               <div className="flex justify-center">
-                {/* <div className="hidden lg:flex lg:w-2/5 justify-center items-center">
-                  <AnimatedLogo />
-                </div> */}
-
                 <div
                   className="flex items-center w-full max-w-3xl  mx-auto lg:px-12 lg:w-3/5"
                   id="signup_div"
@@ -141,7 +136,13 @@ const Account = ({ company }) => {
                             disabled={edit ? false : true}
                             /* {...formik.getFieldProps("email")} */
                           />
-                          <img className="absolute right-0 top-2 w-14 p-1 rounded-full" src={company.profilePicture.url} />
+                          <Image
+                            className="absolute right-2 top-2 rounded-full"
+                            src={company.profilePicture.url}
+                            width={40}
+                            height={40}
+                            alt="pfp"
+                          />
                         </div>
                         {/* {formik.errors.email && formik.touched.email ? (
                           <div className="text-red-600 mt-2 pl-2">

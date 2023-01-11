@@ -1,6 +1,4 @@
 /* eslint-disable react/jsx-no-target-blank */
-import React from "react";
-import { ImFacebook } from "react-icons/im";
 import { BsGithub } from "react-icons/bs";
 import { BsLinkedin } from "react-icons/bs";
 import Image from "next/image";
@@ -43,7 +41,7 @@ const integrantes = [
     linkedIn: "https://www.linkedin.com/in/fabi%C3%A1n-sojo-2a92a7224/",
   },
 ];
-const Devs = ({ dev = integrantes }) => {
+const Devs = () => {
   return (
     <>
       {integrantes.map((dev) => (

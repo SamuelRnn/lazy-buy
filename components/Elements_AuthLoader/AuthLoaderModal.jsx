@@ -1,7 +1,7 @@
+import Spinner from "../Spinners/Spinner";
 import { AnimatePresence, motion } from "framer-motion";
-import Spinner from "../Spinner";
 
-const WaitingAuth = ({ loadingToggle }) => {
+const AuthLoaderModal = ({ loadingToggle }) => {
   return (
     <AnimatePresence>
       {loadingToggle && (
@@ -22,4 +22,4 @@ const WaitingAuth = ({ loadingToggle }) => {
   );
 };
 
-export default WaitingAuth;
+export default AuthLoaderModal;

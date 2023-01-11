@@ -1,7 +1,6 @@
-import React from "react";
+import Card from "./Card";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import Card from "./Card";
 import { motion } from "framer-motion";
 
 const CardCarousel = ({ products }) => {

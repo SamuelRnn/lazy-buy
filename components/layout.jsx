@@ -1,5 +1,5 @@
-import NavBar from "./NavBar";
-import Footer from "./Footer";
+import NavBar from "./Elements_Layout/Navbar/NavBar";
+import Footer from "./Elements_Layout/Footer";
 import Head from "next/head";
 import { Toaster } from "react-hot-toast";
 

@@ -1,4 +1,3 @@
-import React from "react";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 
 function getPageLabels(count, perPage) {
@@ -14,7 +13,7 @@ function getPageLabels(count, perPage) {
 }
 
 const Pagination = ({ count, filters, setFilters }) => {
-  if (count == 0) {
+  if (+count == 0) {
     return <div className="text-gray-500">No products found!</div>;
   }
   const ITEMS_PER_PAGE = 10;
