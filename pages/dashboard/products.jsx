@@ -1,8 +1,6 @@
 import DashboardLayout from "../../components/Dashboard/DashboardLayout";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useState } from "react";
-import Image from "next/image";
-import { useRouter } from "next/router";
 import {
   PencilSquareIcon,
   XMarkIcon,
@@ -15,6 +13,7 @@ import {
   useCreateProductMutation,
   useUpdateActiveMutation,
   useUpdateVisibleMutation,
+  useUpdateProductMutation,
 } from "../../redux/companyApi";
 import Spinner from "../../components/Spinners/Spinner";
 import { toast } from "react-hot-toast";
@@ -23,10 +22,11 @@ const Products = ({ company: { email } }) => {
   const [updateActive] = useUpdateActiveMutation();
   const [updateVisible] = useUpdateVisibleMutation();
   const [createProduct] = useCreateProductMutation();
+  const [updateProduct] = useUpdateProductMutation();
   const { isLoading, data: company } = useGetCompanyQuery(email);
-  console.log("🚀 ~ file: products.jsx:27 ~ Products ~ company", company?.id);
 
   const [isOpen, setIsOpen] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
   const [input, setInput] = useState({
     name: "",
     description: "",
@@ -37,9 +37,6 @@ const Products = ({ company: { email } }) => {
     isVisible: true,
   });
 
-  //TODO: add mutation RTQ query
-  const router = useRouter();
-
   function closeModal() {
     setIsOpen(false);
   }
@@ -48,8 +45,7 @@ const Products = ({ company: { email } }) => {
     setIsOpen(true);
   }
 
-  async function onSubmit(input) {
-    console.log(input);
+  async function onCreate(input) {
     if (
       !input.name ||
       !input.description ||
@@ -60,11 +56,51 @@ const Products = ({ company: { email } }) => {
     )
       return toast.error("Qué haces maquinola?");
 
+    // parse values
     input.stock = parseInt(input.stock);
     input.price = parseFloat(input.price);
     input.companyId = company.id;
-    await createProduct(input);
+
+    if (isEdit) {
+      await updateProduct(input);
+    } else {
+      await createProduct(input);
+    }
+
+    setInput({
+      name: "",
+      description: "",
+      category: "",
+      price: "",
+      mainImage: "",
+      stock: "",
+      isVisible: true,
+    });
+
+    console.log(input);
     closeModal();
+    setIsEdit(false);
+  }
+
+  async function onModify(productId) {
+    console.log("🚀 ~ file: products.jsx:78 ~ onModify ~ productId", productId);
+    const product = await fetch(
+      `http://localhost:3000/api/get/product/${productId}`
+    ).then((res) => res.json());
+    input.name = product.name;
+    input.description = product.description;
+    input.price = product.price;
+    input.mainImage = {
+      url: product.mainImage.url,
+      public_id: product.mainImage.public_id,
+    };
+    input.stock = product.stock;
+    input.category = "";
+    input.id = productId;
+    console.log("🚀 ~ file: products.jsx:87 ~ onModify ~ input", input);
+
+    openModal();
+    setIsEdit(true);
   }
 
   return (
@@ -163,11 +199,12 @@ const Products = ({ company: { email } }) => {
                           </label>
                           <select
                             name="category"
+                            defaultValue={"Select Categorie"}
                             onChange={(e) =>
                               setInput({ ...input, category: e.target.value })
                             }
                           >
-                            <option disabled value="Select Categorie" selected>
+                            <option disabled value="Select Categorie">
                               Select Category
                             </option>
                             <option className="" value="Vatican City">
@@ -214,12 +251,22 @@ const Products = ({ company: { email } }) => {
                             name="mainImage"
                             placeholder="e.g. https://res.cloudinary.com/dl5hwebwa/image/upload/v1673232713/lazy-buy/206750_001_ALT140_36ea6580-982e-4394-b619-92392c527865_gtbtvx.jpg"
                             className="outline-none"
-                            value={input.mainImage}
+                            value={
+                              isEdit ? input.mainImage.url : input.mainImage
+                            }
                             onChange={(e) =>
-                              setInput({
-                                ...input,
-                                [e.target.name]: e.target.value,
-                              })
+                              isEdit
+                                ? setInput({
+                                    ...input,
+                                    [e.target.name]: {
+                                      ...e.target.name,
+                                      url: e.target.value,
+                                    },
+                                  })
+                                : setInput({
+                                    ...input,
+                                    [e.target.name]: e.target.value,
+                                  })
                             }
                           />
                         </div>
@@ -247,10 +294,10 @@ const Products = ({ company: { email } }) => {
                       </form>
                       <div className="mt-4">
                         <button
-                          onClick={() => onSubmit(input)}
+                          onClick={() => onCreate(input)}
                           className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                         >
-                          Create
+                          {isEdit ? "Modify" : "Create"}
                         </button>
                       </div>
                     </Dialog.Panel>
@@ -279,7 +326,10 @@ const Products = ({ company: { email } }) => {
                               updateActive(p.id);
                             }}
                           />
-                          <PencilSquareIcon className="h-5 w-5 hover:text-red-800" />
+                          <PencilSquareIcon
+                            className="h-5 w-5 hover:text-red-800"
+                            onClick={() => onModify(p.id)}
+                          />
                           {p.isVisible ? (
                             <EyeSlashIcon
                               className="h-5 w-5 hover:text-red-800"
