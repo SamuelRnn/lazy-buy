@@ -1,14 +1,18 @@
 import DashboardLayout from "../../components/Dashboard/DashboardLayout";
 import dashboardMiddleware from "../../utils/dashboardMiddleware";
+import { useGetCompanyQuery, useGetPlanQuery } from "../../redux/companyApi";
 
-const Plan = ({ company, plans }) => {
-  console.log("🚀 ~ file: plan.jsx:4 ~ Plan ~ company", company);
+const Plan = ({ company: { email } }) => {
+  const { isLoadingPlans, data: plans } = useGetPlanQuery();
+  const { isLoadingCompany, data: company } = useGetCompanyQuery(email);
+
   return (
     <DashboardLayout>
       <div className="mt-5 h-full">
         <h1 className="text-center font-bold text-5xl mb-24">Choose a Plan</h1>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 place-content-center gap-10 h-full w-full mb-2">
           {plans &&
+            company &&
             plans.map((p, i) => (
               <div
                 key={i}
