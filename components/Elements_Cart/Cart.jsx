@@ -1,5 +1,11 @@
 import { useSelector, useDispatch } from "react-redux";
-import { getCart, cutCartItem, clearCart } from "../../redux/cartSlice";
+import {
+  getCart,
+  cutCartItem,
+  clearCart,
+  increaseItemQuantity,
+  decreaseItemQuantity,
+} from "../../redux/cartSlice";
 import { BsTrashFill } from "react-icons/bs";
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/solid";
 import { TfiClose } from "react-icons/tfi";
@@ -23,11 +29,23 @@ const Cart = ({ setActive }) => {
             <div className="flex items-center w-5/6">
               {/* product quantity */}
               <div className="w-8 flex flex-col items-center justify-between mr-2">
-                <button className="text-lg w-5 h-5">
+                <button
+                  className="text-lg w-5 h-5"
+                  onClick={() => dispatch(increaseItemQuantity(product.id))}
+                >
                   <ChevronUpIcon />
                 </button>
-                1
-                <button className="text-lg w-5 h-5">
+                {product.quantity}
+                <button
+                  className="text-lg w-5 h-5"
+                  onClick={() => {
+                    if (product.quantity === 1)
+                      return toast.error(
+                        "Select at least 1 item, if you want to remove the item click on the trash can"
+                      );
+                    dispatch(decreaseItemQuantity(product.id));
+                  }}
+                >
                   <ChevronDownIcon />
                 </button>
               </div>
@@ -82,7 +100,7 @@ const Cart = ({ setActive }) => {
           <button
             onClick={() => {
               if (!cart.length) return;
-              toast.success("Cleared cart successfully!");
+              toast.success("Cart cleared successfully!");
               dispatch(clearCart());
             }}
             className="h-12 bg-zinc-400 text-white grid place-content-center rounded-md"
