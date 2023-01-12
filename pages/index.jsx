@@ -17,11 +17,11 @@ export default function Home({ extendedSessionData, query }) {
   }, []);
 
   useEffect(() => {
-    if (query)
+    if (query === true)
       toast.success("successful payment", {
         duration: 4000,
       });
-    if (!query)
+    if (!query && query !== "null")
       toast.error("failed payment", {
         duration: 4000,
       });
@@ -71,7 +71,8 @@ export async function getServerSideProps({ req, query }) {
   return {
     props: {
       extendedSessionData,
-      query: query.success ? true : query.cancel ? false : null,
+      query: query.success ? true : query.cancel ? false : "null",
+
     },
   };
 }
