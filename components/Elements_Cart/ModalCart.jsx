@@ -22,8 +22,8 @@ const ModalCart = ({ active, setActive }) => {
           <div>
             <motion.div
               onClick={() => {
-                document.body.style.overflow = "";
                 setActive(false);
+                document.body.style.overflow = "";
               }}
               className="fixed top-0 right-0 w-full h-screen flex justify-start p-6 items-start modal_bg z-50"
               initial={{ x: 0, opacity: 0 }}
