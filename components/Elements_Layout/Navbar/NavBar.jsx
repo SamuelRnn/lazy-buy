@@ -77,7 +77,10 @@ const NavBar = () => {
               >
                 <Image
                   className="border rounded-full border-fondo-300 bg-fondo-400"
-                  src={sessionData.image}
+                  src={
+                    sessionData.image ||
+                    "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673480864/lazy-buy/Dise%C3%B1o_sin_t%C3%ADtulo_r4admw.png"
+                  }
                   width={30}
                   height={30}
                   alt={"pfp"}
