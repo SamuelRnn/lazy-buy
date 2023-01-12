@@ -22,8 +22,8 @@ const Card = ({ product, style = "card" }) => {
     if (itemAlreadyExist) {
       return toast.error(`"${product.name}" is already in your cart!`);
     }
-    product.quantity = 1;
-    dispatch(setCartItem(product));
+
+    dispatch(setCartItem({ ...product, quantity: 1 }));
     toast.success(`"${product.name}" added sucessfully to your cart :D`, {
       duration: 4000,
     });

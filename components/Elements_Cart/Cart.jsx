@@ -65,6 +65,9 @@ const Cart = ({ setActive }) => {
                 <span className="text-sm text-slate-600">
                   ${product.price.toFixed(2)}
                 </span>
+                <span className="text-sm text-slate-400">
+                  ${(product.price * product.quantity).toFixed(2)}
+                </span>
               </div>
             </div>
             {/* delete button */}
