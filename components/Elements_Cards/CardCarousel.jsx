@@ -3,7 +3,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { motion } from "framer-motion";
 
-const CardCarousel = ({ products }) => {
+const CardCarousel = ({ productArray }) => {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1313 },
@@ -38,24 +38,14 @@ const CardCarousel = ({ products }) => {
         responsive={responsive}
         draggable={false}
         infinite={true}
-        autoPlay={true}
+        // autoPlay={true}
         shouldResetAutoplay={false}
-        autoPlaySpeed={3500}
+        // autoPlaySpeed={4500}
+        pauseOnHover={true}
       >
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+        {productArray.map((product) => (
+          <Card product={product} key={product.id} />
+        ))}
       </Carousel>
     </motion.div>
   );

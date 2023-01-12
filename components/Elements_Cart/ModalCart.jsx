@@ -1,4 +1,3 @@
-import { TfiClose } from "react-icons/tfi";
 import { motion, AnimatePresence } from "framer-motion";
 import Cart from "./Cart";
 import { useEffect } from "react";
@@ -9,9 +8,11 @@ const ModalCart = ({ active, setActive }) => {
       if (keyCode !== 27) return;
       setActive(false);
     };
+    // document.body.style.overflow = "hidden";
     document.addEventListener("keydown", scapelistener);
     return () => {
       document.removeEventListener("keydown", scapelistener);
+      // document.body.style.overflow = "normal";
     };
   });
   return (
@@ -20,32 +21,24 @@ const ModalCart = ({ active, setActive }) => {
         {active && (
           <div>
             <motion.div
-              onClick={() => setActive(false)}
-              className="fixed top-0 right-0 w-full h-screen flex justify-start p-6 items-start modal_bg"
+              onClick={() => {
+                document.body.style.overflow = "";
+                setActive(false);
+              }}
+              className="fixed top-0 right-0 w-full h-screen flex justify-start p-6 items-start modal_bg z-50"
               initial={{ x: 0, opacity: 0 }}
               animate={{ opacity: 100 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.1 }}
-            >
-              <motion.button
-                initial={{ x: -200 }}
-                animate={{ x: 0 }}
-                exit={{ x: -100 }}
-                transition={{ duration: 0.5 }}
-                className="h-12 w-12 bg-fondo-300 rounded-lg grid place-content-center"
-                onClick={() => setActive(false)}
-              >
-                <TfiClose size={"1.5em"} className="text-white" />
-              </motion.button>
-            </motion.div>
+            ></motion.div>
             <motion.div
               initial={{ x: 500 }}
               animate={{ x: 100 }}
               exit={{ x: 500 }}
               transition={{ delay: 0.1, lease: "anticipate" }}
-              className="cart_modal"
+              className="cart_modal bg-zinc-100"
             >
-              <Cart />
+              <Cart setActive={setActive} />
             </motion.div>
           </div>
         )}

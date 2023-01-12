@@ -4,8 +4,8 @@ export const cartSlice = createSlice({
   name: "cart",
   initialState: [],
   reducers: {
-    setCartItem: (state, action) => {
-      state.push(action.payload);
+    setCartItem: (state, { payload: product }) => {
+      state.push(product);
     },
     cutCartItem: (state, { payload: itemId }) => {
       const itemIndex = state.findIndex((i) => i.id === itemId);

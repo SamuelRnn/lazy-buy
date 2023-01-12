@@ -33,9 +33,9 @@
   bottom: 0;
   right: 0;
   height: 100vh;
-  width: 400px;
-  padding-right: 110px;
-  @apply bg-fondo-200;
+  width: calc(100% + 100px);
+  @apply pr-[100px];
+  max-width: 500px;
   z-index: 1001;
 }
 .modal_bg {
