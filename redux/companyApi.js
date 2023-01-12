@@ -15,7 +15,7 @@ export const companyApi = createApi({
       query: (productId) => `/api/get/product/${productId}`,
     }),
     getPlan: builder.query({
-      query: () => `/api/get/plan`
+      query: () => `/api/get/plan`,
     }),
     createProduct: builder.mutation({
       query: (newProduct) => ({
@@ -42,9 +42,12 @@ export const companyApi = createApi({
     }),
     updateProduct: builder.mutation({
       query: (updateProduct) => ({
-        url: `/api/modify/?productId=${updateProduct}`,
+        url: `/api/modify/product`,
         method: "PUT",
+        body: updateProduct,
+        headers: { "Content-Type": "application/json" },
       }),
+      invalidatesTags: ["Company"],
     }),
   }),
   tagTypes: ["Company"],
@@ -58,4 +61,5 @@ export const {
   useCreateProductMutation,
   useUpdateActiveMutation,
   useUpdateVisibleMutation,
+  useUpdateProductMutation,
 } = companyApi;
