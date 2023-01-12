@@ -630,24 +630,30 @@ let productos = [
 let plans = [
   {
     planType: "Basic",
-    productsLimit: 10,
+    description:
+      "Start selling on our marketplace with no financial commitment by signing up for our Free plan, offering basic features for new and casual sellers.",
+    productsLimit: 20,
     activeProductsLimit: 7,
-    productPriority: 1,
-    price: 1,
+    productPriority: 3,
+    price: 0,
   },
   {
     planType: "Standard",
-    productsLimit: 15,
-    activeProductsLimit: 10,
+    description:
+      "Elevate your sales to new heights with our Standard plan, everything you need to succeed as a top seller on our marketplace.",
+    productsLimit: 70,
+    activeProductsLimit: 30,
     productPriority: 2,
-    price: 2,
+    price: 49,
   },
   {
     planType: "Premium",
+    description:
+      "Unlock the full potential of our marketplace and take your sales to the next level with our Premium plan, featuring exclusive features.",
     productsLimit: 9999,
     activeProductsLimit: 9999,
-    productPriority: 3,
-    price: 3,
+    productPriority: 1,
+    price: 99,
   },
 ];
 export default async function handler(req, res) {
