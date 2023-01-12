@@ -68,7 +68,7 @@ const NavBar = () => {
               </a>
             )}
             {/* Cart */}
-            {sessionData === "no-session" && sessionData.type !== "company" && (
+            {(sessionData === "no-session" || sessionData.type === "user") && (
               <button
                 onClick={() => {
                   document.body.style.overflow = "hidden";
@@ -89,13 +89,13 @@ const NavBar = () => {
                 className="nav_links flex items-center gap-1"
               >
                 <Image
-                  className="border rounded-full border-fondo-300 bg-fondo-400"
+                  className="rounded-full bg-fondo-400"
                   src={
                     sessionData.image ||
                     "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673480864/lazy-buy/Dise%C3%B1o_sin_t%C3%ADtulo_r4admw.png"
                   }
-                  width={30}
-                  height={30}
+                  width={32}
+                  height={32}
                   alt={"pfp"}
                 />
                 <BsCaretDownFill size={15} />

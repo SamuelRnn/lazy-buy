@@ -4,6 +4,7 @@ import { BsTrashFill } from "react-icons/bs";
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/solid";
 import { TfiClose } from "react-icons/tfi";
 import Image from "next/image";
+import { toast } from "react-hot-toast";
 const Cart = ({ setActive }) => {
   const cart = useSelector(getCart);
   const dispatch = useDispatch();
@@ -70,13 +71,20 @@ const Cart = ({ setActive }) => {
         </div>
         <div className="px-2 flex gap-x-2">
           <button
-            onClick={() => setActive(false)}
+            onClick={() => {
+              setActive(false);
+              document.body.style.overflow = "";
+            }}
             className="h-12 bg-zinc-400 text-white grid place-content-center rounded-md"
           >
             <TfiClose className="w-12  text-xl" />
           </button>
           <button
-            onClick={() => dispatch(clearCart())}
+            onClick={() => {
+              if (!cart.length) return;
+              toast.success("Cleared cart successfully!");
+              dispatch(clearCart());
+            }}
             className="h-12 bg-zinc-400 text-white grid place-content-center rounded-md"
           >
             Clear Cart
