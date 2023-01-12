@@ -6,8 +6,9 @@ import { user, company } from "../prisma";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { setSession } from "../redux/accountSlice";
+import { toast } from "react-hot-toast";
 
-export default function Home({ extendedSessionData }) {
+export default function Home({ extendedSessionData, query }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -15,8 +16,20 @@ export default function Home({ extendedSessionData }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    if (query)
+      toast.success("successful payment", {
+        duration: 4000,
+      });
+    if (!query)
+      toast.error("failed payment", {
+        duration: 4000,
+      });
+  }, [query]);
+
   return (
     <Layout>
+      {console.log(query)}
       <div className="py-12">
         <h1 className="main home_titles">New Products</h1>
         <CardCarousel />
@@ -35,7 +48,7 @@ export default function Home({ extendedSessionData }) {
   );
 }
 
-export async function getServerSideProps({ req }) {
+export async function getServerSideProps({ req, query }) {
   const session = await getSession({ req });
   let extendedSessionData = "no-session";
   if (session) {
@@ -56,6 +69,9 @@ export async function getServerSideProps({ req }) {
   }
 
   return {
-    props: { extendedSessionData },
+    props: {
+      extendedSessionData,
+      query: query.success ? true : query.cancel ? false : null,
+    },
   };
 }

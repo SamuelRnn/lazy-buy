@@ -22,13 +22,14 @@ export default async function stripePay(req, res) {
     mode: 'payment',
     success_url: 'http://localhost:3000?success=true',
     cancel_url: 'http://localhost:3000?cancel=true',
-    payment_intent_data: {
-        application_fee_amount: 123,
-        transfer_data: {
-          destination: 'acct_1MPTsGEvNgChGIg5',
-        },
-      },
+    
   }; 
+ /*  payment_intent_data: {
+    application_fee_amount: 123,
+    transfer_data: {
+      destination: 'acct_1MPTsGEvNgChGIg5',
+    },
+  }, */
 
   try {
     const session = await stripe.checkout.sessions.create(params);
