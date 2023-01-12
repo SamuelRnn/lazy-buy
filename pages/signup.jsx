@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useState } from "react";
 import Image from "next/image";
 import AnimatedLogo from "../components/Elements/AnimatedLogo";
-import Layout from "../components/layout";
+import Layout from "../components/Layout";
 import SignUpCompany from "../components/Forms_SignUp/SignUpCompany";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";

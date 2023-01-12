@@ -51,7 +51,8 @@ model Company {
   owner          String
   city           String
   country        String
-  plan           PlanType
+  plan           PlanType       @default(Basic)
+  priority       Int            @default(3)
   products       Product[]
   transactions   Transaction[]
   isActive       Boolean        @default(true)
@@ -63,10 +64,11 @@ model Company {
 model Plan {
   id                  Int      @id @default(autoincrement())
   planType            PlanType @unique
+  description         String
   productsLimit       Int
   activeProductsLimit Int
   productPriority     Int
-  price               Float
+  price               Int
 
   @@index([productPriority])
 }
