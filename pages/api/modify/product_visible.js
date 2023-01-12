@@ -1,11 +1,10 @@
 import { product } from "../../../prisma";
 
 export default async function handler(req, res) {
-  if (req.method !== "PUT")
+  if (req.method !== "PATCH")
     return res.status(400).send({ message: "Not found" });
 
   const { productId } = req.query;
-  console.log("🚀 ~ file: product_visible.js:8 ~ handler ~ productId", productId)
 
   const setVisible = await product.findFirst({
     where: {

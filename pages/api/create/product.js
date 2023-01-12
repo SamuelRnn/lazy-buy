@@ -16,14 +16,16 @@ export default async function createProduct(req, res) {
     return res.status(400).send({ message: "Not found" });
   }
   const productData = req.body;
-  console.log(productData)
+  console.log(
+    "🚀 ~ file: product.js:19 ~ createProduct ~ productData",
+    productData
+  );
   if (
     !productData.name ||
     !productData.description ||
     !productData.price ||
     !productData.mainImage ||
     !productData.stock ||
-    !productData.isActive ||
     !productData.companyId ||
     !productData.category
   ) {
