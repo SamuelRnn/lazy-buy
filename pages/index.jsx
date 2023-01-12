@@ -72,6 +72,7 @@ export async function getServerSideProps({ req, query }) {
     props: {
       extendedSessionData,
       query: query.success ? true : query.cancel ? false : "null",
+
     },
   };
 }
