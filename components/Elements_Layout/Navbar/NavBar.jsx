@@ -4,17 +4,19 @@ import SearchBar from "./SearchBar";
 import NavSubMenu from "./NavSubMenu";
 import logo from "../../../public/logocartremove.png";
 import Image from "next/image";
-import { MdShoppingCart } from "react-icons/md";
+import { GiShoppingBag } from "react-icons/gi";
 import { BsCaretDownFill } from "react-icons/bs";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
+import { getCart } from "../../../redux/cartSlice";
 
 const NavBar = () => {
   const sessionData = useSelector((state) => state.account.session);
   const [activeCatModal, setActiveCatModal] = useState(false);
   const [activeRegModal, setActiveRegModal] = useState(false);
   const [activeCartModal, setActiveCartModal] = useState(false);
+  const cart_count = useSelector(getCart).length;
   return (
     <header className="w-full bg-fondo-200">
       <div className="main py-2 flex flex-wrap gap-x-4 gap-y-2 items-center lg:justify-between justify-center">
@@ -46,6 +48,8 @@ const NavBar = () => {
             </button>
 
             {/* conditional UI  */}
+
+            {/* Signup & Signin */}
             {sessionData === "no-session" && (
               <button
                 className={`nav_links ${activeRegModal ? "underline" : ""}`}
@@ -57,19 +61,28 @@ const NavBar = () => {
                 Access
               </button>
             )}
+            {/* Dashboard */}
             {sessionData !== "no-session" && sessionData.type === "company" && (
               <a href="/dashboard" className="nav_links">
                 Dashboard
               </a>
             )}
+            {/* Cart */}
             {sessionData === "no-session" && sessionData.type !== "company" && (
               <button
-                onClick={() => setActiveCartModal(true)}
-                className="nav_links"
+                onClick={() => {
+                  document.body.style.overflow = "hidden";
+                  setActiveCartModal(true);
+                }}
+                className="nav_links relative"
               >
-                <MdShoppingCart className="text-[28px] text-fondo-400" />
+                <GiShoppingBag className="text-[28px] text-fondo-400" />
+                <span className="absolute bottom-1 right-1 w-5 h-5 rounded-full bg-zinc-600 text-gray-200 text-xs grid place-content-center">
+                  {cart_count}
+                </span>
               </button>
             )}
+            {/* Profile Toggle */}
             {sessionData !== "no-session" && (
               <button
                 onClick={() => toast(`Hola ${sessionData.name}`)}
