@@ -8,12 +8,13 @@ import { DiGoogleAnalytics } from "react-icons/di";
 import { BiLogIn } from "react-icons/bi";
 import { GiUpgrade } from "react-icons/gi";
 import { signOut } from "next-auth/react";
-import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { clearSession } from "../../redux/accountSlice";
+
 const SideBar = forwardRef(({ setActive }, ref) => {
   const dispatch = useDispatch();
   const router = useRouter();
+
   const handleSignOut = async () => {
     dispatch(clearSession());
     await signOut({
