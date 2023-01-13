@@ -96,6 +96,7 @@ const Products = ({ company: { email } }) => {
     };
     input.stock = product.stock;
     input.category = "";
+    input.isVisible = product.isVisible;
     input.id = productId;
     console.log("🚀 ~ file: products.jsx:87 ~ onModify ~ input", input);
 
