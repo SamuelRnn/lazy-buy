@@ -32,7 +32,7 @@ const Footer = () => {
           </nav>
         </div>
         <div className="md:col-span-4 xl:col-span-3">
-          <h2 className="font-bold mb-6 uppercase">Redes sociales</h2>
+          <h2 className="font-bold mb-6 uppercase">Social Media</h2>
           <nav>
             <a
               href="#"
@@ -46,7 +46,7 @@ const Footer = () => {
                 className="w-[20px] h-[20px]"
                 alt="JT Devs"
               />
-              Lazy Buy @oficial
+              Lazy Buy @official
             </a>
             <a
               href="#"
@@ -79,7 +79,7 @@ const Footer = () => {
           </nav>
         </div>
         <div className="md:col-span-4 xl:col-span-3">
-          <h2 className="font-bold mb-6 uppercase">Contacto</h2>
+          <h2 className="font-bold mb-6 uppercase">Contact</h2>
           <div className="flex flex-col gap-4">
             <p className="flex items-center gap-2">
               <svg
@@ -149,7 +149,7 @@ const Footer = () => {
           <span className="text-gray-900 font-bold text-center">
             {" Lazy buy"}
           </span>{" "}
-          | Todos los derechos reservados.
+          | All rights reserved.
         </p>
       </div>
     </div>
