@@ -7,7 +7,8 @@ const integrantes = [
   {
     img: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673462486/lazy-buy/Modarelli_Franco_s4dugd.jpg",
     name: "Franco",
-    linkedIn: "",
+    linkedIn: "https://www.linkedin.com/in/francomodarelli/",
+    github: "https://github.com/ModarelliFranco",
   },
   {
     img: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673145980/lazy-buy/103448999_f82g57.jpg",
