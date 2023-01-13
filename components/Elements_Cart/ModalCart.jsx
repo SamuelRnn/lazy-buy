@@ -23,7 +23,7 @@ const ModalCart = ({ active, setActive }) => {
             <motion.div
               onClick={() => {
                 setActive(false);
-                document.body.style.overflow = "";
+                setTimeout(() => (document.body.style.overflow = ""), 400);
               }}
               className="fixed top-0 right-0 w-full h-screen flex justify-start p-6 items-start modal_bg z-50"
               initial={{ x: 0, opacity: 0 }}

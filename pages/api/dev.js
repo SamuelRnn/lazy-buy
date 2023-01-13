@@ -674,18 +674,18 @@ export default async function handler(req, res) {
     },
   });
   //------------------------------------------
-  productos.map((productData) => {
-    productData.slug = productData.name;
-    productData.companyId = newCompany.id;
+  await (async () => {
+    for (const productData of productos) {
+      productData.slug = productData.name;
+      productData.companyId = newCompany.id;
 
-    (async () => {
       let newProduct = await product.create({ data: productData });
       await product.update({
         where: { id: newProduct.id },
         data: { slug: getSlug(newProduct) },
       });
-    })();
-  });
+    }
+  })();
   //------------------------------------------
   plans.map((planData) => {
     (async () => {

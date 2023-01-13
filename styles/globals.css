@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 /* main width for the layout */
+.user_menu_pos {
+  position: absolute;
+  z-index: 90;
+  right: 2.5%;
+}
 .main {
   margin: 0 auto;
   width: 95%;
@@ -110,7 +115,7 @@
   animation: loader-rotate 1s linear infinite;
 }
 
-.pay{
+.pay {
   border: 1px solid rgba(162, 162, 162, 0.479);
   backdrop-filter: blur(7px);
 }

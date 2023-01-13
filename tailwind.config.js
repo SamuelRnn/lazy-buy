@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     extend: {
       height: {
-        modal: "calc(100vh - 200px)",
+        modal: "calc(100vh - 230px)",
       },
       colors: {
         fondo: {
