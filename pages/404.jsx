@@ -21,9 +21,9 @@ const ErrorPage = () => {
             <div className="absolute">
               <div className="">
                 <h1 className="my-2 text-fondo-400 font-bold text-2xl">
-                  Parece que encontraste algo que no debía ser encontrado...
+                  Looks like you found something that shouldn't be found...
                 </h1>
-                <p>Se te redigirá en un par de segundos</p>
+                <p>In seconds you will be redirected</p>
               </div>
             </div>
             <div>
