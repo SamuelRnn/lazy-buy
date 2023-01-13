@@ -6,25 +6,24 @@ export default async function stripePay(req, res) {
   }
 
   // salen los datos de req.body
-    let params = {
+  let params = {
     line_items: [
       {
         price_data: {
-          currency: 'usd',
+          currency: "usd",
           product_data: {
-            name: 'Bicleta Renault',
+            name: "Bicleta Renault",
           },
           unit_amount: 2000,
         },
         quantity: 5,
       },
     ],
-    mode: 'payment',
-    success_url: 'http://localhost:3000?success=true',
-    cancel_url: 'http://localhost:3000?cancel=true',
-    
-  }; 
- /*  payment_intent_data: {
+    mode: "payment",
+    success_url: "http://localhost:3000?success=true",
+    cancel_url: "http://localhost:3000?cancel=true",
+  };
+  /*  payment_intent_data: {
     application_fee_amount: 123,
     transfer_data: {
       destination: 'acct_1MPTsGEvNgChGIg5',
@@ -33,7 +32,7 @@ export default async function stripePay(req, res) {
 
   try {
     const session = await stripe.checkout.sessions.create(params);
-   /*  await stripe.charges.create({
+    /*  await stripe.charges.create({
         amount: 2000,
         currency: 'usd',
         source: 'tok_visa',
