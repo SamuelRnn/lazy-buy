@@ -154,7 +154,7 @@ const Detail = ({ product }) => {
                   </div>
 
                   <button className="block px-5 py-3 ml-3 text-xs font-medium text-white bg-fondo-300 rounded hover:bg-fondo-500 active:scale-75 transition-all ease-out">
-                    Agregar al carrito
+                    Add to cart
                   </button>
                 </div>
               </form>
