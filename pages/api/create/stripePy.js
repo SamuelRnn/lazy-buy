@@ -1,30 +1,29 @@
-import stripe from "../../../utils/stripeConfig";
+import { stripe } from "../../../utils/stripeConfig";
 
 export default async function stripePay(req, res) {
   if (req.method !== "POST") {
     return res.status(400).send({ message: "Not found" });
   }
-
+  console.log(req.body)
+  let items = req.body.map((e) => ({
+    price_data: {
+      currency: "usd",
+      product_data: {
+        name: e.name,
+      },
+      unit_amount: e.unit_amount*100,
+    },
+    quantity: e.quantity,
+  }));
   // salen los datos de req.body
   let params = {
-    line_items: [
-      {
-        price_data: {
-          currency: "usd",
-          product_data: {
-            name: "Bicleta Renault",
-          },
-          unit_amount: 2000,
-        },
-        quantity: 5,
-      },
-    ],
+    line_items: items,
     mode: "payment",
-    success_url: "http://localhost:3000?success=true",
-    cancel_url: "http://localhost:3000?cancel=true",
+    success_url: "http://localhost:3000/paymentIs?success=true",
+    cancel_url: "http://localhost:3000/paymentIs?cancel=true",
   };
   /*  payment_intent_data: {
-    application_fee_amount: 123,
+    application_fee_amount: 123,  
     transfer_data: {
       destination: 'acct_1MPTsGEvNgChGIg5',
     },
