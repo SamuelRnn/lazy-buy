@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { toast } from "react-hot-toast";
 import { loadStripe } from "@stripe/stripe-js";
 
 
 
+//front
+ const stripePromise = loadStripe("pk_test_51MPBiWFwUUE4BECZWIW79wVuDUNOvRk11V12SqjiwaFiH8WiWYqRARsyra6QPN5vdJi3bkpvf9ZqEjKfZc1NwS4F005hYMzGWf");
 
 const paymentIs = () => {
   const [btn, setBtn] = useState(false);
@@ -16,15 +19,40 @@ const paymentIs = () => {
     "md:block hidden fixed h-full  ",
   ];
   // trasladar a /utils
-  const stripePromise = loadStripe("pk_test_51MPBiWFwUUE4BECZWIW79wVuDUNOvRk11V12SqjiwaFiH8WiWYqRARsyra6QPN5vdJi3bkpvf9ZqEjKfZc1NwS4F005hYMzGWf");
 
-  const handlePayment = async (event) => {
+  const handlePayment = async () => {
     const stripe = await stripePromise;
-    const { error } = await stripe.redirectToCheckout({
-      sessionId: "cs_test_a1K6Cj92HoEKibafgp6xO2ATiHxQhpjFWUIOHQXGGg0dSazhbxi5DGqp9S",
-    });
-  
-    if (error) {
+    let array = [
+      {
+        name: "bicicleta renault",
+        unit_amount: 200,
+        quantity: 2,
+      },
+      {
+        name: "posillo?",
+        unit_amount: 20,
+        quantity: 5,
+      },
+    ];
+    try {
+      const response = await fetch(
+        "http://localhost:3000/api/create/stripePy",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(array),
+        }
+      );
+      const data = await response.json();
+      //toast.loading("Redirecting...");
+      const hh = await stripe.redirectToCheckout({
+        sessionId: data.id,
+      });
+
+      
+    } catch (error) {
       console.log(error);
     }
   };
@@ -52,7 +80,7 @@ const paymentIs = () => {
               animate={{ scale: 1, opacity: 1 }}
               type="button"
               onClick={handlePayment}
-              class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800"
+              className="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800"
             >
               Back to Site
             </motion.button>
@@ -67,8 +95,9 @@ const paymentIs = () => {
           alt="men"
         />
       </div>
-      {arr?.map((str) => (
+      {arr?.map((str,i) => (
         <motion.img
+        key={i}
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: [1, 0.5, 0, 0.5, 1] }}
           transition={{ delay: 0.2, type: "spring", stiffness: 1000 }}
