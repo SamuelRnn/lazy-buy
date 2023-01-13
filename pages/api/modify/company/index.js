@@ -10,26 +10,21 @@ export default async function handler(req, res) {
 
   delete req.body.id;
   try {
-    const cloudUpload = await cloud.uploader.upload(req.body.profilePicture, {
-      folder: "lazy-buy",
-    });
-    console.log("🚀 ~ file: index.js:16 ~ handler ~ cloudUpload", cloudUpload)
+    const cloudUpload = await cloud.uploader.upload(
+      companyData.profilePicture,
+      { folder: "lazy-buy" }
+    );
+    companyData.profilePicture = {
+      public_id: cloudUpload.public_id,
+      url: cloudUpload.secure_url,
+    };
+
     const updatecompany = await company.update({
       where: {
-        email,
+        email
       },
-      data: {
-        city: req.body.city,
-        owner: req.body.owner,
-        country: req.body.country,
-        profilePicture: cloudUpload.secure_url,
-        name: req.body.name,
-      },
+      data: { ...req.body },
     });
-    console.log(
-      "🚀 ~ file: index.js:31 ~ handler ~ updatecompany",
-      updatecompany
-    );
 
     return res
       .status(202)

@@ -49,6 +49,15 @@ export const companyApi = createApi({
       }),
       invalidatesTags: ["Company"],
     }),
+    updateAccount: builder.mutation({
+      query: (updateAccount) => ({
+        url: `/api/modify/product`,
+        method: "PUT",
+        body: updateAccount,
+        headers: { "Content-Type": "application/json" },
+      }),
+      invalidatesTags: ["Company"],
+    }),
   }),
   tagTypes: ["Company"],
 });

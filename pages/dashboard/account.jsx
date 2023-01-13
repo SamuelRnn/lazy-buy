@@ -6,15 +6,43 @@ import { useState } from "react";
 import dashboardMiddleware from "../../utils/dashboardMiddleware";
 import { useGetCompanyQuery } from "../../redux/companyApi";
 import Spinner from "../../components/Spinners/Spinner";
+import { registerValidateCompanyAccount } from "../../utils/validateCompanyAccount";
+import { useFormik } from "formik";
 
 const Account = ({ company: { email } }) => {
   const [edit, setEdit] = useState(false);
   const { isLoading, data: company } = useGetCompanyQuery(email);
+  /* TODO: CLOUDINARY */
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      profilePicture: "",
+      owner: "",
+      country: "",
+      city: "",
+    },
+    validate: registerValidateCompanyAccount,
+    onSubmit,
+  });
+
+  async function onSubmit(values) {
+    values.email = company.email;
+    console.log(values);
+    /* const options = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(values),
+    };
+
+    await fetch("http://localhost:3000/api/modify/company", options)
+      .then((res) => res.json())
+      .catch((error) => console.log(error)); */
+  }
+
   return (
     <DashboardLayout>
       <AnimatePresence>
         <div className="overflow-hidden -z-50">
-          account
           <motion.div
             initial={{ x: 200, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
@@ -34,24 +62,30 @@ const Account = ({ company: { email } }) => {
 
                       <form
                         className="grid grid-cols-2 gap-6 mt-6 md:grid-cols-2"
-                        onSubmit=""
+                        onSubmit={formik.handleSubmit}
                       >
-                        <div className="col-span-2 sm:col-span-1">
+                        <div className="col-span-2">
                           <label className="block mb-2 text-sm text-gray-800">
                             Company Name
                           </label>
                           <input
-                            name="companyname"
+                            name="name"
                             type="text"
                             placeholder={company.name}
-                            className={`block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-lg focus:outline-none ${
-                              edit ? "cursor-text" : "cursor-not-allowed"
-                            }`}
+                            className={`block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border 
+                            border-slate-800 rounded-lg focus:outline-none
+                            ${
+                              formik.errors.name && formik.touched.name
+                                ? "border-rose-800"
+                                : ""
+                            }
+                             ${edit ? "cursor-text" : "cursor-not-allowed"}`}
                             disabled={edit ? false : true}
+                            {...formik.getFieldProps("name")}
                           />
                         </div>
 
-                        <div className="col-span-2 sm:col-span-1">
+                        <div className="col-span-2">
                           <label className="block mb-2 text-sm text-gray-800">
                             Owner
                           </label>
@@ -59,12 +93,19 @@ const Account = ({ company: { email } }) => {
                             name="owner"
                             type="text"
                             placeholder={company.owner}
-                            className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-lg focus:outline-none"
+                            className={`block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-slate-800 rounded-lg focus:outline-none
+                            ${
+                              formik.errors.owner && formik.touched.owner
+                                ? "border-rose-800"
+                                : ""
+                            }
+                            ${edit ? "cursor-text" : "cursor-not-allowed"}`}
                             disabled={edit ? false : true}
+                            {...formik.getFieldProps("owner")}
                           />
                         </div>
 
-                        <div className="col-span-2 sm:col-span-1">
+                        <div className="col-span-2">
                           <label className="block mb-2 text-sm text-gray-800">
                             Country
                           </label>
@@ -72,13 +113,18 @@ const Account = ({ company: { email } }) => {
                             name="country"
                             type="text"
                             placeholder={company.country}
-                            className={`block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-lg focus:outline-none ${
-                              edit ? "cursor-text" : "cursor-not-allowed"
-                            }`}
+                            className={`block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-slate-800 rounded-lg focus:outline-none
+                            ${
+                              formik.errors.country && formik.touched.country
+                                ? "border-rose-800"
+                                : ""
+                            }
+                            ${edit ? "cursor-text" : "cursor-not-allowed"}`}
                             disabled={edit ? false : true}
+                            {...formik.getFieldProps("country")}
                           />
                         </div>
-                        <div className="col-span-2 sm:col-span-1">
+                        <div className="col-span-2">
                           <label className="block mb-2 text-sm text-gray-800">
                             City
                           </label>
@@ -86,10 +132,15 @@ const Account = ({ company: { email } }) => {
                             name="city"
                             type="text"
                             placeholder={company.city}
-                            className={`block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-lg focus:outline-none ${
-                              edit ? "cursor-text" : "cursor-not-allowed"
-                            }`}
+                            className={`block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-slate-800 rounded-lg focus:outline-none
+                            ${
+                              formik.errors.city && formik.touched.city
+                                ? "border-rose-800"
+                                : ""
+                            }
+                            ${edit ? "cursor-text" : "cursor-not-allowed"}`}
                             disabled={edit ? false : true}
+                            {...formik.getFieldProps("city")}
                           />
                         </div>
                         <div className="col-span-2">
@@ -100,22 +151,28 @@ const Account = ({ company: { email } }) => {
                             <input
                               name="profilePicture"
                               type="file"
-                              className={`block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-lg focus:outline-none ${
-                                edit ? "cursor-text" : "cursor-not-allowed"
-                              }`}
+                              className={`block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-slate-800 rounded-lg focus:outline-none 
+                              ${
+                                formik.errors.profilePicture &&
+                                formik.touched.profilePicture
+                                  ? "border-rose-800"
+                                  : ""
+                              }
+                              ${edit ? "cursor-text" : "cursor-not-allowed"}`}
                               disabled={edit ? false : true}
+                              {...formik.getFieldProps("profilePicture")}
                             />
-                            <Image
+                            {/* <Image
                               className="absolute right-2 top-2 rounded-full"
                               src={company.profilePicture.url}
                               width={40}
                               height={40}
                               alt="pfp"
-                            />
+                            /> */}
                           </div>
                         </div>
 
-                        <div className="col-span-2">
+                        {/* <div className="col-span-2">
                           <label className="block mb-2 text-sm text-gray-800">
                             Password
                           </label>
@@ -129,7 +186,6 @@ const Account = ({ company: { email } }) => {
                             disabled={edit ? false : true}
                           />
                         </div>
-
                         <div className="col-span-2">
                           <label className="block mb-2 text-sm text-gray-800">
                             New Password
@@ -155,7 +211,7 @@ const Account = ({ company: { email } }) => {
                             }`}
                             disabled={edit ? false : true}
                           />
-                        </div>
+                        </div> */}
 
                         <button
                           type="button"
@@ -166,16 +222,15 @@ const Account = ({ company: { email } }) => {
 
                           <AiOutlineEdit />
                         </button>
-                      </form>
-
-                      <div className={`${edit ? "block" : "hidden"}`}>
-                        <div
-                          className="hover:text-fondo-300 mt-3 hover:bg-fondo-50 text-white font-semibold flex rounded-xl border-2 py-3 border-fondo-200 items-center justify-center gap-4ease-in-out transition-all bg-fondo-200"
-                          href="./login"
+                        <button
+                          type="submit"
+                          className={`hover:text-fondo-300 mt-3 hover:bg-fondo-50 text-white font-semibold flex rounded-xl border-2 py-3 border-fondo-200 items-center justify-center gap-4ease-in-out transition-all bg-fondo-200 col-span-2 ${
+                            edit ? "block" : "hidden"
+                          }`}
                         >
                           Confirm Changes
-                        </div>
-                      </div>
+                        </button>
+                      </form>
                     </div>
                   </div>
                 </div>
