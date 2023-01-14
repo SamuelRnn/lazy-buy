@@ -35,7 +35,6 @@ export default function Home({
 
   return (
     <Layout>
-      {console.log(query)}
       <div className="py-12">
         <h1 className="main home_titles">New Products</h1>
         <CardCarousel productArray={newProducts} />
