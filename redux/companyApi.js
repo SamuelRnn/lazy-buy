@@ -17,11 +17,15 @@ export const companyApi = createApi({
     getPlan: builder.query({
       query: () => `/api/get/plan`,
     }),
+    getCompanyPlan: builder.query({
+      query: (planType) => `/api/get/plan/${planType}`,
+    }),
     createProduct: builder.mutation({
       query: (newProduct) => ({
         url: "/api/create/product",
         method: "POST",
         body: JSON.stringify(newProduct),
+        body: newProduct,
         headers: { "Content-Type": "application/json" },
       }),
       invalidatesTags: ["Company"],
@@ -75,6 +79,7 @@ export const {
   useGetCompanyQuery,
   useGetProductQuery,
   useGetPlanQuery,
+  useLazyGetCompanyPlanQuery,
   useGetCompanyProductsQuery,
   useCreateProductMutation,
   useUpdateActiveMutation,

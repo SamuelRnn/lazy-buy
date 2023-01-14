@@ -25,6 +25,9 @@
   @apply bg-fondo-100 text-zinc-50;
   pointer-events: none;
 }
+.input_class {
+  @apply bg-gray-300 text-zinc-700 rounded p-2 outline-none border border-slate-300 mt-2;
+}
 .filters_modal {
   position: fixed;
   top: 0;
