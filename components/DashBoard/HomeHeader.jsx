@@ -40,7 +40,7 @@ const HomeHeader = () => {
             </a>
           </div>
           <a
-            href=""
+            href="/dashboard/plan"
             className="hidden xl:block p-3 px-6 pt 2 text-white bg-fondo-100 rounded-full baseline hover:bg-white hover:text-fondo-300 transition-all text-2xl"
           >
             Upgrade
@@ -63,7 +63,7 @@ const HomeHeader = () => {
             <div className="flex justify justify-center lg:justify-start">
               <a
                 href="/dashboard/plan"
-                className="p-3 px-6 pt 2 text-white bg-fondo-300 rounded-full baseline hover:bg-fondo-200 hover:text-white transition-all text-2xl"
+                className="p-3 px-6 pt 2 text-white bg-fondo-300 rounded-full baseline hover:bg-white hover:text-fondo-300 hover:border-fondo-300   border transition-all text-2xl"
               >
                 Upgrade
               </a>
@@ -124,17 +124,17 @@ const HomeHeader = () => {
                   It's important for your business to have clear presentation.
                 </p>
                 <a
-                  className="hidden p-2 bg-fondo-200 rounded-full text-center w-1/4 mx-auto mr-2 mt-3 text-white lg:block lg:w-1/3 xl:w-1/4 xl:mt-3"
-                  href="/dashboard/products"
+                  className="hidden p-2 bg-fondo-300 border rounded-full text-center w-1/4 mx-auto mr-2 mt-3 text-white lg:block lg:w-1/3 xl:w-1/4 xl:mt-3 hover:bg-white hover:text-fondo-300 hover:border-fondo-300 transition-all"
+                  href="/dashboard/account"
                 >
-                  Store
+                  Account
                 </a>
               </div>
               <a
                 className="p-2 bg-fondo-200 rounded-full text-center w-1/2 md:w-1/4 mx-auto text-white lg:hidden"
                 href="/dashboard/products"
               >
-                Store
+                Account
               </a>
             </div>
 
@@ -192,27 +192,27 @@ const HomeHeader = () => {
               </div>
               <div>
                 <h3 className="hidden mb-4 text-lg font-bold lg:block">
-                  Track your stock of products with customized view
+                  Watch live charts with the stats you need
                 </h3>
                 <p className="text-fondo-200 text-justify">
-                  In your personal dashboard, you can count with a perfectly
-                  customized storage that provides you everything you need to
-                  have a maximum control of your products, and stock available.
-                  Also you can create new products, edit old ones, even choose
-                  which products are visualized in your store.
+                  In your personal dashboard you can also view a set of charts
+                  to see your real progress in real time.
+                  This way you can watch your progress, the amount of sales, your most
+                  valued products and more
+
                 </p>
                 <a
-                  className="hidden p-2 bg-fondo-200 rounded-full text-center w-1/4 mx-auto mr-2 mt-3 text-white lg:block lg:w-1/3 xl:w-1/4 xl:mt-3"
-                  href="/dashboard/products"
+                  className="hidden p-2 bg-fondo-200 rounded-full text-center w-1/4 mx-auto mr-2 mt-3 text-white lg:block lg:w-1/3 lg: text-sm xl:w-1/4 xl:mt-3"
+                  href="/dashboard/performance"
                 >
-                  Store
+                  Performance
                 </a>
               </div>
               <a
                 className="p-2 bg-fondo-200 rounded-full text-center w-1/2 md:w-1/4 mx-auto text-white lg:hidden"
-                href="/dashboard/products"
+                href="/dashboard/performance"
               >
-                Store
+                Performance
               </a>
             </div>
           </div>
