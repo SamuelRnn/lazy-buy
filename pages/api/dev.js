@@ -15,7 +15,7 @@ const companyData = {
     url: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673033931/lazy-buy/fodpv8nlpc1uynqep0lf.jpg",
     public_id: "lazy-buy/fodpv8nlpc1uynqep0lf",
   },
-  plan: "Basic",
+  plan: "Premium",
 };
 let productos = [
   {
