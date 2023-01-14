@@ -138,9 +138,9 @@ const Detail = ({ product }) => {
                       </label>
                     </div>
                   </div>
-                </fieldset>
+                </fieldset> */}
 
-                <fieldset className="mt-4">
+                {/* <fieldset className="mt-4">
                   <legend className="mb-1 text-sm font-medium">Size</legend>
                 </fieldset> */}
 
