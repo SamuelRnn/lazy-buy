@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import placeholder from "../../../public/no_image.jpg";
 import MiniSpinner from "../../Spinners/MiniSpinner";
-import simulateDelay from "../../../utils/simulateDelay";
 import { useCreateProductMutation } from "../../../redux/companyApi";
 
 function getFileAsDataURI(image) {

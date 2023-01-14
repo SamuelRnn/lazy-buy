@@ -104,6 +104,13 @@
   grid-template-columns: 1fr 4fr;
   column-gap: 40px;
 }
+/* products dashboard */
+.grid_dashboard_products {
+  @apply grid;
+  grid-template-columns: repeat(auto-fill, 320px);
+  place-content: center;
+  gap: 4rem;
+}
 /* loader */
 @keyframes loader-rotate {
   0% {
