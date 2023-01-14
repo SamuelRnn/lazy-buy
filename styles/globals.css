@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+/* navbar h = 3.8rem */
 /* main width for the layout */
 .user_menu_pos {
   position: absolute;

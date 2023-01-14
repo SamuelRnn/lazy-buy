@@ -22,11 +22,11 @@ const UserMenu = ({ active, setActive }) => {
   });
   return (
     <motion.div
-      initial={{ opacity: 0, x: -50 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: 30 }}
+      initial={{ opacity: 0, height: 0 }}
+      animate={{ opacity: 1, height: "auto" }}
+      exit={{ opacity: 0, height: 0 }}
       transition={{ duration: 0.1 }}
-      className="user_menu_pos top-[70px] w-[200px] rounded-md bg-fondo-200 text-zinc-100 p-1 flex flex-col gap-y-1"
+      className="user_menu_pos top-[70px] w-[200px] rounded-md bg-fondo-200 text-zinc-100 flex flex-col gap-y-1 overflow-hidden"
     >
       <button className="hover:bg-fondo-300 rounded w-full px-2 py-2 text-left transition-colors">
         option 1
