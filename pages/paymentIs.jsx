@@ -6,7 +6,7 @@ import { loadStripe } from "@stripe/stripe-js";
 
 
 //front
- const stripePromise = loadStripe("pk_test_51MPBiWFwUUE4BECZWIW79wVuDUNOvRk11V12SqjiwaFiH8WiWYqRARsyra6QPN5vdJi3bkpvf9ZqEjKfZc1NwS4F005hYMzGWf");
+ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_PUBLIC_KEY);
 
 const paymentIs = () => {
   const [btn, setBtn] = useState(false);
