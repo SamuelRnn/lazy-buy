@@ -14,6 +14,7 @@ import {
   useUpdateActiveMutation,
   useUpdateVisibleMutation,
   useUpdateProductMutation,
+  useGetPlanQuery,
 } from "../../redux/companyApi";
 import Spinner from "../../components/Spinners/Spinner";
 import { toast } from "react-hot-toast";
@@ -23,7 +24,20 @@ const Products = ({ company: { email } }) => {
   const [updateVisible] = useUpdateVisibleMutation();
   const [createProduct] = useCreateProductMutation();
   const [updateProduct] = useUpdateProductMutation();
+  const { isLoading: isLoadingPlans, data: plans } = useGetPlanQuery();
   const { isLoading, data: company } = useGetCompanyQuery(email);
+
+  const plan =
+    plans &&
+    company &&
+    plans.find((p) => {
+      return p.planType === company.plan;
+    });
+
+  const productsCompany = company && company.products.length;
+
+  const companyProductsVisibles =
+    company && company.products.filter((p) => p.isVisible);
 
   const [isOpen, setIsOpen] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
@@ -37,6 +51,18 @@ const Products = ({ company: { email } }) => {
     isVisible: true,
   });
 
+  function resetInput() {
+    setInput({
+      name: "",
+      description: "",
+      category: "",
+      price: "",
+      mainImage: "",
+      stock: "",
+      isVisible: true,
+    });
+  }
+
   function closeModal() {
     setIsOpen(false);
   }
@@ -46,6 +72,15 @@ const Products = ({ company: { email } }) => {
   }
 
   async function onCreate(input) {
+    console.log(companyProductsVisibles);
+    console.log(plan);
+
+    if (productsCompany > plan.productsLimit) {
+      resetInput();
+      closeModal();
+      return toast.error("Upgrade Your Plan!");
+    }
+
     if (
       !input.name ||
       !input.description ||
@@ -54,7 +89,7 @@ const Products = ({ company: { email } }) => {
       !input.mainImage ||
       !input.stock
     )
-      return toast.error("Qué haces maquinola?");
+      return toast.error("Check your fields!");
 
     // parse values
     input.stock = parseInt(input.stock);
@@ -67,15 +102,8 @@ const Products = ({ company: { email } }) => {
       await createProduct(input);
     }
 
-    setInput({
-      name: "",
-      description: "",
-      category: "",
-      price: "",
-      mainImage: "",
-      stock: "",
-      isVisible: true,
-    });
+    // set input
+    resetInput();
 
     console.log(input);
     closeModal();
@@ -309,7 +337,7 @@ const Products = ({ company: { email } }) => {
           </Transition>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 w-full h-full gap-4 place-content-center py-5 ">
             {company.products &&
-              company.products.map((p) => {
+              company.products.map((p, index) => {
                 return (
                   p.isActive && (
                     <div
@@ -332,17 +360,27 @@ const Products = ({ company: { email } }) => {
                             onClick={() => onModify(p.id)}
                           />
                           {p.isVisible ? (
-                            <EyeSlashIcon
-                              className="h-5 w-5 hover:text-red-800"
-                              onClick={() => updateVisible(p.id)}
-                            />
-                          ) : (
                             <EyeIcon
                               className="h-5 w-5 hover:text-red-800"
-                              onClick={() => updateVisible(p.id)}
+                              onClick={() => {
+                                updateVisible(p.id);
+                                //setCantVisible(cantVisible - 1);
+                                console.log(cantVisible);
+                              }}
+                            />
+                          ) : (
+                            <EyeSlashIcon
+                              className="h-5 w-5 hover:text-red-800"
+                              onClick={() => {
+                                updateVisible(p.id);
+                                //setCantVisible(cantVisible + 1);
+                                console.log(cantVisible);
+                              }}
                             />
                           )}
                         </div>
+
+                        {/* activeProductsLimit */}
                       </div>
                       <picture className="self-center">
                         <img
