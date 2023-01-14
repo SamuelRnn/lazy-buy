@@ -11,7 +11,7 @@ const Detail = ({ product }) => {
       <br />
       <br />
       <br />
-      <button onClick={() => router.back()}>Back</button>
+      <button className="block px-5 py-3 ml-3 text-xs font-medium text-white bg-fondo-300 rounded hover:bg-fondo-500 active:scale-75 transition-all ease-out" onClick={() => router.back()}>Back</button>
       <section>
         <div className="relative max-w-screen-xl px-4 py-8 mx-auto">
           <div className="grid items-start grid-cols-1 gap-8 md:grid-cols-2">
@@ -95,12 +95,12 @@ const Detail = ({ product }) => {
                     </div>
 
                     <span className="mt-4 text-sm font-medium underline cursor-pointer group-open:absolute group-open:bottom-0 group-open:left-0 group-open:mt-0">
-                      Leer más...
+                      Read more...
                     </span>
                   </div>
                 </summary>
 
-                <div className="pb-6 prose max-w-none">
+                {/* <div className="pb-6 prose max-w-none">
                   <p>
                     The Ordinary es una marca que ofrece una variedad de
                     productos para el cuidado de la piel facial. Si buscas
@@ -109,12 +109,12 @@ const Detail = ({ product }) => {
                     lastimar a ningún animal. Es vegano Este producto es
                     realizado en base a elementos naturales de origen vegetal.
                   </p>
-                </div>
+                </div> */}
               </details>
 
               <form className="mt-8">
                 {/* //add props extra to model  */}
-                <fieldset>
+                {/* <fieldset>
                   <legend className="mb-1 text-sm font-medium">Color</legend>
 
                   <div className="flow-root">
@@ -142,7 +142,7 @@ const Detail = ({ product }) => {
 
                 <fieldset className="mt-4">
                   <legend className="mb-1 text-sm font-medium">Size</legend>
-                </fieldset>
+                </fieldset> */}
 
                 <div className="flex mt-8">
                   <div>
@@ -154,7 +154,7 @@ const Detail = ({ product }) => {
                   </div>
 
                   <button className="block px-5 py-3 ml-3 text-xs font-medium text-white bg-fondo-300 rounded hover:bg-fondo-500 active:scale-75 transition-all ease-out">
-                    Agregar al carrito
+                    Add to cart
                   </button>
                 </div>
               </form>
