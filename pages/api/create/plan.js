@@ -19,7 +19,10 @@ export default async function createPlan(req, res) {
     !productPriority ||
     !price
   )
+
     return res.status(400).send({ message: "Not enough data" });
+
+    
 
   await plan.create({
     data: {

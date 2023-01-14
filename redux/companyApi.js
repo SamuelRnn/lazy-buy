@@ -58,6 +58,15 @@ export const companyApi = createApi({
       }),
       invalidatesTags: ["Company"],
     }),
+    updatePicture: builder.mutation({
+      query: (updatePicture) => ({
+        url: `/api/modify/company/profilePicture`,
+        method: "PUT",
+        body: updatePicture,
+        headers: { "Content-Type": "application/json" },
+      }),
+      invalidatesTags: ["Company"],
+    }),
   }),
   tagTypes: ["Company"],
 });
@@ -71,4 +80,5 @@ export const {
   useUpdateActiveMutation,
   useUpdateVisibleMutation,
   useUpdateProductMutation,
+  useUpdatePictureMutation,
 } = companyApi;
