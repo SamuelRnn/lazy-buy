@@ -18,7 +18,7 @@ function getFileAsDataURI(image) {
   });
 }
 
-const CreationForm = ({ product, setActive }) => {
+const CreationForm = ({ product, setActive, companyId, companyPlan }) => {
   console.log(product);
   const [createProduct] = useCreateProductMutation();
   const [isSubmitLoading, triggerSubmitLoading] = useState(false);
@@ -77,7 +77,7 @@ const CreationForm = ({ product, setActive }) => {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.1 }}
-        className="absolute modal_bg h-screen w-screen top-0 right-0 flex items-center justify-center"
+        className="fixed modal_bg h-screen w-screen top-0 right-0 flex items-center justify-center"
       >
         <motion.div
           initial={{ scale: 0.6 }}
