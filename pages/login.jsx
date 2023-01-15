@@ -26,7 +26,7 @@ export default function Loading() {
 
   const googleLogin = async () => {
     await signIn("google", {
-      type: "company",
+      callbackUrl: "/",
     });
   };
 
@@ -44,8 +44,8 @@ export default function Loading() {
     resetForm();
     triggerLogin(true);
     const sessionStatus = await signIn("credentials", {
-      redirect: false,
       ...formValues,
+      callbackUrl: "/",
     });
     await simulateDelay(2);
     triggerLogin(false);
