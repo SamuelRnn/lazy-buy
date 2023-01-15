@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { toast } from "react-hot-toast";
-import { loadStripe } from "@stripe/stripe-js";
 import Image from "next/image";
-
-//front
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_PUBLIC_KEY);
+import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { clearCart } from "../redux/cartSlice";
 
 const PaymentIs = () => {
+  const dispatch = useDispatch();
   const [btn, setBtn] = useState(false);
-
+  const router = useRouter();
+  dispatch(clearCart());
   let arr = [
     "md:block hidden fixed h-full -left-20 -bottom-20",
     "md:block hidden fixed h-full -left-20 -top-28",
@@ -17,43 +17,6 @@ const PaymentIs = () => {
     "md:block hidden fixed h-full -right-20 -top-28",
     "md:block hidden fixed h-full  ",
   ];
-  // trasladar a /utils
-
-  const handlePayment = async () => {
-    const stripe = await stripePromise;
-    let array = [
-      {
-        name: "bicicleta renault",
-        unit_amount: 200,
-        quantity: 2,
-      },
-      {
-        name: "posillo?",
-        unit_amount: 20,
-        quantity: 5,
-      },
-    ];
-    try {
-      const response = await fetch(
-        "http://localhost:3000/api/create/stripePy",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(array),
-        }
-      );
-      const data = await response.json();
-      //toast.loading("Redirecting...");
-      const hh = await stripe.redirectToCheckout({
-        sessionId: data.id,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
     setTimeout(() => {
       setBtn(true);
@@ -72,13 +35,13 @@ const PaymentIs = () => {
             alt="succes"
           />
           <h1 className="text-fondo-1000 text-4xl">Payment Successful!!</h1>
-          <h2>algunas cosas</h2>
+          <h2 className="text-zinc-500">Thank you for choosing us</h2>
           {btn && (
             <motion.button
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               type="button"
-              onClick={handlePayment}
+              onClick={() => router.push("/")}
               className="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800"
             >
               Back to Site
@@ -89,11 +52,11 @@ const PaymentIs = () => {
       </div>
       <div className="w-3/5 z-40">
         <Image
-          className="-scale-x-100"
           width={200}
           height={200}
           src="https://images.vexels.com/media/users/3/210362/isolated/preview/44acab728548ca17f29211eeda51f2e3-hombre-reclinado-con-caracter-de-telefono-celular.png"
           alt="men"
+          className="-scale-x-100 w-[380px]"
         />
       </div>
       {arr?.map((str, i) => (
