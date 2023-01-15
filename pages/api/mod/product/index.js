@@ -32,8 +32,11 @@ export default async function handler(req, res) {
   }
 
   //update visibility
-  if (updatedProduct.hasOwnProperty("isActive")) {
-    console.log("me hice invisible boo");
+  if (updatedProduct.triggerDelete) {
+    await product.update({
+      where: { id: updatedProduct.productId },
+      data: { isActive: false },
+    });
     return res.status(204).json({ message: "Updated Correctly" });
   }
 
