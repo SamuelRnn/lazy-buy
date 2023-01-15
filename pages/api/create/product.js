@@ -16,10 +16,6 @@ export default async function createProduct(req, res) {
     return res.status(400).send({ message: "Not found" });
   }
   const productData = req.body;
-  console.log(
-    "🚀 ~ file: product.js:19 ~ createProduct ~ productData",
-    productData
-  );
   if (
     !productData.name ||
     !productData.description ||
@@ -30,7 +26,7 @@ export default async function createProduct(req, res) {
     !productData.category
   ) {
     return res.status(400).json({
-      message: "Datos incompletos, asegurese de llenar todos los campos",
+      message: "Incomplete data",
     });
   }
 

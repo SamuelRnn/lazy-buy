@@ -29,15 +29,6 @@ const Account = ({ company: { email } }) => {
   async function onSubmit(values) {
     values.email = company.email;
     console.log(values);
-    /* const options = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(values),
-    };
-
-    await fetch("http://localhost:3000/api/modify/company", options)
-      .then((res) => res.json())
-      .catch((error) => console.log(error)); */
   }
 
   return (
@@ -147,11 +138,11 @@ const Account = ({ company: { email } }) => {
                         <div className="flex justify-between items-center col-span-2 gap-2 p-x-4">
                           <UploadWidget email={company.email} />
                           {company && (
-                              <img
-                                src={company && company.profilePicture.url}
-                                alt={company.owner}
-                                className="object-cover object-center h-12 rounded-full"
-                              />
+                            <img
+                              src={company && company.profilePicture.url}
+                              alt={company.owner}
+                              className="object-cover object-center h-12 rounded-full"
+                            />
                           )}
                         </div>
 

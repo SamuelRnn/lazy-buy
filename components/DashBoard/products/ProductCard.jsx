@@ -8,34 +8,53 @@ import {
 } from "react-icons/bs";
 import { MdInventory } from "react-icons/md";
 import { ImPriceTag } from "react-icons/im";
+import { useUpdateProductMutation } from "../../../redux/companyApi";
 
 const ProductCard = ({ product, editProduct, id }) => {
+  const [updateProduct] = useUpdateProductMutation();
+
   return (
-    <div className="relative bg-zinc-100 border border-zinc-300 rounded-lg w-[160px]">
+    <div
+      className={`relative bg-zinc-50 rounded-lg w-[160px] ${
+        product.isVisible ? "" : "invisible_filter"
+      } shadow-md shadow-zinc-400`}
+    >
       {/* product options */}
-      <div className="absolute right-[-10px] top-[32px] flex flex-col rounded-md overflow-hidden">
+      <div className="absolute right-[-10px] bottom-[-10px] flex flex-col z-20">
         <div className="flex flex-col gap-y-2 mt-1">
           {/* product visibility */}
-          <button className="p-2 rounded-md bg-zinc-500 bg-opacity-60 hover:bg-opacity-100 hover:bg-fondo-400 transition-colors">
-            <BsFillEyeSlashFill className="text-2xl text-zinc-100" />
+          <button
+            onClick={() =>
+              updateProduct({
+                isVisible: !product.isVisible,
+                productId: product.id,
+              })
+            }
+            className="p-2 rounded-md bg-zinc-500 hover:bg-opacity-100 hover:bg-fondo-400 transition-colors"
+          >
+            {product.isVisible ? (
+              <BsFillEyeSlashFill className="text-2xl text-zinc-100" />
+            ) : (
+              <BsFillEyeFill className="text-2xl text-orange-300" />
+            )}
           </button>
           {/* edit product */}
           <button
             onClick={() => editProduct(id)}
-            className="p-2 rounded-md bg-zinc-500 bg-opacity-60 hover:bg-opacity-100 hover:bg-fondo-400 transition-colors"
+            className="p-2 rounded-md bg-zinc-500 hover:bg-opacity-100 hover:bg-fondo-400 transition-colors"
           >
             <AiTwotoneEdit className="text-2xl text-zinc-100" />
           </button>
           {/* borrado logico del producto */}
-          <button className="p-2 rounded-md bg-zinc-500 bg-opacity-60 hover:bg-opacity-100 hover:bg-fondo-400 transition-colors">
+          <button className="p-2 rounded-md bg-zinc-500 hover:bg-opacity-100 hover:bg-fondo-400 transition-colors">
             <BsFillTrashFill className="text-2xl text-zinc-100" />
           </button>
         </div>
       </div>
 
       <div>
-        <div className="px-3 py-3 text-slate-600">
-          <h2 className=" overflow-hidden whitespace-nowrap text-ellipsis font-bold w-3/5">
+        <div className="px-3 py-2 text-fondo-300">
+          <h2 className=" overflow-hidden whitespace-nowrap text-ellipsis font-bold">
             {product.name}
           </h2>
         </div>
@@ -47,7 +66,7 @@ const ProductCard = ({ product, editProduct, id }) => {
           height={100}
           className="w-[160px] h-[110px] object-cover"
         />
-        <div className="bg-zinc-600 py-3 px-5 text-zinc-100 text-sm">
+        <div className="bg-zinc-600 py-3 px-5 text-zinc-100 text-sm rounded-b-lg">
           <p className="flex font-bold">
             <ImPriceTag className="mr-1 mt-[5px]" />
             {product.price.toFixed(2)}
