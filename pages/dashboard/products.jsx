@@ -20,15 +20,17 @@ const Products = ({ company: { email } }) => {
   const [displayedProduct, setDisplayedProduct] = useState(null);
 
   useEffect(() => {
-    if (company) {
+    if (company && !plan) {
       fetchCompany(company.plan);
     }
   }, [company]);
+
   useEffect(() => {
     if (fetchProduct) {
       setDisplayedProduct(fetchedProduct);
     }
   }, [fetchedProduct]);
+
   const editProduct = async (id) => {
     await fetchProduct(id);
     setActive(true);
@@ -73,14 +75,16 @@ const Products = ({ company: { email } }) => {
           )}
           {company && (
             <div className="grid_dashboard_products">
-              {company.products.map((item) => (
-                <ProductCard
-                  key={item.id}
-                  id={item.id}
-                  product={item}
-                  editProduct={editProduct}
-                />
-              ))}
+              {[...company.products]
+                .sort((a, b) => b.isVisible - a.isVisible)
+                .map((item) => (
+                  <ProductCard
+                    key={item.id}
+                    id={item.id}
+                    product={item}
+                    editProduct={editProduct}
+                  />
+                ))}
             </div>
           )}
         </div>

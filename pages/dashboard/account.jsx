@@ -71,7 +71,7 @@ const Account = ({ company: { email } }) => {
                                 ? "border-rose-800"
                                 : ""
                             }
-                             ${edit ? "cursor-text" : "cursor-not-allowed"}`}
+                            ${edit ? "cursor-text" : "cursor-not-allowed"}`}
                             disabled={edit ? false : true}
                             {...formik.getFieldProps("name")}
                           />
@@ -136,9 +136,11 @@ const Account = ({ company: { email } }) => {
                           />
                         </div>
                         <div className="flex justify-between items-center col-span-2 gap-2 p-x-4">
-                          <UploadWidget email={company.email} />
+                          <UploadWidget email={company && company.email} />
                           {company && (
-                            <img
+                            <Image
+                              width={48}
+                              height={48}
                               src={company && company.profilePicture.url}
                               alt={company.owner}
                               className="object-cover object-center h-12 rounded-full"

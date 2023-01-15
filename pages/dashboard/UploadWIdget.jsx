@@ -1,8 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useRef } from "react";
-import {
-  useGetCompanyQuery,
-  useUpdatePictureMutation,
-} from "../../redux/companyApi";
+import { useUpdatePictureMutation } from "../../redux/companyApi";
 
 const UploadWidget = ({ email }) => {
   const cloudinaryRef = useRef();

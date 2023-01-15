@@ -6,7 +6,8 @@ export default async function handler(req, res) {
     return res.status(400).send({ message: "Not found" });
 
   const { email } = req.body;
-  console.log("🚀 ~ file: index.js:8 ~ handler ~ req.body", req.body);
+
+  console.log("hola")
 
   delete req.body.id;
   try {

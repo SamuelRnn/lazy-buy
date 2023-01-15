@@ -43,7 +43,6 @@ export default async function createProduct(req, res) {
   }
   //create product
   productData.slug = "available";
-  console.log(productData);
   let newProduct = await product.create({ data: productData });
   newProduct = await product.update({
     where: { id: newProduct.id },

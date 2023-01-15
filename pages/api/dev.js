@@ -14,7 +14,7 @@ const companyData = {
   profilePicture: {
     url: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673146181/lazy-buy/fotoSamuel_rbdz1h.jpg",
   },
-  plan: "Premium",
+  plan: "Basic",
 };
 let productos = [
   {

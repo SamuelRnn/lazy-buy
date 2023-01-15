@@ -8,7 +8,7 @@ const UserMenu = ({ active, setActive }) => {
   const dispatch = useDispatch();
 
   const handleSignOut = async () => {
-    setTimeout(() => dispatch(clearSession()), 300);
+    dispatch(clearSession());
     await signOut({
       callbackUrl: "/login?session=signed-out",
     });
