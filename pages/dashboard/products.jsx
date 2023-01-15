@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import DashboardLayout from "../../components/Dashboard/DashboardLayout";
 import CreationForm from "../../components/Dashboard/Products/CreationForm";
 import dashboardMiddleware from "../../utils/dashboardMiddleware";
@@ -11,18 +12,23 @@ import {
 import Spinner from "../../components/Spinners/Spinner";
 import ProductCard from "../../components/Dashboard/products/ProductCard";
 
-const Products = ({ company: { email, id } }) => {
+const Products = ({ company: { email } }) => {
   const [active, setActive] = useState(false);
   const { isFetching, data: company } = useGetCompanyQuery(email);
   const [fetchCompany, { data: plan }] = useLazyGetCompanyPlanQuery();
   const [fetchProduct, { data: fetchedProduct }] = useLazyGetProductQuery();
+  const [displayedProduct, setDisplayedProduct] = useState(null);
 
   useEffect(() => {
     if (company) {
       fetchCompany(company.plan);
     }
   }, [company]);
-
+  useEffect(() => {
+    if (fetchProduct) {
+      setDisplayedProduct(fetchedProduct);
+    }
+  }, [fetchedProduct]);
   const editProduct = async (id) => {
     await fetchProduct(id);
     setActive(true);
@@ -35,8 +41,8 @@ const Products = ({ company: { email, id } }) => {
         {active && (
           <CreationForm
             setActive={setActive}
-            product={fetchedProduct}
-            companyId={id}
+            product={displayedProduct}
+            companyId={company.id}
             companyPlan={plan}
           />
         )}
@@ -47,6 +53,7 @@ const Products = ({ company: { email, id } }) => {
           <button
             onClick={() => {
               setActive(true);
+              setDisplayedProduct(null);
               document.body.style.overflow = "hidden";
             }}
             className="py-3 bg-fondo-300 text-zinc-100 px-2 rounded-md"

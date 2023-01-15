@@ -3,7 +3,10 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import placeholder from "../../../public/no_image.jpg";
 import MiniSpinner from "../../Spinners/MiniSpinner";
-import { useCreateProductMutation } from "../../../redux/companyApi";
+import {
+  useCreateProductMutation,
+  useUpdateProductMutation,
+} from "../../../redux/companyApi";
 
 function getFileAsDataURI(image) {
   return new Promise((resolve) => {
@@ -19,8 +22,9 @@ function getFileAsDataURI(image) {
 }
 
 const CreationForm = ({ product, setActive, companyId, companyPlan }) => {
-  console.log(product);
+  const [updateProduct] = useUpdateProductMutation();
   const [createProduct] = useCreateProductMutation();
+  const [hasChanged, setIfChanged] = useState(false);
   const [isSubmitLoading, triggerSubmitLoading] = useState(false);
   //initial state if product not provided
   const initialForm = {
@@ -41,14 +45,22 @@ const CreationForm = ({ product, setActive, companyId, companyPlan }) => {
   };
 
   const handleImageChange = (event) => {
+    if (!hasChanged) {
+      setIfChanged(true);
+    }
+    setForm((data) => ({ ...data, mainImage: "" }));
     const url = URL.createObjectURL(event.target.files[0]);
     setImagePreview(url);
   };
 
   const handleChange = ({ target: { name, value } }) => {
+    if (!hasChanged) {
+      setIfChanged(true);
+    }
     setForm((data) => ({ ...data, [name]: value }));
   };
 
+  // creates a new product
   const handleSubmit = async (event) => {
     event.preventDefault();
     triggerSubmitLoading(true);
@@ -61,15 +73,43 @@ const CreationForm = ({ product, setActive, companyId, companyPlan }) => {
       price: parseFloat(form.price),
       stock: parseInt(form.stock),
       mainImage: file,
-      companyId: "335d4af5-5489-4ae4-b60b-311ea82687d5",
+      companyId,
     };
-
     await createProduct(newProduct);
 
     triggerSubmitLoading(false);
     closeModal();
   };
 
+  // updates the existing product
+  const handleUpdateSubmit = async (event) => {
+    event.preventDefault();
+
+    if (!hasChanged) {
+      closeModal();
+    }
+
+    triggerSubmitLoading(true);
+    let file = document.getElementById("product_file").files[0];
+
+    const newProduct = {
+      productId: form.id,
+      name: form.name,
+      description: form.description,
+      category: form.category,
+      price: parseFloat(form.price),
+      stock: parseInt(form.stock),
+    };
+
+    if (file) {
+      file = await getFileAsDataURI(file);
+      newProduct.mainImage = file;
+    }
+    await updateProduct(newProduct);
+
+    triggerSubmitLoading(false);
+    closeModal();
+  };
   return (
     <>
       <motion.div
@@ -86,7 +126,7 @@ const CreationForm = ({ product, setActive, companyId, companyPlan }) => {
           transition={{ bounce: true, ease: "backInOut" }}
           className="p-4 rounded-lg bg-zinc-100 overflow-x-hidden h-[80vh] w-product_form"
         >
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={product ? handleUpdateSubmit : handleSubmit}>
             <div className="sm:flex justify-between gap-x-8 items-center">
               {/* Product name */}
               <div className="w-full">
@@ -174,6 +214,7 @@ const CreationForm = ({ product, setActive, companyId, companyPlan }) => {
                 onChange={handleChange}
                 name="description"
                 className="input_class resize-none w-full h-[160px]"
+                value={form.description}
               />
             </label>
             <div className="flex gap-4 w-full mt-6 justify-between max-sm:flex-col">
@@ -185,8 +226,9 @@ const CreationForm = ({ product, setActive, companyId, companyPlan }) => {
                 Return to products
               </button>
               <button
+                disabled={product && !hasChanged}
                 type="submit"
-                className="bg-fondo-300 text-zinc-200 py-3 px-5 rounded flex items-center justify-center"
+                className="bg-fondo-300 text-zinc-200 py-3 px-5 rounded flex items-center justify-center disabled:bg-zinc-300"
               >
                 Submit Changes
                 {isSubmitLoading && (
