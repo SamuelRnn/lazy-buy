@@ -11,7 +11,14 @@ const Detail = ({ product }) => {
       <br />
       <br />
       <br />
-      <button className="block px-5 py-3 ml-3 text-xs font-medium text-white bg-fondo-300 rounded hover:bg-fondo-500 active:scale-75 transition-all ease-out" onClick={() => router.back()}>Back</button>
+      <div className="main">
+        <button
+          className="block px-5 py-3 ml-3 text-xs font-medium text-white bg-fondo-300 rounded hover:bg-fondo-500 active:scale-75 transition-all ease-out"
+          onClick={() => router.back()}
+        >
+          Back
+        </button>
+      </div>
       <section>
         <div className="relative max-w-screen-xl px-4 py-8 mx-auto">
           <div className="grid items-start grid-cols-1 gap-8 md:grid-cols-2">
