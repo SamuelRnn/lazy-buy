@@ -75,7 +75,7 @@ const Products = ({ company: { email } }) => {
     console.log(companyProductsVisibles);
     console.log(plan);
 
-    if (productsCompany > plan.productsLimit) {
+    if (productsCompany > plan && plan.productsLimit) {
       resetInput();
       closeModal();
       return toast.error("Upgrade Your Plan!");
