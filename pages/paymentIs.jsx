@@ -2,13 +2,12 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { toast } from "react-hot-toast";
 import { loadStripe } from "@stripe/stripe-js";
-
-
+import Image from "next/image";
 
 //front
- const stripePromise = loadStripe(process.env.NEXT_PUBLIC_PUBLIC_KEY);
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_PUBLIC_KEY);
 
-const paymentIs = () => {
+const PaymentIs = () => {
   const [btn, setBtn] = useState(false);
 
   let arr = [
@@ -50,8 +49,6 @@ const paymentIs = () => {
       const hh = await stripe.redirectToCheckout({
         sessionId: data.id,
       });
-
-      
     } catch (error) {
       console.log(error);
     }
@@ -67,7 +64,9 @@ const paymentIs = () => {
     <div className="h-screen w-screen flex md:flex-row flex-col bg-white items-center justify-center">
       <div className="w-4/5 flex items-center justify-end z-50">
         <div className="mr-10 pay gap-5 flex flex-col items-center p-11 justify-end  rounded-3xl shadow-lg">
-          <img
+          <Image
+            width={200}
+            height={200}
             className="w-28"
             src="https://drikung.cl/wp-content/uploads/2020/06/Pago-exitoso.png"
             alt="succes"
@@ -89,15 +88,17 @@ const paymentIs = () => {
         </div>
       </div>
       <div className="w-3/5 z-40">
-        <img
+        <Image
           className="-scale-x-100"
+          width={200}
+          height={200}
           src="https://images.vexels.com/media/users/3/210362/isolated/preview/44acab728548ca17f29211eeda51f2e3-hombre-reclinado-con-caracter-de-telefono-celular.png"
           alt="men"
         />
       </div>
-      {arr?.map((str,i) => (
+      {arr?.map((str, i) => (
         <motion.img
-        key={i}
+          key={i}
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: [1, 0.5, 0, 0.5, 1] }}
           transition={{ delay: 0.2, type: "spring", stiffness: 1000 }}
@@ -110,4 +111,4 @@ const paymentIs = () => {
   );
 };
 
-export default paymentIs;
+export default PaymentIs;

@@ -1,5 +1,7 @@
+/* eslint-disable @next/next/no-html-link-for-pages */
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import det from "../../public/dashdet2.png";
 
 const HomeHeader = () => {
@@ -51,14 +53,14 @@ const HomeHeader = () => {
         <div className="container flex flex-col-reverse lg:flex-row items-center px-6 mx-auto mt-10 space-y-0 lg:space-y-0">
           <div className="flex flex-col mb-12 space-y-12 lg:w-1/2 md:items-center lg:items-start">
             <h1 className="max-w-md text-4xl font-bold text-center lg:text-left xl:text-5xl text-fondo-200">
-              Congratulations on becoming a new Lazy-Seller, now it's time to
-              make the next step!
+              Congratulations on becoming a new Lazy-Seller, now it&apos;s time
+              to make the next step!
             </h1>
             <p className="max-w-sm text-center text-fondo-100 lg:text-left">
-              In Lazy-Buy we now that you're putting all your effort to make
-              your business grow. And that's why we designed this web site
-              specially made for you and your company. But being a part of our
-              lazy-sellers it's only the first step!
+              In Lazy-Buy we now that you&apos;re putting all your effort to
+              make your business grow. And that&apos;s why we designed this web
+              site specially made for you and your company. But being a part of
+              our lazy-sellers it&apos;s only the first step!
             </p>
             <div className="flex justify justify-center lg:justify-start">
               <a
@@ -71,7 +73,13 @@ const HomeHeader = () => {
           </div>
 
           <div className="pr-5 pb-6 lg:w-1/2 lg:pb-24 xl:pb-32">
-            <Image className="" src={det} />
+            <Image
+              className=""
+              src={det}
+              alt="image"
+              height={300}
+              width={300}
+            />
           </div>
         </div>
       </section>
@@ -79,23 +87,23 @@ const HomeHeader = () => {
         <div className="container flex flex-col px-4 mx-auto mt-10 space-y-12 lg:space-y-0 lg:flex-row">
           <div className="flex flex-col space-y-12 lg:w-1/2 md:items-center lg:items-start">
             <h2 className="max-w-md text-4xl font-bold text-center lg:text-4xl lg:text-left xl:text-5xl text-fondo-200">
-              What's the difference about manage your own virtual office
+              {"What's the difference about manage your own virtual office"}
             </h2>
             <p className="max-w-sm text-center text-fondo-200 lg:text-left">
-              Running a business can be challenging, but it doesn't have to be.
-              One solution that can make things easier for you is a virtual
+              Running a business can be challenging, but it doesn&apos;t have to
+              be. One solution that can make things easier for you is a virtual
               office. A virtual office is a service that provides you with a
               professional business address, mail handling and call answering
               services, without the need for a physical office space. Choosing a
               virtual office can bring many benefits to your business. <br />
               <br />
               Firstly, it can save you money on overhead costs. With a virtual
-              office, you don't have to worry about paying rent and utilities
-              for a physical office space. You can also save on office supplies
-              and furniture. This can free up more of your budget to invest in
-              other areas of your business. Additionally, a virtual office can
-              provide you with a prestigious business address, which can help to
-              enhance your company's image and credibility.
+              office, you don&apos;t have to worry about paying rent and
+              utilities for a physical office space. You can also save on office
+              supplies and furniture. This can free up more of your budget to
+              invest in other areas of your business. Additionally, a virtual
+              office can provide you with a prestigious business address, which
+              can help to enhance your company&apos;s image and credibility.
             </p>
           </div>
           {/* Numbered List */}
@@ -118,10 +126,11 @@ const HomeHeader = () => {
                   Edit your profile for your clients
                 </h3>
                 <p className="text-fondo-200 text-justify">
-                  In your personal dashboard you can edit your profile to show all
-                  the information that your clients need to start knowing you and 
-                  the quality of your products. <br/>
-                  It's important for your business to have clear presentation.
+                  In your personal dashboard you can edit your profile to show
+                  all the information that your clients need to start knowing
+                  you and the quality of your products. <br />
+                  It&apos;s important for your business to have clear
+                  presentation.
                 </p>
                 <a
                   className="hidden p-2 bg-fondo-300 border rounded-full text-center w-1/4 mx-auto mr-2 mt-3 text-white lg:block lg:w-1/3 xl:w-1/4 xl:mt-3 hover:bg-white hover:text-fondo-300 hover:border-fondo-300 transition-all"
@@ -196,10 +205,9 @@ const HomeHeader = () => {
                 </h3>
                 <p className="text-fondo-200 text-justify">
                   In your personal dashboard you can also view a set of charts
-                  to see your real progress in real time.
-                  This way you can watch your progress, the amount of sales, your most
-                  valued products and more
-
+                  to see your real progress in real time. This way you can watch
+                  your progress, the amount of sales, your most valued products
+                  and more
                 </p>
                 <a
                   className="hidden p-2 bg-fondo-200 rounded-full text-center w-1/4 mx-auto mr-2 mt-3 text-white lg:block lg:w-1/3 lg: text-sm xl:w-1/4 xl:mt-3"

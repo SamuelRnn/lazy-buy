@@ -31,12 +31,12 @@ const ProductCard = ({ product, editProduct, id }) => {
             })
           }
           title="publish/unpublish product"
-          className="p-2 rounded-md bg-zinc-500 hover:bg-opacity-100 hover:bg-zinc-400 transition-colors"
+          className="p-2 rounded-md bg-zinc-500 hover:bg-opacity-100 hover:bg-zinc-400 transition-colors shadow-md shadow-zinc-700"
         >
           {product.isVisible ? (
             <BsFillEyeSlashFill className="text-2xl text-zinc-100" />
           ) : (
-            <BsFillEyeFill className="text-2xl text-amber-400" />
+            <BsFillEyeFill className="text-2xl text-fondo-100" />
           )}
         </button>
 
@@ -45,7 +45,7 @@ const ProductCard = ({ product, editProduct, id }) => {
           <button
             title="edit product"
             onClick={() => editProduct(id)}
-            className="p-2 rounded-md bg-zinc-500 hover:bg-opacity-100 hover:bg-fondo-400 transition-colors"
+            className="p-2 rounded-md bg-zinc-500 hover:bg-opacity-100 hover:bg-fondo-400 transition-colors shadow-md shadow-zinc-700"
           >
             <AiTwotoneEdit className="text-2xl text-zinc-100" />
           </button>
@@ -58,7 +58,7 @@ const ProductCard = ({ product, editProduct, id }) => {
                 triggerDelete: true,
               });
             }}
-            className="p-2 rounded-md bg-zinc-500 hover:bg-opacity-100 hover:bg-fondo-400 transition-colors"
+            className="p-2 rounded-md bg-zinc-500 hover:bg-opacity-100 hover:bg-fondo-400 transition-colors shadow-md shadow-zinc-700"
           >
             <BsFillTrashFill className="text-2xl text-zinc-100" />
           </button>
