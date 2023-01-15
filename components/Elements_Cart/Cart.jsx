@@ -11,8 +11,11 @@ import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/solid";
 import { TfiClose } from "react-icons/tfi";
 import Image from "next/image";
 import { toast } from "react-hot-toast";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 const Cart = ({ setActive }) => {
+  const router = useRouter();
   const cart = useSelector(getCart);
   const session = useSelector((state) => state.account.session);
   const dispatch = useDispatch();
@@ -118,6 +121,9 @@ const Cart = ({ setActive }) => {
               <BsTrashFill className="text-xl w-12" />
             </button>
             <button
+              onClick={() => {
+                router.push("/order-detail");
+              }}
               className={`h-12 bg-zinc-400 text-white rounded-md w-full flex justify-center gap-x-4 items-center ${
                 session !== "no-session"
                   ? "hover:bg-fondo-300 transition-colors"

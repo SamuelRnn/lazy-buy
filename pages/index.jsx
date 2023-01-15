@@ -15,6 +15,7 @@ export default function Home({
   recommendedProducts,
   query,
 }) {
+  console.log(extendedSessionData);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -67,14 +68,18 @@ export async function getServerSideProps({ req, query }) {
 
     if (found_company) {
       extendedSessionData.type = "company";
+      extendedSessionData.image = found_company.profilePicture.url;
     }
     if (found_user) {
       extendedSessionData.type = "user";
+      extendedSessionData.image = found_user.profilePicture.url;
     }
   }
+  console.log(extendedSessionData);
   let newProducts = await product.findMany({
     where: {
       isActive: true,
+      isVisible: true,
     },
     orderBy: {
       createdAt: "desc",
@@ -96,6 +101,7 @@ export async function getServerSideProps({ req, query }) {
   let bestRatedProducts = await product.findMany({
     where: {
       isActive: true,
+      isVisible: true,
     },
     orderBy: {
       averageRating: "desc",
@@ -118,6 +124,7 @@ export async function getServerSideProps({ req, query }) {
     //takes by priority order || TODO: add priority connection
     where: {
       isActive: true,
+      isVisible: true,
     },
     // orderBy: {
     //   averageRating: "desc",
