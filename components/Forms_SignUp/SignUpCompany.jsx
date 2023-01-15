@@ -24,7 +24,7 @@ const SignUpCompany = ({ typeAccount, setTypeAccount }) => {
 
   async function onSubmit(values) {
     values.profilePicture =
-      "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673032247/lazy-buy/pailrl1p3kwddj5v2qtn.jpg";
+      "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673636868/lazy-buy/co6kn9d0v9whpoz6bqgb.png";
     values.plan = "Basic";
 
     const options = {

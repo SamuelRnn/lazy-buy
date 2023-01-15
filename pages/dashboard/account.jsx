@@ -8,6 +8,7 @@ import { useGetCompanyQuery } from "../../redux/companyApi";
 import Spinner from "../../components/Spinners/Spinner";
 import { registerValidateCompanyAccount } from "../../utils/validateCompanyAccount";
 import { useFormik } from "formik";
+import UploadWidget from "./UploadWIdget";
 
 const Account = ({ company: { email } }) => {
   const [edit, setEdit] = useState(false);
@@ -143,75 +144,16 @@ const Account = ({ company: { email } }) => {
                             {...formik.getFieldProps("city")}
                           />
                         </div>
-                        <div className="col-span-2">
-                          <label className="block mb-2 text-sm text-gray-800">
-                            Company Picture
-                          </label>
-                          <div className="relative">
-                            <input
-                              name="profilePicture"
-                              type="file"
-                              className={`block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-slate-800 rounded-lg focus:outline-none 
-                              ${
-                                formik.errors.profilePicture &&
-                                formik.touched.profilePicture
-                                  ? "border-rose-800"
-                                  : ""
-                              }
-                              ${edit ? "cursor-text" : "cursor-not-allowed"}`}
-                              disabled={edit ? false : true}
-                              {...formik.getFieldProps("profilePicture")}
-                            />
-                            {/* <Image
-                              className="absolute right-2 top-2 rounded-full"
-                              src={company.profilePicture.url}
-                              width={40}
-                              height={40}
-                              alt="pfp"
-                            /> */}
-                          </div>
+                        <div className="flex justify-between items-center col-span-2 gap-2 p-x-4">
+                          <UploadWidget email={company.email} />
+                          {company && (
+                              <img
+                                src={company && company.profilePicture.url}
+                                alt={company.owner}
+                                className="object-cover object-center h-12 rounded-full"
+                              />
+                          )}
                         </div>
-
-                        {/* <div className="col-span-2">
-                          <label className="block mb-2 text-sm text-gray-800">
-                            Password
-                          </label>
-                          <input
-                            name="password"
-                            type="password"
-                            placeholder="Enter your last password"
-                            className={`block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-lg focus:outline-none ${
-                              edit ? "cursor-text" : "cursor-not-allowed"
-                            }`}
-                            disabled={edit ? false : true}
-                          />
-                        </div>
-                        <div className="col-span-2">
-                          <label className="block mb-2 text-sm text-gray-800">
-                            New Password
-                          </label>
-                          <input
-                            type="password"
-                            placeholder="Enter your new password"
-                            className={`block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-lg focus:outline-none ${
-                              edit ? "cursor-text" : "cursor-not-allowed"
-                            }`}
-                            disabled={edit ? false : true}
-                          />
-                        </div>
-                        <div className="col-span-2">
-                          <label className="block mb-2 text-sm text-gray-800">
-                            Confirm password
-                          </label>
-                          <input
-                            type="password"
-                            placeholder="Just to be sure"
-                            className={`block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-lg focus:outline-none ${
-                              edit ? "cursor-text" : "cursor-not-allowed"
-                            }`}
-                            disabled={edit ? false : true}
-                          />
-                        </div> */}
 
                         <button
                           type="button"

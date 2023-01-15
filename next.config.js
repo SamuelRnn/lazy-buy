@@ -4,6 +4,7 @@ const nextConfig = {
   images: {
     domains: [
       "img.freepik.com",
+      "w7.pngwing.com",
       "encrypted-tbn0.gstatic.com",
       "mdbootstrap.com",
       "www.thedigitalsalesinstitute.com",

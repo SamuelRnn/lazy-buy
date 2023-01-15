@@ -12,10 +12,9 @@ const companyData = {
   city: "Sao Paolo",
   country: "Brasil",
   profilePicture: {
-    url: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673033931/lazy-buy/fodpv8nlpc1uynqep0lf.jpg",
-    public_id: "lazy-buy/fodpv8nlpc1uynqep0lf",
+    url: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673146181/lazy-buy/fotoSamuel_rbdz1h.jpg",
   },
-  plan: "Basic",
+  plan: "Premium",
 };
 let productos = [
   {
@@ -674,18 +673,18 @@ export default async function handler(req, res) {
     },
   });
   //------------------------------------------
-  productos.map((productData) => {
-    productData.slug = productData.name;
-    productData.companyId = newCompany.id;
+  await (async () => {
+    for (const productData of productos) {
+      productData.slug = productData.name;
+      productData.companyId = newCompany.id;
 
-    (async () => {
       let newProduct = await product.create({ data: productData });
       await product.update({
         where: { id: newProduct.id },
         data: { slug: getSlug(newProduct) },
       });
-    })();
-  });
+    }
+  })();
   //------------------------------------------
   plans.map((planData) => {
     (async () => {

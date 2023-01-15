@@ -11,7 +11,7 @@ const Home = ({ company }) => {
         initial={{ x: -400, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         exit={{ x: 400, opacity: 0 }}
-        className="bg-fondo-50 h-screen"
+        className="bg-zinc-50 h-screen"
       >
         <HomeHeader/>
       </motion.div>

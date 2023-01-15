@@ -14,14 +14,19 @@ export const companyApi = createApi({
     getProduct: builder.query({
       query: (productId) => `/api/get/product/${productId}`,
     }),
+
     getPlan: builder.query({
       query: () => `/api/get/plan`,
+    }),
+    getCompanyPlan: builder.query({
+      query: (planType) => `/api/get/plan/${planType}`,
     }),
     createProduct: builder.mutation({
       query: (newProduct) => ({
         url: "/api/create/product",
         method: "POST",
         body: JSON.stringify(newProduct),
+        body: newProduct,
         headers: { "Content-Type": "application/json" },
       }),
       invalidatesTags: ["Company"],
@@ -58,17 +63,29 @@ export const companyApi = createApi({
       }),
       invalidatesTags: ["Company"],
     }),
+    updatePicture: builder.mutation({
+      query: (updatePicture) => ({
+        url: `/api/modify/company/profilePicture`,
+        method: "PUT",
+        body: updatePicture,
+        headers: { "Content-Type": "application/json" },
+      }),
+      invalidatesTags: ["Company"],
+    }),
   }),
   tagTypes: ["Company"],
 });
 
 export const {
   useGetCompanyQuery,
-  useGetProductQuery,
+  useLazyGetProductQuery,
   useGetPlanQuery,
+  useLazyGetCompanyPlanQuery,
   useGetCompanyProductsQuery,
+  //mutations
   useCreateProductMutation,
   useUpdateActiveMutation,
   useUpdateVisibleMutation,
   useUpdateProductMutation,
+  useUpdatePictureMutation,
 } = companyApi;

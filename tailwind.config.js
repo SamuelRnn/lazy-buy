@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     extend: {
       height: {
-        modal: "calc(100vh - 200px)",
+        modal: "calc(100vh - 230px)",
       },
       colors: {
         fondo: {
@@ -27,6 +27,9 @@ module.exports = {
         textH1: {
           50: "#FF8787",
         },
+      },
+      width: {
+        product_form: "min(98%, 600px)",
       },
     },
   },
