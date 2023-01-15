@@ -11,11 +11,11 @@ import {
 import Spinner from "../../components/Spinners/Spinner";
 import ProductCard from "../../components/Dashboard/products/ProductCard";
 
-const Products = ({ company: { email } }) => {
+const Products = ({ company: { email, id } }) => {
   const [active, setActive] = useState(false);
   const { isFetching, data: company } = useGetCompanyQuery(email);
   const [fetchCompany, { data: plan }] = useLazyGetCompanyPlanQuery();
-  const [fetchProduct, fetchedProduct] = useLazyGetProductQuery();
+  const [fetchProduct, { data: fetchedProduct }] = useLazyGetProductQuery();
 
   useEffect(() => {
     if (company) {
@@ -25,14 +25,20 @@ const Products = ({ company: { email } }) => {
 
   const editProduct = async (id) => {
     await fetchProduct(id);
-    setTimeout(() => setActive(true), 400);
+    setActive(true);
+    document.body.style.overflow = "hidden";
   };
 
   return (
     <DashboardLayout>
       <AnimatePresence>
         {active && (
-          <CreationForm setActive={setActive} product={fetchedProduct.data} />
+          <CreationForm
+            setActive={setActive}
+            product={fetchedProduct}
+            companyId={id}
+            companyPlan={plan}
+          />
         )}
       </AnimatePresence>
       <div className="relative">
