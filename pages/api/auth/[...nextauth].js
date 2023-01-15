@@ -3,6 +3,7 @@ import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { company, user } from "../../../prisma";
 import { compare } from "bcryptjs";
+import cloud from "../../../utils/cloudinary";
 
 export const authOptions = {
   providers: [
@@ -59,10 +60,28 @@ export const authOptions = {
   ],
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    async signIn({ user, account }) {
-      console.log("user", user);
+    async signIn({ user: userData, account }) {
       if (account.provider === "google") {
-        return "/login?error=google_verification";
+        const found = await user.findUnique({
+          where: { email: userData.email },
+        });
+        //return if accout exist
+        if (found) return true;
+        //upload to cloudinary
+        const upToCloud = await cloud.uploader.upload(userData.image, {
+          folder: "userProfilePictures",
+        });
+        const jsonProfilePicture = {
+          public_id: upToCloud.public_id,
+          url: upToCloud.secure_url,
+        };
+        await user.create({
+          data: {
+            email: userData.email,
+            profilePicture: jsonProfilePicture,
+            userName: userData.name,
+          },
+        });
       }
       return true;
     },

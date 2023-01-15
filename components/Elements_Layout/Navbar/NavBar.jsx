@@ -93,7 +93,6 @@ const NavBar = () => {
                 className="nav_links flex items-center gap-1"
               >
                 <Image
-                  className="rounded-full bg-fondo-400"
                   src={
                     sessionData.image ||
                     "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673480864/lazy-buy/Dise%C3%B1o_sin_t%C3%ADtulo_r4admw.png"
@@ -101,6 +100,7 @@ const NavBar = () => {
                   width={32}
                   height={32}
                   alt={"pfp"}
+                  className="w-[32px] h-[32px] object-cover rounded-full bg-fondo-400"
                 />
                 <BsCaretDownFill size={15} />
               </button>
