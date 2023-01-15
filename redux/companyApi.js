@@ -42,6 +42,15 @@ export const companyApi = createApi({
       invalidatesTags: ["Company"],
     }),
 
+    updatePicture: builder.mutation({
+      query: (updatePicture) => ({
+        url: "/api/mod/company/picture",
+        method: "PATCH",
+        body: updatePicture,
+        headers: { "Content-Type": "application/json" },
+      }),
+      invalidatesTags: ["Company"],
+    }),
     // updateAccount: builder.mutation({
     //   query: (updateAccount) => ({
     //     url: `/api/modify/product`,
@@ -63,4 +72,5 @@ export const {
   //mutations
   useCreateProductMutation,
   useUpdateProductMutation,
+  useUpdatePictureMutation,
 } = companyApi;
