@@ -41,7 +41,7 @@ export default async function stripePay(req, res) {
         });
       }
       const productoNew = await product.findUnique({ where: { id } });
-      
+
       if (productoNew.stock < 1) {
         await product.update({
           where: {
@@ -50,15 +50,6 @@ export default async function stripePay(req, res) {
           data: { isVisible: false },
         });
       }
-
-      console.log("echo : " + id);
-      /* if (producto.stock < 1) {
-        producto.isVisible = false;
-      }
-      if (producto.stock >= 1) {
-        producto.stock = producto.stock - 1;
-      }
-      console.log("echo") */
     });
 
     res.status(200).json(session);

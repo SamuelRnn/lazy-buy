@@ -136,7 +136,7 @@ const Account = ({ company: { email } }) => {
                           />
                         </div>
                         <div className="flex justify-between items-center col-span-2 gap-2 p-x-4">
-                          <UploadWidget email={company.email} />
+                          <UploadWidget email={company && company.email} />
                           {company && (
                             <img
                               src={company && company.profilePicture.url}
