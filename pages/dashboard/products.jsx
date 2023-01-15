@@ -6,14 +6,16 @@ import { AnimatePresence } from "framer-motion";
 import {
   useGetCompanyQuery,
   useLazyGetCompanyPlanQuery,
+  useLazyGetProductQuery,
 } from "../../redux/companyApi";
 import Spinner from "../../components/Spinners/Spinner";
 import ProductCard from "../../components/Dashboard/products/ProductCard";
 
 const Products = ({ company: { email } }) => {
+  const [active, setActive] = useState(false);
   const { isFetching, data: company } = useGetCompanyQuery(email);
   const [fetchCompany, { data: plan }] = useLazyGetCompanyPlanQuery();
-  const [active, setActive] = useState(false);
+  const [fetchProduct, fetchedProduct] = useLazyGetProductQuery();
 
   useEffect(() => {
     if (company) {
@@ -21,10 +23,17 @@ const Products = ({ company: { email } }) => {
     }
   }, [company]);
 
+  const editProduct = async (id) => {
+    await fetchProduct(id);
+    setTimeout(() => setActive(true), 400);
+  };
+
   return (
     <DashboardLayout>
       <AnimatePresence>
-        {active && <CreationForm setActive={setActive} />}
+        {active && (
+          <CreationForm setActive={setActive} product={fetchedProduct.data} />
+        )}
       </AnimatePresence>
       <div className="relative">
         <div className="flex justify-between items-center">
@@ -52,7 +61,12 @@ const Products = ({ company: { email } }) => {
           {company && (
             <div className="grid_dashboard_products">
               {company.products.map((item) => (
-                <ProductCard key={item.id} product={item} />
+                <ProductCard
+                  key={item.id}
+                  id={item.id}
+                  product={item}
+                  editProduct={editProduct}
+                />
               ))}
             </div>
           )}

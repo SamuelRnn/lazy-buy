@@ -107,7 +107,7 @@
 /* products dashboard */
 .grid_dashboard_products {
   @apply grid;
-  grid-template-columns: repeat(auto-fill, 320px);
+  grid-template-columns: repeat(auto-fill, 160px);
   place-content: center;
   gap: 4rem;
 }

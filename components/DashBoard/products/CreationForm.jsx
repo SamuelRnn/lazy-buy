@@ -19,6 +19,7 @@ function getFileAsDataURI(image) {
 }
 
 const CreationForm = ({ product, setActive }) => {
+  console.log(product);
   const [createProduct] = useCreateProductMutation();
   const [isSubmitLoading, triggerSubmitLoading] = useState(false);
   //initial state if product not provided
@@ -131,31 +132,12 @@ const CreationForm = ({ product, setActive }) => {
                     name="category"
                     className="input_class w-full"
                     onChange={handleChange}
+                    defaultValue={form.category}
                   >
-                    <option
-                      selected={form.category === "Handicraft"}
-                      value="Handicraft"
-                    >
-                      Handicraft
-                    </option>
-                    <option
-                      selected={form.category === "Textile"}
-                      value="Textile"
-                    >
-                      Textile
-                    </option>
-                    <option
-                      selected={form.category === "Electronics"}
-                      value="Electronics"
-                    >
-                      Electronics
-                    </option>
-                    <option
-                      selected={form.category === "Accessories"}
-                      value="Accessories"
-                    >
-                      Accessories
-                    </option>
+                    <option value="Handicraft">Handicraft</option>
+                    <option value="Textile">Textile</option>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Accessories">Accessories</option>
                   </select>
                 </div>
               </div>
@@ -172,7 +154,7 @@ const CreationForm = ({ product, setActive }) => {
                 <Image
                   alt="product image"
                   className=" min-w-[200px] h-[200px] object-cover rounded-md"
-                  src={imagePreview}
+                  src={form.mainImage?.url || imagePreview}
                   width={100}
                   height={100}
                 />

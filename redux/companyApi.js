@@ -14,6 +14,7 @@ export const companyApi = createApi({
     getProduct: builder.query({
       query: (productId) => `/api/get/product/${productId}`,
     }),
+
     getPlan: builder.query({
       query: () => `/api/get/plan`,
     }),
@@ -77,10 +78,11 @@ export const companyApi = createApi({
 
 export const {
   useGetCompanyQuery,
-  useGetProductQuery,
+  useLazyGetProductQuery,
   useGetPlanQuery,
   useLazyGetCompanyPlanQuery,
   useGetCompanyProductsQuery,
+  //mutations
   useCreateProductMutation,
   useUpdateActiveMutation,
   useUpdateVisibleMutation,
