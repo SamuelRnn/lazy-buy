@@ -10,7 +10,7 @@ export const userApi = createApi({
     }),
     addWishItem: builder.mutation({
       query: (addWishItem) => ({
-        url: "/api/modify/user/wishList",
+        url: "/api/mod/user/wishList",
         method: "PATCH",
         body: addWishItem,
         header: { "Content-Type": "application/json" },

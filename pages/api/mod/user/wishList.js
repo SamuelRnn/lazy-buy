@@ -7,15 +7,12 @@ export default async function getWishList(req, res) {
   const { product, email } = req.body;
 
   try {
-    const userWishList = await user.findFirst({
+    const userWishList = await user.findUnique({
       where: {
         email,
       },
-      include: {
-        wishList: true,
-      },
     });
-
+    
     if (!userWishList)
       return res
         .status(404)
@@ -27,18 +24,17 @@ export default async function getWishList(req, res) {
       return res
         .status(404)
         .json({ message: "User's wish list item already exist" });
-    const newWishList = userWishList.wishList.push(product);
 
     await user.update({
       where: {
         email,
       },
       data: {
-        wishList: newWishList,
+        wishList: [...userWishList.wishList, product],
       },
     });
 
-    return res.status(200).json(wishList);
+    return res.status(200).send("added");
   } catch (error) {
     console.log(error);
     res.status(500).json({ error });

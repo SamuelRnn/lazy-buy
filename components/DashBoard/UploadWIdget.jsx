@@ -39,7 +39,3 @@ const UploadWidget = ({ email }) => {
 };
 
 export default UploadWidget;
-
-export async function getServerSideProps(context) {
-  return await dashboardMiddleware(context);
-}

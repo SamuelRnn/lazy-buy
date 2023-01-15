@@ -8,7 +8,7 @@ import { useGetCompanyQuery } from "../../redux/companyApi";
 import Spinner from "../../components/Spinners/Spinner";
 import { registerValidateCompanyAccount } from "../../utils/validateCompanyAccount";
 import { useFormik } from "formik";
-import UploadWidget from "./UploadWIdget";
+import UploadWidget from "../../components/DashBoard/UploadWIdget";
 
 const Account = ({ company: { email } }) => {
   const [edit, setEdit] = useState(false);

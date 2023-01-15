@@ -3,6 +3,7 @@ import { cartSlice } from "./cartSlice";
 import { accountSlice } from "./accountSlice";
 import { productApi } from "./productsApi";
 import { companyApi } from "./companyApi";
+import { userApi } from "./userApi";
 // import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
 import { combineReducers } from "@reduxjs/toolkit";
@@ -39,6 +40,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   [productApi.reducerPath]: productApi.reducer,
   [companyApi.reducerPath]: companyApi.reducer,
+  [userApi.reducerPath]: userApi.reducer,
   cart: cartSlice.reducer,
   account: accountSlice.reducer,
 });
@@ -50,7 +52,8 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false })
       .concat(productApi.middleware)
-      .concat(companyApi.middleware),
+      .concat(companyApi.middleware)
+      .concat(userApi.middleware),
 });
 
 //optional
