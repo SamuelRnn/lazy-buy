@@ -20,33 +20,46 @@ const ProductCard = ({ product, editProduct, id }) => {
       } shadow-md shadow-zinc-400`}
     >
       {/* product options */}
-      <div className="absolute right-[-10px] bottom-[-10px] flex flex-col z-20">
-        <div className="flex flex-col gap-y-2 mt-1">
-          {/* product visibility */}
-          <button
-            onClick={() =>
-              updateProduct({
-                isVisible: !product.isVisible,
-                productId: product.id,
-              })
-            }
-            className="p-2 rounded-md bg-zinc-500 hover:bg-opacity-100 hover:bg-fondo-400 transition-colors"
-          >
-            {product.isVisible ? (
-              <BsFillEyeSlashFill className="text-2xl text-zinc-100" />
-            ) : (
-              <BsFillEyeFill className="text-2xl text-orange-300" />
-            )}
-          </button>
+
+      <div className="absolute flex flex-col justify-between z-20 top-[-6px] right-[-6px] h-full">
+        {/* product visibility */}
+        <button
+          onClick={() =>
+            updateProduct({
+              isVisible: !product.isVisible,
+              productId: product.id,
+            })
+          }
+          title="publish/unpublish product"
+          className="p-2 rounded-md bg-zinc-500 hover:bg-opacity-100 hover:bg-zinc-400 transition-colors"
+        >
+          {product.isVisible ? (
+            <BsFillEyeSlashFill className="text-2xl text-zinc-100" />
+          ) : (
+            <BsFillEyeFill className="text-2xl text-amber-400" />
+          )}
+        </button>
+
+        <div className="flex flex-col gap-1 mb-[-10px]">
           {/* edit product */}
           <button
+            title="edit product"
             onClick={() => editProduct(id)}
             className="p-2 rounded-md bg-zinc-500 hover:bg-opacity-100 hover:bg-fondo-400 transition-colors"
           >
             <AiTwotoneEdit className="text-2xl text-zinc-100" />
           </button>
           {/* borrado logico del producto */}
-          <button className="p-2 rounded-md bg-zinc-500 hover:bg-opacity-100 hover:bg-fondo-400 transition-colors">
+          <button
+            title="delete product"
+            onClick={() => {
+              updateProduct({
+                productId: product.id,
+                triggerDelete: true,
+              });
+            }}
+            className="p-2 rounded-md bg-zinc-500 hover:bg-opacity-100 hover:bg-fondo-400 transition-colors"
+          >
             <BsFillTrashFill className="text-2xl text-zinc-100" />
           </button>
         </div>
@@ -54,7 +67,7 @@ const ProductCard = ({ product, editProduct, id }) => {
 
       <div>
         <div className="px-3 py-2 text-fondo-300">
-          <h2 className=" overflow-hidden whitespace-nowrap text-ellipsis font-bold">
+          <h2 className=" overflow-hidden whitespace-nowrap text-ellipsis font-bold w-3/4">
             {product.name}
           </h2>
         </div>

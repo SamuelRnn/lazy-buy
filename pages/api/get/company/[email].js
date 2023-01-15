@@ -10,6 +10,9 @@ export default async function getCompanyById(req, res) {
       where: { email },
       include: {
         products: {
+          where: {
+            isActive: true,
+          },
           orderBy: {
             updatedAt: "desc",
           },

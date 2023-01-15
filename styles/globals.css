@@ -135,6 +135,6 @@
   z-index: 19;
   height: 100%;
   width: 100%;
-  @apply bg-zinc-500 bg-opacity-60 rounded-md grid place-content-center text-zinc-200 font-bold;
+  @apply bg-zinc-600 bg-opacity-70 rounded-md grid place-content-center text-zinc-100 font-bold;
   top: 0;
 }
