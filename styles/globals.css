@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+/* navbar h = 3.8rem */
 /* main width for the layout */
 .user_menu_pos {
   position: absolute;
@@ -24,6 +24,9 @@
 .filter_btn:disabled {
   @apply bg-fondo-100 text-zinc-50;
   pointer-events: none;
+}
+.input_class {
+  @apply bg-gray-300 text-zinc-700 rounded p-2 outline-none border border-slate-300 mt-2;
 }
 .filters_modal {
   position: fixed;
@@ -101,6 +104,13 @@
   grid-template-columns: 1fr 4fr;
   column-gap: 40px;
 }
+/* products dashboard */
+.grid_dashboard_products {
+  @apply grid;
+  grid-template-columns: repeat(auto-fill, 160px);
+  place-content: center;
+  gap: 4rem;
+}
 /* loader */
 @keyframes loader-rotate {
   0% {
@@ -118,4 +128,13 @@
 .pay {
   border: 1px solid rgba(162, 162, 162, 0.479);
   backdrop-filter: blur(7px);
+}
+.invisible_filter::after {
+  content: "Private";
+  position: absolute;
+  z-index: 19;
+  height: 100%;
+  width: 100%;
+  @apply bg-zinc-600 bg-opacity-70 rounded-md grid place-content-center text-zinc-100 font-bold;
+  top: 0;
 }

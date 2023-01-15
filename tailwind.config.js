@@ -28,6 +28,9 @@ module.exports = {
           50: "#FF8787",
         },
       },
+      width: {
+        product_form: "min(98%, 600px)",
+      },
     },
   },
   plugins: [

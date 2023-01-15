@@ -23,7 +23,7 @@ const NavBar = () => {
 
   return (
     <header className="w-full bg-fondo-200">
-      <div className="main py-2 flex flex-wrap gap-x-4 gap-y-2 items-center lg:justify-between justify-center">
+      <div className="main h-[3.8rem] flex flex-wrap gap-x-4 gap-y-2 items-center lg:justify-between justify-center">
         <div className="flex items-center gap-x-4 justify-center flex-wrap gap-y-2">
           {/* logo */}
           <a href="/" className="nav_links flex items-center gap-1">

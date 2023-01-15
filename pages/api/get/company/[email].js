@@ -9,7 +9,14 @@ export default async function getCompanyById(req, res) {
     const companyFound = await company.findUnique({
       where: { email },
       include: {
-        products: true,
+        products: {
+          where: {
+            isActive: true,
+          },
+          orderBy: {
+            updatedAt: "desc",
+          },
+        },
         transactions: true,
       },
     });
