@@ -8,7 +8,7 @@ export default async function stripePay(req, res) {
   console.log(req.body);
   let ids = [];
   let items = req.body.map((e) => {
-    ids.push(e.id);
+    ids.push({ id: e.id, quantity: e.quantity });
     return {
       price_data: {
         currency: "usd",
@@ -31,19 +31,34 @@ export default async function stripePay(req, res) {
   try {
     const session = await stripe.checkout.sessions.create(params);
 
-    ids.forEach(async (e) => {
-      const producto = await product.findUnique({
-        where: {
-          id: e,
-        },
-      });
+    ids.forEach(async ({ id, quantity }) => {
+      const producto = await product.findUnique({ where: { id } });
 
-      if (producto.stock < 1) {
+      if (producto && producto.stock >= 1) {
+        await product.update({
+          where: { id },
+          data: { stock: producto.stock - quantity },
+        });
+      }
+      const productoNew = await product.findUnique({ where: { id } });
+      
+      if (productoNew.stock < 1) {
+        await product.update({
+          where: {
+            id,
+          },
+          data: { isVisible: false },
+        });
+      }
+
+      console.log("echo : " + id);
+      /* if (producto.stock < 1) {
         producto.isVisible = false;
       }
       if (producto.stock >= 1) {
         producto.stock = producto.stock - 1;
       }
+      console.log("echo") */
     });
 
     res.status(200).json(session);
