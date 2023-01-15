@@ -1,4 +1,4 @@
-import { plan } from "../../../prisma";
+import { plan } from "../../../../prisma";
 
 export default async function getPlan(req, res) {
   if (req.method !== "GET")

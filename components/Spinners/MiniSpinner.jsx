@@ -1,7 +1,7 @@
-const MiniSpinner = () => {
+const MiniSpinner = ({ className = "bg-fondo-300" }) => {
   return (
     <div
-      className="animate-spin inline-block w-4 h-4 border-[3px] border-t-transparent rounded-full border-fondo-300"
+      className={`animate-spin inline-block w-4 h-4 border-[3px] border-t-transparent rounded-full ${className}`}
       role="status"
       aria-label="loading"
     >
