@@ -1,7 +1,7 @@
-import DashboardLayout from "../../components/Dashboard/DashboardLayout";
+import DashboardLayout from "../../components/Elements_Dashboard/DashboardLayout";
 import { motion } from "framer-motion";
 import dashboardMiddleware from "../../utils/dashboardMiddleware";
-import HomeHeader from "../../components/DashBoard/HomeHeader";
+import HomeHeader from "../../components/Elements_Dashboard/HomeHeader";
 
 const Home = ({ company }) => {
   console.log(company);

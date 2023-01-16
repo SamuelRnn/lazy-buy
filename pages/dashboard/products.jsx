@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import DashboardLayout from "../../components/Dashboard/DashboardLayout";
-import CreationForm from "../../components/Dashboard/Products/CreationForm";
+import DashboardLayout from "../../components/Elements_Dashboard/DashboardLayout";
+import CreationForm from "../../components/Elements_Dashboard/Products/CreationForm";
 import dashboardMiddleware from "../../utils/dashboardMiddleware";
 import { useEffect, useState } from "react";
 import { AnimatePresence } from "framer-motion";
