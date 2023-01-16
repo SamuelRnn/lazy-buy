@@ -4,16 +4,59 @@ import dashboardMiddleware from "../../utils/dashboardMiddleware";
 import { useGetCompanyQuery, useGetPlanQuery } from "../../redux/companyApi";
 import { BiCheck } from "react-icons/bi";
 import { motion, AnimatePresence } from "framer-motion";
+import { loadStripe } from "@stripe/stripe-js";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
+import { toast, Toaster } from "react-hot-toast";
+
 const Plan = ({ company }) => {
+  const router = useRouter();
   const { isLoading: isLoadingPlans, data: plans } = useGetPlanQuery();
   const { isLoading: isLoadingCompany, data: companyData } = useGetCompanyQuery(
     company.email
   );
-  console.log(companyData);
+  console.log(plans);
+
+  const handlePayment = async (planType) => {
+    const stripe = await loadStripe(process.env.NEXT_PUBLIC_PUBLIC_KEY);
+    let body = {
+      planType,
+      email: company.email,
+    };
+    try {
+      const response = await fetch(
+        "http://localhost:3000/api/create/stripePy?pay=plan",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(body),
+        }
+      );
+      const data = await response.json();
+      //toast.loading("Redirecting...");
+      const hh = await stripe.redirectToCheckout({
+        sessionId: data.id,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    if (router.query.success) {
+      toast.success(`Congratulations on your new plan ${router.query.planType}`,{duration: 5000,});
+    }
+    if (router.query.cancel) {
+      toast.error("We are sorry your payment has failed",{duration: 5000,});
+    }
+  }, []);
+
   return (
     <DashboardLayout>
       <section>
         <div className="pt-4">
+          <Toaster />
           <div className="mx-auto max-w-screen-md text-center mb-8 lg:mb-8">
             <h2 className="mb-3 text-4xl tracking-tight font-extrabold text-fondo-300">
               Designed specially for your business
@@ -88,6 +131,7 @@ const Plan = ({ company }) => {
                     </span>
                   </div>
                   <button
+                    onClick={() => handlePayment(plan.planType)}
                     disabled={companyData.plan === plan.planType}
                     className="w-full mt-6 p-4 rounded bg-fondo-300 border border-fondo-300 text-zinc-100
                   font-bold transition-colors hover:bg-zinc-500 hover:text-white disabled:bg-zinc-500 disabled:pointer-events-none"
