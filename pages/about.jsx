@@ -1,4 +1,4 @@
-import Layout from "../components/Layout";
+import Layout from "../components/MainLayout";
 import Devs from "../components/Elements/Devs";
 import Image from "next/image";
 
