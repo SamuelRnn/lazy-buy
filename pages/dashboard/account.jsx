@@ -35,10 +35,7 @@ const Account = ({ company: { email } }) => {
     <DashboardLayout>
       <AnimatePresence>
         <div className="overflow-hidden -z-50">
-          <motion.div
-            initial={{ x: 200, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-          >
+          <div>
             <section className="">
               {isLoading && <Spinner />}
               {!isLoading && (
@@ -171,7 +168,7 @@ const Account = ({ company: { email } }) => {
                 </div>
               )}
             </section>
-          </motion.div>
+          </div>
         </div>
       </AnimatePresence>
     </DashboardLayout>
