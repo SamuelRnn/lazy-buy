@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { cartSlice } from "./cartSlice";
 import { accountSlice } from "./accountSlice";
+import { productSlice } from "./productsSlice";
 import { productApi } from "./productsApi";
 import { companyApi } from "./companyApi";
 import { userApi } from "./userApi";
@@ -41,6 +42,7 @@ const rootReducer = combineReducers({
   [productApi.reducerPath]: productApi.reducer,
   [companyApi.reducerPath]: companyApi.reducer,
   [userApi.reducerPath]: userApi.reducer,
+  products: productSlice.reducer,
   cart: cartSlice.reducer,
   account: accountSlice.reducer,
 });

@@ -18,7 +18,7 @@ const OrderDetail = () => {
     }));
     try {
       const response = await fetch(
-        "http://localhost:3000/api/create/stripePy",
+        "http://localhost:3000/api/create/stripePy?pay=product",
         {
           method: "POST",
           headers: {
@@ -42,8 +42,11 @@ const OrderDetail = () => {
       <h2 className="main text-fondo-400 font-bold text-2xl">Your order</h2>
       <div className="main flex gap-2 gap-y-3 py-5 ">
         {cart.map((item) => (
-          <div key={item.id} className="bg-zinc-200 p-3  rounded-md content-center ">
-            <Image 
+          <div
+            key={item.id}
+            className="bg-zinc-200 p-3  rounded-md content-center "
+          >
+            <Image
               src={item.mainImage.url}
               alt={item.name}
               height={200}

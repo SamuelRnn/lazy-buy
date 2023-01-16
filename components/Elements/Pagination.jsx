@@ -2,13 +2,16 @@ import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 
 function getPageLabels(count, perPage) {
   const pages = Math.ceil(count / perPage);
-  const aux = [];
+  let aux = [];
   for (let i = pages; i > 0; i--) {
-    if (i === pages - 1 && pages > 4) {
+    if (i === 4) {
       aux.unshift("...");
+      continue;
     }
+    if (i > 4) continue;
     aux.unshift(i);
   }
+  aux.push(pages);
   return [aux, pages];
 }
 
@@ -55,19 +58,38 @@ const Pagination = ({ count, filters, setFilters }) => {
         >
           <HiChevronLeft size="22px" />
         </button>
-        {pageLabels?.map((e) => (
-          <button
-            key={e}
-            className={`h-10 w-10 transition-colors rounded-full hover:bg-gray-200 ${
-              parseInt(filters.page) === e
-                ? "bg-fondo-200 pointer-events-none text-zinc-100"
-                : "text-gray-800"
-            }`}
-            onClick={() => goToPage(e)}
-          >
-            {e}
-          </button>
-        ))}
+        {pageLabels?.map((e) => {
+          if (e === "...") {
+            console.log(maxPages);
+            return (
+              <button
+                key={e}
+                className={`h-10 w-10 transition-colors rounded-full hover:bg-gray-200 ${
+                  filters.page > 3 && filters.page !== maxPages
+                    ? "bg-fondo-200 pointer-events-none text-zinc-100"
+                    : "text-gray-800"
+                }`}
+              >
+                {filters.page < 4 || filters.page === maxPages
+                  ? e
+                  : filters.page}
+              </button>
+            );
+          }
+          return (
+            <button
+              key={e}
+              className={`h-10 w-10 transition-colors rounded-full hover:bg-gray-200 ${
+                parseInt(filters.page) === e
+                  ? "bg-fondo-200 pointer-events-none text-zinc-100"
+                  : "text-gray-800"
+              }`}
+              onClick={() => goToPage(e)}
+            >
+              {e}
+            </button>
+          );
+        })}
         <button
           className={`grid place-content-center h-10 w-10 transition-colors rounded-full text-fondo-500 
           hover:bg-gray-200 ${

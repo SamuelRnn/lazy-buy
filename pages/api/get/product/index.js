@@ -1,5 +1,6 @@
 import { product } from "../../../../prisma";
 import camelize from "../../../../utils/camelize";
+import simulateDelay from "../../../../utils/simulateDelay";
 //------------------------------------------
 //TODO: error managment
 //------------------------------------------
@@ -26,7 +27,9 @@ function parseNullfromJSON(json) {
 export default async function getProduct(req, res) {
   if (req.method !== "GET")
     return res.status(405).json({ message: "Not found" });
+
   const filters = parseNullfromJSON(req.query);
+  console.log(filters);
   //generar variable mutable de los productos
   let products;
   let count;
@@ -65,36 +68,40 @@ export default async function getProduct(req, res) {
       .findMany({
         where: whereSearchQuery,
       })
-      .then((res) => res.length);
-    products = await product.findMany({
-      where: whereSearchQuery,
-      include: {
-        company: {
-          select: {
-            name: true,
+      .then((res) => res.filter((i) => i.isActive && i.isVisible).length);
+    products = await product
+      .findMany({
+        where: whereSearchQuery,
+        include: {
+          company: {
+            select: {
+              name: true,
+            },
           },
         },
-      },
-    });
+      })
+      .then((res) => res.filter((i) => i.isActive && i.isVisible));
   }
   //busqueda por categoria
   if (filters.category && !filters.search) {
     camelize;
-    products = await product.findMany({
-      where: {
-        category: {
-          equals: camelize(filters.category),
-          mode: "default",
-        },
-      },
-      include: {
-        company: {
-          select: {
-            name: true,
+    products = await product
+      .findMany({
+        where: {
+          category: {
+            equals: camelize(filters.category),
+            mode: "default",
           },
         },
-      },
-    });
+        include: {
+          company: {
+            select: {
+              name: true,
+            },
+          },
+        },
+      })
+      .then((res) => res.filter((i) => i.isActive && i.isVisible));
     count = products.length;
   }
   //------------------------------------------
@@ -141,9 +148,11 @@ export default async function getProduct(req, res) {
     count = products.length;
   }
   //------------------------------------------
-  products = products.slice(
-    (parseInt(filters.page) - 1) * 10,
-    (parseInt(filters.page) - 1) * 10 + 10
-  );
+  if (products.length) {
+    products = products.slice(
+      (parseInt(filters.page) - 1) * 10,
+      (parseInt(filters.page) - 1) * 10 + 10
+    );
+  }
   return res.status(200).json({ results: products, count });
 }
