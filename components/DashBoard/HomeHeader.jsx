@@ -175,12 +175,8 @@ const HomeHeader = () => {
                   In your personal dashboard you can edit your profile to show
                   all the information that your clients need to start knowing
                   you and the quality of your products. <br />
-<<<<<<< HEAD
-                  It's important for your business to have clear presentation.
-=======
                   It&apos;s important for your business to have clear
                   presentation.
->>>>>>> 3067a5aeb4f3dcac366dfea079082442c5502f3f
                 </p>
                 <Link
                   className="hidden p-2 bg-fondo-300 border rounded-full text-center w-1/4 mx-auto mr-2 mt-3 text-white lg:block lg:w-1/3 xl:w-1/4 xl:mt-3 hover:bg-white hover:text-fondo-300 hover:border-fondo-300 transition-all"
