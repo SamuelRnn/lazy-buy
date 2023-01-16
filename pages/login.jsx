@@ -1,5 +1,5 @@
 import AnimatedLogo from "../components/Elements/AnimatedLogo";
-import Layout from "../components/Layout";
+import Layout from "../components/MainLayout";
 import WaitingAuthModal from "../components/Elements_AuthLoader/AuthLoaderModal";
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";

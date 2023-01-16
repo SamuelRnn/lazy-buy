@@ -1,4 +1,4 @@
-import Layout from "../../components/Layout";
+import Layout from "../../components/MainLayout";
 import Card from "../../components/Elements_Cards/Card";
 import Spinner from "../../components/Spinners/Spinner";
 import ModalFilters from "../../components/Elements_Filters/ModalFilters";
