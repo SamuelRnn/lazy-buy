@@ -4,20 +4,25 @@ import Image from "next/image";
 import { AiOutlineEdit } from "react-icons/ai";
 import { useState } from "react";
 import dashboardMiddleware from "../../utils/dashboardMiddleware";
-import { useGetCompanyQuery } from "../../redux/companyApi";
+import {
+  useGetCompanyQuery,
+  useUpdateAccountMutation,
+} from "../../redux/companyApi";
 import Spinner from "../../components/Spinners/Spinner";
 import { registerValidateCompanyAccount } from "../../utils/validateCompanyAccount";
 import { useFormik } from "formik";
 import UploadWidget from "../../components/DashBoard/UploadWIdget";
+import { toast } from "react-hot-toast";
 
 const Account = ({ company: { email } }) => {
   const [edit, setEdit] = useState(false);
   const { isLoading, data: company } = useGetCompanyQuery(email);
+  const [updateAccount] = useUpdateAccountMutation();
+
   /* TODO: CLOUDINARY */
   const formik = useFormik({
     initialValues: {
       name: "",
-      profilePicture: "",
       owner: "",
       country: "",
       city: "",
@@ -28,17 +33,22 @@ const Account = ({ company: { email } }) => {
 
   async function onSubmit(values) {
     values.email = company.email;
-    console.log(values);
+    console.log(values)
+    try {
+      await updateAccount(values);
+      formik.resetForm()
+      return toast.success('Changes Applied!')
+    } catch (error) {
+      return toast.error('Something went wrong!')
+      
+    }
   }
 
   return (
     <DashboardLayout>
       <AnimatePresence>
         <div className="overflow-hidden -z-50">
-          <motion.div
-            initial={{ x: 200, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-          >
+          <div>
             <section className="">
               {isLoading && <Spinner />}
               {!isLoading && (
@@ -171,7 +181,7 @@ const Account = ({ company: { email } }) => {
                 </div>
               )}
             </section>
-          </motion.div>
+          </div>
         </div>
       </AnimatePresence>
     </DashboardLayout>

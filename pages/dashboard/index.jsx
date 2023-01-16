@@ -7,14 +7,9 @@ const Home = ({ company }) => {
   console.log(company);
   return (
     <DashboardLayout>
-      <motion.div
-        initial={{ x: -400, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        exit={{ x: 400, opacity: 0 }}
-        className="bg-zinc-50 h-screen"
-      >
-        <HomeHeader/>
-      </motion.div>
+      <div>
+        <HomeHeader />
+      </div>
     </DashboardLayout>
   );
 };
