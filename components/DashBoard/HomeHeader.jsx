@@ -4,8 +4,10 @@ import Image from "next/image";
 import det from "../../public/dashdet2.png";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useSelector } from "react-redux";
 
 const HomeHeader = () => {
+  const companyData = useSelector((state) => state.account.session);
   const hambHandler = () => {
     let menu = document.getElementById("menu");
     let hamb = document.getElementById("menu_btn");
@@ -27,7 +29,7 @@ const HomeHeader = () => {
               alt="profile"
             ></Image>
             <h2 className="text-white font-semibold text-md lg:text-lg">
-              Armando Mendoza Style SA
+              {companyData.name}
             </h2>
           </div>
           <div className="hidden lg:flex space-x-2 text-white text-lg font-semibold items-center mt-2">
