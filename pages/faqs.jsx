@@ -1,4 +1,4 @@
-import Layout from "../components/Layout";
+import Layout from "../components/MainLayout";
 import { BsQuestionCircleFill } from "react-icons/bs";
 
 const Faqs = () => {

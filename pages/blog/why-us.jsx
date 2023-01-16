@@ -1,4 +1,4 @@
-import Layout from "../../components/Layout";
+import Layout from "../../components/MainLayout";
 import { motion } from "framer-motion";
 import Testimonials from "../../components/Elements/Testimonials";
 import Topics from "../../components/Elements/Topics";
