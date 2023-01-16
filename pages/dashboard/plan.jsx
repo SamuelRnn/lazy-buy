@@ -1,5 +1,5 @@
 import Spinner from "../../components/Spinners/Spinner";
-import DashboardLayout from "../../components/Dashboard/DashboardLayout";
+import DashboardLayout from "../../components/Elements_Dashboard/DashboardLayout";
 import dashboardMiddleware from "../../utils/dashboardMiddleware";
 import { useGetCompanyQuery, useGetPlanQuery } from "../../redux/companyApi";
 import { BiCheck } from "react-icons/bi";
@@ -45,10 +45,13 @@ const Plan = ({ company }) => {
   };
   useEffect(() => {
     if (router.query.success) {
-      toast.success(`Congratulations on your new plan ${router.query.planType}`,{duration: 5000,});
+      toast.success(
+        `Congratulations on your new plan ${router.query.planType}`,
+        { duration: 5000 }
+      );
     }
     if (router.query.cancel) {
-      toast.error("We are sorry your payment has failed",{duration: 5000,});
+      toast.error("We are sorry your payment has failed", { duration: 5000 });
     }
   }, []);
 
