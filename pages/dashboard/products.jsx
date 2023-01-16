@@ -10,7 +10,7 @@ import {
   useLazyGetProductQuery,
 } from "../../redux/companyApi";
 import Spinner from "../../components/Spinners/Spinner";
-import ProductCard from "../../components/Dashboard/products/ProductCard";
+import ProductCard from "../../components/Elements_Dashboard/products/ProductCard";
 
 const Products = ({ company: { email } }) => {
   const [active, setActive] = useState(false);
