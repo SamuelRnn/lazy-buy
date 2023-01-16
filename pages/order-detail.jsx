@@ -1,5 +1,5 @@
+import Layout from "../components/MainLayout";
 import { useSelector } from "react-redux";
-import Layout from "../components/Layout";
 import Image from "next/image";
 import { getCart } from "../redux/cartSlice";
 import { loadStripe } from "@stripe/stripe-js";

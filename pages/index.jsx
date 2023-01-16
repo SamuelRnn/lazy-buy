@@ -1,4 +1,4 @@
-import Layout from "../components/Layout";
+import Layout from "../components/MainLayout";
 import Banner from "../components/Elements/Banner";
 import CardCarousel from "../components/Elements_Cards/CardCarousel";
 import { getSession } from "next-auth/react";

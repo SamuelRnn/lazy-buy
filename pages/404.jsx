@@ -1,4 +1,4 @@
-import Layout from "../components/Layout";
+import Layout from "../components/MainLayout";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Image from "next/image";
