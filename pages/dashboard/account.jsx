@@ -11,7 +11,7 @@ import {
 import Spinner from "../../components/Spinners/Spinner";
 import { registerValidateCompanyAccount } from "../../utils/validateCompanyAccount";
 import { useFormik } from "formik";
-import UploadWidget from "../../components/DashBoard/UploadWIdget";
+import UploadWidget from "../../components/Elements_Dashboard/UploadWIdget";
 import { toast } from "react-hot-toast";
 
 const Account = ({ company: { email } }) => {

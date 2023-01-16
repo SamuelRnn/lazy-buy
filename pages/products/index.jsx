@@ -3,7 +3,7 @@ import Card from "../../components/Elements_Cards/Card";
 import Spinner from "../../components/Spinners/Spinner";
 import ModalFilters from "../../components/Elements_Filters/ModalFilters";
 import OrderSelect from "../../components/Elements_Filters/OrderSelect";
-import MiniSpinner from "../../components/Spinners/miniSpinner";
+import MiniSpinner from "../../components/Spinners/MiniSpinner";
 import Pagination from "../../components/Elements/Pagination";
 import { useEffect, useState } from "react";
 import { IoMdOptions } from "react-icons/io";
