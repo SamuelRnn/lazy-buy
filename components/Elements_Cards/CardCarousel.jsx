@@ -38,9 +38,9 @@ const CardCarousel = ({ productArray }) => {
         responsive={responsive}
         draggable={false}
         infinite={true}
-        // autoPlay={true}
+        autoPlay={true}
         shouldResetAutoplay={false}
-        // autoPlaySpeed={4500}
+        autoPlaySpeed={4500}
         pauseOnHover={true}
       >
         {productArray.map((product) => (
