@@ -33,11 +33,11 @@ const SignUpCompany = ({ typeAccount, setTypeAccount }) => {
       body: JSON.stringify(values),
     };
 
-    await fetch("http://localhost:3000/api/create/company", options)
+    await fetch("/api/create/company", options)
       .then((res) => res.json())
       .then((data) => {
         console.log("🚀 ~ file: signCompany.jsx:42 ~ .then ~ data", data);
-        if (data) router.push("http://localhost:3000/login");
+        if (data) router.push("/login");
       })
       .catch((error) => console.log(error));
   }
