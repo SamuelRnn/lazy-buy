@@ -8,7 +8,7 @@ import { useGetCompanyQuery } from "../../redux/companyApi";
 import Spinner from "../../components/Spinners/Spinner";
 import { registerValidateCompanyAccount } from "../../utils/validateCompanyAccount";
 import { useFormik } from "formik";
-import UploadWidget from "./UploadWIdget";
+import UploadWidget from "../../components/DashBoard/UploadWIdget";
 
 const Account = ({ company: { email } }) => {
   const [edit, setEdit] = useState(false);
@@ -71,7 +71,7 @@ const Account = ({ company: { email } }) => {
                                 ? "border-rose-800"
                                 : ""
                             }
-                             ${edit ? "cursor-text" : "cursor-not-allowed"}`}
+                            ${edit ? "cursor-text" : "cursor-not-allowed"}`}
                             disabled={edit ? false : true}
                             {...formik.getFieldProps("name")}
                           />
@@ -138,7 +138,9 @@ const Account = ({ company: { email } }) => {
                         <div className="flex justify-between items-center col-span-2 gap-2 p-x-4">
                           <UploadWidget email={company && company.email} />
                           {company && (
-                            <img
+                            <Image
+                              width={48}
+                              height={48}
                               src={company && company.profilePicture.url}
                               alt={company.owner}
                               className="object-cover object-center h-12 rounded-full"

@@ -3,10 +3,34 @@ import { cartSlice } from "./cartSlice";
 import { accountSlice } from "./accountSlice";
 import { productApi } from "./productsApi";
 import { companyApi } from "./companyApi";
-import storage from "redux-persist/lib/storage";
+import { userApi } from "./userApi";
+// import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
-
 import { combineReducers } from "@reduxjs/toolkit";
+
+import createWebStorage from "redux-persist/lib/storage/createWebStorage";
+
+const createNoopStorage = () => {
+  return {
+    getItem(_key) {
+      return Promise.resolve(null);
+    },
+    setItem(_key, value) {
+      return Promise.resolve(value);
+    },
+    removeItem(_key) {
+      return Promise.resolve();
+    },
+  };
+};
+
+const storage =
+  typeof window !== "undefined"
+    ? createWebStorage("local")
+    : createNoopStorage();
+
+// export default storage;
+
 const persistConfig = {
   key: "root",
   storage,
@@ -16,6 +40,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   [productApi.reducerPath]: productApi.reducer,
   [companyApi.reducerPath]: companyApi.reducer,
+  [userApi.reducerPath]: userApi.reducer,
   cart: cartSlice.reducer,
   account: accountSlice.reducer,
 });
@@ -27,7 +52,8 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false })
       .concat(productApi.middleware)
-      .concat(companyApi.middleware),
+      .concat(companyApi.middleware)
+      .concat(userApi.middleware),
 });
 
 //optional

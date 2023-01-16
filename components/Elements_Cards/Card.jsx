@@ -5,13 +5,16 @@ import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { IoBagAdd } from "react-icons/io5";
 import { AiFillStar } from "react-icons/ai";
 import { getCart, setCartItem } from "../../redux/cartSlice";
+import { useAddWishItemMutation } from "../../redux/userApi";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
+import { useSession, getSession } from "next-auth/react";
 
 //recibe 2 styles: "card" || "wider"
 const Card = ({ product, style = "card" }) => {
   const dispatch = useDispatch();
   const cart = useSelector(getCart);
+  const [wishList] = useAddWishItemMutation();
   const accountType = useSelector((state) => state.account?.session.type);
 
   const addItemToCart = () => {
@@ -27,6 +30,25 @@ const Card = ({ product, style = "card" }) => {
     toast.success(`"${product.name}" added sucessfully to your cart :D`, {
       duration: 4000,
     });
+  };
+
+  const addItemToWishList = async () => {
+    const session = await getSession();
+
+    if (accountType === "company") {
+      return toast.error("Company accounts can't add or have a wish items!");
+    }
+    const result = await wishList({ email: session.user.email, product });
+    
+    if (result.error.originalStatus !== 200)
+      return toast.error(`"${product.name}" is already in your wish list!`);
+
+    return toast.success(
+      `"${product.name}" added sucessfully to your wish list :D`,
+      {
+        duration: 4000,
+      }
+    );
   };
 
   return (
@@ -77,7 +99,10 @@ const Card = ({ product, style = "card" }) => {
             </span>
             {accountType !== "company" && (
               <div className="flex">
-                <button className="text-fondo-300 hover:text-gray-200 px-2 py-2 hover:bg-zinc-500 transition-colors  rounded-md">
+                <button
+                  className="text-fondo-300 hover:text-gray-200 px-2 py-2 hover:bg-zinc-500 transition-colors  rounded-md"
+                  onClick={addItemToWishList}
+                >
                   <FaRegHeart className="transition-all text-2xl" />
                 </button>
                 {/* button to add to cart */}
