@@ -1,21 +1,18 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 import React from "react";
 import Image from "next/image";
-import Link from "next/link";
 import det from "../../public/dashdet2.png";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-
 const HomeHeader = () => {
- 
   const hambHandler = () => {
-    let menu = document.getElementById('menu')
-    let hamb = document.getElementById('menu_btn')
-    hamb.classList.toggle('open')
-    menu.classList.toggle('flex')
-    menu.classList.toggle('hidden')
-  }
+    let menu = document.getElementById("menu");
+    let hamb = document.getElementById("menu_btn");
+    hamb.classList.toggle("open");
+    menu.classList.toggle("flex");
+    menu.classList.toggle("hidden");
+  };
 
   return (
     <>
@@ -65,35 +62,33 @@ const HomeHeader = () => {
             <span className="hamburger_mid"></span>
             <span className="hamburger_bot"></span>
           </button>
-     
         </div>
         {/* MOBILE MENU */}
-        <div className="lg:hidden"
-        >
-            <div
-              id="menu"
-              className="absolute hidden flex-col items-center self-end py-8 mt-3 space-y-6 font-bold bg-zinc-50 sm:w-auto sm:self-center left-6 right-6 drop-shadow-md rounded-b-md"
+        <div className="lg:hidden">
+          <div
+            id="menu"
+            className="absolute hidden flex-col items-center self-end py-8 mt-3 space-y-6 font-bold bg-zinc-50 sm:w-auto sm:self-center left-6 right-6 drop-shadow-md rounded-b-md"
+          >
+            <Link
+              className="hover:bg-fondo-50 hover:text-fondo-300 p-2 rounded-lg transition-all"
+              href="#"
             >
-              <Link
-                className="hover:bg-fondo-50 hover:text-fondo-300 p-2 rounded-lg transition-all"
-                href="#"
-              >
-                Support
-              </Link>
-              <Link
-                className="hover:bg-fondo-50 hover:text-fondo-300 p-2 rounded-lg transition-all"
-                href="#"
-              >
-                FAQ
-              </Link>
-              <Link
-                className="hover:bg-fondo-50 hover:text-fondo-300 p-2 rounded-lg transition-all"
-                href="#"
-              >
-                Your Plan
-              </Link>
-            </div>
+              Support
+            </Link>
+            <Link
+              className="hover:bg-fondo-50 hover:text-fondo-300 p-2 rounded-lg transition-all"
+              href="#"
+            >
+              FAQ
+            </Link>
+            <Link
+              className="hover:bg-fondo-50 hover:text-fondo-300 p-2 rounded-lg transition-all"
+              href="#"
+            >
+              Your Plan
+            </Link>
           </div>
+        </div>
       </nav>
       <section id="welcome">
         <div className="container flex flex-col-reverse lg:flex-row items-center px-6 mx-auto mt-10 space-y-0 lg:space-y-0">
@@ -278,7 +273,7 @@ const HomeHeader = () => {
         <div className="max-w-6xl px-5 mx-auto mt-20 text-center">
           {/* Heading */}
           <h2 className="text-4xl font-bold text-center text-fondo-200">
-            What's different about your own virtual office
+            What&apos;s different about your own virtual office
           </h2>
           {/* Testimonials Container */}
           <div className="flex flex-col space-y-12 mt-24 lg:space-y-0 lg:flex-row lg:space-x-6">
@@ -324,9 +319,9 @@ const HomeHeader = () => {
               />
               <h5 className="text-lg font-bold text-zinc-50">Arwen Udromiel</h5>
               <p className="text-sm text-zinc-100">
-                I've never thought been a lazy-seller could make this awesomes
-                changes in my work style. Now I can control my numbers and also
-                increase them!
+                I&apos;ve never thought been a lazy-seller could make this
+                awesomes changes in my work style. Now I can control my numbers
+                and also increase them!
               </p>
             </div>
           </div>

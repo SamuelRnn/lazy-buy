@@ -15,7 +15,6 @@ export default function Home({
   recommendedProducts,
   query,
 }) {
-  console.log(extendedSessionData);
   const dispatch = useDispatch();
 
   useEffect(() => {
