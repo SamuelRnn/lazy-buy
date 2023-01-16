@@ -68,7 +68,7 @@ export default async function createCompany(req, res) {
       },
     });
       await transporter.sendMail({
-        from: '"Company register" <lazybuy23.gmail.com>', // sender address
+        from: '"Lazy Buy" <lazybuy23.gmail.com>', // sender address
         to: companyData.email, // list of receivers
         subject: "Company register", // Subject line
         text: "Welcome to Lazy Buy Corporation! We are thrilled to have you on board as a valued member of our team. We are confident that your skills and expertise will help us continue to provide top-notch service to our customers. We believe that our company culture is the key to our success, and we strive to create a positive and productive work environment. We value communication and teamwork, and we are here to support you in any way we can. Thank you for joining us, we can't wait to see the great things you will achieve here at Lazy Buy Corporation", // plain text body

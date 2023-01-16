@@ -66,7 +66,7 @@ export default async function createUser(req, res) {
 
   try {
     await transporter.sendMail({
-      from: '"User register" <lazybuy23.gmail.com>', // sender address
+      from: '"Lazy Buy" <lazybuy23.gmail.com>', // sender address
       to: email, // list of receivers
       subject: "User register", // Subject line
       text: "Welcome to Lazy Buy! We are excited to have you as a part of our lazy shoppers community. You can now enjoy a comfortable and effortless shopping experience on our platform. Take advantage of our exclusive deals and promotions to make your purchases in style! If you have any questions or need help, don't hesitate to reach out to our customer service team. Thank you for choosing Lazy Buy!", // plain text body
