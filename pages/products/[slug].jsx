@@ -3,7 +3,7 @@ import Image from "next/image";
 import { PrismaClient } from "@prisma/client";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
-import { PlusCircleIcon, MinusCircleIcon } from "@heroicons/react/24/outline";
+import { FiPlus, FiMinus } from "react-icons/fi";
 import { useState } from "react";
 import {
   getCart,
@@ -96,11 +96,7 @@ const Detail = ({ product }) => {
               </div>
             </div>
 
-            <div className="sticky top-0">
-              <strong className="rounded-full border border-rose-500 bg-fondo-200 px-3 py-0.5 text-xs font-medium tracking-wide ">
-                Pre Order
-              </strong>
-
+            <div className="sticky top-10">
               <div className="flex justify-between mt-8">
                 <div className="max-w-[35ch]">
                   <h1 className="text-2xl font-bold">{product.name}</h1>
@@ -124,20 +120,14 @@ const Detail = ({ product }) => {
                 <p className="text-lg font-bold">${product.price.toFixed(2)}</p>
               </div>
 
-              <details className="group relative mt-4 [&_summary::-webkit-details-marker]:hidden">
-                <summary className="block">
-                  <div>
-                    <div className="prose max-w-none group-open:hidden">
-                      <p>{product.description}</p>
-                    </div>
+              <div className="prose max-w-none mt-10">
+                <p>{product.description}</p>
+                <p className="mt-8 text-zinc-600">
+                  available stock: {product.stock}
+                </p>
+              </div>
 
-                    <span className="mt-4 text-sm font-medium underline cursor-pointer group-open:absolute group-open:bottom-0 group-open:left-0 group-open:mt-0">
-                      Read more...
-                    </span>
-                  </div>
-                </summary>
-
-                {/* <div className="pb-6 prose max-w-none">
+              {/* <div className="pb-6 prose max-w-none">
                   <p>
                     The Ordinary es una marca que ofrece una variedad de
                     productos para el cuidado de la piel facial. Si buscas
@@ -147,7 +137,6 @@ const Detail = ({ product }) => {
                     realizado en base a elementos naturales de origen vegetal.
                   </p>
                 </div> */}
-              </details>
 
               <div className="mt-8">
                 {/* //add props extra to model  */}
@@ -191,7 +180,7 @@ const Detail = ({ product }) => {
                   </div>
                   <div className="flex justify-between items-center mb-5 px-5">
                     <button
-                      className=""
+                      className="text-gray-200 px-2 py-2 bg-zinc-500 hover:bg-fondo-300 transition-colors  rounded-md"
                       onClick={() => {
                         if (quantity === 1)
                           return toast.error(
@@ -201,22 +190,22 @@ const Detail = ({ product }) => {
                         setQuantity(quantity - 1);
                       }}
                     >
-                      <MinusCircleIcon className="h-10" />
+                      <FiMinus className="text-xl" />
                     </button>
                     <span className="font-bold text-2xl">{quantity}</span>
                     <button
-                      className=""
+                      className="text-gray-200 px-2 py-2 bg-zinc-500 hover:bg-fondo-300 transition-colors  rounded-md"
                       onClick={() => {
                         setQuantity(quantity + 1);
                       }}
                     >
-                      <PlusCircleIcon className="h-10" />
+                      <FiPlus className="text-xl" />
                     </button>
                   </div>
 
                   <button
                     disabled={cart.find((item) => item.id === product.id)}
-                    className="block px-5 py-3 sm:ml-3 text-xs font-medium text-white bg-fondo-300 rounded hover:bg-fondo-500 active:scale-75 transition-all ease-out disabled:pointer-events-none disabled:bg-zinc-400"
+                    className="block px-5 py-3 sm:ml-3 font-medium text-white bg-fondo-300 rounded hover:bg-fondo-500 active:scale-75 transition-all ease-out disabled:pointer-events-none disabled:bg-zinc-400 text-lg"
                     onClick={addItemToCart}
                   >
                     Add to cart
