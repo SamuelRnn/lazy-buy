@@ -21,7 +21,6 @@ const Pagination = ({ count, filters, setFilters }) => {
   }
   const ITEMS_PER_PAGE = 10;
   let [pageLabels, maxPages] = getPageLabels(count, ITEMS_PER_PAGE);
-  console.log(pageLabels);
 
   const goToPage = (num) => {
     if (num === "...") return;

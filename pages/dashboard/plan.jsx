@@ -16,7 +16,6 @@ const Plan = ({ company }) => {
   const { isLoading: isLoadingCompany, data: companyData } = useGetCompanyQuery(
     company.email
   );
-  console.log(plans);
 
   const handlePayment = async (planType) => {
     const stripe = await loadStripe(process.env.NEXT_PUBLIC_PUBLIC_KEY);
