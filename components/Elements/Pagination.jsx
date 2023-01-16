@@ -11,16 +11,17 @@ function getPageLabels(count, perPage) {
     if (i > 4) continue;
     aux.unshift(i);
   }
-  aux.push(pages);
+
+  pages > 4 && aux.push(pages);
   return [aux, pages];
 }
-
 const Pagination = ({ count, filters, setFilters }) => {
   if (+count == 0) {
     return <div className="text-gray-500">No products found!</div>;
   }
   const ITEMS_PER_PAGE = 10;
   let [pageLabels, maxPages] = getPageLabels(count, ITEMS_PER_PAGE);
+  console.log(pageLabels);
 
   const goToPage = (num) => {
     if (num === "...") return;
@@ -60,7 +61,6 @@ const Pagination = ({ count, filters, setFilters }) => {
         </button>
         {pageLabels?.map((e) => {
           if (e === "...") {
-            console.log(maxPages);
             return (
               <button
                 key={e}

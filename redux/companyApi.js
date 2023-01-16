@@ -27,7 +27,6 @@ export const companyApi = createApi({
       query: (newProduct) => ({
         url: "/api/create/product",
         method: "POST",
-        body: JSON.stringify(newProduct),
         body: newProduct,
         headers: { "Content-Type": "application/json" },
       }),

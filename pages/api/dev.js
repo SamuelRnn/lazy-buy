@@ -12,7 +12,8 @@ const companyData = {
   city: "Sao Paolo",
   country: "Brasil",
   profilePicture: {
-    url: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673146181/lazy-buy/fotoSamuel_rbdz1h.jpg",
+    url: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673883720/lazy-buy/epxbduk5ibi6zfg8soob.png",
+    public_id: "lazy-buy/epxbduk5ibi6zfg8soob",
   },
   plan: "Basic",
 };

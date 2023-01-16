@@ -21,7 +21,7 @@ const Footer = () => {
               Home
             </Link>
             <Link
-              href="/nosotros"
+              href="/about"
               className="hover:underline hover:text-fondo-300"
             >
               About
@@ -35,9 +35,10 @@ const Footer = () => {
           <h2 className="font-bold mb-6 uppercase">Social Media</h2>
           <nav>
             <a
-              href="#"
+              href="https://www.facebook.com/profile.php?id=100089361346783"
               className="flex items-center gap-2 my-1 bg-fondo-200 hover:bg-gray-200 p-2 rounded-lg transition-colors"
               target="_blank"
+              rel="noreferrer"
             >
               <Image
                 width={20}
@@ -49,9 +50,10 @@ const Footer = () => {
               Lazy Buy @official
             </a>
             <a
-              href="#"
+              href="https://www.instagram.com/lazybuy23/"
               className="flex items-center gap-2 my-1 bg-fondo-200 hover:bg-gray-200 p-2 rounded-lg transition-colors"
               target="_blank"
+              rel="noreferrer"
             >
               <Image
                 width={20}
@@ -63,9 +65,10 @@ const Footer = () => {
               Lazy Buy
             </a>
             <a
-              href="#"
+              href="https://twitter.com/Lazy_Buy23"
               className="flex items-center gap-2 my-1 bg-fondo-200 hover:bg-gray-200 p-2 rounded-lg transition-colors"
               target="_blank"
+              rel="noreferrer"
             >
               <Image
                 width={20}
