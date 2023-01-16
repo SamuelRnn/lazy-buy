@@ -4,7 +4,7 @@ function getPageLabels(count, perPage) {
   const pages = Math.ceil(count / perPage);
   let aux = Array.from("*".repeat(pages)).map((_, i) => i + 1);
   console.log(aux);
-  if (aux > 4) {
+  if (pages > 4) {
     aux = aux.slice(0, 3).concat("...").concat(pages);
   }
   // pages > 4 && aux.push(pages);
