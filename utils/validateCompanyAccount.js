@@ -20,9 +20,5 @@ export function registerValidateCompanyAccount(values) {
     errors.city = "Required City";
   }
 
-  if (!values.profilePicture) {
-    errors.profilePicture = "Required Picture";
-  }
-
   return errors;
 }

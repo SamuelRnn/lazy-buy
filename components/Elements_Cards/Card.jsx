@@ -40,7 +40,6 @@ const Card = ({ product, style = "card" }) => {
     }
     const result = await wishList({ email: session.user.email, product });
     
-    console.log("🚀 ~ file: Card.jsx:45 ~ addItemToWishList ~ result", result);
     if (result.error.originalStatus !== 200)
       return toast.error(`"${product.name}" is already in your wish list!`);
 
