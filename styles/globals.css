@@ -138,3 +138,60 @@
   @apply bg-zinc-600 bg-opacity-70 rounded-md grid place-content-center text-zinc-100 font-bold;
   top: 0;
 }
+
+.hamburger{
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  transition: all 0.25s;
+  position: relative;
+}
+
+.hamburger_top,
+.hamburger_mid,
+.hamburger_bot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 2px;
+  background-color: white;
+  transform: rotate(0);
+  transition: all 0.5s;
+}
+
+.hamburger_mid{
+  transform: translateY(7px);
+}
+
+
+.hamburger_bot{
+  transform: translateY(14px);
+}
+
+.open{
+  transform: rotate(90deg);
+  transform: translateY(0px);
+}
+
+.open .hamburger_top{
+  transform: rotate(45deg) translateY(6px) translate(6px)
+}
+
+.open .hamburger_mid{
+  display: none;
+}
+
+.open .hamburger_bot{
+  transform: rotate(-45deg) translateY(6px) translate(-6px)
+}
+
+.menu_open{
+  display: flex;
+  transform: translateY(0);
+}
+
+.menu_close{
+  overflow: hidden;
+  transform: translateY(-100);
+}
