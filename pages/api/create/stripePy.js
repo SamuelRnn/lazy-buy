@@ -6,8 +6,6 @@ export default async function stripePay(req, res) {
     return res.status(400).send({ message: "Not found" });
   }
 
-  console.log("body es : ", req.body);
-
   if (req.query.pay === "product") {
     let ids = [];
     let items = req.body.map((e) => {
@@ -66,8 +64,6 @@ export default async function stripePay(req, res) {
   }
   if (req.query.pay === "plan") {
     if (req.body.planType === "Standard") {
-      console.log("hola estou aqui");
-
       await company.update({
         where: {
           email: req.body.email,

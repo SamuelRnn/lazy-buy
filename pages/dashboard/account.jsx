@@ -33,7 +33,6 @@ const Account = ({ company: { email } }) => {
 
   async function onSubmit(values) {
     values.email = company.email;
-    console.log(values);
     try {
       await updateAccount(values);
       formik.resetForm();

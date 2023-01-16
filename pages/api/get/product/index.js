@@ -29,7 +29,6 @@ export default async function getProduct(req, res) {
     return res.status(405).json({ message: "Not found" });
 
   const filters = parseNullfromJSON(req.query);
-  console.log(filters);
   //generar variable mutable de los productos
   let products;
   let count;
@@ -136,13 +135,6 @@ export default async function getProduct(req, res) {
     }
 
     products = products.filter((p) => {
-      console.log(
-        p.price,
-        range.min_price,
-        p.price >= range.min_price,
-        range.max_price,
-        p.price <= range.max_price
-      );
       return p.price >= range.min_price && p.price <= range.max_price;
     });
     count = products.length;

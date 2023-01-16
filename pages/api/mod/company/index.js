@@ -7,8 +7,6 @@ export default async function handler(req, res) {
 
   const { email } = req.body;
 
-  console.log("hola")
-
   delete req.body.id;
   try {
     const cloudUpload = await cloud.uploader.upload(
@@ -22,7 +20,7 @@ export default async function handler(req, res) {
 
     const updatecompany = await company.update({
       where: {
-        email
+        email,
       },
       data: { ...req.body },
     });

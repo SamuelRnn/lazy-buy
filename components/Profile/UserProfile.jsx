@@ -9,7 +9,6 @@ import { useState } from "react";
 
 const Profile = ({ user }) => {
   // const { user: session } = useSession();
-  console.log("UserProfile:", user);
   return (
     <div className=" grid lg:grid-cols-4 xl:grid-cols-6 min-h-screen">
       <Sidebar user={user} />

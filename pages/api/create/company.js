@@ -21,7 +21,6 @@ transporter.verify().then(() => {
 });
 
 export default async function createCompany(req, res) {
-  
   if (req.method !== "POST") {
     return res.status(405).json({ message: "Method not allowed" });
   }
@@ -44,15 +43,18 @@ export default async function createCompany(req, res) {
   companyData.password = hashedPassword;
 
   try {
-    const cloudUpload = await cloud.uploader.upload(
-      companyData.profilePicture,
-      { folder: "lazy-buy" }
-    );
+    // const cloudUpload = await cloud.uploader.upload(
+    //   companyData.profilePicture,
+    //   { folder: "lazy-buy" }
+    // );
+    // companyData.profilePicture = {
+    //   public_id: cloudUpload.public_id,
+    //   url: cloudUpload.secure_url,
+    // };
     companyData.profilePicture = {
-      public_id: cloudUpload.public_id,
-      url: cloudUpload.secure_url,
+      public_id: "lazy-buy/Diseño_sin_título_r4admw",
+      url: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673480864/lazy-buy/Dise%C3%B1o_sin_t%C3%ADtulo_r4admw.png",
     };
-
     const newCompany = await company.create({
       data: {
         name: companyData.name,
@@ -67,16 +69,14 @@ export default async function createCompany(req, res) {
         },
       },
     });
-      await transporter.sendMail({
-        from: '"Lazy Buy" <lazybuy23.gmail.com>', // sender address
-        to: companyData.email, // list of receivers
-        subject: "Company register", // Subject line
-        text: "Welcome to Lazy Buy Corporation! We are thrilled to have you on board as a valued member of our team. We are confident that your skills and expertise will help us continue to provide top-notch service to our customers. We believe that our company culture is the key to our success, and we strive to create a positive and productive work environment. We value communication and teamwork, and we are here to support you in any way we can. Thank you for joining us, we can't wait to see the great things you will achieve here at Lazy Buy Corporation", // plain text body
-      });
-   
+    await transporter.sendMail({
+      from: '"Lazy Buy" <lazybuy23.gmail.com>', // sender address
+      to: companyData.email, // list of receivers
+      subject: "Company register", // Subject line
+      text: "Welcome to Lazy Buy Corporation! We are thrilled to have you on board as a valued member of our team. We are confident that your skills and expertise will help us continue to provide top-notch service to our customers. We believe that our company culture is the key to our success, and we strive to create a positive and productive work environment. We value communication and teamwork, and we are here to support you in any way we can. Thank you for joining us, we can't wait to see the great things you will achieve here at Lazy Buy Corporation", // plain text body
+    });
+
     return res.status(200).json(newCompany);
-
-
   } catch (error) {
     console.log({ error, message: error.message });
     return res.status(500).json({ error });

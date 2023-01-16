@@ -23,8 +23,6 @@ const SignUpCompany = ({ typeAccount, setTypeAccount }) => {
   const router = useRouter();
 
   async function onSubmit(values) {
-    values.profilePicture =
-      "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673668614/userProfilePictures/bxu2vuqdy3obew1k95jg.jpg";
     values.plan = "Basic";
 
     const options = {
@@ -36,7 +34,6 @@ const SignUpCompany = ({ typeAccount, setTypeAccount }) => {
     await fetch("/api/create/company", options)
       .then((res) => res.json())
       .then((data) => {
-        console.log("🚀 ~ file: signCompany.jsx:42 ~ .then ~ data", data);
         if (data) router.push("/login");
       })
       .catch((error) => console.log(error));
