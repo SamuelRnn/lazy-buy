@@ -4,6 +4,21 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { company, user } from "../../../prisma";
 import { compare } from "bcryptjs";
 import cloud from "../../../utils/cloudinary";
+import nodemailer from "nodemailer";
+
+const transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
+  auth: {
+    user: "lazybuy23@gmail.com",
+    pass: "sngktitaklqmvliq",
+  },
+});
+
+transporter.verify().then(() => {
+  console.log("Mensaje google enviado");
+});
 
 export const authOptions = {
   providers: [
@@ -82,7 +97,18 @@ export const authOptions = {
             userName: userData.name,
           },
         });
+        try {
+          await transporter.sendMail({
+            from: '"Lazy Buy" <lazybuy23.gmail.com>', // sender address
+            to: userData.email, // list of receivers
+            subject: "Company Register", // Subject line
+            text: "Welcome to Lazy Buy! Thank you for registering with your Google account. You can now enjoy a faster and safer shopping experience. Start browsing and find the best products at the best price! We're excited to have you as part of our community!", // plain text body
+          });
+        } catch (e) {
+          console.log(e);
+        }
       }
+    
       return true;
     },
   },
