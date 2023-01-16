@@ -32,8 +32,7 @@ export default async function createCompany(req, res) {
     !companyData.password ||
     !companyData.city ||
     !companyData.country ||
-    !companyData.plan ||
-    !companyData.profilePicture
+    !companyData.plan
   ) {
     return res.status(400).json({
       message: "Datos incompletos, asegurese de llenar todos los campos",
