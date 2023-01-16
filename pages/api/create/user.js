@@ -1,11 +1,27 @@
 import { user } from "../../../prisma";
 import bcrypt from "bcryptjs";
 import cloud from "../../../utils/cloudinary";
+import nodemailer from "nodemailer";
+
+const transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
+  auth: {
+    user: "lazybuy23@gmail.com",
+    pass: "sngktitaklqmvliq",
+  },
+});
+
+transporter.verify().then(() => {
+  console.log("Mensaje enviado");
+});
+
 
 export default async function createUser(req, res) {
   if (req.method !== "POST")
     return res.status(400).send({ message: "Not found" });
-  req.body.fullName = `${req.body.firstname} ${req.body.lastname}`
+  req.body.fullName = `${req.body.firstname} ${req.body.lastname}`;
   const {
     isAdmin,
     fullName,
@@ -17,9 +33,9 @@ export default async function createUser(req, res) {
     country,
   } = req.body;
 
-  delete req.body.cpassword
-  delete req.body.lastname
-  delete req.body.firstname
+  delete req.body.cpassword;
+  delete req.body.lastname;
+  delete req.body.firstname;
   delete req.body["password"];
 
   if (!fullName || !email || !password)
@@ -47,6 +63,17 @@ export default async function createUser(req, res) {
       },
     },
   });
+
+  try {
+    await transporter.sendMail({
+      from: '"Lazy Buy" <lazybuy23.gmail.com>', // sender address
+      to: email, // list of receivers
+      subject: "User register", // Subject line
+      text: "Welcome to Lazy Buy! We are excited to have you as a part of our lazy shoppers community. You can now enjoy a comfortable and effortless shopping experience on our platform. Take advantage of our exclusive deals and promotions to make your purchases in style! If you have any questions or need help, don't hesitate to reach out to our customer service team. Thank you for choosing Lazy Buy!", // plain text body
+    });
+  } catch (e) {
+    console.log(e);
+  }
 
   return res.status(200).json({
     ...req.body,

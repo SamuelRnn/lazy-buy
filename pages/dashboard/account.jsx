@@ -1,247 +1,187 @@
-import DashboardLayout from "../../components/DashBoard/Layout";
-import { getSession } from "next-auth/react";
+import DashboardLayout from "../../components/Dashboard/DashboardLayout";
 import { motion, AnimatePresence } from "framer-motion";
-import { registerValidate } from "../../utils/validateForm";
-import Link from "next/link";
+import Image from "next/image";
 import { AiOutlineEdit } from "react-icons/ai";
 import { useState } from "react";
+import dashboardMiddleware from "../../utils/dashboardMiddleware";
+import {
+  useGetCompanyQuery,
+  useUpdateAccountMutation,
+} from "../../redux/companyApi";
+import Spinner from "../../components/Spinners/Spinner";
+import { registerValidateCompanyAccount } from "../../utils/validateCompanyAccount";
+import { useFormik } from "formik";
+import UploadWidget from "../../components/DashBoard/UploadWIdget";
+import { toast } from "react-hot-toast";
 
-const Account = ({ company }) => {
+const Account = ({ company: { email } }) => {
   const [edit, setEdit] = useState(false);
+  const { isLoading, data: company } = useGetCompanyQuery(email);
+  const [updateAccount] = useUpdateAccountMutation();
+
+  /* TODO: CLOUDINARY */
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      owner: "",
+      country: "",
+      city: "",
+    },
+    validate: registerValidateCompanyAccount,
+    onSubmit,
+  });
+
+  async function onSubmit(values) {
+    values.email = company.email;
+    console.log(values)
+    try {
+      await updateAccount(values);
+      formik.resetForm()
+      return toast.success('Changes Applied!')
+    } catch (error) {
+      return toast.error('Something went wrong!')
+      
+    }
+  }
 
   return (
     <DashboardLayout>
       <AnimatePresence>
         <div className="overflow-hidden -z-50">
-          <motion.div
-            initial={{ x: 200, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-          >
+          <div>
             <section className="">
-              <div className="flex justify-center">
-                {/* <div className="hidden lg:flex lg:w-2/5 justify-center items-center">
-                  <AnimatedLogo />
-                </div> */}
+              {isLoading && <Spinner />}
+              {!isLoading && (
+                <div className="flex justify-center">
+                  <div
+                    className="flex items-center w-full max-w-3xl  mx-auto lg:px-12 lg:w-3/5"
+                    id="signup_div"
+                  >
+                    <div className="w-full bg-white p-5">
+                      <h1 className="text-3xl font-bold tracking-wider text-fondo-300 capitalize text-center">
+                        Company Information
+                      </h1>
 
-                <div
-                  className="flex items-center w-full max-w-3xl  mx-auto lg:px-12 lg:w-3/5"
-                  id="signup_div"
-                >
-                  <div className="w-full bg-white p-5">
-                    <h1 className="text-3xl font-bold tracking-wider text-fondo-300 capitalize text-center">
-                      Company Information
-                    </h1>
-
-                    {/* Formulario controlado */}
-                    <form
-                      className="grid grid-cols-2 gap-6 mt-6 md:grid-cols-2"
-                      onSubmit=""
-                      // onBlur={formik.handleBlur}
-                    >
-                      <div className="col-span-2 sm:col-span-1">
-                        <label className="block mb-2 text-sm text-gray-800">
-                          Company Name
-                        </label>
-                        <input
-                          name="companyname"
-                          type="text"
-                          placeholder={company.name}
-                          className={`block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-lg focus:outline-none ${
-                            edit ? "cursor-text" : "cursor-not-allowed"
-                          }`}
-                          disabled={edit ? false : true}
-                          /* {...formik.getFieldProps("firstname")} */
-                          // onBlur={formik.handleBlur}
-                        />
-                        {/* {formik.errors.firstname && formik.touched.firstname ? (
-                          <div className="text-red-600 mt-2 pl-2">
-                            {formik.errors.firstname}
-                          </div>
-                        ) : (
-                          <></>
-                        )} */}
-                      </div>
-
-                      <div className="col-span-2 sm:col-span-1">
-                        <label className="block mb-2 text-sm text-gray-800">
-                          Owner
-                        </label>
-                        <input
-                          name="owner"
-                          type="text"
-                          placeholder={company.owner}
-                          className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-lg focus:outline-none"
-                          disabled={edit ? false : true}
-                          /* {...formik.getFieldProps("lastname")} */
-                        />
-                        {/* {formik.errors.lastname && formik.touched.lastname ? (
-                          <div className="text-red-600 mt-2 pl-2">
-                            {formik.errors.lastname}
-                          </div>
-                        ) : (
-                          <></>
-                        )} */}
-                      </div>
-
-                      <div className="col-span-2 sm:col-span-1">
-                        <label className="block mb-2 text-sm text-gray-800">
-                          Country
-                        </label>
-                        <input
-                          name="country"
-                          type="text"
-                          placeholder={company.country}
-                          className={`block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-lg focus:outline-none ${
-                            edit ? "cursor-text" : "cursor-not-allowed"
-                          }`}
-                          disabled={edit ? false : true}
-                          /* {...formik.getFieldProps("lastname")} */
-                        />
-                        {/* {formik.errors.lastname && formik.touched.lastname ? (
-                          <div className="text-red-600 mt-2 pl-2">
-                            {formik.errors.lastname}
-                          </div>
-                        ) : (
-                          <></>
-                        )} */}
-                      </div>
-                      <div className="col-span-2 sm:col-span-1">
-                        <label className="block mb-2 text-sm text-gray-800">
-                          City
-                        </label>
-                        <input
-                          name="city"
-                          type="text"
-                          placeholder={company.city}
-                          className={`block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-lg focus:outline-none ${
-                            edit ? "cursor-text" : "cursor-not-allowed"
-                          }`}
-                          disabled={edit ? false : true}
-                          /* {...formik.getFieldProps("lastname")} */
-                        />
-                        {/* {formik.errors.lastname && formik.touched.lastname ? (
-                          <div className="text-red-600 mt-2 pl-2">
-                            {formik.errors.lastname}
-                          </div>
-                        ) : (
-                          <></>
-                        )} */}
-                      </div>
-                      <div className="col-span-2">
-                        <label className="block mb-2 text-sm text-gray-800">
-                          Company Picture
-                        </label>
-                        <div className="relative">
+                      <form
+                        className="grid grid-cols-2 gap-6 mt-6 md:grid-cols-2"
+                        onSubmit={formik.handleSubmit}
+                      >
+                        <div className="col-span-2">
+                          <label className="block mb-2 text-sm text-gray-800">
+                            Company Name
+                          </label>
                           <input
-                            name="profilePicture"
-                            type="file"
-                            className={`block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-lg focus:outline-none ${
-                              edit ? "cursor-text" : "cursor-not-allowed"
-                            }`}
+                            name="name"
+                            type="text"
+                            placeholder={company.name}
+                            className={`block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border 
+                            border-slate-800 rounded-lg focus:outline-none
+                            ${
+                              formik.errors.name && formik.touched.name
+                                ? "border-rose-800"
+                                : ""
+                            }
+                            ${edit ? "cursor-text" : "cursor-not-allowed"}`}
                             disabled={edit ? false : true}
-                            /* {...formik.getFieldProps("email")} */
+                            {...formik.getFieldProps("name")}
                           />
-                          <img className="absolute right-0 top-2 w-14 p-1 rounded-full" src={company.profilePicture.url} />
                         </div>
-                        {/* {formik.errors.email && formik.touched.email ? (
-                          <div className="text-red-600 mt-2 pl-2">
-                            {formik.errors.email}
-                          </div>
-                        ) : (
-                          <></>
-                        )} */}
-                      </div>
 
-                      <div className="col-span-2">
-                        <label className="block mb-2 text-sm text-gray-800">
-                          Password
-                        </label>
-                        <input
-                          name="password"
-                          type="password"
-                          placeholder="Enter your last password"
-                          className={`block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-lg focus:outline-none ${
-                            edit ? "cursor-text" : "cursor-not-allowed"
+                        <div className="col-span-2">
+                          <label className="block mb-2 text-sm text-gray-800">
+                            Owner
+                          </label>
+                          <input
+                            name="owner"
+                            type="text"
+                            placeholder={company.owner}
+                            className={`block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-slate-800 rounded-lg focus:outline-none
+                            ${
+                              formik.errors.owner && formik.touched.owner
+                                ? "border-rose-800"
+                                : ""
+                            }
+                            ${edit ? "cursor-text" : "cursor-not-allowed"}`}
+                            disabled={edit ? false : true}
+                            {...formik.getFieldProps("owner")}
+                          />
+                        </div>
+
+                        <div className="col-span-2">
+                          <label className="block mb-2 text-sm text-gray-800">
+                            Country
+                          </label>
+                          <input
+                            name="country"
+                            type="text"
+                            placeholder={company.country}
+                            className={`block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-slate-800 rounded-lg focus:outline-none
+                            ${
+                              formik.errors.country && formik.touched.country
+                                ? "border-rose-800"
+                                : ""
+                            }
+                            ${edit ? "cursor-text" : "cursor-not-allowed"}`}
+                            disabled={edit ? false : true}
+                            {...formik.getFieldProps("country")}
+                          />
+                        </div>
+                        <div className="col-span-2">
+                          <label className="block mb-2 text-sm text-gray-800">
+                            City
+                          </label>
+                          <input
+                            name="city"
+                            type="text"
+                            placeholder={company.city}
+                            className={`block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-slate-800 rounded-lg focus:outline-none
+                            ${
+                              formik.errors.city && formik.touched.city
+                                ? "border-rose-800"
+                                : ""
+                            }
+                            ${edit ? "cursor-text" : "cursor-not-allowed"}`}
+                            disabled={edit ? false : true}
+                            {...formik.getFieldProps("city")}
+                          />
+                        </div>
+                        <div className="flex justify-between items-center col-span-2 gap-2 p-x-4">
+                          <UploadWidget email={company && company.email} />
+                          {company && (
+                            <Image
+                              width={48}
+                              height={48}
+                              src={company && company.profilePicture.url}
+                              alt={company.owner}
+                              className="object-cover object-center h-12 rounded-full"
+                            />
+                          )}
+                        </div>
+
+                        <button
+                          type="button"
+                          className="hover:text-fondo-300 hover:bg-fondo-50 text-white font-semibold flex rounded-xl border-2 p-3 border-fondo-200 items-center justify-center gap-4 ease-in-out transition-all bg-fondo-200 col-span-2"
+                          onClick={() => setEdit(!edit)}
+                        >
+                          <span>Edit</span>
+
+                          <AiOutlineEdit />
+                        </button>
+                        <button
+                          type="submit"
+                          className={`hover:text-fondo-300 mt-3 hover:bg-fondo-50 text-white font-semibold flex rounded-xl border-2 py-3 border-fondo-200 items-center justify-center gap-4ease-in-out transition-all bg-fondo-200 col-span-2 ${
+                            edit ? "block" : "hidden"
                           }`}
-                          disabled={edit ? false : true}
-                          /* {...formik.getFieldProps("password")} */
-                        />
-                        {/* {formik.errors.password && formik.touched.password ? (
-                          <div className="text-red-600 mt-2 pl-2">
-                            {formik.errors.password}
-                          </div>
-                        ) : (
-                          <></>
-                        )} */}
-                      </div>
-
-                      <div className="col-span-2">
-                        <label className="block mb-2 text-sm text-gray-800">
-                          New Password
-                        </label>
-                        <input
-                          type="password"
-                          placeholder="Enter your new password"
-                          className={`block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-lg focus:outline-none ${
-                            edit ? "cursor-text" : "cursor-not-allowed"
-                          }`}
-                          /* {...formik.getFieldProps("cpassword")} */
-                          disabled={edit ? false : true}
-                        />
-                        {/* {formik.errors.cpassword && formik.touched.cpassword ? (
-                          <div className="text-red-600 mt-2 pl-2">
-                            {formik.errors.cpassword}
-                          </div>
-                        ) : (
-                          <></>
-                        )} */}
-                      </div>
-                      <div className="col-span-2">
-                        <label className="block mb-2 text-sm text-gray-800">
-                          Confirm password
-                        </label>
-                        <input
-                          type="password"
-                          placeholder="Just to be sure"
-                          className={`block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-fondo-200 rounded-lg focus:outline-none ${
-                            edit ? "cursor-text" : "cursor-not-allowed"
-                          }`}
-                          /* {...formik.getFieldProps("cpassword")} */
-                          disabled={edit ? false : true}
-                        />
-                        {/* {formik.errors.cpassword && formik.touched.cpassword ? (
-                          <div className="text-red-600 mt-2 pl-2">
-                            {formik.errors.cpassword}
-                          </div>
-                        ) : (
-                          <></>
-                        )} */}
-                      </div>
-
-                      <button
-                        type="button"
-                        className="hover:text-fondo-300 hover:bg-fondo-50 text-white font-semibold flex rounded-xl border-2 p-3 border-fondo-200 items-center justify-center gap-4 ease-in-out transition-all bg-fondo-200 col-span-2"
-                        onClick={() => setEdit(!edit)}
-                      >
-                        <span>Edit</span>
-
-                        <AiOutlineEdit />
-                      </button>
-                    </form>
-
-                    <div className={`${edit ? "block" : "hidden"}`}>
-                      <div
-                        className="hover:text-fondo-300 mt-3 hover:bg-fondo-50 text-white font-semibold flex rounded-xl border-2 py-3 border-fondo-200 items-center justify-center gap-4ease-in-out transition-all bg-fondo-200"
-                        href="./login"
-                      >
-                        Confirm Changes
-                      </div>
+                        >
+                          Confirm Changes
+                        </button>
+                      </form>
                     </div>
                   </div>
                 </div>
-              </div>
+              )}
             </section>
-          </motion.div>
+          </div>
         </div>
       </AnimatePresence>
     </DashboardLayout>
@@ -251,27 +191,5 @@ const Account = ({ company }) => {
 export default Account;
 
 export async function getServerSideProps(context) {
-  const { req } = context;
-  const session = await getSession({
-    req,
-  });
-
-  let dataCompany;
-  let company;
-
-  // if user isn't is auth
-  if (!session) return { redirect: { destination: "/", permanent: false } };
-
-  await fetch(`http://localhost:3000/api/get/company`)
-    .then((res) => res.json())
-    .then((data) => (dataCompany = data));
-
-  dataCompany.forEach((c) => {
-    if (c.email === session.user.email) return (company = c);
-  });
-  //console.log(company.products)
-  // if user is is auth
-  return {
-    props: { company },
-  };
+  return await dashboardMiddleware(context);
 }

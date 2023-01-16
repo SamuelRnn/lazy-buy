@@ -1,18 +1,54 @@
-import React from "react";
-import Layout from "../../components/layout";
+import Layout from "../../components/Layout";
 import Image from "next/image";
 import { PrismaClient } from "@prisma/client";
 import { useRouter } from "next/router";
+import { useSelector, useDispatch } from "react-redux";
+import { FiPlus, FiMinus } from "react-icons/fi";
+import { useState } from "react";
+import {
+  getCart,
+  setCartItem,
+  increaseItemQuantity,
+  decreaseItemQuantity,
+} from "../../redux/cartSlice";
+import { toast } from "react-hot-toast";
 
 const Detail = ({ product }) => {
   const router = useRouter();
+  const dispatch = useDispatch();
+  const [quantity, setQuantity] = useState(1);
+  const accountType = useSelector((state) => state.account?.session.type);
+  const cart = useSelector(getCart);
+
+  const addItemToCart = () => {
+    if (accountType === "company") {
+      return toast.error("Company accounts can't buy or have a cart!");
+    }
+    const itemAlreadyExist = cart.find((item) => item.id === product.id);
+    if (itemAlreadyExist) {
+      return toast.error(`"${product.name}" is already in your cart!`);
+    }
+
+    dispatch(setCartItem({ ...product, quantity }));
+    setQuantity(1);
+    toast.success(`"${product.name}" added sucessfully to your cart :D`, {
+      duration: 4000,
+    });
+  };
 
   return (
     <Layout title={"Lazy Buy | " + product.name}>
       <br />
       <br />
       <br />
-      <button onClick={() => router.back()}>Back</button>
+      <div className="main">
+        <button
+          className="block px-5 py-3 ml-3 text-xs font-medium text-white bg-fondo-300 rounded hover:bg-fondo-500 active:scale-75 transition-all ease-out"
+          onClick={() => router.back()}
+        >
+          Back
+        </button>
+      </div>
       <section>
         <div className="relative max-w-screen-xl px-4 py-8 mx-auto">
           <div className="grid items-start grid-cols-1 gap-8 md:grid-cols-2">
@@ -30,7 +66,7 @@ const Detail = ({ product }) => {
                   width={1500}
                   height={1000}
                   alt="Les Paul"
-                  src="https://images.unsplash.com/photo-1456948927036-ad533e53865c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+                  src={product.mainImage.url}
                   className="object-cover w-full aspect-square rounded-xl"
                 />
 
@@ -38,7 +74,7 @@ const Detail = ({ product }) => {
                   width={1500}
                   height={1000}
                   alt="Les Paul"
-                  src="https://images.unsplash.com/photo-1456948927036-ad533e53865c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+                  src={product.mainImage.url}
                   className="object-cover w-full aspect-square rounded-xl"
                 />
 
@@ -46,7 +82,7 @@ const Detail = ({ product }) => {
                   width={1500}
                   height={1000}
                   alt="Les Paul"
-                  src="https://images.unsplash.com/photo-1456948927036-ad533e53865c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+                  src={product.mainImage.url}
                   className="object-cover w-full aspect-square rounded-xl"
                 />
 
@@ -54,17 +90,13 @@ const Detail = ({ product }) => {
                   width={1500}
                   height={1000}
                   alt="Les Paul"
-                  src="https://images.unsplash.com/photo-1456948927036-ad533e53865c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+                  src={product.mainImage.url}
                   className="object-cover w-full aspect-square rounded-xl"
                 />
               </div>
             </div>
 
-            <div className="sticky top-0">
-              <strong className="rounded-full border border-rose-500 bg-fondo-200 px-3 py-0.5 text-xs font-medium tracking-wide ">
-                Pre Order
-              </strong>
-
+            <div className="sticky top-10">
               <div className="flex justify-between mt-8">
                 <div className="max-w-[35ch]">
                   <h1 className="text-2xl font-bold">{product.name}</h1>
@@ -88,20 +120,14 @@ const Detail = ({ product }) => {
                 <p className="text-lg font-bold">${product.price.toFixed(2)}</p>
               </div>
 
-              <details className="group relative mt-4 [&_summary::-webkit-details-marker]:hidden">
-                <summary className="block">
-                  <div>
-                    <div className="prose max-w-none group-open:hidden">
-                      <p>{product.description}</p>
-                    </div>
+              <div className="prose max-w-none mt-10">
+                <p>{product.description}</p>
+                <p className="mt-8 text-zinc-600">
+                  available stock: {product.stock}
+                </p>
+              </div>
 
-                    <span className="mt-4 text-sm font-medium underline cursor-pointer group-open:absolute group-open:bottom-0 group-open:left-0 group-open:mt-0">
-                      Leer más...
-                    </span>
-                  </div>
-                </summary>
-
-                <div className="pb-6 prose max-w-none">
+              {/* <div className="pb-6 prose max-w-none">
                   <p>
                     The Ordinary es una marca que ofrece una variedad de
                     productos para el cuidado de la piel facial. Si buscas
@@ -110,12 +136,11 @@ const Detail = ({ product }) => {
                     lastimar a ningún animal. Es vegano Este producto es
                     realizado en base a elementos naturales de origen vegetal.
                   </p>
-                </div>
-              </details>
+                </div> */}
 
-              <form className="mt-8">
+              <div className="mt-8">
                 {/* //add props extra to model  */}
-                <fieldset>
+                {/* <fieldset>
                   <legend className="mb-1 text-sm font-medium">Color</legend>
 
                   <div className="flow-root">
@@ -139,13 +164,13 @@ const Detail = ({ product }) => {
                       </label>
                     </div>
                   </div>
-                </fieldset>
+                </fieldset> */}
 
-                <fieldset className="mt-4">
+                {/* <fieldset className="mt-4">
                   <legend className="mb-1 text-sm font-medium">Size</legend>
-                </fieldset>
+                </fieldset> */}
 
-                <div className="flex mt-8">
+                <div className="flex mt-8 flex-col gap-4">
                   <div>
                     {/*  <input
                       type="number"
@@ -153,12 +178,40 @@ const Detail = ({ product }) => {
                       className="w-12 rounded border-gray-200 py-3 text-center text-xs [-moz-appearance:_textfield] [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
                     /> */}
                   </div>
+                  <div className="flex justify-between items-center mb-5 px-5">
+                    <button
+                      className="text-gray-200 px-2 py-2 bg-zinc-500 hover:bg-fondo-300 transition-colors  rounded-md"
+                      onClick={() => {
+                        if (quantity === 1)
+                          return toast.error(
+                            "Select at least 1 item, if you want to remove the item click on the trash can"
+                          );
 
-                  <button className="block px-5 py-3 ml-3 text-xs font-medium text-white bg-fondo-300 rounded hover:bg-fondo-500 active:scale-75 transition-all ease-out">
-                    Agregar al carrito
+                        setQuantity(quantity - 1);
+                      }}
+                    >
+                      <FiMinus className="text-xl" />
+                    </button>
+                    <span className="font-bold text-2xl">{quantity}</span>
+                    <button
+                      className="text-gray-200 px-2 py-2 bg-zinc-500 hover:bg-fondo-300 transition-colors  rounded-md"
+                      onClick={() => {
+                        setQuantity(quantity + 1);
+                      }}
+                    >
+                      <FiPlus className="text-xl" />
+                    </button>
+                  </div>
+
+                  <button
+                    disabled={cart.find((item) => item.id === product.id)}
+                    className="block px-5 py-3 sm:ml-3 font-medium text-white bg-fondo-300 rounded hover:bg-fondo-500 active:scale-75 transition-all ease-out disabled:pointer-events-none disabled:bg-zinc-400 text-lg"
+                    onClick={addItemToCart}
+                  >
+                    Add to cart
                   </button>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>

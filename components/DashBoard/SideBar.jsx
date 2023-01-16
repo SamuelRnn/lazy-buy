@@ -8,20 +8,25 @@ import { DiGoogleAnalytics } from "react-icons/di";
 import { BiLogIn } from "react-icons/bi";
 import { GiUpgrade } from "react-icons/gi";
 import { signOut } from "next-auth/react";
-import { toast } from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { clearSession } from "../../redux/accountSlice";
+
 
 const SideBar = forwardRef(({ setActive }, ref) => {
+  const dispatch = useDispatch();
   const router = useRouter();
-  function handleSignOut() {
-    signOut({
-      callbackUrl: "/login?session=log-out",
+
+  const handleSignOut = async () => {
+    dispatch(clearSession());
+    await signOut({
+      callbackUrl: "/login?session=signed-out",
     });
-  }
+  };
 
   return (
     <div ref={ref} className="fixed w-56 h-full bg-white shadow-sm z-50">
       <div className="flex justify-center mt-6 mb-14">
-        <picture>
+        <Link href='/'>
           <Image
             width={80}
             height={80}
@@ -29,7 +34,7 @@ const SideBar = forwardRef(({ setActive }, ref) => {
             src="https://res.cloudinary.com/dl5hwebwa/image/upload/v1673132716/lazy-buy/lazycartremove_lvvnie.png"
             alt="company logo"
           />
-        </picture>
+        </Link>
       </div>
 
       <div className="flex flex-col">

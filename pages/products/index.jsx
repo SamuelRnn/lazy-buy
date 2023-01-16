@@ -1,20 +1,41 @@
-import Layout from "../../components/layout";
-import Card from "../../components/Card";
-import Spinner from "../../components/Spinner";
-import ModalFilters from "../../components/FiltersModal/Modal";
-import OrderSelect from "../../components/OrderSelect";
-import { useState } from "react";
+import Layout from "../../components/Layout";
+import Card from "../../components/Elements_Cards/Card";
+import Spinner from "../../components/Spinners/Spinner";
+import ModalFilters from "../../components/Elements_Filters/ModalFilters";
+import OrderSelect from "../../components/Elements_Filters/OrderSelect";
+import MiniSpinner from "../../components/Spinners/miniSpinner";
+import Pagination from "../../components/Elements/Pagination";
+import { useEffect, useState } from "react";
 import { IoMdOptions } from "react-icons/io";
 import { useGetProductsQuery } from "../../redux/productsApi";
-import MiniSpinner from "../../components/miniSpinner";
-import Pagination from "../../components/Pagination";
 import camelize from "../../utils/camelize";
+import { useDispatch, useSelector } from "react-redux";
+import { getPage, setPage } from "../../redux/productsSlice";
+import { getPrevFilters, setPrevFilters } from "../../redux/productsSlice";
 
 const Store = (initialParams) => {
-  const [filters, setFilters] = useState(initialParams);
+  const prevFilters = useSelector(getPrevFilters);
+  const selectedPage = useSelector(getPage);
+  const dispatch = useDispatch();
+  const [filters, setFilters] = useState(
+    prevFilters || {
+      ...initialParams,
+      page: selectedPage,
+    }
+  );
   const [activeFiltersModal, setActiveFiltersModal] = useState(false);
-  const { isLoading, data: productos } = useGetProductsQuery(filters);
+  const {
+    isFetching,
+    isLoading,
+    data: productos,
+  } = useGetProductsQuery(filters);
 
+  useEffect(() => {
+    return () => {
+      dispatch(setPage(filters.page));
+      dispatch(setPrevFilters(filters));
+    };
+  });
   return (
     <>
       <Layout>
@@ -51,23 +72,25 @@ const Store = (initialParams) => {
           <hr className="my-4" />
           <div className="bg-zinc-100 w-full rounded-xl mt-6 mb-12">
             <div className="flex flex-col gap-y-10 items-center py-10 min-h-[164px] justify-center overflow-hidden ">
-              {isLoading && <Spinner />}
               {/* pagination */}
-              {productos && (
+              {productos && !isLoading && (
                 <Pagination
                   count={productos.count}
                   setFilters={setFilters}
                   filters={filters}
                 />
               )}
-              {productos?.results.map((product, index) => (
-                <Card
-                  key={product.id}
-                  style="wider"
-                  product={product}
-                  delay={index}
-                />
-              ))}
+              {isFetching && <Spinner />}
+              {productos &&
+                !isFetching &&
+                productos.results.map((product, index) => (
+                  <Card
+                    key={product.id}
+                    style="wider"
+                    product={product}
+                    delay={index}
+                  />
+                ))}
             </div>
           </div>
         </section>
@@ -90,7 +113,6 @@ export async function getServerSideProps({ query }) {
     props: {
       search: query.search || null,
       category: query.category || null,
-      page: query.page || 1,
     },
   };
 }

@@ -16,19 +16,17 @@ export default async function createProduct(req, res) {
     return res.status(400).send({ message: "Not found" });
   }
   const productData = req.body;
-  console.log(productData)
   if (
     !productData.name ||
     !productData.description ||
     !productData.price ||
     !productData.mainImage ||
     !productData.stock ||
-    !productData.isActive ||
     !productData.companyId ||
     !productData.category
   ) {
     return res.status(400).json({
-      message: "Datos incompletos, asegurese de llenar todos los campos",
+      message: "Incomplete data",
     });
   }
 
@@ -45,7 +43,6 @@ export default async function createProduct(req, res) {
   }
   //create product
   productData.slug = "available";
-  console.log(productData);
   let newProduct = await product.create({ data: productData });
   newProduct = await product.update({
     where: { id: newProduct.id },

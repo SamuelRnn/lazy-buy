@@ -1,8 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+/* navbar h = 3.8rem */
 /* main width for the layout */
+.user_menu_pos {
+  position: absolute;
+  z-index: 90;
+  right: 2.5%;
+}
 .main {
   margin: 0 auto;
   width: 95%;
@@ -20,6 +25,9 @@
   @apply bg-fondo-100 text-zinc-50;
   pointer-events: none;
 }
+.input_class {
+  @apply bg-gray-300 text-zinc-700 rounded p-2 outline-none border border-slate-300 mt-2;
+}
 .filters_modal {
   position: fixed;
   top: 0;
@@ -33,20 +41,17 @@
   bottom: 0;
   right: 0;
   height: 100vh;
-  width: 400px;
-  padding-right: 110px;
-  @apply bg-fondo-200;
+  width: calc(100% + 100px);
+  @apply pr-[100px];
+  max-width: 500px;
   z-index: 1001;
 }
 .modal_bg {
-  background-color: rgba(0, 0, 0, 0.5);
+  /* background-color: rgba(0, 0, 0, 0.5); */
   z-index: 1000;
+  @apply bg-opacity-60 bg-zinc-900;
 }
 /* width for navbar */
-.nav {
-  margin: 0 auto;
-  width: min(1200px, 95%);
-}
 .card_width {
   min-width: 320px;
   width: 320px;
@@ -99,6 +104,13 @@
   grid-template-columns: 1fr 4fr;
   column-gap: 40px;
 }
+/* products dashboard */
+.grid_dashboard_products {
+  @apply grid;
+  grid-template-columns: repeat(auto-fill, 160px);
+  place-content: center;
+  gap: 4rem;
+}
 /* loader */
 @keyframes loader-rotate {
   0% {
@@ -111,4 +123,75 @@
 .loader {
   border-right-color: transparent;
   animation: loader-rotate 1s linear infinite;
+}
+
+.pay {
+  border: 1px solid rgba(162, 162, 162, 0.479);
+  @apply bg-zinc-100 bg-opacity-90;
+}
+.invisible_filter::after {
+  content: "Private";
+  position: absolute;
+  z-index: 19;
+  height: 100%;
+  width: 100%;
+  @apply bg-zinc-600 bg-opacity-70 rounded-md grid place-content-center text-zinc-100 font-bold;
+  top: 0;
+}
+
+.hamburger{
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  transition: all 0.25s;
+  position: relative;
+}
+
+.hamburger_top,
+.hamburger_mid,
+.hamburger_bot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 2px;
+  background-color: white;
+  transform: rotate(0);
+  transition: all 0.5s;
+}
+
+.hamburger_mid{
+  transform: translateY(7px);
+}
+
+
+.hamburger_bot{
+  transform: translateY(14px);
+}
+
+.open{
+  transform: rotate(90deg);
+  transform: translateY(0px);
+}
+
+.open .hamburger_top{
+  transform: rotate(45deg) translateY(6px) translate(6px)
+}
+
+.open .hamburger_mid{
+  display: none;
+}
+
+.open .hamburger_bot{
+  transform: rotate(-45deg) translateY(6px) translate(-6px)
+}
+
+.menu_open{
+  display: flex;
+  transform: translateY(0);
+}
+
+.menu_close{
+  overflow: hidden;
+  transform: translateY(-100);
 }

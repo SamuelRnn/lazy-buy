@@ -3,6 +3,11 @@ const nextConfig = {
   reactStrictMode: false,
   images: {
     domains: [
+      "images.vexels.com",
+      "drikung.cl",
+      "img.freepik.com",
+      "w7.pngwing.com",
+      "encrypted-tbn0.gstatic.com",
       "mdbootstrap.com",
       "www.thedigitalsalesinstitute.com",
       "assets.entrepreneur.com",

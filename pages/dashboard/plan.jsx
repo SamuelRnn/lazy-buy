@@ -1,72 +1,155 @@
-import DashboardLayout from "../../components/DashBoard/Layout";
-import { getSession } from "next-auth/react";
-const Plan = ({ company, plans }) => {
-  console.log("🚀 ~ file: plan.jsx:4 ~ Plan ~ company", company);
+import Spinner from "../../components/Spinners/Spinner";
+import DashboardLayout from "../../components/Dashboard/DashboardLayout";
+import dashboardMiddleware from "../../utils/dashboardMiddleware";
+import { useGetCompanyQuery, useGetPlanQuery } from "../../redux/companyApi";
+import { BiCheck } from "react-icons/bi";
+import { motion, AnimatePresence } from "framer-motion";
+import { loadStripe } from "@stripe/stripe-js";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
+import { toast, Toaster } from "react-hot-toast";
+
+const Plan = ({ company }) => {
+  const router = useRouter();
+  const { isLoading: isLoadingPlans, data: plans } = useGetPlanQuery();
+  const { isLoading: isLoadingCompany, data: companyData } = useGetCompanyQuery(
+    company.email
+  );
+  console.log(plans);
+
+  const handlePayment = async (planType) => {
+    const stripe = await loadStripe(process.env.NEXT_PUBLIC_PUBLIC_KEY);
+    let body = {
+      planType,
+      email: company.email,
+    };
+    try {
+      const response = await fetch(
+        "http://localhost:3000/api/create/stripePy?pay=plan",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(body),
+        }
+      );
+      const data = await response.json();
+      //toast.loading("Redirecting...");
+      const hh = await stripe.redirectToCheckout({
+        sessionId: data.id,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    if (router.query.success) {
+      toast.success(`Congratulations on your new plan ${router.query.planType}`,{duration: 5000,});
+    }
+    if (router.query.cancel) {
+      toast.error("We are sorry your payment has failed",{duration: 5000,});
+    }
+  }, []);
+
   return (
     <DashboardLayout>
-      <div className="mt-5 h-full">
-        <h1 className="text-center font-bold text-5xl mb-24">Choose a Plan</h1>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 place-content-center gap-10 h-full w-full mb-2">
-          {plans &&
-            plans.map((p) => (
-              <div
-                className={`grid gap-10 bg-slate-700 border-2 border-rose-600 rounded-md ${
-                  p.planType === "Premium" && "sm:col-span-2 lg:col-span-1"
-                } ${p.planType === company.plan && "bg-slate-50"} p-2`}
-              >
-                <h2 className="text-center">{p.planType}</h2>
+      <section>
+        <div className="pt-4">
+          <Toaster />
+          <div className="mx-auto max-w-screen-md text-center mb-8 lg:mb-8">
+            <h2 className="mb-3 text-4xl tracking-tight font-extrabold text-fondo-300">
+              Designed specially for your business
+            </h2>
+            <p className="mb-5 font-light text-gray-500 sm:text-lg">
+              Here at Lazy-Buy we focus on your growth where technology,
+              innovation, and capital can unlock long-term value and drive to
+              your next level
+            </p>
+          </div>
+          {(isLoadingPlans || isLoadingCompany) && (
+            <div className="flex justify-center h-[300px] items-center">
+              <Spinner />
+            </div>
+          )}
+          <div className="space-y-8 lg:grid lg:grid-cols-3 sm:gap-6 xl:gap-10 lg:space-y-0">
+            {plans &&
+              companyData &&
+              plans.map((plan, i) => (
+                <motion.div
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i / 10 }}
+                  whileHover={{ scale: 1.04 }}
+                  key={plan.id}
+                  className={`flex flex-col rounded-lg ${"bg-zinc-100"} border shadow-md pt-8 pb-4 px-6 justify-between`}
+                >
+                  <div className="mb-5">
+                    <p className="text-center text-3xl font-black mb-2 text-[#e4b47c]">
+                      {plan.planType}
+                    </p>
+                    <p className="text-center text-gray-600 font-thin">
+                      {plan.description}
+                    </p>
+                  </div>
+                  {/* info section */}
 
-                <div className="flex justify-between">
-                  <p>You can create</p>
-                  <p>{p.productsLimit} Products</p>
-                </div>
-                <div className="flex justify-between">
-                  <p>Active Product Limit </p>
-                  <p>{p.activeProductsLimit}</p>
-                </div>
-                <div className="flex justify-between">
-                  <p>Priority</p>
-                  <p>{p.productPriority}</p>
-                </div>
-                <div className="flex justify-between">
-                  <p>Price</p>
-                  <p>${p.productPriority}</p>
-                </div>
-              </div>
-            ))}
+                  <div className="mx-auto">
+                    {/* price */}
+                    <div className="flex justify-center gap-2 items-center mb-4">
+                      <p className="text-5xl font-bold first-letter:text-fondo-300 text-zinc-600">
+                        ${plan.price}
+                      </p>
+                      <span>/month</span>
+                    </div>
+                    {/* features */}
+                    <span className="flex items-center">
+                      <BiCheck className="text-emerald-400 text-2xl" />
+                      <p className="ml-2">Individual Configuration</p>
+                    </span>
+                    <span className="flex items-center">
+                      <BiCheck className="text-emerald-400 text-2xl" />
+                      <p className="ml-2">
+                        Visualized products:{" "}
+                        <span className="font-bold text-slate-500">
+                          {plan.activeProductsLimit === 9999
+                            ? "Unlimited*"
+                            : plan.activeProductsLimit}
+                        </span>
+                      </p>
+                    </span>
+                    <span className="flex items-center">
+                      <BiCheck className="text-emerald-400 text-2xl" />
+                      <p className="ml-2">
+                        Store size:{" "}
+                        <span className="font-bold text-slate-500">
+                          {plan.productsLimit === 9999
+                            ? "Unlimited*"
+                            : plan.productsLimit}
+                        </span>
+                      </p>
+                    </span>
+                  </div>
+                  <button
+                    onClick={() => handlePayment(plan.planType)}
+                    disabled={companyData.plan === plan.planType}
+                    className="w-full mt-6 p-4 rounded bg-fondo-300 border border-fondo-300 text-zinc-100
+                  font-bold transition-colors hover:bg-zinc-500 hover:text-white disabled:bg-zinc-500 disabled:pointer-events-none"
+                  >
+                    {companyData.plan === plan.planType
+                      ? "Selected"
+                      : "Get Started"}
+                  </button>
+                </motion.div>
+              ))}
+          </div>
         </div>
-      </div>
+      </section>
     </DashboardLayout>
   );
 };
-
 export default Plan;
 
 export async function getServerSideProps(context) {
-  const { req } = context;
-  const session = await getSession({
-    req,
-  });
-
-  let company;
-
-  // if user isn't is auth
-  if (!session) return { redirect: { destination: "/", permanent: false } };
-
-  const dataCompany = await fetch(`http://localhost:3000/api/get/company`).then(
-    (res) => res.json()
-  );
-
-  const plans = await fetch(`http://localhost:3000/api/get/plan`).then((res) =>
-    res.json()
-  );
-
-  dataCompany.forEach((c) => {
-    if (c.email === session.user.email) return (company = c);
-  });
-  //console.log(company.products)
-  // if user is is auth
-  return {
-    props: { company, plans },
-  };
+  return await dashboardMiddleware(context);
 }

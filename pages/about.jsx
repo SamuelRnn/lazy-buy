@@ -1,6 +1,6 @@
+import Layout from "../components/Layout";
+import Devs from "../components/Elements/Devs";
 import Image from "next/image";
-import Devs from "../components/Devs";
-import Layout from "../components/layout";
 
 const About = () => {
   return (

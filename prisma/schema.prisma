@@ -26,6 +26,7 @@ model User {
   updatedAt      DateTime      @updatedAt
   Review         Review[]
   Transaction    Transaction[]
+  wishList       Json[]
 }
 
 model Access {
@@ -51,20 +52,24 @@ model Company {
   owner          String
   city           String
   country        String
-  plan           PlanType
+  plan           PlanType       @default(Basic)
+  priority       Int            @default(3)
   products       Product[]
   transactions   Transaction[]
+  isActive       Boolean        @default(true)
+  isBanned       Boolean        @default(false)
   createdAt      DateTime       @default(now())
   updatedAt      DateTime       @updatedAt
 }
 
 model Plan {
   id                  Int      @id @default(autoincrement())
-  planType            PlanType
+  planType            PlanType @unique
+  description         String
   productsLimit       Int
   activeProductsLimit Int
   productPriority     Int
-  price               Float
+  price               Int
 
   @@index([productPriority])
 }
@@ -86,7 +91,8 @@ model Product {
   averageRating  Float?        @default(0)
   reviewsCount   Int?          @default(0)
   stock          Int
-  isActive       Boolean
+  isVisible      Boolean
+  isActive       Boolean       @default(true)
   company        Company       @relation(fields: [companyId], references: [id])
   companyId      String
   category       String

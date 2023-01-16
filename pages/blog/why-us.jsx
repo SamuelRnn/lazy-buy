@@ -1,18 +1,13 @@
-import NavBar from "../../components/NavBar";
-import Footer from "../../components/Footer";
+import Layout from "../../components/Layout";
 import { motion } from "framer-motion";
-import Image from "next/image";
-import Layout from "../../components/layout";
-import Testimonials from "../../components/Why-usComponents/Testimonials";
-import Topics from "../../components/Why-usComponents/Topics";
+import Testimonials from "../../components/Elements/Testimonials";
+import Topics from "../../components/Elements/Topics";
 
 const WhyUs = () => {
   return (
-    <Layout title="Why us?" noLayout={true}>
-      <NavBar /> 
-      <Topics/>
-      <Testimonials/>
-      <Footer />
+    <Layout title="Why us?">
+      <Topics />
+      <Testimonials />
     </Layout>
   );
 };
