@@ -27,8 +27,12 @@ export default async function stripePay(req, res) {
     let params = {
       line_items: items,
       mode: "payment",
-      success_url: "http://localhost:3000/paymentIs?success=true",
-      cancel_url: "http://localhost:3000/paymentIs?cancel=true",
+      success_url: `${
+        process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
+      }/paymentIs?sucess=true`,
+      cancel_url: `${
+        process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
+      }/paymentIs?cancel=true`,
     };
 
     try {
@@ -62,7 +66,7 @@ export default async function stripePay(req, res) {
   }
   if (req.query.pay === "plan") {
     if (req.body.planType === "Standard") {
-      console.log("hola estou aqui")
+      console.log("hola estou aqui");
 
       await company.update({
         where: {
@@ -86,8 +90,12 @@ export default async function stripePay(req, res) {
           },
         ],
         mode: "payment",
-        success_url: `http://localhost:3000/dashboard/plan?success=true&planType=${req.body.planType}`,
-        cancel_url: "http://localhost:3000/dashboard/plan?cancel=true",
+        success_url: `${
+          process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
+        }/dashboard/plan?success=true&planType=${req.body.planType}`,
+        cancel_url: `${
+          process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
+        }/dashboard/plan?cancel=true`,
       };
 
       const session = await stripe.checkout.sessions.create(paramsPlan);

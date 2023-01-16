@@ -2,7 +2,9 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const companyApi = createApi({
   reducerPath: "companyApi",
-  baseQuery: fetchBaseQuery("http://localhost:3000"),
+  baseQuery: fetchBaseQuery(
+    process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
+  ),
   endpoints: (builder) => ({
     getCompany: builder.query({
       query: (email) => `/api/get/company/${email}`,
