@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import Layout from "../components/Layout";
+import Image from "next/image";
 import { getCart } from "../redux/cartSlice";
 import { loadStripe } from "@stripe/stripe-js";
 
@@ -39,12 +40,19 @@ const OrderDetail = () => {
   return (
     <Layout title="Lazy Buy | Order detail">
       <h2 className="main text-fondo-400 font-bold text-2xl">Your order</h2>
-      <div className="main flex flex-col gap-y-3 py-5">
+      <div className="main flex gap-2 gap-y-3 py-5 ">
         {cart.map((item) => (
-          <div key={item.id} className="bg-zinc-400 p-4  rounded-md">
-            <p>{item.name}</p>
-            <p>{item.quantity} u</p>
-            <p>$ {item.price} /u</p>
+          <div key={item.id} className="bg-zinc-200 p-3  rounded-md content-center ">
+            <Image 
+              src={item.mainImage.url}
+              alt={item.name}
+              height={200}
+              width={320}
+              className="h-[200px] object-cover transition-all "
+            />
+            <p className="font-bold text-lg text-gray-700">{item.name}</p>
+            <p className="font-bold text-sm text-gray-700">{item.quantity} u</p>
+            <p className="font-bold text-sm text-gray-700">$ {item.price} /u</p>
           </div>
         ))}
       </div>
