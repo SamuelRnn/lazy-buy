@@ -17,7 +17,6 @@ transporter.verify().then(() => {
   console.log("Mensaje enviado");
 });
 
-
 export default async function createUser(req, res) {
   if (req.method !== "POST")
     return res.status(400).send({ message: "Not found" });
@@ -32,7 +31,6 @@ export default async function createUser(req, res) {
     city,
     country,
   } = req.body;
-
   delete req.body.cpassword;
   delete req.body.lastname;
   delete req.body.firstname;
@@ -43,14 +41,24 @@ export default async function createUser(req, res) {
 
   const passwordHashed = await bcrypt.hash(password, 8);
 
-  const upToCloud = await cloud.uploader.upload(profilePicture, {
-    folder: "userProfilePictures",
-  });
+  let jsonProfilePicture;
+  let upToCloud;
 
-  const jsonProfilePicture = {
-    public_id: upToCloud.public_id,
-    url: upToCloud.secure_url,
-  };
+  if (profilePicture) {
+    upToCloud = await cloud.uploader.upload(profilePicture, {
+      folder: "userProfilePictures",
+    });
+
+    jsonProfilePicture = {
+      public_id: upToCloud.public_id,
+      url: upToCloud.secure_url,
+    };
+  } else {
+    jsonProfilePicture = {
+      public_id: "lazy-buy/Diseño_sin_título_r4admw",
+      url: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673480864/lazy-buy/Dise%C3%B1o_sin_t%C3%ADtulo_r4admw.png",
+    };
+  }
 
   await user.create({
     data: {
