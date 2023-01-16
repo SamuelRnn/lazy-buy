@@ -120,8 +120,12 @@ export default async function stripePay(req, res) {
           },
         ],
         mode: "payment",
-        success_url: `http://localhost:3000/dashboard/plan?success=true&planType=${req.body.planType}`,
-        cancel_url: "http://localhost:3000/dashboard/plan?cancel=true",
+        success_url: `${
+          process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
+        }/dashboard/plan?success=true&planType=${req.body.planType}`,
+        cancel_url: `${
+          process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
+        }/dashboard/plan?cancel=true`,
       };
 
       const session = await stripe.checkout.sessions.create(paramsPlan);
