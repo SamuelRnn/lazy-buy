@@ -43,7 +43,6 @@ const Detail = ({ product }) => {
       return toast.error("Invalid comment, please write something!");
 
     addReview(input);
-    console.log(input);
   };
 
   const addItemToCart = () => {
