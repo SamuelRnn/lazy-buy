@@ -7,13 +7,10 @@ export default async function getWishList(req, res) {
   const { id, email } = req.body;
 
   try {
-    const userWishList = await user.findFirst({
+    const userWishList = await user.findUnique({
       where: {
         email,
-      },
-      include: {
-        wishList: true,
-      },
+      }
     });
 
     if (!userWishList)
@@ -28,11 +25,11 @@ export default async function getWishList(req, res) {
         email,
       },
       data: {
-        wishList: newWishList,
+        wishList: [...newWishList],
       },
     });
 
-    return res.status(200).json(wishList);
+    return res.status(200).json("Done");
   } catch (error) {
     console.log(error);
     res.status(500).json({ error });

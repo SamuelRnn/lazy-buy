@@ -2,15 +2,16 @@ import { user } from "../../../../prisma";
 
 export default async function getWishList(req, res) {
   if (req.method !== "GET")
-    return res.status(400).send({ message: "Not found" });
+    return res.status(404).send({ message: "Not found" });
 
   const { email } = req.query;
+  
   try {
-    const userWishList = await user.findFirst({
+    const userWishList = await user.findUnique({
       where: {
         email,
       },
-      include: {
+      select: {
         wishList: true,
       },
     });
