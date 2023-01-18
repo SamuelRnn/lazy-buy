@@ -1,5 +1,5 @@
 import { stripe } from "../../../utils/stripeConfig";
-import { product, company } from "../../../prisma";
+import { product, company, transaction } from "../../../prisma";
 
 export default async function stripePay(req, res) {
   if (req.method !== "POST") {
@@ -37,7 +37,18 @@ export default async function stripePay(req, res) {
       const session = await stripe.checkout.sessions.create(params);
 
       ids.forEach(async ({ id, quantity }) => {
-        const producto = await product.findUnique({ where: { id } });
+        const producto = await product.findUnique({ where: { id },include:{company:{select:{name:true}}} });
+        const {companyId,id:productId} = producto
+        // falta enviar por body el id del usuario ***********
+        const transation = await transaction.create({
+          data:{
+            userId:"0f631a6d-15df-46e3-8a6e-aace8f191ef4",
+            companyId,
+            productId,
+            productAmount:quantity,
+          }
+        })
+        console.log(transation)
 
         if (producto && producto.stock >= 1) {
           await product.update({
@@ -62,6 +73,9 @@ export default async function stripePay(req, res) {
       res.status(400).json(error);
     }
   }
+
+  // *****************************************************
+
   if (req.query.pay === "plan") {
     if (req.body.planType === "Standard") {
       await company.update({

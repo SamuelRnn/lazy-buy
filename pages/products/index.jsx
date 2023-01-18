@@ -44,7 +44,9 @@ const Store = (initialParams) => {
             {initialParams.search && (
               <h2 className="text-lg text-fondo-300 font-medium max-sm:self-start transition-all align-middle">
                 {productos ? productos.count : <MiniSpinner />}
-                {` result(s) for "${initialParams.search}"`}
+                {` result(s) for "${initialParams.search
+                  .split("-")
+                  .join(" ")}"`}
               </h2>
             )}
             {initialParams.category && (
