@@ -20,6 +20,7 @@
     "bcryptjs": "^2.4.3",
     "chart.js": "^4.1.2",
     "cloudinary": "^1.33.0",
+    "crypto-js": "^4.1.1",
     "eslint": "8.30.0",
     "eslint-config-next": "13.1.1",
     "formik": "^2.2.9",
