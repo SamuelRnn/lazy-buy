@@ -16,11 +16,6 @@ const integrantes = [
     linkedIn: "https://www.linkedin.com/in/brayan-bravo-ramos56/",
   },
   {
-    img: "https://i.ibb.co/7nSJPXQ/Rectangle-121.png",
-    name: "Juan",
-    linkedIn: "",
-  },
-  {
     img: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673147022/lazy-buy/Imagen_de_WhatsApp_2023-01-07_a_las_21.57.07_enidiz.jpg",
     name: "Juampi",
     linkedIn: "https://www.linkedin.com/in/juan-pablo-matarazzo-202409224/",
