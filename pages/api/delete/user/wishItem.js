@@ -5,7 +5,6 @@ export default async function getWishList(req, res) {
     return res.status(400).send({ message: "Not found" });
 
   const { id, email } = req.body;
-  console.log("🚀 ~ file: wishItem.js:8 ~ getWishList ~  req.body;", req.body);
 
   try {
     const userWishList = await user.findUnique({
