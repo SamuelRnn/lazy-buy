@@ -4,6 +4,8 @@ import { clearSession } from "../../../redux/accountSlice";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
 import Link from "next/link";
+import { FiUser, FiHeart } from "react-icons/fi";
+import { RiLogoutBoxRLine } from "react-icons/ri";
 
 const UserMenu = ({ active, setActive }) => {
   const dispatch = useDispatch();
@@ -31,18 +33,29 @@ const UserMenu = ({ active, setActive }) => {
       className="user_menu_pos top-[70px] w-[200px] rounded-md bg-fondo-200 text-zinc-100 flex flex-col gap-y-1 overflow-hidden"
     >
       {session.type === "user" && (
-        <Link
-          href="/profile"
-          className="hover:bg-fondo-300 rounded w-full px-2 py-2 text-left transition-colors"
-        >
-          Profile
-        </Link>
+        <>
+          <Link
+            href="/profile"
+            className="hover:bg-fondo-300 w-full px-2 py-2 text-left transition-colors duration-75 flex items-center"
+          >
+            <FiUser className="mr-2" />
+            Profile
+          </Link>
+          <Link
+            href="/profile/like"
+            className="hover:bg-fondo-300 w-full px-2 py-2 text-left transition-colors duration-75 flex items-center"
+          >
+            <FiHeart className="mr-2" />
+            Wishlist
+          </Link>
+        </>
       )}
 
       <button
         onClick={handleSignOut}
-        className="hover:bg-fondo-300 rounded w-full px-2 py-2 text-left transition-colors"
+        className="hover:bg-fondo-300 w-full px-2 py-2 text-left transition-colors duration-75 flex items-center"
       >
+        <RiLogoutBoxRLine className="mr-2" />
         Sign out
       </button>
     </motion.div>
