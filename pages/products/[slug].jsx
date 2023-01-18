@@ -260,7 +260,13 @@ export async function getServerSideProps({ res, query: { slug } }) {
           },
         },
       ],
+      NOT: {
+        name: {
+          contains: fetchedProduct.name,
+        },
+      },
     },
+
     orderBy: {
       averageRating: "desc",
     },
