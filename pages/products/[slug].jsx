@@ -17,8 +17,10 @@ import {
   useGetReviewsQuery,
   useAddReviewMutation,
 } from "../../redux/reviewApi";
+import CardCarousel from "../../components/Elements_Cards/CardCarousel";
 
-const Detail = ({ product }) => {
+const Detail = ({ product, carousel }) => {
+  console.log(carousel);
   const router = useRouter();
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
@@ -298,6 +300,12 @@ const Detail = ({ product }) => {
       </section>
       <br />
       <br />
+      {carousel.length ? (
+        <>
+          <h1 className="main home_titles">Related products</h1>
+          <CardCarousel productArray={carousel} />
+        </>
+      ) : null}
       <br />
     </Layout>
   );
@@ -322,9 +330,47 @@ export async function getServerSideProps({ res, query: { slug } }) {
   fetchedProduct.createdAt = toString(fetchedProduct.createdAt);
   fetchedProduct.company.createdAt = toString(fetchedProduct.company.createdAt);
   fetchedProduct.company.updatedAt = toString(fetchedProduct.company.updatedAt);
+
+  const carousel = await product.findMany({
+    where: {
+      OR: [
+        {
+          category: {
+            contains: fetchedProduct.category,
+          },
+        },
+      ],
+      NOT: {
+        name: {
+          contains: fetchedProduct.name,
+        },
+      },
+    },
+
+    orderBy: {
+      averageRating: "desc",
+    },
+    include: {
+      company: true,
+    },
+  });
+  /* {
+    companyId:{
+      contains: fetchedProduct.companyId
+    }
+  } */
+  if (carousel.length) {
+    for (let obj of carousel) {
+      obj.createdAt = obj.createdAt.toString();
+      obj.updatedAt = obj.updatedAt.toString();
+      obj.company.updatedAt = obj.company.updatedAt.toString();
+      obj.company.createdAt = obj.company.createdAt.toString();
+    }
+  }
   return {
     props: {
       product: fetchedProduct,
+      carousel: carousel.length ? carousel : null,
     },
   };
 }
