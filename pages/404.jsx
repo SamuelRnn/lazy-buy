@@ -9,7 +9,6 @@ const ErrorPage = () => {
     const id = setTimeout(() => router.push("/"), 5000);
     return () => {
       clearTimeout(id);
-      console.log("me voy");
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

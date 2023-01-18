@@ -34,19 +34,16 @@ const Signup = () => {
   });
 
   async function onSubmit(values) {
-    values.profilePicture =
-      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fyt3.ggpht.com%2Fa%2FAATXAJyso7plus_8_qI1aWr4wS23XvBCXnikqGxVKzrdpQ%3Ds900-c-k-c0xffffffff-no-rj-mo&f=1&nofb=1&ipt=04178e62b79bda4a36a02b96e71abd3b56414327b8f8fe56c46d9a82d88d4b1b&ipo=images";
     const options = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(values),
     };
 
-    await fetch("http://localhost:3000/api/create/user", options)
+    await fetch("/api/create/user", options)
       .then((res) => res.json())
       .then((data) => {
-        console.log("🚀 ~ file: signCompany.jsx:42 ~ .then ~ data", data);
-        if (data) router.push("http://localhost:3000/login");
+        if (data) router.push("/login");
       })
       .catch((error) => console.log(error));
   }

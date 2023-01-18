@@ -17,16 +17,13 @@ const OrderDetail = () => {
       quantity: cartItem.quantity,
     }));
     try {
-      const response = await fetch(
-        "http://localhost:3000/api/create/stripePy?pay=product",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(order),
-        }
-      );
+      const response = await fetch("/api/create/stripePy?pay=product", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(order),
+      });
       const data = await response.json();
       //toast.loading("Redirecting...");
       const hh = await stripe.redirectToCheckout({

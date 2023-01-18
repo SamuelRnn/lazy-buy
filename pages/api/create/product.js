@@ -51,3 +51,11 @@ export default async function createProduct(req, res) {
 
   return res.status(201).json(newProduct);
 }
+
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: "8mb",
+    },
+  },
+};

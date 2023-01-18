@@ -2,19 +2,14 @@ import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 
 function getPageLabels(count, perPage) {
   const pages = Math.ceil(count / perPage);
-  let aux = [];
-  for (let i = pages; i > 0; i--) {
-    if (i === 4) {
-      aux.unshift("...");
-      continue;
-    }
-    if (i > 4) continue;
-    aux.unshift(i);
+  let aux = Array.from("*".repeat(pages)).map((_, i) => i + 1);
+  console.log(aux);
+  if (pages > 4) {
+    aux = aux.slice(0, 3).concat("...").concat(pages);
   }
-  aux.push(pages);
+  // pages > 4 && aux.push(pages);
   return [aux, pages];
 }
-
 const Pagination = ({ count, filters, setFilters }) => {
   if (+count == 0) {
     return <div className="text-gray-500">No products found!</div>;
@@ -60,7 +55,6 @@ const Pagination = ({ count, filters, setFilters }) => {
         </button>
         {pageLabels?.map((e) => {
           if (e === "...") {
-            console.log(maxPages);
             return (
               <button
                 key={e}

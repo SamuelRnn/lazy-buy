@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Spinner from "../../components/Spinners/Spinner";
-import DashboardLayout from "../../components/Dashboard/DashboardLayout";
+import DashboardLayout from "../../components/Elements_Dashboard/DashboardLayout";
 import dashboardMiddleware from "../../utils/dashboardMiddleware";
 import { useGetCompanyQuery, useGetPlanQuery } from "../../redux/companyApi";
 import { BiCheck } from "react-icons/bi";
@@ -15,7 +16,6 @@ const Plan = ({ company }) => {
   const { isLoading: isLoadingCompany, data: companyData } = useGetCompanyQuery(
     company.email
   );
-  console.log(plans);
 
   const handlePayment = async (planType) => {
     const stripe = await loadStripe(process.env.NEXT_PUBLIC_PUBLIC_KEY);
@@ -24,16 +24,13 @@ const Plan = ({ company }) => {
       email: company.email,
     };
     try {
-      const response = await fetch(
-        "http://localhost:3000/api/create/stripePy?pay=plan",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(body),
-        }
-      );
+      const response = await fetch("/api/create/stripePy?pay=plan", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
       const data = await response.json();
       //toast.loading("Redirecting...");
       const hh = await stripe.redirectToCheckout({
@@ -45,10 +42,13 @@ const Plan = ({ company }) => {
   };
   useEffect(() => {
     if (router.query.success) {
-      toast.success(`Congratulations on your new plan ${router.query.planType}`,{duration: 5000,});
+      toast.success(
+        `Congratulations on your new plan ${router.query.planType}`,
+        { duration: 5000 }
+      );
     }
     if (router.query.cancel) {
-      toast.error("We are sorry your payment has failed",{duration: 5000,});
+      toast.error("We are sorry your payment has failed", { duration: 5000 });
     }
   }, []);
 

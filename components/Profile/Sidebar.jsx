@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import Link from 'next/link'
+import { useState } from "react";
+import Link from "next/link";
 // Icons
 import {
   RiHome3Line,
@@ -7,40 +7,37 @@ import {
   RiMore2Fill,
   RiCloseFill,
   RiServiceLine,
-} from 'react-icons/ri'
-import Image from 'next/image'
-import { BiLogIn } from 'react-icons/bi'
-import { useSession, getSession } from 'next-auth/react'
-import { useDispatch } from 'react-redux'
-import { clearSession } from '../../redux/accountSlice'
-import { HomeIcon, UserIcon } from '@heroicons/react/24/solid'
-import { signOut } from 'next-auth/react'
+} from "react-icons/ri";
+import Image from "next/image";
+import { BiLogIn } from "react-icons/bi";
+import { useSession, getSession } from "next-auth/react";
+import { useDispatch } from "react-redux";
+import { clearSession } from "../../redux/accountSlice";
+import { HomeIcon, UserIcon } from "@heroicons/react/24/solid";
+import { signOut } from "next-auth/react";
 import { useRouter } from "next/router";
 
+const Sidebar = ({ user }) => {
+  const [showMenu, setShowMenu] = useState(false);
 
-const Sidebar = ({user}) => {
-  const [showMenu, setShowMenu] = useState(false)
-  
-  const dispatch = useDispatch()
-  // console.log('ESTA ES LA SESION', session)
+  const dispatch = useDispatch();
   // const { data: session } = useSession()
   const router = useRouter();
 
   const handleSignOut = async () => {
-    dispatch(clearSession())
+    dispatch(clearSession());
     await signOut({
-      callbackUrl: '/login?session=signed-out',
-    })
-  }
+      callbackUrl: "/login?session=signed-out",
+    });
+  };
   return (
     <>
       <div
         className={`bg-primary-900 h-full fixed lg:static w-[80%] md:w-[40%] lg:w-full transition-all z-50 duration-300 bg-gray-400  ${
-          showMenu ? 'left-0' : '-left-full'
+          showMenu ? "left-0" : "-left-full"
         }`}
       >
         {/* Profile */}
-        {/* {console.log('data:', session)} */}
         <button
           onClick={() => setShowMenu(!showMenu)}
           className="lg:hidden fixed right-2 top-2 text-2xl bg-primary-900 p-2.5 rounded-full text-black z-50"
@@ -66,7 +63,7 @@ const Sidebar = ({user}) => {
         <div className="bg-primary-300 p-8 rounded-tr-[100px] h-[70vh]  flex flex-col justify-between gap-8 bg-fondo-100">
           <nav className="flex flex-col gap-8">
             <Link
-              href="/"
+              href="/profile"
               className={`flex items-center gap-4 text-white py-2 px-4 rounded-xl hover:bg-primary-900/50 transition-colors`}
             >
               <RiHome3Line /> Home
@@ -74,9 +71,9 @@ const Sidebar = ({user}) => {
             <Link
               href="/profile/record"
               className={`flex items-center gap-4 text-white py-2 px-4 rounded-xl hover:bg-primary-900/50 transition-colors ${
-                router.pathname === '/profile/record'
-                ? "bg-fondo-100 text-fondo-500 focus:text-black"
-                : "text-white hover:bg-fondo-100 hover:text-fondo-200"
+                router.pathname === "/profile/record"
+                  ? "bg-fondo-100 text-fondo-500 focus:text-black"
+                  : "text-white hover:bg-fondo-100 hover:text-fondo-200"
               }`}
             >
               <RiFileCopyLine /> Record
@@ -84,9 +81,9 @@ const Sidebar = ({user}) => {
             <Link
               href="/profile/like"
               className={`flex items-center gap-4 text-white py-2 px-4 rounded-xl hover:bg-primary-900/50 transition-colors ${
-                router.pathname === 'profile/like'
-                ? "bg-fondo-100 text-fondo-500 focus:text-black"
-                : "text-white hover:bg-fondo-100 hover:text-fondo-200"
+                router.pathname === "profile/like"
+                  ? "bg-fondo-100 text-fondo-500 focus:text-black"
+                  : "text-white hover:bg-fondo-100 hover:text-fondo-200"
               }`}
             >
               <RiServiceLine /> Like
@@ -112,23 +109,23 @@ const Sidebar = ({user}) => {
       </div>
       {/* Button mobile */}
     </>
-  )
-}
+  );
+};
 
-export default Sidebar
+export default Sidebar;
 
 export async function getServerSideProps(context) {
-  const { req } = context
+  const { req } = context;
 
   const session = await getSession({
     req,
-  })
-  console.log('datagetserver', session)
+  });
   // if user isn't is auth
-  if (!session) return { redirect: { destination: '/login', permanent: false } }
+  if (!session)
+    return { redirect: { destination: "/login", permanent: false } };
 
   // if user is is auth
   return {
     props: { session },
-  }
+  };
 }

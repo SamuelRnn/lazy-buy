@@ -1,4 +1,4 @@
-import DashboardLayout from "../../components/Dashboard/DashboardLayout";
+import DashboardLayout from "../../components/Elements_Dashboard/DashboardLayout";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { AiOutlineEdit } from "react-icons/ai";
@@ -11,7 +11,7 @@ import {
 import Spinner from "../../components/Spinners/Spinner";
 import { registerValidateCompanyAccount } from "../../utils/validateCompanyAccount";
 import { useFormik } from "formik";
-import UploadWidget from "../../components/DashBoard/UploadWIdget";
+import UploadWidget from "../../components/Elements_Dashboard/UploadWIdget";
 import { toast } from "react-hot-toast";
 
 const Account = ({ company: { email } }) => {
@@ -33,14 +33,12 @@ const Account = ({ company: { email } }) => {
 
   async function onSubmit(values) {
     values.email = company.email;
-    console.log(values)
     try {
       await updateAccount(values);
-      formik.resetForm()
-      return toast.success('Changes Applied!')
+      formik.resetForm();
+      return toast.success("Changes Applied!");
     } catch (error) {
-      return toast.error('Something went wrong!')
-      
+      return toast.error("Something went wrong!");
     }
   }
 

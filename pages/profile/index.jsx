@@ -1,19 +1,17 @@
-import UserProfile from '../../components/Profile/UserProfile'
+import UserProfile from "../../components/Profile/UserProfile";
+import Home from "../../components/Profile/Home";
+import profileMiddleware from "../../utils/profileMiddleware";
 
-import profileMiddleware from '../../utils/profileMiddleware'
-
-const Home = ({user}) => {
- console.log(user)
+const HomePage = ({ user }) => {
   return (
-    <UserProfile user={user}>
-
+    <UserProfile user={user} title="Home">
+      <Home />
     </UserProfile>
-  
-  )
-}
+  );
+};
 
-export default Home
+export default HomePage;
 
 export async function getServerSideProps(context) {
-  return await profileMiddleware(context)
+  return await profileMiddleware(context);
 }

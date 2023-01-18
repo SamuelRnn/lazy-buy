@@ -74,7 +74,6 @@ export async function getServerSideProps({ req, query }) {
       extendedSessionData.image = found_user.profilePicture.url;
     }
   }
-  console.log(extendedSessionData);
   let newProducts = await product.findMany({
     where: {
       isActive: true,
