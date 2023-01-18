@@ -46,7 +46,7 @@ const About = () => {
             </p>
           </div>
           <div className="w-full lg:w-8/12 lg:pt-8">
-            <div className="flex flex-row items-center rounded-md shadow-lg justify-center flex-wrap gap-4 md:gap-5 p-1 md:p-5">
+            <div className="flex flex-row items-center rounded-md  justify-center flex-wrap gap-4 md:gap-5 p-1 md:p-5">
               <Devs />
             </div>
           </div>
