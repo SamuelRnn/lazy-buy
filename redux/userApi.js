@@ -5,10 +5,10 @@ export const userApi = createApi({
   baseQuery: fetchBaseQuery(
     process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
   ),
-  tagTypes: ["wishList"],
   endpoints: (builder) => ({
     getWishList: builder.query({
-      query: (email) => `/api/get/user/whisList/${email}`,
+      query: (email) => `/api/get/user/${email}`,
+      providesTags: ["wishList"],
     }),
     addWishItem: builder.mutation({
       query: (addWishItem) => ({
@@ -17,7 +17,7 @@ export const userApi = createApi({
         body: addWishItem,
         header: { "Content-Type": "application/json" },
       }),
-      invalidatesTahs: ["wishList"],
+      invalidatesTags: ["wishList"],
     }),
     deleteWishItem: builder.mutation({
       query: (deleteWishItem) => ({
@@ -26,9 +26,14 @@ export const userApi = createApi({
         body: deleteWishItem,
         header: { "Content-Type": "application/json" },
       }),
-      invalidatesTahs: ["wishList"],
+      invalidatesTags: ["wishList"],
     }),
   }),
+  tagTypes: ["wishList"],
 });
 
-export const { useGetWishListQuery, useAddWishItemMutation } = userApi;
+export const {
+  useGetWishListQuery,
+  useAddWishItemMutation,
+  useDeleteWishItemMutation,
+} = userApi;
