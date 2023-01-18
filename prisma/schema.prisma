@@ -106,7 +106,6 @@ model Product {
 
 model Review {
   id           String   @id @default(uuid())
-  commentTitle String
   commentBody  String
   rating       Float
   user         User?    @relation(fields: [userId], references: [id])

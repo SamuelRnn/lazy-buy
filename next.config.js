@@ -20,6 +20,7 @@ const nextConfig = {
       "bicialtea.labici.net",
       "images.unsplash.com",
       "res.cloudinary.com",
+      "lh3.googleusercontent.com",
     ],
   },
 };
