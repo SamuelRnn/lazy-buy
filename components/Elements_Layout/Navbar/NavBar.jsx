@@ -2,7 +2,7 @@
 import ModalCart from "../../Elements_Cart/ModalCart";
 import SearchBar from "./SearchBar";
 import NavSubMenu from "./NavSubMenu";
-import logo from "../../../public/logocartremove.png";
+import logo from "../../../public/lazycartremove.png";
 import Image from "next/image";
 import { GiShoppingBag } from "react-icons/gi";
 import { BsCaretDownFill } from "react-icons/bs";
@@ -27,7 +27,7 @@ const NavBar = () => {
         <div className="flex items-center gap-x-4 justify-center flex-wrap gap-y-2">
           {/* logo */}
           <a href="/" className="nav_links flex items-center gap-1">
-            <Image src={logo} alt="logo" width={27} height={27} />
+            <Image src={logo} alt="logo" width={30} height={30} />
             <h1 className="font-bold text-fondo-400 text-xl transition-colors ease-in-out">
               Lazy Buy
             </h1>
@@ -38,9 +38,6 @@ const NavBar = () => {
         {/* navlinks */}
         <div className="flex justify-center">
           <nav className="flex items-center gap-x-3">
-            <a href="/about" className="nav_links">
-              About
-            </a>
             <button
               className={`nav_links ${activeCatModal ? "underline" : ""}`}
               onClick={() => {
