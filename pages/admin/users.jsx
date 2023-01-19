@@ -3,7 +3,7 @@ import AdminLayout from "../../components/Elements_Admin/AdminLayout";
 import { useGetUserListQuery } from "../../redux/userApi";
 import adminMiddleware from "../../utils/adminMiddleware";
 
-const index = () => {
+const Index = () => {
   const {data , isLoading} = useGetUserListQuery()
 console.log(data)
   return (
@@ -12,7 +12,7 @@ console.log(data)
     </AdminLayout>
   );
 };
-export default index;
+export default Index;
 export async function getServerSideProps(context) {
   return await adminMiddleware(context);
 }
