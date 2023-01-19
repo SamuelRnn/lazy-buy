@@ -10,10 +10,6 @@ export default async function getPlanById(req, res) {
     where: { id: parseInt(id) },
     include: { reviews: { include: { user: true } } },
   });
-  console.log(
-    "🚀 ~ file: [id].js:13 ~ getPlanById ~ planFound",
-    planFound.reviews
-  );
-
+  
   return res.status(200).json(planFound.reviews);
 }

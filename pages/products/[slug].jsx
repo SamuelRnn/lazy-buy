@@ -45,6 +45,12 @@ const Detail = ({ product, carousel }) => {
       return toast.error("Invalid comment, please write something!");
 
     addReview(input);
+    setInput({
+      commentBody: "",
+      rating: 1,
+      userEmail: accountType.email,
+      productId: product.id,
+    });
   };
 
   const addItemToCart = () => {
