@@ -197,3 +197,19 @@
   overflow: hidden;
   transform: translateY(-100);
 }
+
+.grid_order{
+display: grid;
+grid-template-columns: auto 400px;
+gap: 1rem;
+}
+.grid_products_order {
+  grid-template-columns: repeat(auto-fill, 160px);
+  gap: 1rem;
+}
+@media (min-width: 425px) {
+  .grid_order {
+    display: flex;
+    justify-content: center;
+  }
+}
