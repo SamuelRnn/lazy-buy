@@ -4,17 +4,18 @@ import Image from "next/image";
 import { getCart } from "../redux/cartSlice";
 import { loadStripe } from "@stripe/stripe-js";
 import { getSession } from "../redux/accountSlice";
+import { ImPriceTag } from "react-icons/im";
+import { MdInventory } from "react-icons/md";
 
 const OrderDetail = () => {
   const cart = useSelector(getCart);
-  const {email} = useSelector((state) => state.account?.session);
+  const { email } = useSelector((state) => state.account?.session);
   document.body.style.overflow = "";
 
   const handlePayment = async () => {
-    
     const stripe = await loadStripe(process.env.NEXT_PUBLIC_PUBLIC_KEY);
     let order = cart.map((cartItem) => ({
-      userEmail:email,
+      userEmail: email,
       id: cartItem.id,
       name: cartItem.name,
       unit_amount: cartItem.price,
@@ -45,18 +46,31 @@ const OrderDetail = () => {
         {cart.map((item) => (
           <div
             key={item.id}
-            className="bg-zinc-200 p-3  rounded-md content-center "
+            className="relative bg-zinc-50 rounded-lg w-[250px] sm:w-[320px] md:w-[720px] shadow-md shadow-zinc-400"
           >
+            <div className="px-3 py-2 text-fondo-300">
+              <h2 className=" overflow-hidden whitespace-nowrap text-ellipsis font-bold w-3/4">
+                {item.name}
+              </h2>
+            </div>
             <Image
-              src={item.mainImage.url}
               alt={item.name}
-              height={200}
+              title={item.name}
+              src={item.mainImage.url}
               width={320}
-              className="h-[200px] object-cover transition-all "
+              height={100}
+              className="w-[160px] h-[110px] object-cover"
             />
-            <p className="font-bold text-lg text-gray-700">{item.name}</p>
-            <p className="font-bold text-sm text-gray-700">{item.quantity} u</p>
-            <p className="font-bold text-sm text-gray-700">$ {item.price} /u</p>
+            <div className="bg-zinc-600 py-3 px-5 text-zinc-100 text-sm rounded-b-lg">
+              <p className="flex font-bold">
+                <ImPriceTag className="mr-1 mt-[5px]" />
+                {item.price.toFixed(2)}
+              </p>
+              <p className="flex font-bold">
+                <MdInventory className="mr-1 mt-[5px]" />
+                {item.quantity}
+              </p>
+            </div>
           </div>
         ))}
       </div>
