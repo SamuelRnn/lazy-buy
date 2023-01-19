@@ -11,7 +11,6 @@ export default async function stripePay(req, res) {
     .split("")
     .map((e, i) => e + i + "-")
     .join("");
-  console.log(otro);
 
   if (req.query.pay === "product") {
     let items = req.body.map((e) => {
