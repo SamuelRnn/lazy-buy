@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 
 import { useRouter } from "next/router";
@@ -5,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { clearCart, getCart } from "../redux/cartSlice";
 import { useSelector } from "react-redux";
 import SuccessComponent from "../components/After_Payment/SuccessComponent";
-import CancelComponent from "../components/after_Payment/cancelComponent";
+import CancelComponent from "../components/After_Payment/CancelComponent";
 
 const PaymentIs = () => {
   const dispatch = useDispatch();
@@ -49,7 +50,7 @@ const PaymentIs = () => {
     setTimeout(() => {
       setBtn(true);
     }, 2000);
-  }, [emailEn, email]);
+  }, []);
 
   useEffect(() => {
     if (router.query.cancel) {
@@ -60,7 +61,7 @@ const PaymentIs = () => {
   return (
     <>
       {succ ? <SuccessComponent btn={btn} /> : null}
-      {cancel ? <CancelComponent btn={btn}/> : null}
+      {cancel ? <CancelComponent btn={btn} /> : null}
     </>
   );
 };
