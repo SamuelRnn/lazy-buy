@@ -49,13 +49,13 @@ const PaymentIs = () => {
     setTimeout(() => {
       setBtn(true);
     }, 2000);
-  }, [emailEn]);
+  }, [emailEn,dispatch,setSucc]);
 
   useEffect(() => {
     if (router.query.cancel) {
       setCancel(true);
     }
-  }, [router.query.cancel]);
+  }, [router.query.cancel,setCancel]);
 
   return (
     <>

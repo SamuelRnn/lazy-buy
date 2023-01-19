@@ -13,7 +13,7 @@ export const userApi = createApi({
     getUserList: builder.query({
       query: () => "/api/get/user",
       //filtrar si no es un admin
-      //transformResponse: (response) => response.filter(e => !e.isAdmin),
+      transformResponse: (response) => response.filter(e => !e.isAdmin),
       providesTags: ["userList"],
     }),
     deleteUser: builder.mutation({
@@ -51,4 +51,5 @@ export const {
   useAddWishItemMutation,
   useDeleteWishItemMutation,
   useGetUserListQuery,
+  useDeleteUserMutation,
 } = userApi;

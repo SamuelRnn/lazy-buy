@@ -6,16 +6,18 @@ export default async function deleteUser(req, res) {
   }
   try {
     const { userEmail } = req.query;
+    const prev = await user.findUnique({where:{email:userEmail}})
     const userDelete = await user.update({
       where: {
         email: userEmail,
       },
       data: {
-        isBanned: true,
+        isBanned: !prev.isBanned,
       },
     });
-    if(!userDelete)throw new Error("User not found")
+    if(!userDelete)throw new Error("User not found");
     console.log(userDelete)
+    res.status(200).json(userDelete)
   } catch (error) {
     console.log(error)
     res.status(400).json({error: error.message})
