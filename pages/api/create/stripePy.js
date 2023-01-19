@@ -6,10 +6,15 @@ export default async function stripePay(req, res) {
     return res.status(400).send({ message: "Not found" });
   }
 
+  const email = req.body[0].userEmail;
+  const otro = email
+    .split("")
+    .map((e, i) => e + i + "-")
+    .join("");
+  console.log(otro);
+
   if (req.query.pay === "product") {
-    let ids = [];
     let items = req.body.map((e) => {
-      ids.push({ id: e.id, quantity: e.quantity });
       return {
         price_data: {
           currency: "usd",
@@ -27,7 +32,7 @@ export default async function stripePay(req, res) {
       mode: "payment",
       success_url: `${
         process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
-      }/paymentIs?sucess=true`,
+      }/paymentIs?status=${otro}`,
       cancel_url: `${
         process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
       }/paymentIs?cancel=true`,
@@ -35,38 +40,6 @@ export default async function stripePay(req, res) {
 
     try {
       const session = await stripe.checkout.sessions.create(params);
-
-      ids.forEach(async ({ id, quantity }) => {
-        const producto = await product.findUnique({ where: { id },include:{company:{select:{name:true}}} });
-        const {companyId,id:productId} = producto
-        // falta enviar por body el id del usuario ***********
-        const transation = await transaction.create({
-          data:{
-            userId:"0f631a6d-15df-46e3-8a6e-aace8f191ef4",
-            companyId,
-            productId,
-            productAmount:quantity,
-          }
-        })
-        console.log(transation)
-
-        if (producto && producto.stock >= 1) {
-          await product.update({
-            where: { id },
-            data: { stock: producto.stock - quantity },
-          });
-        }
-        const productoNew = await product.findUnique({ where: { id } });
-
-        if (productoNew.stock < 1) {
-          await product.update({
-            where: {
-              id,
-            },
-            data: { isVisible: false },
-          });
-        }
-      });
 
       res.status(200).json(session);
     } catch (error) {
