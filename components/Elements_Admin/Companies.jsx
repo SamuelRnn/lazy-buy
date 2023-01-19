@@ -53,7 +53,7 @@ export const Companies = () => {
               <td className="p-3 text-sm text-gray-700 whitespace-nowrap">
                 {c.plan}
               </td>
-              <td className="p-3 text-sm text-white whitespace-nowrap bg-fondo-400 font-bold hover:cursor-pointer">
+              <td className="p-3 text-sm text-white whitespace-nowrap bg-fondo-400 font-bold hover:cursor-pointer hover:bg-fondo-300">
                 Delete
               </td>
             </tr>
