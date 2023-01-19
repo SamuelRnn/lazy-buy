@@ -27,7 +27,6 @@ const Detail = ({ product, carousel }) => {
   const accountType = useSelector((state) => state.account?.session);
   const cart = useSelector(getCart);
   const { isFetching, data: reviews } = useGetReviewsQuery(product.id);
-  console.log("🚀 ~ file: [slug].jsx:30 ~ Detail ~ reviews", reviews);
   const [addReview] = useAddReviewMutation();
 
   const [input, setInput] = useState({
@@ -37,7 +36,7 @@ const Detail = ({ product, carousel }) => {
     productId: product.id,
   });
 
-  const addReviewToProduct = (e) => {
+  const addReviewToProduct = async (e) => {
     e.preventDefault();
     if (accountType === "company") {
       return toast.error("Company accounts can't give reviews!");
@@ -46,14 +45,19 @@ const Detail = ({ product, carousel }) => {
       return toast.error("Invalid comment, please write something!");
 
     let aux = 0;
+    let checkProductTransaction;
+
     const checkUserReview = reviews.forEach((r) => {
       if (r.user.email === accountType.email) aux = 1;
     });
 
     if (aux) {
-      toast.error("Hey, is forbidden give more than one review!");
+      toast.error("Hey, isn't allowed give more than one review!");
     } else {
-      addReview(input);
+      checkProductTransaction = await addReview(input);
+
+      if (checkProductTransaction.error.data === "Forbbiden")
+        toast.error("You haven't bought this product yet!");
     }
 
     setInput({
@@ -282,7 +286,7 @@ const Detail = ({ product, carousel }) => {
                     </div>
                     <Rate
                       disabled={accountType.type === "user" ? false : true}
-                      defaultValue={1}
+                      defaultValue={input.rating}
                       onChange={(e) => setInput({ ...input, rating: e })}
                       className="flex justify-center"
                     />

@@ -4,6 +4,7 @@ const nextConfig = {
   images: {
     domains: [
       "static.helpjuice.com",
+      "cdn-icons-png.flaticon.com",
       "images.vexels.com",
       "drikung.cl",
       "img.freepik.com",
