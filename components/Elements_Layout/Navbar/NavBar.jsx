@@ -22,7 +22,7 @@ const NavBar = () => {
   const cart_count = useSelector(getCart).reduce((v, e) => v + e.quantity, 0);
 
   return (
-    <header className="w-full bg-fondo-200">
+    <header className="w-full bg-fondo-200 overflow-hidden">
       <div className="main h-[3.8rem] flex gap-x-4 gap-y-2 items-center justify-between">
         <div className="flex items-center gap-x-4 justify-center gap-y-2">
           {/* logo */}
