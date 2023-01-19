@@ -11,8 +11,15 @@ export default async function createReview(req, res) {
 
   const userFound = await user.findUnique({
     where: { email: userEmail },
-    select: { id: true },
+    include: { Transaction: true },
   });
+
+  let aux = null;
+  const checkProductTransaction = userFound.Transaction.forEach((t) => {
+    if (t.productId === productId) return (aux = "found");
+  });
+
+  if (aux === null) return res.status(200).send("Forbbiden");
 
   await review.create({
     data: {
