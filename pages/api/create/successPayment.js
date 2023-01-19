@@ -1,3 +1,4 @@
+import { throws } from "assert";
 import { product, transaction, user } from "../../../prisma";
 
 export default async function success(req, res) {
@@ -5,8 +6,9 @@ export default async function success(req, res) {
     return res.status(400).send({ message: "Not found" });
   }
 
-  let { emailUser } = req.body[0];
   try {
+    if(!req.body.length) throw new Error("No products error");
+    let { emailUser } = req.body[0];
     req.body.forEach(async ({ id, quantity }) => {
       const producto = await product.findUnique({
         where: { id },
@@ -44,7 +46,7 @@ export default async function success(req, res) {
     res.status(200).json({ transactionCreate: true, modifiedStock: true });
   } catch (error) {
     console.log(error)
-    res.status(200).json({ transactionCreate: false, modifiedStock: false });
+    res.status(400).json({ transactionCreate: false, modifiedStock: false });
   }
 }
 

@@ -4,7 +4,6 @@ import dashboardMiddleware from "../../utils/dashboardMiddleware";
 import HomeHeader from "../../components/Elements_Dashboard/HomeHeader";
 
 const Home = ({ company }) => {
-  console.log(company);
   return (
     <DashboardLayout>
       <div>
