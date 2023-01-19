@@ -124,7 +124,7 @@ const Card = ({ product, style = "card" }) => {
             whileInView={{ x: 0, opacity: 1 }}
             viewport={{ once: true }}
           >
-            <div className="sm:hidden w-[320px] rounded-sm shadow-md shadow-zinc-300 hover:scale-110 transition-transform overflow-hidden">
+            <div className="sm:hidden w-[320px] rounded-sm shadow-md shadow-zinc-300 overflow-hidden">
               <Image
                 src={product.mainImage.url}
                 alt="Adidas"
@@ -164,14 +164,16 @@ const Card = ({ product, style = "card" }) => {
                 </div>
               </div>
             </div>
-            <div className="hidden sm:grid grid_search_card w-full rounded-sm shadow-md shadow-zinc-300 hover:scale-105 transition-transform overflow-hidden">
-              <Image
-                src={product.mainImage.url}
-                width={160}
-                height={100}
-                alt={product.name}
-                className="w-[160px] h-[140px] object-cover"
-              />
+            <div className="hidden sm:grid grid_search_card w-full rounded-sm shadow-md shadow-zinc-300 overflow-hidden">
+              <div className="w-[160px] h-[140px] overflow-hidden">
+                <Image
+                  src={product.mainImage.url}
+                  width={160}
+                  height={100}
+                  alt={product.name}
+                  className="w-[160px] h-[140px] object-cover hover:scale-110 transition-transform duration-300"
+                />
+              </div>
               <div className="p-4 max-w-full relative">
                 <div className="flex items-center justify-between">
                   <h2 className="text-zinc-600 text-lg sm:w-[250px] lg:w-[320px] overflow-hidden text-ellipsis whitespace-nowrap">
