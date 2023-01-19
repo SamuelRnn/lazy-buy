@@ -118,54 +118,54 @@ const Card = ({ product, style = "card" }) => {
       )}
       {/* wider style for Card */}
       {style === "wider" && (
-        <Link href={"/products/" + product.slug}>
-          <motion.div
-            initial={{ x: -200, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: true }}
-          >
-            <div className="sm:hidden w-[320px] rounded-sm shadow-md shadow-zinc-300 overflow-hidden">
-              <Image
-                src={product.mainImage.url}
-                alt="Adidas"
-                height={140}
-                width={320}
-                className="w-[320px] h-[220px] bg-white object-cover"
-              />
-              <div className="p-2 bg-zinc-100">
-                <div className="flex justify-between items-center">
-                  <h3 className="text-slate-600 font-semibold text-ellipsis overflow-hidden whitespace-nowrap">
-                    {product.name}
-                  </h3>
-                  <span className="flex">
-                    {Array.from(
-                      "*".repeat(Math.round(product.averageRating))
-                    ).map((star, i) => (
-                      <AiFillStar key={i} className="text-yellow-500" />
-                    ))}
-                    {Array.from(
-                      "*".repeat(5 - Math.round(product.averageRating))
-                    ).map((star, i) => (
-                      <AiFillStar key={i} className="text-zinc-300" />
-                    ))}
-                  </span>
-                </div>
-                <h4 className="text-sm text-zinc-500 text-ellipsis overflow-hidden whitespace-nowrap">
-                  {product.company.name}
-                </h4>
-                <div className="flex justify-between items-center">
-                  <p className="font-bold text-slate-500">$ {product.price}</p>
-                  <button
-                    className="text-fondo-300 hover:text-gray-200 px-2 py-2 transition-colors rounded-md"
-                    onClick={addItemToWishList}
-                  >
-                    <FaRegHeart className="transition-all text-2xl" />
-                  </button>
-                </div>
+        <motion.div
+          initial={{ x: -200, opacity: 0 }}
+          whileInView={{ x: 0, opacity: 1 }}
+          viewport={{ once: true }}
+        >
+          <div className="sm:hidden w-[320px] rounded-sm shadow-md shadow-zinc-300 overflow-hidden">
+            <Image
+              src={product.mainImage.url}
+              alt="Adidas"
+              height={140}
+              width={320}
+              className="w-[320px] h-[220px] bg-white object-cover"
+            />
+            <div className="p-2 bg-zinc-100">
+              <div className="flex justify-between items-center">
+                <h3 className="text-slate-600 font-semibold text-ellipsis overflow-hidden whitespace-nowrap">
+                  {product.name}
+                </h3>
+                <span className="flex">
+                  {Array.from(
+                    "*".repeat(Math.round(product.averageRating))
+                  ).map((star, i) => (
+                    <AiFillStar key={i} className="text-yellow-500" />
+                  ))}
+                  {Array.from(
+                    "*".repeat(5 - Math.round(product.averageRating))
+                  ).map((star, i) => (
+                    <AiFillStar key={i} className="text-zinc-300" />
+                  ))}
+                </span>
+              </div>
+              <h4 className="text-sm text-zinc-500 text-ellipsis overflow-hidden whitespace-nowrap">
+                {product.company.name}
+              </h4>
+              <div className="flex justify-between items-center">
+                <p className="font-bold text-slate-500">$ {product.price}</p>
+                <button
+                  className="text-fondo-300 hover:text-gray-200 px-2 py-2 transition-colors rounded-md"
+                  onClick={addItemToWishList}
+                >
+                  <FaRegHeart className="transition-all text-2xl" />
+                </button>
               </div>
             </div>
-            <div className="hidden sm:grid grid_search_card w-full rounded-sm shadow-md shadow-zinc-300 overflow-hidden">
-              <div className="w-[160px] h-[140px] overflow-hidden">
+          </div>
+          <div className="hidden sm:grid grid_search_card w-full rounded-sm shadow-md shadow-zinc-300 overflow-hidden">
+            <div className="w-[160px] h-[140px] overflow-hidden">
+              <Link href={"/products/" + product.slug}>
                 <Image
                   src={product.mainImage.url}
                   width={160}
@@ -173,42 +173,51 @@ const Card = ({ product, style = "card" }) => {
                   alt={product.name}
                   className="w-[160px] h-[140px] object-cover hover:scale-110 transition-transform duration-300"
                 />
+              </Link>
+            </div>
+            <div className="p-4 max-w-full relative">
+              <div className="flex items-center justify-between">
+                <h2 className="text-zinc-600 text-lg sm:w-[250px] lg:w-[320px] overflow-hidden text-ellipsis whitespace-nowrap">
+                  {product.name}
+                </h2>
+                <span className="flex">
+                  {Array.from(
+                    "*".repeat(Math.round(product.averageRating))
+                  ).map((star, i) => (
+                    <AiFillStar key={i} className="text-yellow-500" />
+                  ))}
+                  {Array.from(
+                    "*".repeat(5 - Math.round(product.averageRating))
+                  ).map((star, i) => (
+                    <AiFillStar key={i} className="text-zinc-300" />
+                  ))}
+                </span>
               </div>
-              <div className="p-4 max-w-full relative">
-                <div className="flex items-center justify-between">
-                  <h2 className="text-zinc-600 text-lg sm:w-[250px] lg:w-[320px] overflow-hidden text-ellipsis whitespace-nowrap">
-                    {product.name}
-                  </h2>
-                  <span className="flex">
-                    {Array.from(
-                      "*".repeat(Math.round(product.averageRating))
-                    ).map((star, i) => (
-                      <AiFillStar key={i} className="text-yellow-500" />
-                    ))}
-                    {Array.from(
-                      "*".repeat(5 - Math.round(product.averageRating))
-                    ).map((star, i) => (
-                      <AiFillStar key={i} className="text-zinc-300" />
-                    ))}
-                  </span>
-                </div>
-                <p className="text-xs text-zinc-400 w-2/3 text-ellipsis overflow-hidden whitespace-nowrap">
-                  {product.company.name}
-                </p>
-                <p className="font-bold text-slate-600 mt-10">
-                  $ {product.price.toFixed(2)}
-                </p>
+              <p className="text-xs text-zinc-400 w-2/3 text-ellipsis overflow-hidden whitespace-nowrap">
+                {product.company.name}
+              </p>
+              <p className="font-bold text-slate-600 mt-10">
+                $ {product.price.toFixed(2)}
+              </p>
+              <div className="absolute  bottom-2 right-2">
                 <button
                   title="Add to my wishlist"
-                  className="absolute bottom-2 right-2 text-fondo-300 px-2 py-2 transition-colors  rounded-md"
+                  className="text-fondo-300 px-2 py-2 transition-colors rounded-md hover:text-zinc-100 hover:bg-fondo-300"
                   onClick={addItemToWishList}
                 >
                   <FaRegHeart className="transition-all text-2xl" />
                 </button>
+                <button
+                  title="Add to my cart"
+                  className="text-fondo-300 px-2 py-2 transition-colors rounded-md hover:text-zinc-100 hover:bg-fondo-300"
+                  onClick={addItemToWishList}
+                >
+                  <IoBagAdd className="transition-all text-2xl" />
+                </button>
               </div>
             </div>
-          </motion.div>
-        </Link>
+          </div>
+        </motion.div>
       )}
     </>
   );

@@ -83,7 +83,7 @@ const Store = (initialParams) => {
                   filters={filters}
                 />
               )}
-              <div className="flex w-full">
+              <div className="flex max-w-[1400px] mx-auto">
                 <div className="hidden lg:flex h-fit bg-zinc-100 rounded-md pb-16 mt-4">
                   <Filters
                     setActiveFiltersModal={setActiveFiltersModal}
