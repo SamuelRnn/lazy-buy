@@ -19,7 +19,7 @@ const CancelComponent = ({ btn }) => {
           />
           <h1 className="text-red-700 text-4xl">Payment Error!!</h1>
           <h2 className="text-zinc-500">
-            Were sorry your payment has been declined
+            We&apos;re sorry your payment has been declined
           </h2>
           {btn && (
             <motion.button
