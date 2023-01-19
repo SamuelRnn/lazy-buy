@@ -4,7 +4,7 @@ import { PrismaClient } from "@prisma/client";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import { FiPlus, FiMinus } from "react-icons/fi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   getCart,
   setCartItem,
@@ -12,6 +12,11 @@ import {
   decreaseItemQuantity,
 } from "../../redux/cartSlice";
 import { toast } from "react-hot-toast";
+import { Rate } from "antd";
+import {
+  useGetReviewsQuery,
+  useAddReviewMutation,
+} from "../../redux/reviewApi";
 import CardCarousel from "../../components/Elements_Cards/CardCarousel";
 
 const Detail = ({ product, carousel }) => {
@@ -19,8 +24,45 @@ const Detail = ({ product, carousel }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
-  const accountType = useSelector((state) => state.account?.session.type);
+  const accountType = useSelector((state) => state.account?.session);
   const cart = useSelector(getCart);
+  const { isFetching, data: reviews } = useGetReviewsQuery(product.id);
+  console.log("🚀 ~ file: [slug].jsx:30 ~ Detail ~ reviews", reviews);
+  const [addReview] = useAddReviewMutation();
+
+  const [input, setInput] = useState({
+    commentBody: "",
+    rating: 1,
+    userEmail: accountType.email,
+    productId: product.id,
+  });
+
+  const addReviewToProduct = (e) => {
+    e.preventDefault();
+    if (accountType === "company") {
+      return toast.error("Company accounts can't give reviews!");
+    }
+    if (!input.commentBody)
+      return toast.error("Invalid comment, please write something!");
+
+    let aux = 0;
+    const checkUserReview = reviews.forEach((r) => {
+      if (r.user.email === accountType.email) aux = 1;
+    });
+
+    if (aux) {
+      toast.error("Hey, is forbidden give more than one review!");
+    } else {
+      addReview(input);
+    }
+
+    setInput({
+      commentBody: "",
+      rating: 1,
+      userEmail: accountType.email,
+      productId: product.id,
+    });
+  };
 
   const addItemToCart = () => {
     if (accountType === "company") {
@@ -212,6 +254,61 @@ const Detail = ({ product, carousel }) => {
                   >
                     Add to cart
                   </button>
+                  <form onSubmit={addReviewToProduct} className="mb-5">
+                    <div className="flex justify-center items-center gap-2">
+                      <textarea
+                        disabled={accountType.type === "user" ? false : true}
+                        placeholder="Rate this product!"
+                        rows={3}
+                        cols={50}
+                        maxLength={119}
+                        className="resize-none p-1 border-solid border-2 border-slate-900 outline-none rounded disabled:cursor-not-allowed"
+                        name="commentBody"
+                        value={input.commentBody}
+                        onChange={(e) =>
+                          setInput({
+                            ...input,
+                            [e.target.name]: e.target.value,
+                          })
+                        }
+                      />
+                      <button
+                        disabled={accountType.type === "user" ? false : true}
+                        type="submit"
+                        className="px-5 py-7 bg-fondo-300 hover:bg-fondo-500 active:scale-75 disabled:pointer-events-none disabled:bg-zinc-400 text-lg rounded font-medium text-white cursor-pointer"
+                      >
+                        Post
+                      </button>
+                    </div>
+                    <Rate
+                      disabled={accountType.type === "user" ? false : true}
+                      defaultValue={1}
+                      onChange={(e) => setInput({ ...input, rating: e })}
+                      className="flex justify-center"
+                    />
+                  </form>
+                  <div className="grid gap-2 place-content-center">
+                    {reviews &&
+                      reviews.map((r) => (
+                        <div key={r.id} className="bg-slate-300 rounded p-2">
+                          <div className="flex items-center gap-3">
+                            <Image
+                              src={r.user.profilePicture.url}
+                              alt={r.user.userName}
+                              width={64}
+                              height={64}
+                              className="object-cover rounded-full"
+                            />
+                            <p>{r.commentBody}</p>
+                          </div>
+                          <Rate
+                            disabled={true}
+                            defaultValue={r.rating}
+                            className="flex justify-center"
+                          />
+                        </div>
+                      ))}
+                  </div>
                 </div>
               </div>
             </div>
