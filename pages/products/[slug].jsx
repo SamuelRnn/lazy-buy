@@ -55,10 +55,10 @@ const Detail = ({ product, carousel }) => {
       toast.error("Hey, isn't allowed give more than one review!");
     } else {
       checkProductTransaction = await addReview(input);
-    }
 
-    if (checkProductTransaction.error.data === "Forbbiden")
-      toast.error("You haven't bought this product yet!");
+      if (checkProductTransaction.error.data === "Forbbiden")
+        toast.error("You haven't bought this product yet!");
+    }
 
     setInput({
       commentBody: "",
