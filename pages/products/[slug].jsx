@@ -27,6 +27,7 @@ const Detail = ({ product, carousel }) => {
   const accountType = useSelector((state) => state.account?.session);
   const cart = useSelector(getCart);
   const { isFetching, data: reviews } = useGetReviewsQuery(product.id);
+  console.log("🚀 ~ file: [slug].jsx:30 ~ Detail ~ reviews", reviews);
   const [addReview] = useAddReviewMutation();
 
   const [input, setInput] = useState({
@@ -44,7 +45,17 @@ const Detail = ({ product, carousel }) => {
     if (!input.commentBody)
       return toast.error("Invalid comment, please write something!");
 
-    addReview(input);
+    let aux = 0;
+    const checkUserReview = reviews.forEach((r) => {
+      if (r.user.email === accountType.email) aux = 1;
+    });
+
+    if (aux) {
+      toast.error("Hey, is forbidden give more than one review!");
+    } else {
+      addReview(input);
+    }
+
     setInput({
       commentBody: "",
       rating: 1,
@@ -253,6 +264,7 @@ const Detail = ({ product, carousel }) => {
                         maxLength={119}
                         className="resize-none p-1 border-solid border-2 border-slate-900 outline-none rounded disabled:cursor-not-allowed"
                         name="commentBody"
+                        value={input.commentBody}
                         onChange={(e) =>
                           setInput({
                             ...input,
