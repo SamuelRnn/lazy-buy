@@ -4,7 +4,7 @@ import AdminLayout from "../../components/Elements_Admin/AdminLayout";
 const index = () => {
   return (
     <AdminLayout>
-      <h1>Home</h1>
+      <h1>Companies</h1>
     </AdminLayout>
   );
 };
