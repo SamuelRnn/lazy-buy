@@ -3,14 +3,18 @@ import { useSelector } from "react-redux";
 import Image from "next/image";
 import { getCart } from "../redux/cartSlice";
 import { loadStripe } from "@stripe/stripe-js";
+import { getSession } from "../redux/accountSlice";
 
 const OrderDetail = () => {
   const cart = useSelector(getCart);
+  const {email} = useSelector((state) => state.account?.session);
   document.body.style.overflow = "";
 
   const handlePayment = async () => {
+    
     const stripe = await loadStripe(process.env.NEXT_PUBLIC_PUBLIC_KEY);
     let order = cart.map((cartItem) => ({
+      userEmail:email,
       id: cartItem.id,
       name: cartItem.name,
       unit_amount: cartItem.price,

@@ -3,13 +3,18 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
-import { clearCart } from "../redux/cartSlice";
+import { clearCart, getCart } from "../redux/cartSlice";
+import { useSelector } from "react-redux";
 
 const PaymentIs = () => {
   const dispatch = useDispatch();
+  const [succ, setSucc] = useState(false)
   const [btn, setBtn] = useState(false);
   const router = useRouter();
-  dispatch(clearCart());
+  const emailEn = router.query?.status;
+  const cart = useSelector(getCart);
+  const { email } = useSelector((state) => state.account?.session);
+  
   let arr = [
     "md:block hidden fixed h-full -left-20 -bottom-20",
     "md:block hidden fixed h-full -left-20 -top-28",
@@ -17,11 +22,37 @@ const PaymentIs = () => {
     "md:block hidden fixed h-full -right-20 -top-28",
     "md:block hidden fixed h-full  ",
   ];
+
   useEffect(() => {
+   let emailDe
+    if (emailEn) {
+      emailDe = emailEn.split("-").map((e,i)=> {
+        const [a] = e.split("")
+        return a
+      }).join("")
+      if (emailDe === email) {
+        let order = cart.map((cartItem) => ({
+          emailUser:email,
+          id: cartItem.id,
+          unit_amount: cartItem.price,
+          quantity: cartItem.quantity,
+        }));
+        console.log(emailDe);
+        fetch("/api/create/successPayment", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(order),
+        }).catch((error) => console.log(error));
+
+        dispatch(clearCart());
+      }
+    }
     setTimeout(() => {
       setBtn(true);
     }, 2000);
-  }, []);
+  }, [emailEn, email]);
 
   return (
     <div className="h-screen w-screen flex md:flex-row flex-col bg-white items-center justify-center">
