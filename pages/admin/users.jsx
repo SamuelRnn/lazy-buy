@@ -1,14 +1,19 @@
 import React from "react";
 import AdminLayout from "../../components/Elements_Admin/AdminLayout";
-import { useGetUserListQuery } from "../../redux/userApi";
+import UserComponent from "../../components/Elements_Admin/UserComponent";
 import adminMiddleware from "../../utils/adminMiddleware";
 
 const Index = () => {
-  const {data , isLoading} = useGetUserListQuery()
-console.log(data)
   return (
     <AdminLayout>
-      <h1>Users</h1>
+      <h1 className="text-3xl font-bold tracking-wider text-fondo-300 capitalize text-center mb-10">
+        Users Information
+      </h1>
+      <br />
+      
+      
+        <UserComponent />
+     
     </AdminLayout>
   );
 };

@@ -16,6 +16,14 @@ export const userApi = createApi({
       //transformResponse: (response) => response.filter(e => !e.isAdmin),
       providesTags: ["userList"],
     }),
+    deleteUser: builder.mutation({
+      query: (userEmail)=>({
+        url: `/api/delete/deleteUser?userEmail=${userEmail}`,
+        method: "PATCH",
+        header: { "Content-Type": "application/json" },
+      }),
+      invalidatesTags: ["userList"],
+    }),
     addWishItem: builder.mutation({
       query: (addWishItem) => ({
         url: "/api/mod/user/wishList",
