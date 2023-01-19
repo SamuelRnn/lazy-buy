@@ -31,7 +31,6 @@ const Card = ({ product, style = "card" }) => {
       duration: 4000,
     });
   };
-
   const addItemToWishList = async () => {
     const session = await getSession();
 
@@ -39,7 +38,7 @@ const Card = ({ product, style = "card" }) => {
       return toast.error("Company accounts can't add or have a wish items!");
     }
     const result = await wishList({ email: session.user.email, product });
-    
+
     if (result.error.originalStatus !== 200)
       return toast.error(`"${product.name}" is already in your wish list!`);
 
@@ -70,7 +69,7 @@ const Card = ({ product, style = "card" }) => {
                   )
                 )}
                 {Array.from(
-                  "*".repeat(Math.round(5 - product.averageRating))
+                  "*".repeat(5 - Math.round(product.averageRating))
                 ).map((star, i) => (
                   <AiFillStar key={i} className="text-zinc-300" />
                 ))}
@@ -125,34 +124,85 @@ const Card = ({ product, style = "card" }) => {
             whileInView={{ x: 0, opacity: 1 }}
             viewport={{ once: true }}
           >
-            <div className="bg-white h-[200px] w-[800px] rounded-lg shadow-xl hover:scale-110 transition-transform">
-              <div className="p-6 flex">
-                <div className="mr-6 h-[152px] w-[152px]">
-                  <Image
-                    src={product.mainImage.url}
-                    alt="Adidas"
-                    height={152}
-                    width={152}
-                    className="h-[152px] w-[152px] bg-white object-cover brightness-105 mix-blend-multiply"
-                  />
+            <div className="sm:hidden w-[320px] rounded-sm shadow-md shadow-zinc-300 hover:scale-110 transition-transform overflow-hidden">
+              <Image
+                src={product.mainImage.url}
+                alt="Adidas"
+                height={140}
+                width={320}
+                className="w-[320px] h-[220px] bg-white object-cover"
+              />
+              <div className="p-2 bg-zinc-100">
+                <div className="flex justify-between items-center">
+                  <h3 className="text-slate-600 font-semibold text-ellipsis overflow-hidden whitespace-nowrap">
+                    {product.name}
+                  </h3>
+                  <span className="flex">
+                    {Array.from(
+                      "*".repeat(Math.round(product.averageRating))
+                    ).map((star, i) => (
+                      <AiFillStar key={i} className="text-yellow-500" />
+                    ))}
+                    {Array.from(
+                      "*".repeat(5 - Math.round(product.averageRating))
+                    ).map((star, i) => (
+                      <AiFillStar key={i} className="text-zinc-300" />
+                    ))}
+                  </span>
                 </div>
-                <div className="w-full px-6 bg-zinc-100 rounded pt-4">
-                  <div className="flex justify-between">
-                    <h3 className="font-bold text-xl text-gray-700">
-                      {product.name}
-                    </h3>
-                    <h3>⭐{product.averageRating}</h3>
-                  </div>
-                  <h4 className="text-sm text-gray-500">
-                    {product.company.name}
-                  </h4>
-
-                  <div className="mt-6">
-                    <p className="font-mono font-bold text-2xl text-fondo-300">
-                      ${product.price.toFixed(2)}
-                    </p>
-                  </div>
+                <h4 className="text-sm text-zinc-500 text-ellipsis overflow-hidden whitespace-nowrap">
+                  {product.company.name}
+                </h4>
+                <div className="flex justify-between items-center">
+                  <p className="font-bold text-slate-500">$ {product.price}</p>
+                  <button
+                    className="text-fondo-300 hover:text-gray-200 px-2 py-2 transition-colors rounded-md"
+                    onClick={addItemToWishList}
+                  >
+                    <FaRegHeart className="transition-all text-2xl" />
+                  </button>
                 </div>
+              </div>
+            </div>
+            <div className="hidden sm:grid grid_search_card w-full rounded-sm shadow-md shadow-zinc-300 hover:scale-105 transition-transform overflow-hidden">
+              <Image
+                src={product.mainImage.url}
+                width={160}
+                height={100}
+                alt={product.name}
+                className="w-[160px] h-[140px] object-cover"
+              />
+              <div className="p-4 max-w-full relative">
+                <div className="flex items-center justify-between">
+                  <h2 className="text-zinc-600 text-lg sm:w-[250px] lg:w-[320px] overflow-hidden text-ellipsis whitespace-nowrap">
+                    {product.name}
+                  </h2>
+                  <span className="flex">
+                    {Array.from(
+                      "*".repeat(Math.round(product.averageRating))
+                    ).map((star, i) => (
+                      <AiFillStar key={i} className="text-yellow-500" />
+                    ))}
+                    {Array.from(
+                      "*".repeat(5 - Math.round(product.averageRating))
+                    ).map((star, i) => (
+                      <AiFillStar key={i} className="text-zinc-300" />
+                    ))}
+                  </span>
+                </div>
+                <p className="text-xs text-zinc-400 w-2/3 text-ellipsis overflow-hidden whitespace-nowrap">
+                  {product.company.name}
+                </p>
+                <p className="font-bold text-slate-600 mt-10">
+                  $ {product.price.toFixed(2)}
+                </p>
+                <button
+                  title="Add to my wishlist"
+                  className="absolute bottom-2 right-2 text-fondo-300 px-2 py-2 transition-colors  rounded-md"
+                  onClick={addItemToWishList}
+                >
+                  <FaRegHeart className="transition-all text-2xl" />
+                </button>
               </div>
             </div>
           </motion.div>

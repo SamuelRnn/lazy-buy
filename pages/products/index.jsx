@@ -12,6 +12,7 @@ import camelize from "../../utils/camelize";
 import { useDispatch, useSelector } from "react-redux";
 import { getPage, setPage } from "../../redux/productsSlice";
 import { getPrevFilters, setPrevFilters } from "../../redux/productsSlice";
+import Filters from "../../components/Elements_Filters/Filters";
 
 const Store = (initialParams) => {
   const prevFilters = useSelector(getPrevFilters);
@@ -58,7 +59,7 @@ const Store = (initialParams) => {
             <div className="flex gap-4 max-sm:w-full max-sm:justify-between">
               <button
                 onClick={() => setActiveFiltersModal((state) => !state)}
-                className="filter_btn"
+                className="filter_btn flex lg:hidden"
                 disabled={!productos?.count}
               >
                 <p>Filters</p>
@@ -72,8 +73,8 @@ const Store = (initialParams) => {
             </div>
           </div>
           <hr className="my-4" />
-          <div className="bg-zinc-100 w-full rounded-xl mt-6 mb-12">
-            <div className="flex flex-col gap-y-10 items-center py-10 min-h-[164px] justify-center overflow-hidden ">
+          <div className="mt-6 mb-12">
+            <div className="flex flex-col gap-y-10 items-center py-10 min-h-[164px]">
               {/* pagination */}
               {productos && !isLoading && (
                 <Pagination
@@ -82,17 +83,31 @@ const Store = (initialParams) => {
                   filters={filters}
                 />
               )}
-              {isFetching && <Spinner />}
-              {productos &&
-                !isFetching &&
-                productos.results.map((product, index) => (
-                  <Card
-                    key={product.id}
-                    style="wider"
-                    product={product}
-                    delay={index}
+              <div className="flex w-full">
+                <div className="hidden lg:flex h-fit bg-zinc-100 rounded-md pb-16 mt-4">
+                  <Filters
+                    setActiveFiltersModal={setActiveFiltersModal}
+                    setFilters={setFilters}
                   />
-                ))}
+                </div>
+                <div className="w-full flex flex-col gap-y-10 items-center sm:items-stretch sm:px-8 overflow-hidden py-4">
+                  {isFetching && (
+                    <div className="flex justify-center mt-16">
+                      <Spinner />
+                    </div>
+                  )}
+                  {productos &&
+                    !isFetching &&
+                    productos.results.map((product, index) => (
+                      <Card
+                        key={product.id}
+                        style="wider"
+                        product={product}
+                        delay={index}
+                      />
+                    ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>

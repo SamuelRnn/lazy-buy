@@ -26,7 +26,7 @@ const ModalFilters = ({
                 animate={{ x: 0 }}
                 exit={{ x: 100 }}
                 transition={{ duration: 0.5 }}
-                className="h-12 w-12 bg-fondo-300 rounded-lg grid place-content-center"
+                className="h-12 w-12 grid place-content-center"
                 onClick={() => setActive(false)}
               >
                 <TfiClose size={"1.5em"} className="text-white" />
