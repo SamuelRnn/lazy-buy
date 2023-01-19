@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 
 const PaymentIs = () => {
   const dispatch = useDispatch();
+  const [succ, setSucc] = useState(false)
   const [btn, setBtn] = useState(false);
   const router = useRouter();
   const emailEn = router.query?.status;
