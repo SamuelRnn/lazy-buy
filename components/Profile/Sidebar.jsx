@@ -64,7 +64,11 @@ const Sidebar = ({ user }) => {
           <nav className="flex flex-col gap-8">
             <Link
               href="/profile"
-              className={`flex items-center gap-4 text-white py-2 px-4 rounded-xl hover:bg-primary-900/50 transition-colors`}
+              className={`flex items-center gap-4 text-white py-2 px-4 rounded-xl hover:bg-primary-900/50 transition-colors ${
+                router.pathname === "/profile"
+                  ? "bg-fondo-100 text-fondo-500 "
+                  : "text-white hover:bg-fondo-100 hover:text-fondo-200"
+              }`}
             >
               <RiHome3Line /> Home
             </Link>
@@ -72,7 +76,7 @@ const Sidebar = ({ user }) => {
               href="/profile/record"
               className={`flex items-center gap-4 text-white py-2 px-4 rounded-xl hover:bg-primary-900/50 transition-colors ${
                 router.pathname === "/profile/record"
-                  ? "bg-fondo-100 text-fondo-500 focus:text-black"
+                  ? "bg-fondo-100 text-fondo-500 "
                   : "text-white hover:bg-fondo-100 hover:text-fondo-200"
               }`}
             >
@@ -81,8 +85,8 @@ const Sidebar = ({ user }) => {
             <Link
               href="/profile/like"
               className={`flex items-center gap-4 text-white py-2 px-4 rounded-xl hover:bg-primary-900/50 transition-colors ${
-                router.pathname === "profile/like"
-                  ? "bg-fondo-100 text-fondo-500 focus:text-black"
+                router.pathname === "/profile/like"
+                  ? "bg-fondo-100 text-fondo-500 "
                   : "text-white hover:bg-fondo-100 hover:text-fondo-200"
               }`}
             >
