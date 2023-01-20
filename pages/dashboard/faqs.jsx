@@ -26,10 +26,15 @@ const faqs = () => {
       content:
         "There is no set time limit for being a basic seller, but to increase sales and grow your business it is recommended to upgrade to a higher level of selling as soon as possible.",
     },
+    {
+      title: "How do I optimize my listings to increase visibility",
+      content:
+        "There is no set time limit for being a basic seller, but to increase sales and grow your business it is recommended to upgrade to a higher level of selling as soon as possible.",
+    },  
   ];
 
   return (
-    <div className="bg-fondo-50">
+    <div className="bg-zinc-50">
       <nav className="bg-fondo-300 p-2 text-white font-semibold flex justify-around">
         <div className="flex items-center gap-2">
           <Image
@@ -53,7 +58,7 @@ const faqs = () => {
       </nav>
 
       <section id="presentation">
-        <div className="flex flex-col-reverse items-center p-2 space-y-2 lg:flex-row">
+        <div className="flex flex-col-reverse items-center p-2 space-y-2 lg:flex-row my-8">
           <div className="flex flex-col gap-4 text-center p-3 lg:w-1/2">
             <h2 className="text-5xl text-fondo-300 font-bold">
               These are the most asked questions:{" "}
@@ -71,9 +76,9 @@ const faqs = () => {
       </section>
 
       <section id="acordeon">
-        <div className="flex flex-col w-[90%] mx-auto text-3xl bg-fondo-100 text-fondo-50 mb-24">
+        <div className="overflow-hidden flex flex-col w-[90%] lg:w-[80%] mx-auto text-xl lg:text-xl bg-white text-zinc-100 rounded-lg text-center">
           <div className="bg-fondo-300 p-6">
-            <h2 className="text-white text-3xl text-center">DON'T BE SHY!</h2>
+            <h2 className="text-zinc-100 text-4xl lg:text-3xl text-center font-semibold">Check Out: </h2>
           </div>
 
           {acordeonContent.map((ac, i) => {
@@ -81,9 +86,10 @@ const faqs = () => {
             return (
               <>
                 <motion.header
+                className="p-4 border border-b-1 bg-gray-400 cursor-pointer"
                   initial={false}
                   animate={{
-                    backgroundColor: isOpen ? "#e29c9c" : "#cb4d4d",
+                    backgroundColor: isOpen ? "#1F2937" : "#9CA3AF",
                   }}
                   onClick={() => {
                     setExpanded(isOpen ? false : i);
@@ -113,7 +119,7 @@ const faqs = () => {
                         }}
                         transition={{ duration: 0.4 }}
                       >
-                        <p className="p-4">{ac.content}</p>
+                        <p className="p-4 text-xl text-slate-500 border border-b-2">{ac.content}</p>
                       </motion.div>
                     </motion.section>
                   )}
@@ -121,6 +127,13 @@ const faqs = () => {
               </>
             );
           })}
+        </div>
+      </section>
+
+      <section>
+        <div className="flex flex-col space-y-4 items-center mt-6 p-3 bg-fondo-300">
+          <h2 className="text-2xl text-white text-center">You can always make things better!</h2>
+          <a className="bg-fondo-200 w-[50%] text-white font-semibold p-3 rounded-full text-center" href="/dashboard/plan">Upgrade</a>
         </div>
       </section>
     </div>
