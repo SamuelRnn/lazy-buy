@@ -4,6 +4,7 @@ import { PrismaClient } from "@prisma/client";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import { FiPlus, FiMinus } from "react-icons/fi";
+import { BsEraserFill } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import {
   getCart,
@@ -16,6 +17,7 @@ import { Rate } from "antd";
 import {
   useGetReviewsQuery,
   useAddReviewMutation,
+  useEraseReviewMutation,
 } from "../../redux/reviewApi";
 import CardCarousel from "../../components/Elements_Cards/CardCarousel";
 
@@ -24,48 +26,54 @@ const Detail = ({ product, carousel }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
-  const accountType = useSelector((state) => state.account?.session);
+  const session = useSelector((state) => state.account?.session);
+  console.log("🚀 ~ file: [slug].jsx:29 ~ Detail ~ session", session);
   const cart = useSelector(getCart);
   const { isFetching, data: reviews } = useGetReviewsQuery(product.id);
-  console.log("🚀 ~ file: [slug].jsx:30 ~ Detail ~ reviews", reviews);
   const [addReview] = useAddReviewMutation();
+  const [eraseReview] = useEraseReviewMutation();
 
   const [input, setInput] = useState({
     commentBody: "",
     rating: 1,
-    userEmail: accountType.email,
+    userEmail: session.email,
     productId: product.id,
   });
 
-  const addReviewToProduct = (e) => {
+  const addReviewToProduct = async (e) => {
     e.preventDefault();
-    if (accountType === "company") {
+    if (session.type === "company") {
       return toast.error("Company accounts can't give reviews!");
     }
     if (!input.commentBody)
       return toast.error("Invalid comment, please write something!");
 
     let aux = 0;
+    let checkProductTransaction;
+
     const checkUserReview = reviews.forEach((r) => {
-      if (r.user.email === accountType.email) aux = 1;
+      if (r.user.email === session.email) aux = 1;
     });
 
     if (aux) {
-      toast.error("Hey, is forbidden give more than one review!");
+      toast.error("Hey, isn't allowed give more than one review!");
     } else {
-      addReview(input);
+      checkProductTransaction = await addReview(input);
+
+      if (checkProductTransaction.error.data === "Forbbiden")
+        toast.error("You haven't bought this product yet!");
     }
 
     setInput({
       commentBody: "",
       rating: 1,
-      userEmail: accountType.email,
+      userEmail: session.email,
       productId: product.id,
     });
   };
 
   const addItemToCart = () => {
-    if (accountType === "company") {
+    if (session.type === "company") {
       return toast.error("Company accounts can't buy or have a cart!");
     }
     const itemAlreadyExist = cart.find((item) => item.id === product.id);
@@ -78,6 +86,15 @@ const Detail = ({ product, carousel }) => {
     toast.success(`"${product.name}" added sucessfully to your cart :D`, {
       duration: 4000,
     });
+  };
+
+  const eraseComment = (id) => {
+    try {
+      eraseReview(id);
+      toast.success("Get out of here!");
+    } catch (error) {
+      toast.error("Something happened D:!");
+    }
   };
 
   return (
@@ -94,7 +111,7 @@ const Detail = ({ product, carousel }) => {
         </button>
       </div>
       <section>
-        <div className="relative max-w-screen-xl px-4 py-8 mx-auto">
+        <div className="relative max-w-screen-xl px-1 py-8 mx-auto">
           <div className="grid items-start grid-cols-1 gap-8 md:grid-cols-2">
             <div className="grid grid-cols-2 gap-4 md:grid-cols-1">
               <Image
@@ -257,7 +274,7 @@ const Detail = ({ product, carousel }) => {
                   <form onSubmit={addReviewToProduct} className="mb-5">
                     <div className="flex justify-center items-center gap-2">
                       <textarea
-                        disabled={accountType.type === "user" ? false : true}
+                        disabled={session.type === "user" ? false : true}
                         placeholder="Rate this product!"
                         rows={3}
                         cols={50}
@@ -273,7 +290,7 @@ const Detail = ({ product, carousel }) => {
                         }
                       />
                       <button
-                        disabled={accountType.type === "user" ? false : true}
+                        disabled={session.type === "user" ? false : true}
                         type="submit"
                         className="px-5 py-7 bg-fondo-300 hover:bg-fondo-500 active:scale-75 disabled:pointer-events-none disabled:bg-zinc-400 text-lg rounded font-medium text-white cursor-pointer"
                       >
@@ -281,16 +298,19 @@ const Detail = ({ product, carousel }) => {
                       </button>
                     </div>
                     <Rate
-                      disabled={accountType.type === "user" ? false : true}
-                      defaultValue={1}
+                      disabled={session.type === "user" ? false : true}
+                      defaultValue={input.rating}
                       onChange={(e) => setInput({ ...input, rating: e })}
                       className="flex justify-center"
                     />
                   </form>
-                  <div className="grid gap-2 place-content-center">
+                  <div className="grid gap-4 place-content-center">
                     {reviews &&
                       reviews.map((r) => (
-                        <div key={r.id} className="bg-slate-300 rounded p-2">
+                        <div
+                          key={r.id}
+                          className="bg-slate-300 rounded p-2 relative w-[320px] sm:w-[420px]"
+                        >
                           <div className="flex items-center gap-3">
                             <Image
                               src={r.user.profilePicture.url}
@@ -306,6 +326,12 @@ const Detail = ({ product, carousel }) => {
                             defaultValue={r.rating}
                             className="flex justify-center"
                           />
+                          {session.isAdmin && (
+                            <BsEraserFill
+                              className="absolute top-[-10px] right-1 text-3xl hover:cursor-pointer hover:text-fondo-500"
+                              onClick={() => eraseComment(r.id)}
+                            />
+                          )}
                         </div>
                       ))}
                   </div>

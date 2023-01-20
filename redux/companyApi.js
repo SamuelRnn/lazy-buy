@@ -6,11 +6,14 @@ export const companyApi = createApi({
     process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
   ),
   endpoints: (builder) => ({
+    getCompanies: builder.query({
+      query: () => "/api/get/company",
+      providesTags: ["Company"],
+    }),
     getCompany: builder.query({
       query: (email) => `/api/get/company/${email}`,
       providesTags: ["Company"],
     }),
-
     getProduct: builder.query({
       query: (productId) => `/api/get/product/${productId}`,
     }),
@@ -61,11 +64,20 @@ export const companyApi = createApi({
       }),
       invalidatesTags: ["Company"],
     }),
+    deleteCompany: builder.mutation({
+      query: (email) => ({
+        url: `/api/delete/company/${email}`,
+        method: "PATCH",
+        header: { "Content-Type": "application/json" },
+      }),
+      invalidatesTags: ["Company"],
+    }),
   }),
   tagTypes: ["Company"],
 });
 
 export const {
+  useGetCompaniesQuery,
   useGetCompanyQuery,
   useLazyGetProductQuery,
   useGetPlanQuery,
@@ -75,4 +87,5 @@ export const {
   useUpdateProductMutation,
   useUpdatePictureMutation,
   useUpdateAccountMutation,
+  useDeleteCompanyMutation,
 } = companyApi;

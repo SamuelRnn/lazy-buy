@@ -84,12 +84,14 @@ const Store = (initialParams) => {
                 />
               )}
               <div className="flex max-w-[1400px] mx-auto">
-                <div className="hidden lg:flex h-fit bg-zinc-100 rounded-md pb-16 mt-4">
-                  <Filters
-                    setActiveFiltersModal={setActiveFiltersModal}
-                    setFilters={setFilters}
-                  />
-                </div>
+                {!isLoading && (
+                  <div className="hidden lg:flex h-fit bg-zinc-100 rounded-md pb-16 mt-4">
+                    <Filters
+                      setActiveFiltersModal={setActiveFiltersModal}
+                      setFilters={setFilters}
+                    />
+                  </div>
+                )}
                 <div className="w-full flex flex-col gap-y-10 items-center sm:items-stretch sm:px-8 overflow-hidden py-4">
                   {isFetching && (
                     <div className="flex justify-center mt-16">

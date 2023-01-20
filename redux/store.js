@@ -6,6 +6,7 @@ import { productApi } from "./productsApi";
 import { companyApi } from "./companyApi";
 import { userApi } from "./userApi";
 import { reviewApi } from "./reviewApi";
+import { transactionApi } from "./transactionApi";
 // import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
 import { combineReducers } from "@reduxjs/toolkit";
@@ -44,6 +45,7 @@ const rootReducer = combineReducers({
   [companyApi.reducerPath]: companyApi.reducer,
   [userApi.reducerPath]: userApi.reducer,
   [reviewApi.reducerPath]: reviewApi.reducer,
+  [transactionApi.reducerPath]: transactionApi.reducer,
   products: productSlice.reducer,
   cart: cartSlice.reducer,
   account: accountSlice.reducer,
@@ -58,7 +60,8 @@ export const store = configureStore({
       .concat(productApi.middleware)
       .concat(companyApi.middleware)
       .concat(userApi.middleware)
-      .concat(reviewApi.middleware),
+      .concat(reviewApi.middleware)
+      .concat(transactionApi.middleware),
 });
 
 //optional

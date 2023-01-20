@@ -43,7 +43,7 @@ const Devs = () => {
       {integrantes.map((dev) => (
         <div
           key={dev.name}
-          className="bg-zinc-100 px-1 md:px-2 md:my-auto my-5 hover:bg-fondo-300 group rounded-lg shadow hover:shadow-lg hover:shadow-fondo-400 transition-all hover:cursor-pointer pt-3"
+          className="bg-zinc-100 px-1 md:px-2 md:my-auto my-5 hover:bg-fondo-400 group rounded-lg shadow hover:shadow-lg hover:shadow-fondo-400 transition-all hover:cursor-pointer pt-3"
         >
           <div className="flex justify-center  py-2">
             <Image
@@ -60,7 +60,7 @@ const Devs = () => {
               {dev.name}
             </h3>
             <p className="text-gray-600 group-hover:text-gray-300">
-              Director de diseño
+            Design manager
             </p>
             <div className="flex items-center">
               <a

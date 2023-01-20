@@ -17,7 +17,6 @@ const PaymentIs = () => {
   const emailEn = router.query?.status;
   const cart = useSelector(getCart);
   const { email } = useSelector((state) => state.account?.session);
-
   useEffect(() => {
     let emailDe;
     if (emailEn) {
@@ -50,13 +49,13 @@ const PaymentIs = () => {
     setTimeout(() => {
       setBtn(true);
     }, 2000);
-  }, []);
+  }, [emailEn,dispatch,setSucc]);
 
   useEffect(() => {
     if (router.query.cancel) {
       setCancel(true);
     }
-  }, [router.query.cancel]);
+  }, [router.query.cancel,setCancel]);
 
   return (
     <>

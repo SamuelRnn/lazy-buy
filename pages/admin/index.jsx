@@ -2,10 +2,10 @@ import React from "react";
 import AdminLayout from "../../components/Elements_Admin/AdminLayout";
 import adminMiddleware from "../../utils/adminMiddleware";
 
-const Index = () => {
+const Index = ({ user }) => {
   return (
     <AdminLayout>
-      <h1>Reviews</h1>
+      <h1>Home</h1>
     </AdminLayout>
   );
 };
