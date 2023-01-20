@@ -5,6 +5,7 @@ import { HiBars3, HiArrowDownCircle } from "react-icons/hi2";
 import faq from "../../public/faq.png";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import DashboardNav from "../../components/Elements_Dashboard/DashboardNav";
 
 const Faqs = () => {
   const [expanded, setExpanded] = useState(false);
@@ -34,28 +35,8 @@ const Faqs = () => {
 
   return (
     <div className="bg-zinc-50">
-      <nav className="bg-fondo-300 p-2 text-white font-semibold flex justify-around">
-        <div className="flex items-center gap-2">
-          <Image
-            className="rounded-full w-16 h-16 object-cover lg:w-24 lg:h-24"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPDdlJ9bo7f5d6w82MI6NQiaiiVFiDj7AwAQ&usqp=CAU"
-            width={1000}
-            height={1000}
-            alt="profile"
-          ></Image>
-          <h2>Armando Mendozas</h2>
-        </div>
-
-        <div className="hidden gap-3 lg:flex items-center">
-          <Link href="#">Support</Link>
-          <Link href="#">FAQ</Link>
-          <Link href="#">Your Plan</Link>
-        </div>
-        <div className="flex items-center text-3xl lg:hidden">
-          <HiBars3 />
-        </div>
-      </nav>
-
+      
+    <DashboardNav/>
       <section id="presentation">
         <div className="flex flex-col-reverse items-center p-2 space-y-2 lg:flex-row my-8">
           <div className="flex flex-col gap-4 text-center p-3 lg:w-1/2">
@@ -140,12 +121,12 @@ const Faqs = () => {
       </section>
 
       <section>
-        <div className="flex flex-col space-y-4 items-center mt-6 p-3 bg-fondo-300">
-          <h2 className="text-2xl text-white text-center">
+        <div className="flex flex-col space-y-4 items-center mt-6 p-3 bg-fondo-300 lg:flex-row lg:justify-around lg:p-8">
+          <h2 className="text-2xl text-white text-center lg:text-3xl">
             You can always make things better!
           </h2>
           <Link
-            className="bg-fondo-200 w-[50%] text-white font-semibold p-3 rounded-full text-center"
+            className="bg-fondo-200 w-[50%] text-white font-semibold p-3 rounded-full text-center lg:w-[20%] lg:items-center lg:p-4"
             href="/dashboard/plan"
           >
             Upgrade
