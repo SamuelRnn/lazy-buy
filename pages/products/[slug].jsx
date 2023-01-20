@@ -58,7 +58,7 @@ const Detail = ({ product, carousel }) => {
     } else {
       checkProductTransaction = await addReview(input);
 
-      if (checkProductTransaction.error.data === "Forbbiden")
+      if (checkProductTransaction.error?.data === "Forbbiden")
         toast.error("You haven't bought this product yet!");
     }
 
