@@ -25,7 +25,7 @@ const FavoriteProduct = ({ email, product }) => {
             onClick={() => {
               deleteProduct({ id: product.id, email });
             }}
-            className="p-2 rounded-md bg-zinc-500 hover:bg-opacity-100 hover:bg-fondo-400 transition-colors shadow-md shadow-zinc-700"
+            className="p-2 rounded-md bg-fondo-200 hover:bg-opacity-100 hover:bg-fondo-400 transition-colors shadow-md shadow-zinc-700"
           >
             <FaHeartBroken className="text-2xl text-zinc-100" />
           </button>
@@ -33,7 +33,7 @@ const FavoriteProduct = ({ email, product }) => {
       </div>
 
       <div>
-        <div className="px-3 py-2 text-fondo-300">
+        <div className="px-3 py-2 text-fondo-200">
           <h2 className=" overflow-hidden whitespace-nowrap text-ellipsis font-bold w-3/4">
             {product.name}
           </h2>
@@ -46,7 +46,7 @@ const FavoriteProduct = ({ email, product }) => {
           height={100}
           className="w-[160px] h-[110px] object-cover"
         />
-        <div className="bg-zinc-600 py-3 px-5 text-zinc-100 text-sm rounded-b-lg">
+        <div className="bg-fondo-100 py-3 px-5 text-zinc-100 text-sm rounded-b-lg">
           <p className="flex font-bold">
             <ImPriceTag className="mr-1 mt-[5px]" />
             {product.price.toFixed(2)}

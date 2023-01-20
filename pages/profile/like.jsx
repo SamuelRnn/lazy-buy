@@ -5,7 +5,7 @@ import FavoriteProduct from "../../components/Profile/FavoriteProduct";
 
 const Like = ({ user }) => {
   const { isFetching, data } = useGetWishListQuery(user.email);
-
+  console.log('Soy data', data)
   return (
     <UserProfile
       user={user}
