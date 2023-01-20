@@ -1,5 +1,4 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import Link from "next/link";
 import Image from "next/image";
 import { HiBars3, HiArrowDownCircle } from "react-icons/hi2";
@@ -7,7 +6,7 @@ import faq from "../../public/faq.png";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
-const faqs = () => {
+const Faqs = () => {
   const [expanded, setExpanded] = useState(false);
 
   const acordeonContent = [
@@ -30,7 +29,7 @@ const faqs = () => {
       title: "How do I optimize my listings to increase visibility",
       content:
         "There is no set time limit for being a basic seller, but to increase sales and grow your business it is recommended to upgrade to a higher level of selling as soon as possible.",
-    },  
+    },
   ];
 
   return (
@@ -65,12 +64,18 @@ const faqs = () => {
             </h2>
             <p className="text-center text-fondo-200 font-semibold text-lg">
               Because we know that when you start something new, sometimes new
-              means a little confusing. That's why we prepare this section
+              means a little confusing. That&apos;s why we prepare this section
               specially for you.
             </p>
           </div>
           <div className="w-1/2">
-            <Image className="" src={faq} width={500} height={500}></Image>
+            <Image
+              className=""
+              src={faq}
+              width={500}
+              height={500}
+              alt={"faqs"}
+            ></Image>
           </div>
         </div>
       </section>
@@ -78,7 +83,9 @@ const faqs = () => {
       <section id="acordeon">
         <div className="overflow-hidden flex flex-col w-[90%] lg:w-[80%] mx-auto text-xl lg:text-xl bg-white text-zinc-100 rounded-lg text-center">
           <div className="bg-fondo-300 p-6">
-            <h2 className="text-zinc-100 text-4xl lg:text-3xl text-center font-semibold">Check Out: </h2>
+            <h2 className="text-zinc-100 text-4xl lg:text-3xl text-center font-semibold">
+              Check Out:{" "}
+            </h2>
           </div>
 
           {acordeonContent.map((ac, i) => {
@@ -86,7 +93,7 @@ const faqs = () => {
             return (
               <>
                 <motion.header
-                className="p-4 border border-b-1 bg-gray-400 cursor-pointer"
+                  className="p-4 border border-b-1 bg-gray-400 cursor-pointer"
                   initial={false}
                   animate={{
                     backgroundColor: isOpen ? "#1F2937" : "#9CA3AF",
@@ -119,7 +126,9 @@ const faqs = () => {
                         }}
                         transition={{ duration: 0.4 }}
                       >
-                        <p className="p-4 text-xl text-slate-500 border border-b-2">{ac.content}</p>
+                        <p className="p-4 text-xl text-slate-500 border border-b-2">
+                          {ac.content}
+                        </p>
                       </motion.div>
                     </motion.section>
                   )}
@@ -132,12 +141,19 @@ const faqs = () => {
 
       <section>
         <div className="flex flex-col space-y-4 items-center mt-6 p-3 bg-fondo-300">
-          <h2 className="text-2xl text-white text-center">You can always make things better!</h2>
-          <a className="bg-fondo-200 w-[50%] text-white font-semibold p-3 rounded-full text-center" href="/dashboard/plan">Upgrade</a>
+          <h2 className="text-2xl text-white text-center">
+            You can always make things better!
+          </h2>
+          <Link
+            className="bg-fondo-200 w-[50%] text-white font-semibold p-3 rounded-full text-center"
+            href="/dashboard/plan"
+          >
+            Upgrade
+          </Link>
         </div>
       </section>
     </div>
   );
 };
 
-export default faqs;
+export default Faqs;
