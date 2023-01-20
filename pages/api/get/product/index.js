@@ -62,6 +62,11 @@ export default async function getProduct(req, res) {
   //     },
   //   ],
   // };
+  if (filters.dash) {
+    const productDash = await product.findMany({include:{company:{select:{name:true,owner:true}}}});
+    return res.status(200).json(productDash);
+  }
+
   let searcyQuery = filters.search.split("-").map((param) => ({
     OR: [
       {
@@ -181,5 +186,6 @@ export default async function getProduct(req, res) {
       (parseInt(filters.page) - 1) * 10 + 10
     );
   }
+
   return res.status(200).json({ results: products, count });
 }
