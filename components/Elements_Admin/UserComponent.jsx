@@ -74,8 +74,8 @@ const UserComponent = () => {
               <td
                 className={`p-3 text-sm text-white rounded whitespace-nowrap bg-fondo-400 ${
                   c.isBanned
-                    ? "bg-green-600 hover:bg-green-400"
-                    : "bg-fondo-400  hover:bg-fondo-300"
+                    ? "bg-slate-400  hover:bg-slate-500"
+                    : "bg-fondo-400 hover:bg-fondo-500"
                 } font-bold hover:cursor-pointer `}
                 onClick={() => handleClick(c.email, c.userName, c.isBanned)}
               >

@@ -1,8 +1,5 @@
 import React from "react";
-import {
-  useGetCompaniesQuery,
-  useDeleteCompanyMutation,
-} from "../../redux/companyApi";
+import { useDeleteCompanyMutation } from "../../redux/companyApi";
 import Image from "next/image";
 import { toast } from "react-hot-toast";
 
@@ -78,8 +75,8 @@ export const Companies = ({ data }) => {
               <td
                 className={`p-3 text-sm text-white rounded whitespace-nowrap bg-fondo-400 ${
                   c.isBanned
-                  ? "bg-slate-400  hover:bg-slate-500"
-                  : "bg-fondo-400 hover:bg-fondo-500"
+                    ? "bg-slate-400  hover:bg-slate-500"
+                    : "bg-fondo-400 hover:bg-fondo-500"
                 } font-bold hover:cursor-pointer `}
                 onClick={() => handleDelete(c.email, c.name, c.isBanned)}
               >
