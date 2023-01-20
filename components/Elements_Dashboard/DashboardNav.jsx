@@ -51,6 +51,11 @@ const DashboardNav = () => {
             </Link>
           )}
         </div>
+        <div className="text-white bg-white">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
       </div>
     </nav>
   );
