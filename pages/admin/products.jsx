@@ -2,14 +2,14 @@ import React from "react";
 import AdminLayout from "../../components/Elements_Admin/AdminLayout";
 import adminMiddleware from "../../utils/adminMiddleware";
 
-const index = () => {
+const Index = () => {
   return (
     <AdminLayout>
       <h1>Products</h1>
     </AdminLayout>
   );
 };
-export default index;
+export default Index;
 export async function getServerSideProps(context) {
   return await adminMiddleware(context);
 }
