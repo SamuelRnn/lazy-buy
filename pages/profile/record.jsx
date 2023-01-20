@@ -1,6 +1,8 @@
 import Profile from '.'
+// import profileMiddleware from "../../utils/profileMiddleware";
+import profileRecordMiddleware from '../../utils/profileRecordMiddleware'
 import UserProfile from '../../components/Profile/UserProfile'
-import { useGetTransactionQuery } from '../../redux/userTransaction'
+// import { useGetTransactionQuery } from '../../redux/userTransaction'
 import { useState } from 'react'
 import Image from 'next/image'
 import { MdInventory } from "react-icons/md";
