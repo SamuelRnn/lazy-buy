@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import Image from "next/image";
 import { HiBars3, HiArrowDownCircle } from "react-icons/hi2";
 import faq from "../../public/faq.png";
@@ -30,7 +31,7 @@ const Faqs = () => {
       title: "How do I optimize my listings to increase visibility",
       content:
         "There is no set time limit for being a basic seller, but to increase sales and grow your business it is recommended to upgrade to a higher level of selling as soon as possible.",
-    },  
+    },
   ];
 
   return (
@@ -52,6 +53,14 @@ const Faqs = () => {
           </div>
           <div className="w-1/2 flex justify-center">
             <Image className="" src={faq} width={500} height={500} alt='FAQ'></Image>
+          <div className="w-1/2">
+            <Image
+              className=""
+              src={faq}
+              width={500}
+              height={500}
+              alt={"faqs"}
+            ></Image>
           </div>
         </div>
       </section>
@@ -59,7 +68,9 @@ const Faqs = () => {
       <section id="acordeon">
         <div className="overflow-hidden flex flex-col w-[90%] lg:w-[65%] mx-auto text-xl lg:text-xl bg-white text-zinc-100 rounded-lg text-center">
           <div className="bg-fondo-300 p-6">
-            <h2 className="text-zinc-100 text-4xl lg:text-3xl text-center font-semibold">Check Out: </h2>
+            <h2 className="text-zinc-100 text-4xl lg:text-3xl text-center font-semibold">
+              Check Out:{" "}
+            </h2>
           </div>
 
           {acordeonContent.map((ac, i) => {
@@ -67,7 +78,7 @@ const Faqs = () => {
             return (
               <>
                 <motion.header
-                className="p-4 border border-b-1 bg-gray-400 cursor-pointer"
+                  className="p-4 border border-b-1 bg-gray-400 cursor-pointer"
                   initial={false}
                   animate={{
                     backgroundColor: isOpen ? "#1F2937" : "#9CA3AF",
@@ -100,7 +111,9 @@ const Faqs = () => {
                         }}
                         transition={{ duration: 0.4 }}
                       >
-                        <p className="p-4 text-xl text-slate-500 border border-b-2">{ac.content}</p>
+                        <p className="p-4 text-xl text-slate-500 border border-b-2">
+                          {ac.content}
+                        </p>
                       </motion.div>
                     </motion.section>
                   )}
@@ -115,6 +128,16 @@ const Faqs = () => {
         <div className="flex flex-col space-y-4 items-center mt-6 p-3 bg-fondo-300 lg:flex-row justify-around ">
           <h2 className="text-2xl text-white text-center lg:text-4xl lg:text-start">You can always make things better!</h2>
           <Link className="bg-fondo-200 w-[50%] text-white font-semibold p-3 rounded-full text-center hover:bg-white hover:text-fondo-200 transition-all lg:w-[20%]" href="/dashboard/plan">Upgrade</Link>
+        <div className="flex flex-col space-y-4 items-center mt-6 p-3 bg-fondo-300">
+          <h2 className="text-2xl text-white text-center">
+            You can always make things better!
+          </h2>
+          <Link
+            className="bg-fondo-200 w-[50%] text-white font-semibold p-3 rounded-full text-center"
+            href="/dashboard/plan"
+          >
+            Upgrade
+          </Link>
         </div>
       </section>
     </div>
