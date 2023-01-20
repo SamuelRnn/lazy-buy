@@ -45,7 +45,6 @@ export default async function success(req, res) {
     });
     res.status(200).json({ transactionCreate: true, modifiedStock: true });
   } catch (error) {
-    console.log(error)
     res.status(400).json({ transactionCreate: false, modifiedStock: false });
   }
 }

@@ -16,10 +16,8 @@ export default async function deleteUser(req, res) {
       },
     });
     if(!userDelete)throw new Error("User not found");
-    console.log(userDelete)
     res.status(200).json(userDelete)
   } catch (error) {
-    console.log(error)
     res.status(400).json({error: error.message})
   }
 }

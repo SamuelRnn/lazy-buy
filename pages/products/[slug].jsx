@@ -22,12 +22,10 @@ import {
 import CardCarousel from "../../components/Elements_Cards/CardCarousel";
 
 const Detail = ({ product, carousel }) => {
-  console.log(carousel);
   const router = useRouter();
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
   const session = useSelector((state) => state.account?.session);
-  console.log("🚀 ~ file: [slug].jsx:29 ~ Detail ~ session", session);
   const cart = useSelector(getCart);
   const { isFetching, data: reviews } = useGetReviewsQuery(product.id);
   const [addReview] = useAddReviewMutation();
