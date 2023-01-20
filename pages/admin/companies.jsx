@@ -4,7 +4,7 @@ import { Companies } from "../../components/Elements_Admin/Companies";
 import adminMiddleware from "../../utils/adminMiddleware";
 import { useGetCompaniesQuery } from "../../redux/companyApi";
 
-const index = ({ user }) => {
+const Index = ({ user }) => {
   const { isLoading, data } = useGetCompaniesQuery();
 
   return (
@@ -25,7 +25,7 @@ const index = ({ user }) => {
     </AdminLayout>
   );
 };
-export default index;
+export default Index;
 export async function getServerSideProps(context) {
   return await adminMiddleware(context);
 }
