@@ -8,6 +8,7 @@ export const companyApi = createApi({
   endpoints: (builder) => ({
     getCompanies: builder.query({
       query: () => "/api/get/company",
+      providesTags: ["Company"],
     }),
     getCompany: builder.query({
       query: (email) => `/api/get/company/${email}`,
@@ -63,6 +64,14 @@ export const companyApi = createApi({
       }),
       invalidatesTags: ["Company"],
     }),
+    deleteCompany: builder.mutation({
+      query: (email) => ({
+        url: `/api/delete/company/${email}`,
+        method: "PATCH",
+        header: { "Content-Type": "application/json" },
+      }),
+      invalidatesTags: ["Company"],
+    }),
   }),
   tagTypes: ["Company"],
 });
@@ -78,4 +87,5 @@ export const {
   useUpdateProductMutation,
   useUpdatePictureMutation,
   useUpdateAccountMutation,
+  useDeleteCompanyMutation,
 } = companyApi;
