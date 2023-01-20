@@ -1,8 +1,23 @@
 import React from "react";
-import { useGetCompaniesQuery } from "../../redux/companyApi";
+import {
+  useGetCompaniesQuery,
+  useDeleteCompanyMutation,
+} from "../../redux/companyApi";
+import Image from "next/image";
+import { toast } from "react-hot-toast";
 
-export const Companies = () => {
-  const { isLoading, data } = useGetCompaniesQuery();
+export const Companies = ({ data }) => {
+  const [banCompany] = useDeleteCompanyMutation();
+
+  const handleDelete = async (email, name, banned) => {
+    if (banned) {
+      toast.success(`You unbanned ${name} wich email is ${email}`);
+    }
+    if (!banned) {
+      toast.success(`You banned ${name} wich email is ${email}`);
+    }
+    await banCompany(email);
+  };
 
   return (
     <table className="w-full">
@@ -35,7 +50,14 @@ export const Companies = () => {
         {data &&
           data.map((c) => (
             <tr key={c.id} className="bg-white">
-              <td className="p-3 text-sm text-gray-700 whitespace-nowrap">
+              <td className="p-4 text-sm text-gray-700 flex flex-row items-center justify-center gap-3 whitespace-nowrap">
+                <Image
+                  alt="img"
+                  width={30}
+                  height={30}
+                  className=" rounded-full scale-125"
+                  src={c.profilePicture.url}
+                />
                 {c.name}
               </td>
               <td className="p-3 text-sm text-gray-700 whitespace-nowrap">
@@ -53,8 +75,15 @@ export const Companies = () => {
               <td className="p-3 text-sm text-gray-700 whitespace-nowrap">
                 {c.plan}
               </td>
-              <td className="p-3 text-sm text-white whitespace-nowrap bg-fondo-400 font-bold hover:cursor-pointer hover:bg-fondo-300">
-                Delete
+              <td
+                className={`p-3 text-sm text-white rounded whitespace-nowrap bg-fondo-400 ${
+                  c.isBanned
+                  ? "bg-slate-400  hover:bg-slate-500"
+                  : "bg-fondo-400 hover:bg-fondo-500"
+                } font-bold hover:cursor-pointer `}
+                onClick={() => handleDelete(c.email, c.name, c.isBanned)}
+              >
+                {c.isBanned ? "Unban" : "Ban"}
               </td>
             </tr>
           ))}
