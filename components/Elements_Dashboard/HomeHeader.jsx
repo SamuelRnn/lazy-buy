@@ -41,7 +41,7 @@ const HomeHeader = () => {
             </Link>
             <Link
               className="hover:bg-fondo-50 hover:text-fondo-300 p-2 rounded-lg transition-all"
-              href="#"
+              href="/dashboard/faqs"
             >
               FAQ
             </Link>
@@ -120,12 +120,13 @@ const HomeHeader = () => {
               className=""
               src={det}
               alt="image"
-              height={300}
-              width={300}
+              height={500}
+              width={500}
             />
           </div>
         </div>
       </section>
+      
       <section id="features">
         <div className="container flex flex-col px-4 mx-auto mt-10 space-y-12 lg:space-y-0 lg:flex-row mb-10">
           <div className="flex flex-col space-y-12 lg:w-1/2 md:items-center lg:items-start">
