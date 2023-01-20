@@ -22,8 +22,20 @@ export const reviewApi = createApi({
       }),
       invalidatesTags: ["products"],
     }),
+    eraseReview: builder.mutation({
+      query: (eraseReview) => ({
+        url: `/api/delete/review/${eraseReview}`,
+        method: "DELETE",
+        header: { "Content-Type": "application/json" },
+      }),
+      invalidatesTags: ["products"],
+    }),
   }),
   tagTypes: ["products"],
 });
 
-export const { useGetReviewsQuery, useAddReviewMutation } = reviewApi;
+export const {
+  useGetReviewsQuery,
+  useAddReviewMutation,
+  useEraseReviewMutation,
+} = reviewApi;

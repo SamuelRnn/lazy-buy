@@ -68,9 +68,11 @@ export async function getServerSideProps({ req, query }) {
     if (found_company) {
       extendedSessionData.type = "company";
       extendedSessionData.image = found_company.profilePicture.url;
+      extendedSessionData.isAdmin = false;
     }
     if (found_user) {
       extendedSessionData.type = "user";
+      extendedSessionData.isAdmin = found_user.isAdmin;
       extendedSessionData.image = found_user.profilePicture.url;
     }
   }
