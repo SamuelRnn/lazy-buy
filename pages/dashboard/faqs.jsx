@@ -6,8 +6,9 @@ import { HiBars3, HiArrowDownCircle } from "react-icons/hi2";
 import faq from "../../public/faq.png";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import Link from "next/link";
 
-const faqs = () => {
+const Faqs = () => {
   const [expanded, setExpanded] = useState(false);
 
   const acordeonContent = [
@@ -65,12 +66,12 @@ const faqs = () => {
             </h2>
             <p className="text-center text-fondo-200 font-semibold text-lg">
               Because we know that when you start something new, sometimes new
-              means a little confusing. That's why we prepare this section
+              means a little confusing. That&apos;s why we prepare this section
               specially for you.
             </p>
           </div>
           <div className="w-1/2">
-            <Image className="" src={faq} width={500} height={500}></Image>
+            <Image className="" src={faq} width={500} height={500} alt='FAQ'></Image>
           </div>
         </div>
       </section>
@@ -133,11 +134,11 @@ const faqs = () => {
       <section>
         <div className="flex flex-col space-y-4 items-center mt-6 p-3 bg-fondo-300">
           <h2 className="text-2xl text-white text-center">You can always make things better!</h2>
-          <a className="bg-fondo-200 w-[50%] text-white font-semibold p-3 rounded-full text-center" href="/dashboard/plan">Upgrade</a>
+          <Link className="bg-fondo-200 w-[50%] text-white font-semibold p-3 rounded-full text-center" href="/dashboard/plan">Upgrade</Link>
         </div>
       </section>
     </div>
   );
 };
 
-export default faqs;
+export default Faqs;
