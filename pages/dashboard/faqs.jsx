@@ -1,12 +1,11 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import Link from "next/link";
 import Image from "next/image";
 import { HiBars3, HiArrowDownCircle } from "react-icons/hi2";
 import faq from "../../public/faq.png";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import Link from "next/link";
+import DashboardNav from "../../components/Elements_Dashboard/DashboardNav";
 
 const Faqs = () => {
   const [expanded, setExpanded] = useState(false);
@@ -36,48 +35,29 @@ const Faqs = () => {
 
   return (
     <div className="bg-zinc-50">
-      <nav className="bg-fondo-300 p-2 text-white font-semibold flex justify-around">
-        <div className="flex items-center gap-2">
-          <Image
-            className="rounded-full w-16 h-16 object-cover lg:w-24 lg:h-24"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPDdlJ9bo7f5d6w82MI6NQiaiiVFiDj7AwAQ&usqp=CAU"
-            width={1000}
-            height={1000}
-            alt="profile"
-          ></Image>
-          <h2>Armando Mendozas</h2>
-        </div>
-
-        <div className="hidden gap-3 lg:flex items-center">
-          <Link href="#">Support</Link>
-          <Link href="#">FAQ</Link>
-          <Link href="#">Your Plan</Link>
-        </div>
-        <div className="flex items-center text-3xl lg:hidden">
-          <HiBars3 />
-        </div>
-      </nav>
+      
+      <DashboardNav/>
 
       <section id="presentation">
-        <div className="flex flex-col-reverse items-center p-2 space-y-2 lg:flex-row my-8">
-          <div className="flex flex-col gap-4 text-center p-3 lg:w-1/2">
+        <div className="flex flex-col-reverse items-center p-2 space-y-2 lg:flex-row my-8 lg:w-[90%] lg:mx-auto">
+          <div className="flex flex-col gap-4 text-center p-3 lg:w-1/2 lg:justify-center lg:text-start lg:px-auto">
             <h2 className="text-5xl text-fondo-300 font-bold">
               These are the most asked questions:{" "}
             </h2>
-            <p className="text-center text-fondo-200 font-semibold text-lg">
+            <p className=" text-fondo-200 font-semibold text-lg">
               Because we know that when you start something new, sometimes new
               means a little confusing. That&apos;s why we prepare this section
               specially for you.
             </p>
           </div>
-          <div className="w-1/2">
+          <div className="w-1/2 flex justify-center">
             <Image className="" src={faq} width={500} height={500} alt='FAQ'></Image>
           </div>
         </div>
       </section>
 
       <section id="acordeon">
-        <div className="overflow-hidden flex flex-col w-[90%] lg:w-[80%] mx-auto text-xl lg:text-xl bg-white text-zinc-100 rounded-lg text-center">
+        <div className="overflow-hidden flex flex-col w-[90%] lg:w-[65%] mx-auto text-xl lg:text-xl bg-white text-zinc-100 rounded-lg text-center">
           <div className="bg-fondo-300 p-6">
             <h2 className="text-zinc-100 text-4xl lg:text-3xl text-center font-semibold">Check Out: </h2>
           </div>
@@ -132,9 +112,9 @@ const Faqs = () => {
       </section>
 
       <section>
-        <div className="flex flex-col space-y-4 items-center mt-6 p-3 bg-fondo-300">
-          <h2 className="text-2xl text-white text-center">You can always make things better!</h2>
-          <Link className="bg-fondo-200 w-[50%] text-white font-semibold p-3 rounded-full text-center" href="/dashboard/plan">Upgrade</Link>
+        <div className="flex flex-col space-y-4 items-center mt-6 p-3 bg-fondo-300 lg:flex-row justify-around ">
+          <h2 className="text-2xl text-white text-center lg:text-4xl lg:text-start">You can always make things better!</h2>
+          <Link className="bg-fondo-200 w-[50%] text-white font-semibold p-3 rounded-full text-center hover:bg-white hover:text-fondo-200 transition-all lg:w-[20%]" href="/dashboard/plan">Upgrade</Link>
         </div>
       </section>
     </div>
