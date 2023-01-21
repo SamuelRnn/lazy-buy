@@ -24,11 +24,9 @@ const NavBar = () => {
 
   return (
     <header className="w-full bg-fondo-200">
-  
-        <UserMenu showModal={showModal} setShowModal={setShowModal} />
+      <UserMenu showModal={showModal} setShowModal={setShowModal} />
 
-
-      <div className=" flex flex-col md:flex-row main gap-x-4 gap-y-2 items-center justify-between">
+      <div className="flex flex-col md:flex-row main items-center justify-between py-[6px]">
         <div className="flex flex-col md:flex-row items-center gap-x-4 justify-center gap-y-2">
           {/* logo */}
           <a href="/" className="nav_links flex items-center gap-1">

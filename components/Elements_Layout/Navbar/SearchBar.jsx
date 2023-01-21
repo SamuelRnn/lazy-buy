@@ -31,7 +31,7 @@ const SearchBar = () => {
         value={search}
       />
       <button type="submit" className="pr-3">
-        <AiOutlineSearch className="text-2xl" />
+        <AiOutlineSearch className="text-2xl text-zinc-500" />
       </button>
     </form>
   );

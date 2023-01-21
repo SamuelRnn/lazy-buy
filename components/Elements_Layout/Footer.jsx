@@ -34,7 +34,9 @@ const Footer = () => {
           </nav>
         </div>
         <div className="md:col-span-4 xl:col-span-3">
-          <h2 className="font-bold text-fondo-400 mb-6 uppercase">Social Media</h2>
+          <h2 className="font-bold text-fondo-400 mb-6 uppercase">
+            Social Media
+          </h2>
           <nav>
             <a
               href="https://www.facebook.com/profile.php?id=100089361346783"
@@ -53,7 +55,7 @@ const Footer = () => {
             </a>
             <a
               href="https://www.instagram.com/lazybuy23/"
-              className="flex items-center gap-2 my-1 flex items-center gap-2 my-1 hover:underline hover:text-fondo-300 p-2"
+              className="flex items-center gap-2 my-1 hover:underline hover:text-fondo-300 p-2"
               target="_blank"
               rel="noreferrer"
             >
@@ -68,7 +70,7 @@ const Footer = () => {
             </a>
             <a
               href="https://twitter.com/Lazy_Buy23"
-              className="flex items-center gap-2 my-1 flex items-center gap-2 my-1 hover:underline hover:text-fondo-300 p-2"
+              className="flex items-center gap-2 my-1 hover:underline hover:text-fondo-300 p-2"
               target="_blank"
               rel="noreferrer"
             >
