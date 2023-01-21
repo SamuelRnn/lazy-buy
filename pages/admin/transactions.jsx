@@ -6,10 +6,6 @@ import { useGetTransactionsQuery } from "../../redux/transactionApi";
 
 const Index = () => {
   const { isLoading, data: transactions } = useGetTransactionsQuery();
-  console.log(
-    "🚀 ~ file: Transactions.jsx:8 ~ Transactions ~ transactions",
-    transactions
-  );
   return (
     <AdminLayout>
       <h1 className="text-3xl font-bold tracking-wider text-fondo-300 capitalize text-center mb-10">

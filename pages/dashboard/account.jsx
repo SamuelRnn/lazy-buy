@@ -159,7 +159,10 @@ const Account = ({ company: { email } }) => {
                         <button
                           type="button"
                           className="hover:text-fondo-300 hover:bg-fondo-50 text-white font-semibold flex rounded-xl border-2 p-3 border-fondo-200 items-center justify-center gap-4 ease-in-out transition-all bg-fondo-200 col-span-2"
-                          onClick={() => setEdit(!edit)}
+                          onClick={() => {
+                            setEdit(!edit);
+                            formik.resetForm();
+                          }}
                         >
                           <span>Edit</span>
 
