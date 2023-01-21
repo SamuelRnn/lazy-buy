@@ -5,7 +5,7 @@ export const productApi = createApi({
   baseQuery: fetchBaseQuery(
     process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
   ),
-  tagTypes: ["products","allProducts"],
+  tagTypes: ["products", "allProducts"],
   endpoints: (builder) => ({
     getProducts: builder.query({
       query: (filters) => ({
@@ -15,7 +15,8 @@ export const productApi = createApi({
       providesTags: ["products"],
     }),
     getAllProducts: builder.query({
-      query:()=> "/api/get/product?dash=true",
+      query: (filter) =>
+        `/api/get/product/admin/productDash?filterOne=${filter.one || "All"}&filterTwo=${filter.two === "true"?true:filter.two === "false"? false:"All"}`,
       providesTags: ["allProducts"],
     }),
     deleteProduct: builder.mutation({
@@ -25,8 +26,12 @@ export const productApi = createApi({
         header: { "Content-Type": "application/json" },
       }),
       invalidatesTags: ["allProducts"],
-    }),    
+    }),
   }),
 });
 
-export const { useGetProductsQuery,useGetAllProductsQuery, useDeleteProductMutation } = productApi;
+export const {
+  useGetProductsQuery,
+  useGetAllProductsQuery,
+  useDeleteProductMutation,
+} = productApi;
