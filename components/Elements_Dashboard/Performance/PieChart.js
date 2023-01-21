@@ -5,7 +5,6 @@ const PieChart = ({ years }) => {
   let yearsLabel = years?.map((y) => y.date);
   yearsLabel = new Set(yearsLabel);
   yearsLabel = Array.from(yearsLabel);
-  console.log("🚀 ~ file: PieChart.js:7 ~ PieChart ~ yearsLabel", yearsLabel);
 
   years?.forEach((e, i) => {
     if (yearsAux[e.date]) yearsAux[e.date] += e.bill;

@@ -29,7 +29,6 @@ const Performance = () => {
       bill: t.product.price * t.productAmount,
     };
   });
-  console.log("🚀 ~ file: performance.jsx:15 ~ Performance ~ days", years);
 
   return (
     <DashboardLayout>
