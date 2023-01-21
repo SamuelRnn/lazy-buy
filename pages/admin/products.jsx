@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 import AdminLayout from "../../components/Elements_Admin/AdminLayout";
+import PaginationAdminProduct from "../../components/Elements_Admin/PaginationAdminProduct";
 import ProductComponent from "../../components/Elements_Admin/ProductComponent";
-import { useGetAllProductsQuery } from "../../redux/productsApi";
+import { useGetAllProductsQuery, useGetProductsQuery } from "../../redux/productsApi";
 import adminMiddleware from "../../utils/adminMiddleware";
 
 const Index = () => {
-  const [filt, setFilt] = useState({one:"",two:""});
-  const { data, isLoading } = useGetAllProductsQuery(filt);
-
+  const [filt, setFilt] = useState({one:"",two:"",pg:0});
+  const { data, isLoading:load } = useGetAllProductsQuery(filt);
+  //const {data:page,isLoading:load} = useGetProductsQuery({dash:true})
   const handleChange = ({ target: { value } }) => {
-    setFilt(state => ({...state,one:value}));
+    setFilt(state => ({...state,one:value,pg:0}));
   };
 
   const handleChangeTwo = ({target:{value}}) => {
-    setFilt(state => ({...state,two:value}));
+    setFilt(state => ({...state,two:value,pg:0}));
   }
   return (
     <AdminLayout>
@@ -24,7 +25,7 @@ const Index = () => {
       <div className="flex flex-row items-center justify-between pr-5">
         <div>
           <h2 className="text-lg font-bold text-slate-700">
-            {data && data.length} Products
+            {!load && (data.count === 0?"No ":data.count)} Products
           </h2>
         </div>
         <div className="flex flex-row items-center justify-center gap-4 ">
@@ -45,8 +46,13 @@ const Index = () => {
       </div>
 
       <br />
+      <div className="flex items-center justify-center">
+
+      {!load && <PaginationAdminProduct page={data.count} setFilt={setFilt} pg={filt.pg}/>}
+      </div>
+      <br />  
       <div className="overflow-auto rounded-lg shadow md:block">
-        <ProductComponent data={data} />
+      {!load && <ProductComponent data={data.productDash} />}
       </div>
       <br />
     </AdminLayout>
