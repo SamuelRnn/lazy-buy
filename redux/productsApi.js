@@ -16,7 +16,7 @@ export const productApi = createApi({
     }),
     getAllProducts: builder.query({
       query: (filter) =>
-        `/api/get/product/admin/productDash?filterOne=${filter.one || "All"}&filterTwo=${filter.two === "true"?true:filter.two === "false"? false:"All"}`,
+        `/api/get/product/admin/productDash?filterOne=${filter.one || "All"}&filterTwo=${filter.two === "true"?true:filter.two === "false"? false:"All"}&pg=${filter.pg}`,
       providesTags: ["allProducts"],
     }),
     deleteProduct: builder.mutation({
