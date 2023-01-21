@@ -17,7 +17,7 @@ export default async function getCompanyById(req, res) {
             updatedAt: "desc",
           },
         },
-        transactions: true,
+        transactions: { include: { product: true } },
       },
     });
     await simulateDelay(3);

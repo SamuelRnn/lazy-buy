@@ -1,39 +1,48 @@
 import DashboardLayout from "../../components/Elements_Dashboard/DashboardLayout";
 import Chart from "chart.js/auto";
-import { Bar } from "react-chartjs-2";
 import dashboardMiddleware from "../../utils/dashboardMiddleware";
+import BarChart from "../../components/Elements_Dashboard/Performance/BarChart";
+import LineChart from "../../components/Elements_Dashboard/Performance/LineChart";
+import PieChart from "../../components/Elements_Dashboard/Performance/PieChart";
+import { useGetCompanyQuery } from "../../redux/companyApi";
+import { useSelector } from "react-redux";
 
 const Performance = () => {
-  const data = {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
-    datasets: [
-      {
-        label: "Bill",
-        backgroundColor: "rgb(255, 99, 132)",
-        borderColor: "rgb(255, 99, 132)",
-        data: [1, 10, 5, 2, 13, 21, 11],
-      },
-    ],
-  };
-  const options = {
-    mainAspectRatio: false,
-    scales: {
-      y: {
-        beginAtZero: true,
-      },
-    },
-    legend: {
-      labels: {
-        fontSize: 22,
-      },
-    },
-  };
+  const account = useSelector((state) => state.account?.session);
+  const { isLoading, data: company } = useGetCompanyQuery(account.email);
+
+  const days = company?.transactions.map((t) => {
+    return {
+      date: new Date(t.createdAt).getDay(),
+      bill: t.product.price * t.productAmount,
+    };
+  });
+  const months = company?.transactions.map((t) => {
+    return {
+      date: new Date(t.createdAt).getMonth(),
+      bill: t.product.price * t.productAmount,
+    };
+  });
+  const years = company?.transactions.map((t) => {
+    return {
+      date: new Date(t.createdAt).getFullYear(),
+      bill: t.product.price * t.productAmount,
+    };
+  });
+  console.log("🚀 ~ file: performance.jsx:15 ~ Performance ~ days", years);
 
   return (
     <DashboardLayout>
-      <div>
-        {/* <Bar data={data} options={options} height={200} /> */}
-        Chart
+      <div className="grid gap-10 place-items-center">
+        <div className="w-[320px] md:w-[720px] lg:w-[920px]">
+          <BarChart days={days} />
+        </div>
+        <div className="w-[320px] md:w-[720px] lg:w-[920px]">
+          <LineChart months={months} />
+        </div>
+        <div className="w-[320px] md:w-[720px] lg:w-[920px] mb-1">
+          <PieChart years={years} />
+        </div>
       </div>
     </DashboardLayout>
   );
