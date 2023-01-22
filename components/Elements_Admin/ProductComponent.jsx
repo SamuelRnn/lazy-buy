@@ -84,7 +84,7 @@ const ProductComponent = ({ data }) => {
               </td>
               <td
                 className={`p-3 text-sm text-white rounded whitespace-nowrap bg-fondo-400 ${
-                  c.isActive
+                  !c.isActive
                     ? "bg-slate-400  hover:bg-slate-500"
                     : "bg-fondo-400 hover:bg-fondo-500"
                 } font-bold hover:cursor-pointer `}
@@ -92,7 +92,7 @@ const ProductComponent = ({ data }) => {
                   handleDelete(c.id, c.name, c.company.name, c.isActive)
                 }
               >
-                {c.isActive ? "Unban" : "Ban"}
+                {!c.isActive ? "Unban" : "Ban"}
               </td>
             </tr>
           ))}
