@@ -5,19 +5,14 @@ import { Menu, Transition, Popover } from "@headlessui/react";
 import Link from "next/link";
 import { useSession, getSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
+import { useSelector } from "react-redux";
 
 export default function TopBar({ showNav, setShowNav }) {
-  const { data: session } = useSession();
-
-  function handleSignOut() {
-    signOut({
-      callbackUrl: "/login?session=signed-out",
-    });
-  }
+  const account = useSelector((state) => state.account?.session);
 
   return (
     <div
-      className={`fixed z-40 w-full h-16 flex justify-between items-center transition-all duration-[400ms] bg-white ${
+      className={`fixed z-40 w-full h-16 flex justify-between items-center transition-all duration-[400ms] bg-transparent ${
         showNav ? "pl-56" : ""
       }`}
     >
@@ -112,13 +107,13 @@ export default function TopBar({ showNav, setShowNav }) {
             <Menu.Button className="inline-flex w-full justify-center items-center">
               <picture>
                 <img
-                  src="/logocart.png"
+                  src={account.image}
                   className="rounded-full h-8 md:mr-4 border-2 border-white shadow-sm"
                   alt="profile picture"
                 />
               </picture>
               <span className="hidden md:block font-medium text-gray-700">
-                {session && session.user.name}
+                {account.name}
               </span>
             </Menu.Button>
           </div>
