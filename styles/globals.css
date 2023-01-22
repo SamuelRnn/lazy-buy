@@ -114,7 +114,7 @@
   @apply grid;
   grid-template-columns: repeat(auto-fill, 160px);
   place-content: center;
-  gap: 4rem;
+  gap: 7rem;
 }
 /* loader */
 @keyframes loader-rotate {
