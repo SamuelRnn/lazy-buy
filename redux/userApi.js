@@ -11,13 +11,11 @@ export const userApi = createApi({
       providesTags: ["wishList"],
     }),
     getUserList: builder.query({
-      query: () => "/api/get/user",
-      //filtrar si no es un admin
-      transformResponse: (response) => response.filter(e => !e.isAdmin),
+      query: (pg) => `/api/get/user?page=${pg}`,
       providesTags: ["userList"],
     }),
     deleteUser: builder.mutation({
-      query: (userEmail)=>({
+      query: (userEmail) => ({
         url: `/api/delete/deleteUser?userEmail=${userEmail}`,
         method: "PATCH",
         header: { "Content-Type": "application/json" },
@@ -43,7 +41,7 @@ export const userApi = createApi({
       invalidatesTags: ["wishList"],
     }),
   }),
-  tagTypes: ["wishList","userList"],
+  tagTypes: ["wishList", "userList"],
 });
 
 export const {
