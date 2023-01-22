@@ -4,12 +4,11 @@ import { clearSession } from "../../../redux/accountSlice";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { FiUser, FiHeart } from "react-icons/fi";
-import { RiLogoutBoxRLine } from "react-icons/ri";
+import { RiLogoutBoxRLine, RiAdminLine } from "react-icons/ri";
 import { MdClose } from "react-icons/md";
 import { useState } from "react";
 
 const backdrop = {
-
   visible: {
     opacity: 1,
     transition: { duration: 0.15 },
@@ -20,12 +19,9 @@ const backdrop = {
   },
 };
 
-
-
 const UserMenu = ({ showModal, setShowModal }) => {
   const dispatch = useDispatch();
   const session = useSelector((state) => state.account.session);
-  const companyData = useSelector((state) => state.account.session);
 
   const handleSignOut = async () => {
     dispatch(clearSession());
@@ -54,12 +50,12 @@ const UserMenu = ({ showModal, setShowModal }) => {
           <motion.div className="relative w-[90%] md:w-[50%] mt-24 h-60 mx-auto bg-fondo-300 shadow-lg flex flex-col items-center justify-evenly rounded-2xl">
             <button
               onClick={() => setShowModal((state) => !state)}
-              className="absolute top-4 right-4 p-1 bg-white transition-all hover:text-fond rounded-full w-8"
+              className="absolute top-4 right-4 p-1 bg-white transition-all hover:text-fond rounded-full w-8 hover:bg-fondo-500"
             >
               <MdClose className="text-2xl" />
             </button>
             <h2 className="text-3xl font-semibold text-white">
-              Hi {companyData}
+              Hi {session.name}
             </h2>
             {session.type === "user" && (
               <div className="flex w-[80%] text-black justify-evenly">
@@ -70,6 +66,15 @@ const UserMenu = ({ showModal, setShowModal }) => {
                   <FiUser className="mr-2" />
                   Profile
                 </Link>
+                {session.isAdmin && (
+                  <Link
+                    href="/admin"
+                    className="flex items-center p-4 cursor-pointer bg-slate-500 text-white rounded-lg hover:bg-zinc-50 transition-all hover:text-fondo-300 shadow-lg"
+                  >
+                    <RiAdminLine className="mr-2" />
+                    Admin
+                  </Link>
+                )}
                 <Link
                   href="/profile/like"
                   className="flex items-center p-4 cursor-pointer bg-slate-500 text-white rounded-lg hover:bg-zinc-50 transition-all hover:text-fondo-300 shadow-lg"
