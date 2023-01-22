@@ -12,10 +12,10 @@ const DashboardLayout = ({
   setActive,
   title = "Lazy Buy | Dashboard",
 }) => {
-  const [showNav, setShowNav] = useState(true);
+  const [showNav, setShowNav] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
-  function handleResize() {
+  /* function handleResize() {
     if (innerWidth <= 640) {
       setShowNav(false);
       setIsMobile(true);
@@ -32,7 +32,7 @@ const DashboardLayout = ({
     return () => {
       removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, []); */
 
   return (
     <>
