@@ -39,7 +39,6 @@ export default async function productsAdmin(req, res) {
       take: 10,
       include: { company: { select: { name: true, owner: true } } },
     });
-    console.log({ count, productDash });
     return res.status(200).json({ count: count.length, productDash });
 
     /* if (filterOne == "All" && filterTwo !== "All") {

@@ -6,8 +6,10 @@ import Link from "next/link";
 import { FiUser, FiHeart } from "react-icons/fi";
 import { RiLogoutBoxRLine } from "react-icons/ri";
 import { MdClose } from "react-icons/md";
+import { useState } from "react";
 
 const backdrop = {
+
   visible: {
     opacity: 1,
     transition: { duration: 0.15 },
@@ -18,9 +20,12 @@ const backdrop = {
   },
 };
 
+
+
 const UserMenu = ({ showModal, setShowModal }) => {
   const dispatch = useDispatch();
   const session = useSelector((state) => state.account.session);
+  const companyData = useSelector((state) => state.account.session);
 
   const handleSignOut = async () => {
     dispatch(clearSession());
@@ -46,37 +51,37 @@ const UserMenu = ({ showModal, setShowModal }) => {
           animate="visible"
           exit="hidden"
         >
-          <motion.div className="relative w-[90%] md:w-[50%] mt-24 h-60 mx-auto bg-fondo-300 flex flex-col items-center justify-evenly rounded-2xl">
+          <motion.div className="relative w-[90%] md:w-[50%] mt-24 h-60 mx-auto bg-fondo-300 shadow-lg flex flex-col items-center justify-evenly rounded-2xl">
             <button
               onClick={() => setShowModal((state) => !state)}
-              className="absolute top-4 right-4 p-1 bg-white rounded-full w-8"
+              className="absolute top-4 right-4 p-1 bg-white transition-all hover:text-fond rounded-full w-8"
             >
               <MdClose className="text-2xl" />
             </button>
-            <h2 className="text-2xl font-semibold text-white">
-              Already leaving?
+            <h2 className="text-3xl font-semibold text-white">
+              Hi {companyData}
             </h2>
             {session.type === "user" && (
-              <>
+              <div className="flex w-[80%] text-black justify-evenly">
                 <Link
                   href="/profile"
-                  className="hover:bg-fondo-300 w-full px-2 py-2 text-left transition-colors duration-75 flex items-center"
+                  className="flex items-center p-4 cursor-pointer bg-slate-500 text-white rounded-lg hover:bg-zinc-50 transition-all hover:text-fondo-300 shadow-lg"
                 >
                   <FiUser className="mr-2" />
                   Profile
                 </Link>
                 <Link
                   href="/profile/like"
-                  className="hover:bg-fondo-300 w-full px-2 py-2 text-left transition-colors duration-75 flex items-center"
+                  className="flex items-center p-4 cursor-pointer bg-slate-500 text-white rounded-lg hover:bg-zinc-50 transition-all hover:text-fondo-300 shadow-lg"
                 >
                   <FiHeart className="mr-2" />
                   Wishlist
                 </Link>
-              </>
+              </div>
             )}
             <button
               onClick={handleSignOut}
-              className="flex items-center bg-fondo-50 p-4 rounded-lg"
+              className="flex items-center p-4 cursor-pointer bg-slate-500 text-white rounded-lg hover:bg-zinc-50 transition-all hover:text-fondo-300"
             >
               <RiLogoutBoxRLine className="mr-2" />
               Sign out
