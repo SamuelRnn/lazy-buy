@@ -22,14 +22,14 @@ const Index = () => {
         Products Information
       </h1>
       <br />
-      <div className="flex flex-row items-center justify-between pr-5">
+      <div className="flex flex-row items-center flex-wrap justify-between pr-5">
         <div>
           <h2 className="text-lg font-bold text-slate-700">
             {!load && (data.count === 0?"No ":data.count)} Products
           </h2>
         </div>
         <div className="flex flex-row items-center justify-center gap-4 ">
-          <h2 className="text-lg font-bold text-slate-700">Filters :</h2>
+          <h2 className="md:block hidden text-lg font-bold text-slate-700">Filters :</h2>
           <select className="filter_btn" onChange={handleChangeTwo}>
             <option value="All">All</option>
             <option value="true" >Active</option>

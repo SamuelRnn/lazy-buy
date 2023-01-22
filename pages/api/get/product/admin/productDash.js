@@ -21,7 +21,7 @@ export default async function productsAdmin(req, res) {
     const count = await product.findMany({
       where: {
         ...(filterTwo !== "All" && {
-          isActive: filterTwo === "true" ? false : true,
+          isActive: filterTwo === "true" ? true :false ,
         }),
         ...(filterOne !== "All" && { category: filterOne }),
       },
@@ -31,7 +31,7 @@ export default async function productsAdmin(req, res) {
     const productDash = await product.findMany({
       where: {
         ...(filterTwo !== "All" && {
-          isActive: filterTwo === "true" ? false : true,
+          isActive: filterTwo === "true" ? true :false,
         }),
         ...(filterOne !== "All" && { category: filterOne }),
       },

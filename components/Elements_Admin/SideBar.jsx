@@ -24,7 +24,7 @@ const SideBar = forwardRef(({ setActive }, ref) => {
   };
 
   return (
-    <div ref={ref} className="fixed w-56 h-full bg-white shadow-sm z-50">
+    <div ref={ref} className="fixed w-56 h-full bg-[rgba(255,255,255,0.7)] backdrop-blur shadow-sm z-50">
       <div className="flex justify-center mt-6 mb-14">
         <Link href="/">
           <Image
