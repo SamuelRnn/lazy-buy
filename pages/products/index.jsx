@@ -84,7 +84,7 @@ const Store = (initialParams) => {
                 />
               )}
               <div className="flex max-w-[1400px] mx-auto">
-                {!isLoading && !!productos.count && (
+                {!isLoading && !!productos?.count && (
                   <div className="hidden lg:flex h-fit bg-zinc-100 rounded-md pb-16 mt-4">
                     <Filters
                       setActiveFiltersModal={setActiveFiltersModal}
