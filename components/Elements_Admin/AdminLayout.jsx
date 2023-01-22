@@ -15,7 +15,7 @@ const DashboardLayout = ({
   const [showNav, setShowNav] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
 
-  function handleResize() {
+  /* function handleResize() {
     if (innerWidth <= 640) {
       setShowNav(false);
       setIsMobile(true);
@@ -32,7 +32,7 @@ const DashboardLayout = ({
     return () => {
       removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, []); */
 
   return (
     <>
@@ -60,11 +60,7 @@ const DashboardLayout = ({
           >
             <SideBar showNav={showNav} setActive={setActive} />
           </Transition>
-          <main
-            className={`pt-16 transition-all duration-[400ms] ${
-              showNav && !isMobile ? "pl-56" : ""
-            }`}
-          >
+          <main className="pt-16 transition-all duration-[400ms] ">
             <div className="px-4 md:px-16">{children}</div>
           </main>
         </div>
