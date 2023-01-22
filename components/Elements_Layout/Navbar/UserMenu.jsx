@@ -10,7 +10,6 @@ import { useState } from "react";
 
 const backdrop = {
 
-
   visible: {
     opacity: 1,
     transition: { duration: 0.15 },
@@ -21,9 +20,12 @@ const backdrop = {
   },
 };
 
+
+
 const UserMenu = ({ showModal, setShowModal }) => {
   const dispatch = useDispatch();
   const session = useSelector((state) => state.account.session);
+  const companyData = useSelector((state) => state.account.session);
 
   const handleSignOut = async () => {
     dispatch(clearSession());
@@ -57,7 +59,7 @@ const UserMenu = ({ showModal, setShowModal }) => {
               <MdClose className="text-2xl" />
             </button>
             <h2 className="text-3xl font-semibold text-white">
-              Hi {}
+              Hi {companyData}
             </h2>
             {session.type === "user" && (
               <div className="flex w-[80%] text-black justify-evenly">
