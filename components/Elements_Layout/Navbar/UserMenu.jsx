@@ -6,7 +6,6 @@ import Link from "next/link";
 import { FiUser, FiHeart } from "react-icons/fi";
 import { RiLogoutBoxRLine, RiAdminLine } from "react-icons/ri";
 import { MdClose } from "react-icons/md";
-import { useState } from "react";
 
 const backdrop = {
   visible: {
@@ -29,14 +28,7 @@ const UserMenu = ({ showModal, setShowModal }) => {
       callbackUrl: "/login?session=signed-out",
     });
   };
-  const body = document.querySelector("main");
-  // useEffect(() => {
-  //   body.onclick = () => setActive(false);
-  //   return () => {
-  //     body.onclick = null;
-  //   };
-  // });
-
+ 
   return (
     <AnimatePresence>
       {showModal && (

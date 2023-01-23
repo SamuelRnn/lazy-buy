@@ -3,12 +3,23 @@ import { useSelector } from "react-redux";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { motion } from "framer-motion";
+import { useState } from "react";
+import ModalMenu from "./ModalMenu";
 
 const DashboardNav = () => {
   const companyData = useSelector((state) => state.account.session);
   const route = useRouter();
+  const [isOpen, setIsOpen] = useState(false);
+  const [showModal, setShowModal] = useState(false)
+
+  const handleOpen = () => {
+    setIsOpen(!isOpen);
+    setShowModal(!showModal)
+  };
 
   return (
+    <>
     <nav className="relative p-2 bg-fondo-300 lg:p-6 container mx-auto rounded-b-3xl shadow-xl shadow-zinc-400">
       <div className="flex items-center justify-around">
         <div className="pt-2 flex items-center space-x-4">
@@ -23,7 +34,7 @@ const DashboardNav = () => {
             {companyData.name}
           </h2>
         </div>
-        <div className="hidden lg:flex space-x-2 text-white text-lg font-semibold items-center mt-2">
+        <div className="hidden md:flex space-x-2 text-white text-lg font-semibold items-center mt-2">
           <Link
             className="hover:bg-fondo-50 hover:text-fondo-300 p-2 rounded-lg transition-all"
             href="#"
@@ -51,13 +62,36 @@ const DashboardNav = () => {
             </Link>
           )}
         </div>
-        <div className="text-white bg-white">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
+        <button onClick={handleOpen} className="md:hidden flex flex-col gap-1 mt-2">
+          <motion.div
+            variants={{
+              open: { rotate: -45, translateY: 4 },
+              close: { rotate: 0 },
+            }}
+            animate={isOpen ? "open" : "close"}
+            className="border-2xl border-slate-700 w-6 h-1 bg-fondo-50"
+          ></motion.div>
+          <motion.div
+            variants={{
+              open: { opacity: 0, display: "none" },
+              close: { opacity: 1 },
+            }}
+            animate={isOpen ? "open" : "close"}
+            className="border-2xl border-slate-700 w-6 h-1 bg-fondo-50 overflow-hidden"
+          ></motion.div>
+          <motion.div
+            variants={{
+              open: { rotate: 45, translateY: -4 },
+              close: { rotate: 0 },
+            }}
+            animate={isOpen ? "open" : "close"}
+            className="border-2xl border-slate-700 w-6 h-1 bg-fondo-50"
+          ></motion.div>
+        </button>
       </div>
     </nav>
+    <ModalMenu showModal={showModal} setShowModal={setShowModal}/>
+    </>
   );
 };
 

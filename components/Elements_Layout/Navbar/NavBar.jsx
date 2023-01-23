@@ -6,19 +6,17 @@ import logo from "../../../public/lazycartremove.png";
 import Image from "next/image";
 import { GiShoppingBag } from "react-icons/gi";
 import { BsCaretDownFill } from "react-icons/bs";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { getCart } from "../../../redux/cartSlice";
 import UserMenu from "./UserMenu";
-import { AnimatePresence } from "framer-motion";
-import { toast } from "react-hot-toast";
+
 
 const NavBar = () => {
   const sessionData = useSelector((state) => state.account.session);
   const [activeCatModal, setActiveCatModal] = useState(false);
   const [activeRegModal, setActiveRegModal] = useState(false);
   const [activeCartModal, setActiveCartModal] = useState(false);
-  const [activeHamburger, setActiveHamburger] = useState(false);
   const cart_count = useSelector(getCart).reduce((v, e) => v + e.quantity, 0);
   const [showModal, setShowModal] = useState(false);
 
