@@ -6,13 +6,12 @@ export default async function stripePay(req, res) {
     return res.status(400).send({ message: "Not found" });
   }
 
-  const email = req.body[0].userEmail;
-  const otro = email
-    .split("")
-    .map((e, i) => e + i + "-")
-    .join("");
-
   if (req.query.pay === "product") {
+    const email = req.body[0].userEmail;
+    const otro = email
+      .split("")
+      .map((e, i) => e + i + "-")
+      .join("");
     let items = req.body.map((e) => {
       return {
         price_data: {
