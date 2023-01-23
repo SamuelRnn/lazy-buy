@@ -24,7 +24,7 @@ const ModalMenu = ({ showModal, setShowModal }) => {
         >
           <Link href="/dashboard/faqs">FAQ&apos;s</Link>
           <Link href="/dashboard/faqs">Support</Link>
-          <Link href="/dashboard/faqs">Plans</Link>
+          <Link href="/dashboard/yourplan">Your plan</Link>
           {route.pathname !== "/dashboard" && (
             <Link href="/dashboard">Home</Link>
           )}

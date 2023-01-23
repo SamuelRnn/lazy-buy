@@ -49,7 +49,7 @@ const DashboardNav = () => {
           </Link>
           <Link
             className="hover:bg-fondo-50 hover:text-fondo-300 p-2 rounded-lg transition-all"
-            href="#"
+            href="/dashboard/yourplan"
           >
             Your Plan
           </Link>
@@ -87,7 +87,7 @@ const DashboardNav = () => {
             animate={isOpen ? "open" : "close"}
             className="border-2xl border-slate-700 w-6 h-1 bg-fondo-50"
           ></motion.div>
-        </button>
+        </button> 
       </div>
     </nav>
     <ModalMenu showModal={showModal} setShowModal={setShowModal}/>
