@@ -15,7 +15,7 @@ const YourPlan = () => {
           <p className="text-2xl text-slate-600 text-left w-1/2">
             Here in Lazy-Buy we designed three company plans that were made
             specially for your company. We know that make the next step to grow
-            your company sometimes can be hard, and that's why we have a
+            your company sometimes can be hard, and that&apos;s why we have a
             subscription plan that adjust itself to your economy depending the
             type of business you have.
           </p>
