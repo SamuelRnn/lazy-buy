@@ -2,22 +2,42 @@ import React from "react";
 import DashboardNav from "../../components/Elements_Dashboard/DashboardNav";
 import Image from "next/image";
 import plan from "../../public/plans.png";
-import { useMotionValue, useTransform, motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 
 const YourPlan = () => {
-  const x = useMotionValue(0);
-  const xInput = [-300, 0, 300];
-  const background = useTransform(x, xInput, [
-    "rgb(211, 9, 225)",
-    "rgb(68, 0, 255)",
-    "rgb(3, 209, 0)",
-  ]);
+  const [rotate, setRotate] = useState(false);
+  console.log(rotate);
 
-  const radius = useTransform(x, xInput, [
-    "white",
-    "green",
-    "black",
-  ]);
+  const variants = {
+    frente: {
+      rotateY: [180, 0]
+    },
+    dorso: {
+      rotateY: [180, 0],
+    },
+  };
+
+  const plans = [
+    {
+      title: "Standard",
+      detail: "Lorem Ipsum",
+      price: "USD" + 0,
+      extendDetail: "LOREM LAROCA",
+    },
+    {
+      title: "Basic",
+      detail: "Lorem Ipsum",
+      price: "USD" + 49,
+      extendDetail: "LOREM LAROCA",
+    },
+    {
+      title: "Premium",
+      detail: "Lorem Ipsum",
+      price: "USD" + 99,
+      extendDetail: "LOREM LAROCA",
+    },
+  ];
 
   return (
     <>
@@ -35,27 +55,56 @@ const YourPlan = () => {
             type of business you have.
           </p>
 
-          <Image width={700} height={700} className="w-1/2" src={plan}></Image>
+          <Image
+            width={700}
+            height={700}
+            className="w-1/2"
+            src={plan}
+            alt="CONCHA"
+          ></Image>
         </div>
       </section>
       <section>
-        <motion.div
-          className="p-6 flex gap-2 justify-center"
-          
-        >
-          <motion.div
-            style={{ x }}
-            drag="x"
-            dragConstraints={{ left: -300, right: 300 }}
-            className="w-1/3 h-[300px] bg-slate-500 flex justify-center items-center"
-          >
-            <motion.div
-              style={{radius}}
-              className="bg-fondo-50 w-[50%] h-[50%] flex items-center justify-center"
-            >
-              PROBANDO
-            </motion.div>
-          </motion.div>
+        <motion.div id="plans" className="flex w-full gap-2 p-4 justify-center">
+          {plans.map((plan, index) => {
+            const isActive = index === rotate;
+            return (
+              <AnimatePresence>
+                <motion.div className="flex mt-8 justify-center w-1/3">
+                  <motion.div
+                    variants={variants}
+                    onClick={() => {
+                      setRotate(isActive ? false : index);
+                    }}
+                    animate={isActive ? "frente" : "dorso"}
+                    transition={{ duration: 0.6 }}
+                    className={`w-full h-[250px] bg-fondo-700 ${
+                      isActive ? "block" : "hidden"
+                    } flex flex-col justify-center items-center text-white font-bold cursor-pointer`}
+                  >
+                    <h2>{plan.title}</h2>
+                    <p>{plan.detail}</p>
+                    <h3>{plan.price}</h3>
+                  </motion.div>
+
+                  <motion.div
+                    onClick={() => {
+                      setRotate(isActive ? true : index);
+                    }}
+                    variants={variants}
+                    animate={isActive ? "frente" : "dorso"}
+                    transition={{ duration: 0.6 }}
+                    className={`w-full h-[250px] bg-fondo-700 ${
+                      isActive ? "hidden" : "block"
+                    } flex flex-col justify-center items-center text-white font-bold cursor-pointer`}
+                  >
+                    <h2>With your: {plan.title} plan</h2>
+                    <p>You can afford, </p>
+                  </motion.div>
+                </motion.div>
+              </AnimatePresence>
+            );
+          })}
         </motion.div>
       </section>
     </>
@@ -63,3 +112,31 @@ const YourPlan = () => {
 };
 
 export default YourPlan;
+
+// {
+//   /* <motion.div className="flex mt-8 justify-center w-1/3">
+//             <motion.div
+//               onClick={handleClick}
+//               variants={variants}
+//               animate={rotate ? "frente" : "dorso"}
+//               transition={{ duration: 0.6 }}
+//               className={`w-full h-[250px] bg-fondo-700 ${
+//                 rotate ? "block" : "hidden"
+//               } flex justify-center items-center text-white font-bold cursor-pointer`}
+//             >
+//               1
+//             </motion.div>
+
+//             <motion.div
+//               onClick={handleClick}
+//               variants={variants}
+//               animate={rotate ? "dorso" : "frente"}
+//               transition={{ duration: 0.6 }}
+//               className={`w-full h-[250px] bg-fondo-700 ${
+//                 rotate ? "hidden" : "block"
+//               } flex justify-center items-center text-white font-bold cursor-pointer`}
+//             >
+//               2
+//             </motion.div>
+//           </motion.div> */
+// }
