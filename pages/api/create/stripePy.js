@@ -1,6 +1,12 @@
 import { stripe } from "../../../utils/stripeConfig";
 import { product, company, transaction } from "../../../prisma";
 
+function fake(str) { 
+  return str.split("")
+  .map((e, i) => e + i + "-")
+  .join("");
+}
+
 export default async function stripePay(req, res) {
   if (req.method !== "POST") {
     return res.status(400).send({ message: "Not found" });
@@ -66,7 +72,7 @@ export default async function stripePay(req, res) {
         mode: "payment",
         success_url: `${
           process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
-        }/dashboard/plan?success=true&planType=${req.body.planType}`,
+        }/dashboard/plan?success=true&planType=${fake(req.body.planType)}`,
         cancel_url: `${
           process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
         }/dashboard/plan?cancel=true`,
@@ -93,7 +99,7 @@ export default async function stripePay(req, res) {
         mode: "payment",
         success_url: `${
           process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
-        }/dashboard/plan?success=true&planType=${req.body.planType}`,
+        }/dashboard/plan?success=true&planType=${fake(req.body.planType)}`,
         cancel_url: `${
           process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
         }/dashboard/plan?cancel=true`,

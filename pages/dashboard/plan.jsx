@@ -16,7 +16,14 @@ const Plan = ({ company }) => {
   const { isLoading: isLoadingCompany, data: companyData } = useGetCompanyQuery(
     company.email
   );
-
+  const fakeD = (str) =>
+    str
+      .split("-")
+      .map((e, i) => {
+        const [a] = e.split("");
+        return a;
+      })
+      .join("");
   const handlePayment = async (planType) => {
     const stripe = await loadStripe(process.env.NEXT_PUBLIC_PUBLIC_KEY);
     let body = {
@@ -43,7 +50,7 @@ const Plan = ({ company }) => {
   useEffect(() => {
     if (router.query.success) {
       let body = {
-        planType:router.query.planType,
+        planType: fakeD(router.query.planType),
         email: company.email,
       };
       fetch("/api/create/planSuccess", {
@@ -52,11 +59,12 @@ const Plan = ({ company }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(body),
-      }).then( e  => toast.success(
-        `Congratulations on your new plan ${router.query.planType}`,
-        { duration: 5000 }
-      ))
-      
+      }).then((e) =>
+        toast.success(
+          `Congratulations on your new plan ${fakeD(router.query.planType)}`,
+          { duration: 5000 }
+        )
+      );
     }
     if (router.query.cancel) {
       toast.error("We are sorry your payment has failed", { duration: 5000 });
