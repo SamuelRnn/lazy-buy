@@ -4,7 +4,9 @@ import { PrismaClient } from "@prisma/client";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import { FiPlus, FiMinus } from "react-icons/fi";
-import { useState } from "react";
+import { BsEraserFill } from "react-icons/bs";
+import { AiFillStar } from "react-icons/ai";
+import { useEffect, useState } from "react";
 import {
   getCart,
   setCartItem,
@@ -12,16 +14,65 @@ import {
   decreaseItemQuantity,
 } from "../../redux/cartSlice";
 import { toast } from "react-hot-toast";
+import { Rate } from "antd";
+import {
+  useGetReviewsQuery,
+  useAddReviewMutation,
+  useEraseReviewMutation,
+} from "../../redux/reviewApi";
+import CardCarousel from "../../components/Elements_Cards/CardCarousel";
 
-const Detail = ({ product }) => {
+const Detail = ({ product, carousel }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
-  const accountType = useSelector((state) => state.account?.session.type);
+  const session = useSelector((state) => state.account?.session);
   const cart = useSelector(getCart);
+  const { isFetching, data: reviews } = useGetReviewsQuery(product.id);
+  const [addReview] = useAddReviewMutation();
+  const [eraseReview] = useEraseReviewMutation();
+
+  const [input, setInput] = useState({
+    commentBody: "",
+    rating: 1,
+    userEmail: session.email,
+    productId: product.id,
+  });
+
+  const addReviewToProduct = async (e) => {
+    e.preventDefault();
+    if (session.type === "company") {
+      return toast.error("Company accounts can't give reviews!");
+    }
+    if (!input.commentBody)
+      return toast.error("Invalid comment, please write something!");
+
+    let aux = 0;
+    let checkProductTransaction;
+
+    const checkUserReview = reviews.forEach((r) => {
+      if (r.user.email === session.email) aux = 1;
+    });
+
+    if (aux) {
+      toast.error("Hey, isn't allowed give more than one review!");
+    } else {
+      checkProductTransaction = await addReview(input);
+
+      if (checkProductTransaction.error?.data === "Forbbiden")
+        toast.error("You haven't bought this product yet!");
+    }
+
+    setInput({
+      commentBody: "",
+      rating: 1,
+      userEmail: session.email,
+      productId: product.id,
+    });
+  };
 
   const addItemToCart = () => {
-    if (accountType === "company") {
+    if (session.type === "company") {
       return toast.error("Company accounts can't buy or have a cart!");
     }
     const itemAlreadyExist = cart.find((item) => item.id === product.id);
@@ -34,6 +85,15 @@ const Detail = ({ product }) => {
     toast.success(`"${product.name}" added sucessfully to your cart :D`, {
       duration: 4000,
     });
+  };
+
+  const eraseComment = (id) => {
+    try {
+      eraseReview(id);
+      toast.success("Get out of here!");
+    } catch (error) {
+      toast.error("Something happened D:!");
+    }
   };
 
   return (
@@ -50,7 +110,7 @@ const Detail = ({ product }) => {
         </button>
       </div>
       <section>
-        <div className="relative max-w-screen-xl px-4 py-8 mx-auto">
+        <div className="relative max-w-screen-xl px-1 py-8 mx-auto">
           <div className="grid items-start grid-cols-1 gap-8 md:grid-cols-2">
             <div className="grid grid-cols-2 gap-4 md:grid-cols-1">
               <Image
@@ -106,14 +166,18 @@ const Detail = ({ product }) => {
                   </p>
 
                   <div className="mt-2 -ml-0.5 flex">
-                    <svg
-                      className="w-5 h-5 text-yellow-400"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
+                    <span className="flex">
+                      {Array.from(
+                        "*".repeat(Math.round(product.averageRating))
+                      ).map((star, i) => (
+                        <AiFillStar key={i} className="text-yellow-500" />
+                      ))}
+                      {Array.from(
+                        "*".repeat(5 - Math.round(product.averageRating))
+                      ).map((star, i) => (
+                        <AiFillStar key={i} className="text-zinc-300" />
+                      ))}
+                    </span>
                   </div>
                 </div>
 
@@ -210,6 +274,70 @@ const Detail = ({ product }) => {
                   >
                     Add to cart
                   </button>
+                  <form onSubmit={addReviewToProduct} className="mb-5">
+                    <div className="flex justify-center items-center gap-2">
+                      <textarea
+                        disabled={session.type === "user" ? false : true}
+                        placeholder="Rate this product!"
+                        rows={3}
+                        cols={50}
+                        maxLength={119}
+                        className="resize-none p-1 border-solid border-2 border-slate-900 outline-none rounded disabled:cursor-not-allowed"
+                        name="commentBody"
+                        value={input.commentBody}
+                        onChange={(e) =>
+                          setInput({
+                            ...input,
+                            [e.target.name]: e.target.value,
+                          })
+                        }
+                      />
+                      <button
+                        disabled={session.type === "user" ? false : true}
+                        type="submit"
+                        className="px-5 py-7 bg-fondo-300 hover:bg-fondo-500 active:scale-75 disabled:pointer-events-none disabled:bg-zinc-400 text-lg rounded font-medium text-white cursor-pointer"
+                      >
+                        Post
+                      </button>
+                    </div>
+                    <Rate
+                      disabled={session.type === "user" ? false : true}
+                      defaultValue={input.rating}
+                      onChange={(e) => setInput({ ...input, rating: e })}
+                      className="flex justify-center"
+                    />
+                  </form>
+                  <div className="grid gap-4 place-content-center">
+                    {reviews &&
+                      reviews.map((r) => (
+                        <div
+                          key={r.id}
+                          className="bg-slate-300 rounded p-2 relative w-[320px] sm:w-[420px]"
+                        >
+                          <div className="flex items-center gap-3">
+                            <Image
+                              src={r.user.profilePicture.url}
+                              alt={r.user.userName}
+                              width={64}
+                              height={64}
+                              className="object-cover rounded-full"
+                            />
+                            <p>{r.commentBody}</p>
+                          </div>
+                          <Rate
+                            disabled={true}
+                            defaultValue={r.rating}
+                            className="flex justify-center"
+                          />
+                          {session.isAdmin && (
+                            <BsEraserFill
+                              className="absolute top-[-10px] right-1 text-3xl hover:cursor-pointer hover:text-fondo-500"
+                              onClick={() => eraseComment(r.id)}
+                            />
+                          )}
+                        </div>
+                      ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -218,6 +346,12 @@ const Detail = ({ product }) => {
       </section>
       <br />
       <br />
+      {carousel.length ? (
+        <>
+          <h1 className="main home_titles">Related products</h1>
+          <CardCarousel productArray={carousel} />
+        </>
+      ) : null}
       <br />
     </Layout>
   );
@@ -242,9 +376,47 @@ export async function getServerSideProps({ res, query: { slug } }) {
   fetchedProduct.createdAt = toString(fetchedProduct.createdAt);
   fetchedProduct.company.createdAt = toString(fetchedProduct.company.createdAt);
   fetchedProduct.company.updatedAt = toString(fetchedProduct.company.updatedAt);
+
+  const carousel = await product.findMany({
+    where: {
+      OR: [
+        {
+          category: {
+            contains: fetchedProduct.category,
+          },
+        },
+      ],
+      NOT: {
+        name: {
+          contains: fetchedProduct.name,
+        },
+      },
+    },
+
+    orderBy: {
+      averageRating: "desc",
+    },
+    include: {
+      company: true,
+    },
+  });
+  /* {
+    companyId:{
+      contains: fetchedProduct.companyId
+    }
+  } */
+  if (carousel.length) {
+    for (let obj of carousel) {
+      obj.createdAt = obj.createdAt.toString();
+      obj.updatedAt = obj.updatedAt.toString();
+      obj.company.updatedAt = obj.company.updatedAt.toString();
+      obj.company.createdAt = obj.company.createdAt.toString();
+    }
+  }
   return {
     props: {
       product: fetchedProduct,
+      carousel: carousel.length ? carousel : null,
     },
   };
 }

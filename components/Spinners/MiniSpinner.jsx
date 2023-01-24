@@ -1,4 +1,4 @@
-const MiniSpinner = ({ className = "bg-fondo-300" }) => {
+const MiniSpinner = ({ className = "border-fondo-300" }) => {
   return (
     <div
       className={`animate-spin inline-block w-4 h-4 border-[3px] border-t-transparent rounded-full ${className}`}

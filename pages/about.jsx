@@ -21,12 +21,13 @@ const About = () => {
                 <span className="text-fondo-500 uppercase">Lazzy Buy</span> is
                 carried out by passionate developers.
               </h3>
-              Lazzy Buy is a project made by a group of 7 students from Henry
-              Bootcamp The project is based on creating a full functional
-              website. In our case, we decided to make a kind of e-commerce
-              including our own payment method implemented on the main app. In
-              this project we were working with the following technologies:
-              Next.JS, JSX, Tailwind & Prisma.
+              Lazzy Buy is a project made by a group of 6 students from Henry
+              Bootcamp. The project is based on creating a fully functional
+              website. In our case, we decided to create an e-commerce that
+              includes an intuitive interface, management tools, secure payment
+              system, and aims to provide a pleasant and satisfactory shopping
+              experience for all users. In this project, we worked with the
+              following technologies: Next.JS, JSX, Tailwind, and Prisma.
             </div>
           </div>
         </div>
@@ -37,16 +38,18 @@ const About = () => {
               Meet the team
             </h1>
             <p className="font-normal text-base leading-6 text-zinc-700 ">
-              Our team is compose by a group of 7 students from Henry Bootcamp
-              The project is based on creating a full functional website. In our
-              case, we decided to make a kind of e-commerce including our own
-              payment method implemented on the main app. In this project we
-              were working with the following technologies: Next.JS, JSX,
-              Tailwind & Prisma.
+              Our team is composed of 6 highly skilled and passionate
+              developers. They have a great ability to work in a team and
+              collaborate on complex projects. Additionally, they have a great
+              knowledge of web development technologies and tools, which allows
+              them to create innovative and efficient solutions. Their passion
+              for development is reflected in their focus on creating
+              high-quality products. They are committed to providing exceptional
+              service to their clients and exceeding their expectations.
             </p>
           </div>
           <div className="w-full lg:w-8/12 lg:pt-8">
-            <div className="flex flex-row items-center rounded-md shadow-lg justify-center flex-wrap gap-4 md:gap-5 p-1 md:p-5">
+            <div className="flex flex-row items-center rounded-md  justify-center flex-wrap gap-4 md:gap-5 p-1 md:p-5">
               <Devs />
             </div>
           </div>

@@ -11,17 +11,20 @@ import {
 } from "../../redux/companyApi";
 import Spinner from "../../components/Spinners/Spinner";
 import ProductCard from "../../components/Elements_Dashboard/Products/ProductCard";
+import PaginationAdminProduct from "../../components/Elements_Admin/PaginationAdminProduct";
 
 const Products = ({ company: { email } }) => {
   const [active, setActive] = useState(false);
-  const { isFetching, data: company } = useGetCompanyQuery(email);
+  const [filt, setFilt] = useState({nd:"",pg:0})
+  const { isFetching,isLoading, data: company } = useGetCompanyQuery(email + "lazy" + filt.pg);
+  console.log(company)
   const [fetchCompany, { data: plan }] = useLazyGetCompanyPlanQuery();
   const [fetchProduct, { data: fetchedProduct }] = useLazyGetProductQuery();
   const [displayedProduct, setDisplayedProduct] = useState(null);
 
   useEffect(() => {
     if (company && !plan) {
-      fetchCompany(company.plan);
+      fetchCompany(company.companyF.plan);
     }
   }, [company]);
 
@@ -44,7 +47,7 @@ const Products = ({ company: { email } }) => {
           <CreationForm
             setActive={setActive}
             product={displayedProduct}
-            companyId={company.id}
+            companyId={company.companyF.id}
             companyPlan={plan}
           />
         )}
@@ -63,6 +66,11 @@ const Products = ({ company: { email } }) => {
             Create Product
           </button>
         </div>
+        <br />
+        <div className="flex items-center justify-center">
+          {!isLoading && <PaginationAdminProduct setFilt={setFilt} page={company.co} pg={filt.pg}  />}
+        </div>
+        <br />
         {/* products */}
         <div className="pt-10 pb-40 relative">
           {isFetching && (
@@ -73,9 +81,9 @@ const Products = ({ company: { email } }) => {
               </div>
             </div>
           )}
-          {company && (
+          {!isLoading && (
             <div className="grid_dashboard_products">
-              {[...company.products]
+              {[...company.companyF?.products]
                 .sort((a, b) => b.isVisible - a.isVisible)
                 .map((item) => (
                   <ProductCard

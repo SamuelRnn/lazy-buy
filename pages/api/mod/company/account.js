@@ -27,7 +27,6 @@ export default async function createCompany(req, res) {
 
     return res.status(200).json("Updated");
   } catch (error) {
-    console.log({ error, message: error.message });
     return res.status(500).json({ error });
   }
 }

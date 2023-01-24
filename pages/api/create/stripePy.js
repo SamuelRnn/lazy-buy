@@ -1,5 +1,11 @@
 import { stripe } from "../../../utils/stripeConfig";
-import { product, company } from "../../../prisma";
+import { product, company, transaction } from "../../../prisma";
+
+function fake(str) { 
+  return str.split("")
+  .map((e, i) => e + i + "-")
+  .join("");
+}
 
 export default async function stripePay(req, res) {
   if (req.method !== "POST") {
@@ -7,9 +13,12 @@ export default async function stripePay(req, res) {
   }
 
   if (req.query.pay === "product") {
-    let ids = [];
+    const email = req.body[0].userEmail;
+    const otro = email
+      .split("")
+      .map((e, i) => e + i + "-")
+      .join("");
     let items = req.body.map((e) => {
-      ids.push({ id: e.id, quantity: e.quantity });
       return {
         price_data: {
           currency: "usd",
@@ -27,7 +36,7 @@ export default async function stripePay(req, res) {
       mode: "payment",
       success_url: `${
         process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
-      }/paymentIs?sucess=true`,
+      }/paymentIs?status=${otro}`,
       cancel_url: `${
         process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
       }/paymentIs?cancel=true`,
@@ -36,42 +45,17 @@ export default async function stripePay(req, res) {
     try {
       const session = await stripe.checkout.sessions.create(params);
 
-      ids.forEach(async ({ id, quantity }) => {
-        const producto = await product.findUnique({ where: { id } });
-
-        if (producto && producto.stock >= 1) {
-          await product.update({
-            where: { id },
-            data: { stock: producto.stock - quantity },
-          });
-        }
-        const productoNew = await product.findUnique({ where: { id } });
-
-        if (productoNew.stock < 1) {
-          await product.update({
-            where: {
-              id,
-            },
-            data: { isVisible: false },
-          });
-        }
-      });
-
       res.status(200).json(session);
     } catch (error) {
       res.status(400).json(error);
     }
   }
+
+  // *****************************************************
+
   if (req.query.pay === "plan") {
     if (req.body.planType === "Standard") {
-      await company.update({
-        where: {
-          email: req.body.email,
-        },
-        data: {
-          plan: req.body.planType,
-        },
-      });
+      
       let paramsPlan = {
         line_items: [
           {
@@ -88,7 +72,7 @@ export default async function stripePay(req, res) {
         mode: "payment",
         success_url: `${
           process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
-        }/dashboard/plan?success=true&planType=${req.body.planType}`,
+        }/dashboard/plan?success=true&planType=${fake(req.body.planType)}`,
         cancel_url: `${
           process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
         }/dashboard/plan?cancel=true`,
@@ -98,14 +82,7 @@ export default async function stripePay(req, res) {
       res.status(200).json(session);
     }
     if (req.body.planType === "Premium") {
-      await company.update({
-        where: {
-          email: req.body.email,
-        },
-        data: {
-          plan: req.body.planType,
-        },
-      });
+      
       let paramsPlan = {
         line_items: [
           {
@@ -122,7 +99,7 @@ export default async function stripePay(req, res) {
         mode: "payment",
         success_url: `${
           process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
-        }/dashboard/plan?success=true&planType=${req.body.planType}`,
+        }/dashboard/plan?success=true&planType=${fake(req.body.planType)}`,
         cancel_url: `${
           process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
         }/dashboard/plan?cancel=true`,

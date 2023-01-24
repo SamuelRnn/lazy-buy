@@ -2,32 +2,33 @@
 import ModalCart from "../../Elements_Cart/ModalCart";
 import SearchBar from "./SearchBar";
 import NavSubMenu from "./NavSubMenu";
-import logo from "../../../public/logocartremove.png";
+import logo from "../../../public/lazycartremove.png";
 import Image from "next/image";
 import { GiShoppingBag } from "react-icons/gi";
 import { BsCaretDownFill } from "react-icons/bs";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { getCart } from "../../../redux/cartSlice";
 import UserMenu from "./UserMenu";
-import { AnimatePresence } from "framer-motion";
-import { toast } from "react-hot-toast";
+
 
 const NavBar = () => {
   const sessionData = useSelector((state) => state.account.session);
   const [activeCatModal, setActiveCatModal] = useState(false);
   const [activeRegModal, setActiveRegModal] = useState(false);
   const [activeCartModal, setActiveCartModal] = useState(false);
-  const [activeHamburger, setActiveHamburger] = useState(false);
   const cart_count = useSelector(getCart).reduce((v, e) => v + e.quantity, 0);
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <header className="w-full bg-fondo-200">
-      <div className="main h-[3.8rem] flex flex-wrap gap-x-4 gap-y-2 items-center lg:justify-between justify-center">
-        <div className="flex items-center gap-x-4 justify-center flex-wrap gap-y-2">
+      <UserMenu showModal={showModal} setShowModal={setShowModal} />
+
+      <div className="flex flex-col md:flex-row main items-center justify-between py-[6px]">
+        <div className="flex flex-col md:flex-row items-center gap-x-4 justify-center gap-y-2">
           {/* logo */}
           <a href="/" className="nav_links flex items-center gap-1">
-            <Image src={logo} alt="logo" width={27} height={27} />
+            <Image src={logo} alt="logo" width={30} height={30} />
             <h1 className="font-bold text-fondo-400 text-xl transition-colors ease-in-out">
               Lazy Buy
             </h1>
@@ -38,9 +39,6 @@ const NavBar = () => {
         {/* navlinks */}
         <div className="flex justify-center">
           <nav className="flex items-center gap-x-3">
-            <a href="/about" className="nav_links">
-              About
-            </a>
             <button
               className={`nav_links ${activeCatModal ? "underline" : ""}`}
               onClick={() => {
@@ -89,7 +87,7 @@ const NavBar = () => {
             {/* Profile Toggle */}
             {sessionData !== "no-session" && (
               <button
-                onClick={() => setActiveHamburger((state) => !state)}
+                onClick={() => setShowModal((state) => !state)}
                 className="nav_links flex items-center gap-1"
               >
                 <Image
@@ -102,7 +100,7 @@ const NavBar = () => {
                   alt={"pfp"}
                   className="w-[32px] h-[32px] object-cover rounded-full bg-fondo-400"
                 />
-                <BsCaretDownFill size={15} />
+                <BsCaretDownFill className="hidden md:block" size={15} />
               </button>
             )}
           </nav>
@@ -128,11 +126,6 @@ const NavBar = () => {
         isActive={activeRegModal}
       />
       <ModalCart active={activeCartModal} setActive={setActiveCartModal} />
-      <AnimatePresence>
-        {activeHamburger && (
-          <UserMenu setActive={setActiveHamburger} active={activeHamburger} />
-        )}
-      </AnimatePresence>
     </header>
   );
 };

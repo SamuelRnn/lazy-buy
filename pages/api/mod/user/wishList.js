@@ -36,7 +36,6 @@ export default async function getWishList(req, res) {
 
     return res.status(200).send("added");
   } catch (error) {
-    console.log(error);
     res.status(500).json({ error });
   }
 }

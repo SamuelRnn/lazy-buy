@@ -32,45 +32,85 @@ export default async function getProduct(req, res) {
   //generar variable mutable de los productos
   let products;
   let count;
-  let whereSearchQuery = {
+  // let whereSearchQuery = {
+  //   OR: [
+  //     {
+  //       name: {
+  //         contains: filters.search,
+  //         mode: "insensitive",
+  //       },
+  //     },
+  //     {
+  //       description: {
+  //         contains: filters.search,
+  //         mode: "insensitive",
+  //       },
+  //     },
+  //     {
+  //       category: {
+  //         contains: filters.search,
+  //         mode: "insensitive",
+  //       },
+  //     },
+  //     {
+  //       company: {
+  //         name: {
+  //           contains: filters.search,
+  //           mode: "insensitive",
+  //         },
+  //       },
+  //     },
+  //   ],
+  // };
+  if (filters.dash) {
+    const productDash = await product.findMany();
+    return res.status(200).json(productDash.length);
+  }
+
+  let searcyQuery = filters.search.split("-").map((param) => ({
     OR: [
       {
         name: {
-          contains: filters.search,
+          contains: param,
           mode: "insensitive",
         },
       },
       {
         description: {
-          contains: filters.search,
+          contains: param,
           mode: "insensitive",
         },
       },
       {
         category: {
-          contains: filters.search,
+          contains: param,
           mode: "insensitive",
         },
       },
       {
         company: {
           name: {
-            contains: filters.search,
+            contains: param,
             mode: "insensitive",
           },
         },
       },
     ],
-  };
+  }));
+
   if (filters.search) {
     count = await product
       .findMany({
-        where: whereSearchQuery,
+        where: {
+          AND: searcyQuery,
+        },
       })
       .then((res) => res.filter((i) => i.isActive && i.isVisible).length);
     products = await product
       .findMany({
-        where: whereSearchQuery,
+        where: {
+          AND: searcyQuery,
+        },
         include: {
           company: {
             select: {
@@ -146,5 +186,6 @@ export default async function getProduct(req, res) {
       (parseInt(filters.page) - 1) * 10 + 10
     );
   }
+
   return res.status(200).json({ results: products, count });
 }

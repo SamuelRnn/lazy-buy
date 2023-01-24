@@ -28,7 +28,7 @@ const Faqs = () => {
       <Layout title="Lazy Buy | FAQs">
         <div className="flex justify-center bg-fondo-25">
           <div className="2xl:container 2xl:mx-auto md:py-12 lg:px-20 md:px-6 py-9 px-4 bg-fondo-25">
-            <h2 className="font-semibold text-2xl lg:text-4xl text-3xl lg:leading-9 md:leading-7 leading-9 text-fondo-500">
+            <h2 className="font-semibold text-2xl lg:text-4xl lg:leading-9 md:leading-7 leading-9 text-fondo-500">
               Frequently Asked Questions
             </h2>
             <div className="flex md:flex-row flex-col md:space-x-8 md:mt-16 mt-8">
@@ -43,7 +43,7 @@ const Faqs = () => {
                       openAnsSection(1);
                     }}
                   >
-                    <h3 className="font-semibold text-xl text-2xl leading-5 text-fondo-500">
+                    <h3 className="font-semibold text-xl  leading-5 text-fondo-500">
                       Shipments
                     </h3>
                     <button
@@ -94,7 +94,7 @@ const Faqs = () => {
                         openAnsSection(8);
                       }}
                     >
-                      <h2 className="font-semibold text-xl text-2xl my-2 leading-5 text-fondo-500">
+                      <h2 className="font-semibold text-xl  my-2 leading-5 text-fondo-500">
                         What means of transportation do you use to do the
                         shipments?
                       </h2>
@@ -146,7 +146,7 @@ const Faqs = () => {
                         openAnsSection(9);
                       }}
                     >
-                      <h2 className="font-semibold text-xl text-2xl my-2 leading-5 text-fondo-500">
+                      <h2 className="font-semibold text-xl  my-2 leading-5 text-fondo-500">
                         What happens if the customer who receives the package
                         does not Do you find when the delivery man arrives at
                         your home?
@@ -202,7 +202,7 @@ const Faqs = () => {
                         openAnsSection(10);
                       }}
                     >
-                      <h2 className="font-semibold text-xl text-2xl my-2 leading-5 text-fondo-500">
+                      <h2 className="font-semibold text-xl  my-2 leading-5 text-fondo-500">
                         If the shipment is delivered late, can I receive a
                         compensation?
                       </h2>
@@ -266,7 +266,7 @@ const Faqs = () => {
                       openAnsSection(2);
                     }}
                   >
-                    <h3 className="font-semibold text-xl text-2xl  leading-5 text-fondo-500">
+                    <h3 className="font-semibold text-xl   leading-5 text-fondo-500">
                       Returns
                     </h3>
                     <button
@@ -315,7 +315,7 @@ const Faqs = () => {
                         openAnsSection(11);
                       }}
                     >
-                      <h2 className="font-semibold text-xl text-2xl my-2 leading-5 text-fondo-500">
+                      <h2 className="font-semibold text-xl  my-2 leading-5 text-fondo-500">
                         How do I return a product?{" "}
                       </h2>
                       <button
@@ -366,7 +366,7 @@ const Faqs = () => {
                         openAnsSection(12);
                       }}
                     >
-                      <h2 className="font-semibold text-xl text-2xl my-2 leading-5 text-fondo-500">
+                      <h2 className="font-semibold text-xl  my-2 leading-5 text-fondo-500">
                         How long do I have to return a product?{" "}
                       </h2>
                       <button
@@ -425,7 +425,7 @@ const Faqs = () => {
                       openAnsSection(3);
                     }}
                   >
-                    <h3 className="font-semibold text-xl text-2xl leading-5 text-fondo-500">
+                    <h3 className="font-semibold text-xl leading-5 text-fondo-500">
                       Changes
                     </h3>
                     <button
@@ -473,7 +473,7 @@ const Faqs = () => {
                         openAnsSection(5);
                       }}
                     >
-                      <h2 className="font-semibold text-xl text-2xl my-2 leading-5 text-fondo-500">
+                      <h2 className="font-semibold text-xl  my-2 leading-5 text-fondo-500">
                         Is it possible to make changes?{" "}
                       </h2>
                       <button
@@ -526,7 +526,7 @@ const Faqs = () => {
                         openAnsSection(6);
                       }}
                     >
-                      <h2 className="font-semibold text-xl text-2xl my-2 leading-5 text-fondo-500">
+                      <h2 className="font-semibold text-xl  my-2 leading-5 text-fondo-500">
                         Is there a deadline for returns?{" "}
                       </h2>
                       <button
@@ -577,7 +577,7 @@ const Faqs = () => {
                         openAnsSection(7);
                       }}
                     >
-                      <h2 className="font-semibold text-xl text-2xl my-2 leading-5 text-fondo-500">
+                      <h2 className="font-semibold text-xl  my-2 leading-5 text-fondo-500">
                         Can I make more than one change?{" "}
                       </h2>
                       <button
@@ -639,7 +639,7 @@ const Faqs = () => {
                       openAnsSection(4);
                     }}
                   >
-                    <h3 className="font-semibold text-xl text-2xl leading-5 text-fondo-500">
+                    <h3 className="font-semibold text-xl  leading-5 text-fondo-500">
                       Tracing
                     </h3>
                     <button
@@ -687,7 +687,7 @@ const Faqs = () => {
                         openAnsSection(13);
                       }}
                     >
-                      <h2 className="font-semibold text-xl text-2xl my-2 leading-5 text-fondo-500">
+                      <h2 className="font-semibold text-xl  my-2 leading-5 text-fondo-500">
                         Is it possible to track in real time the package I
                         expect?
                       </h2>

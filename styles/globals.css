@@ -19,8 +19,10 @@
   @apply p-2 rounded-lg hover:bg-fondo-100 transition-colors text-zinc-700 font-semibold;
 }
 .filter_btn {
-  @apply w-[150px] h-12 px-2 text-zinc-600 bg-zinc-200 rounded flex justify-between items-center transition-colors cursor-pointer;
+  @apply w-[150px] h-12 px-2 text-zinc-600 bg-zinc-200 rounded justify-between items-center transition-colors cursor-pointer;
 }
+
+
 .filter_btn:disabled {
   @apply bg-fondo-100 text-zinc-50;
   pointer-events: none;
@@ -50,6 +52,9 @@
   /* background-color: rgba(0, 0, 0, 0.5); */
   z-index: 1000;
   @apply bg-opacity-60 bg-zinc-900;
+}
+.grid_search_card {
+  grid-template-columns: 160px auto;
 }
 /* width for navbar */
 .card_width {
@@ -109,7 +114,7 @@
   @apply grid;
   grid-template-columns: repeat(auto-fill, 160px);
   place-content: center;
-  gap: 4rem;
+  gap: 7rem;
 }
 /* loader */
 @keyframes loader-rotate {
@@ -139,7 +144,7 @@
   top: 0;
 }
 
-.hamburger{
+.hamburger {
   cursor: pointer;
   width: 24px;
   height: 24px;
@@ -160,38 +165,67 @@
   transition: all 0.5s;
 }
 
-.hamburger_mid{
+.hamburger_mid {
   transform: translateY(7px);
 }
 
-
-.hamburger_bot{
+.hamburger_bot {
   transform: translateY(14px);
 }
 
-.open{
+.open {
   transform: rotate(90deg);
   transform: translateY(0px);
 }
 
-.open .hamburger_top{
-  transform: rotate(45deg) translateY(6px) translate(6px)
+.open .hamburger_top {
+  transform: rotate(45deg) translateY(6px) translate(6px);
 }
 
-.open .hamburger_mid{
+.open .hamburger_mid {
   display: none;
 }
 
-.open .hamburger_bot{
-  transform: rotate(-45deg) translateY(6px) translate(-6px)
+.open .hamburger_bot {
+  transform: rotate(-45deg) translateY(6px) translate(-6px);
 }
 
-.menu_open{
+.menu_open {
   display: flex;
   transform: translateY(0);
 }
 
-.menu_close{
+.menu_close {
   overflow: hidden;
   transform: translateY(-100);
+}
+
+.grid_order{
+display: grid;
+grid-template-columns: auto 400px;
+gap: 1rem;
+}
+.grid_products_order {
+  grid-template-columns: repeat(auto-fill, 160px);
+  gap: 1rem;
+}
+@media (min-width: 425px) {
+  .grid_order {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* grid-gap: 8px; */
+  place-items: center;
+}
+
+@media only screen and (max-width: 600px) {
+  .grid-container {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }

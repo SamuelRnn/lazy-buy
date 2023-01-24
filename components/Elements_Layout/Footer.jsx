@@ -3,19 +3,21 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <div className="bg-zinc-100 w-full py-8">
+    <div className="bg-fondo-50 w-full py-8">
       <div className="main grid grid-rows-1 gap-8 md:grid-cols-12 xl:gap-8">
         <div className="md:col-span-12 xl:col-span-4 flex flex-col gap-4">
-          <h1 className="text-3xl font-bold text-gray-900">Lazy Buy</h1>
-          <p className="text-gray-600 text-justify hover:text-fondo-300 select-none">
-            Lazy Buy is a project done by a group of 7 developers with great
-            ideas. This project is based in the creation of a website in a
-            E-COMERCE format, designed for small and medium-size companies that
-            want to take their buisiness to the next level.
+          <h1 className="text-3xl font-bold text-fondo-400 ">Lazy Buy</h1>
+          <p className="text-gray-600 text-justify ">
+            Lazy Buy is an e-commerce platform developed by a team of highly
+            skilled six programmers, it focuses on providing an easy and
+            accessible platform for both the seller and the customer, offers an
+            intuitive interface, management tools, secure payment system and
+            aims to provide a pleasant and satisfactory shopping experience for
+            all users.
           </p>
         </div>
         <div className="md:col-span-4 xl:col-span-2">
-          <h2 className="font-bold mb-6 uppercase">Menu</h2>
+          <h2 className="font-bold text-fondo-400 mb-6 uppercase">Menu</h2>
           <nav className="flex flex-col gap-4">
             <Link href="/" className="hover:underline hover:text-fondo-300">
               Home
@@ -26,17 +28,16 @@ const Footer = () => {
             >
               About
             </Link>
-            <Link href="/faqs" className="hover:underline hover:text-fondo-300">
-              FAQ
-            </Link>
           </nav>
         </div>
         <div className="md:col-span-4 xl:col-span-3">
-          <h2 className="font-bold mb-6 uppercase">Social Media</h2>
+          <h2 className="font-bold text-fondo-400 mb-6 uppercase">
+            Social Media
+          </h2>
           <nav>
             <a
               href="https://www.facebook.com/profile.php?id=100089361346783"
-              className="flex items-center gap-2 my-1 bg-fondo-200 hover:bg-gray-200 p-2 rounded-lg transition-colors"
+              className="flex items-center gap-2 my-1 hover:underline hover:text-fondo-300 p-2"
               target="_blank"
               rel="noreferrer"
             >
@@ -51,7 +52,7 @@ const Footer = () => {
             </a>
             <a
               href="https://www.instagram.com/lazybuy23/"
-              className="flex items-center gap-2 my-1 bg-fondo-200 hover:bg-gray-200 p-2 rounded-lg transition-colors"
+              className="flex items-center gap-2 my-1 hover:underline hover:text-fondo-300 p-2"
               target="_blank"
               rel="noreferrer"
             >
@@ -66,7 +67,7 @@ const Footer = () => {
             </a>
             <a
               href="https://twitter.com/Lazy_Buy23"
-              className="flex items-center gap-2 my-1 bg-fondo-200 hover:bg-gray-200 p-2 rounded-lg transition-colors"
+              className="flex items-center gap-2 my-1 hover:underline hover:text-fondo-300 p-2"
               target="_blank"
               rel="noreferrer"
             >
@@ -82,7 +83,7 @@ const Footer = () => {
           </nav>
         </div>
         <div className="md:col-span-4 xl:col-span-3">
-          <h2 className="font-bold mb-6 uppercase">Contact</h2>
+          <h2 className="font-bold text-fondo-400 mb-6 uppercase">Contact</h2>
           <div className="flex flex-col gap-4">
             <p className="flex items-center gap-2">
               <svg
@@ -123,7 +124,7 @@ const Footer = () => {
               </svg>
               lazy_buy@gmail.com
             </p>
-            <p className="flex items-center gap-2">
+            <Link href='tel:+5491123376862' className="flex items-center gap-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6 text-fondo-300"
@@ -138,8 +139,8 @@ const Footer = () => {
                   d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
                 />
               </svg>
-              (+52) 614 1 55 55 55
-            </p>
+              (+54) 9 11 23 37 68 62
+            </Link>
           </div>
         </div>
       </div>

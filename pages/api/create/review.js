@@ -1,17 +1,32 @@
-import { review } from "../../../prisma";
+import { review, user } from "../../../prisma";
 
 export default async function createReview(req, res) {
   if (req.method !== "POST")
     return res.status(400).send({ message: "Not found" });
 
-  const { commentTitle, commentBody, rating, userId, productId } = req.body;
+  const { commentBody, rating, userEmail, productId } = req.body;
 
-  if (!commentTitle || !commentBody || !rating || !userId || !productId)
+  if (!commentBody || !rating || !userEmail || !productId)
     return res.status(400).send({ message: "Not enough data" });
+
+  const userFound = await user.findUnique({
+    where: { email: userEmail },
+    include: { Transaction: true },
+  });
+
+  let aux = null;
+  const checkProductTransaction = userFound.Transaction.forEach((t) => {
+    if (t.productId === productId) return (aux = "found");
+  });
+
+  if (aux === null) return res.status(200).send("Forbbiden");
 
   await review.create({
     data: {
-      ...req.body,
+      commentBody,
+      rating,
+      userId: userFound.id,
+      productId,
     },
   });
 

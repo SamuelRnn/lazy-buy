@@ -35,7 +35,6 @@ const SignUpCompany = ({ typeAccount, setTypeAccount }) => {
       .then((res) => res.json())
       .then((data) => {
         if (data) router.push("/login");
-        console.log(data);
       })
       .catch((error) => console.log(error));
   }
