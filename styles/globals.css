@@ -213,3 +213,17 @@ gap: 1rem;
     justify-content: center;
   }
 }
+
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* grid-gap: 8px; */
+  place-items: center;
+}
+
+@media only screen and (max-width: 600px) {
+  .grid-container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
