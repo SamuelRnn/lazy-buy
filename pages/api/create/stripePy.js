@@ -49,14 +49,7 @@ export default async function stripePay(req, res) {
 
   if (req.query.pay === "plan") {
     if (req.body.planType === "Standard") {
-      await company.update({
-        where: {
-          email: req.body.email,
-        },
-        data: {
-          plan: req.body.planType,
-        },
-      });
+      
       let paramsPlan = {
         line_items: [
           {
@@ -83,14 +76,7 @@ export default async function stripePay(req, res) {
       res.status(200).json(session);
     }
     if (req.body.planType === "Premium") {
-      await company.update({
-        where: {
-          email: req.body.email,
-        },
-        data: {
-          plan: req.body.planType,
-        },
-      });
+      
       let paramsPlan = {
         line_items: [
           {

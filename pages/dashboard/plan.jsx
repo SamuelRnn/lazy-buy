@@ -42,10 +42,21 @@ const Plan = ({ company }) => {
   };
   useEffect(() => {
     if (router.query.success) {
-      toast.success(
+      let body = {
+        planType:router.query.planType,
+        email: company.email,
+      };
+      fetch("/api/create/planSuccess", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      }).then( e  => toast.success(
         `Congratulations on your new plan ${router.query.planType}`,
         { duration: 5000 }
-      );
+      ))
+      
     }
     if (router.query.cancel) {
       toast.error("We are sorry your payment has failed", { duration: 5000 });
