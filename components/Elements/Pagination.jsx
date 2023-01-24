@@ -3,7 +3,6 @@ import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 function getPageLabels(count, perPage) {
   const pages = Math.ceil(count / perPage);
   let aux = Array.from("*".repeat(pages)).map((_, i) => i + 1);
-  console.log(aux);
   if (pages > 4) {
     aux = aux.slice(0, 3).concat("...").concat(pages);
   }

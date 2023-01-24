@@ -58,7 +58,7 @@ const Signup = () => {
     <Layout noLayout={true} title="Lazy Buy | SignUp">
       {!typeAccount.company ? (
         <AnimatePresence>
-          <div className="overflow-hidden">
+          <div>
             <motion.div
               initial={{ x: 200, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}

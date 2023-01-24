@@ -74,7 +74,7 @@ const Store = (initialParams) => {
           </div>
           <hr className="my-4" />
           <div className="mt-6 mb-12">
-            <div className="flex flex-col gap-y-10 items-center py-10 min-h-[164px]">
+            <div className="flex flex-col gap-y-10 items-center py-10 min-h-[220px]">
               {/* pagination */}
               {productos && !isLoading && (
                 <Pagination
@@ -84,7 +84,7 @@ const Store = (initialParams) => {
                 />
               )}
               <div className="flex max-w-[1400px] mx-auto">
-                {!isLoading && (
+                {!isLoading && !!productos?.count && (
                   <div className="hidden lg:flex h-fit bg-zinc-100 rounded-md pb-16 mt-4">
                     <Filters
                       setActiveFiltersModal={setActiveFiltersModal}

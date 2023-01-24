@@ -7,7 +7,7 @@ export const transactionApi = createApi({
   ),
   endpoints: (builder) => ({
     getTransactions: builder.query({
-      query: () => "/api/get/transactions",
+      query: (pg) => `/api/get/transactions?page=${pg}`,
       providesTags: ["transactions"],
     }),
   }),

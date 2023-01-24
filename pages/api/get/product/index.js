@@ -63,8 +63,8 @@ export default async function getProduct(req, res) {
   //   ],
   // };
   if (filters.dash) {
-    const productDash = await product.findMany({include:{company:{select:{name:true,owner:true}}}});
-    return res.status(200).json(productDash);
+    const productDash = await product.findMany();
+    return res.status(200).json(productDash.length);
   }
 
   let searcyQuery = filters.search.split("-").map((param) => ({

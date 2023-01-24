@@ -6,8 +6,7 @@ import {
 import Image from "next/image";
 import { toast } from "react-hot-toast";
 
-const UserComponent = () => {
-  const { data, isLoading } = useGetUserListQuery();
+const UserComponent = ({data}) => {
   const [deleteUser] = useDeleteUserMutation();
 
   const handleDelete = async (emailUser, name, banned) => {

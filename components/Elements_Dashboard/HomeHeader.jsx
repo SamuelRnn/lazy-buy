@@ -3,15 +3,16 @@ import React from "react";
 import Image from "next/image";
 import det from "../../public/dashdet2.png";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
+import { useState } from "react";
+
+
 
 const HomeHeader = () => {
   const companyData = useSelector((state) => state.account.session);
-  
+   
   return (
     <>
-      
       <section id="welcome">
         <div className="container flex flex-col-reverse lg:flex-row items-center px-6 mx-auto mt-10 space-y-0 lg:space-y-0">
           <div className="flex flex-col mb-12 space-y-12 lg:w-1/2 md:items-center lg:items-start">

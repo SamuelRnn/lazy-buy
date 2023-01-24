@@ -43,7 +43,9 @@ export const Transactions = ({ transactions }) => {
                 {t.productAmount}
               </td>
               <td className="p-3 text-sm text-gray-700 whitespace-nowrap">
-                {t.createdAt}
+                {JSON.stringify(new Date(t.createdAt).getFullYear())}/
+                {parseInt(JSON.stringify(new Date(t.createdAt).getMonth()) + 1)}
+                /{parseInt(JSON.stringify(new Date(t.createdAt).getDate())) + 1}
               </td>
             </tr>
           ))}

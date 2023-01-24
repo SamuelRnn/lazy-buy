@@ -4,7 +4,7 @@ import Image from "next/dist/client/image";
 import { useRouter } from "next/router";
 import { TfiLayoutListThumb } from "react-icons/tfi";
 import { FaBuilding } from "react-icons/fa";
-import { MdGroups, MdRateReview } from "react-icons/md";
+import { MdGroups } from "react-icons/md";
 import { BiLogIn } from "react-icons/bi";
 import { FaExchangeAlt } from "react-icons/fa";
 import { signOut } from "next-auth/react";
@@ -24,7 +24,7 @@ const SideBar = forwardRef(({ setActive }, ref) => {
   };
 
   return (
-    <div ref={ref} className="fixed w-56 h-full bg-white shadow-sm z-50">
+    <div ref={ref} className="fixed w-56 h-full bg-[rgba(255,255,255,0.7)] backdrop-blur shadow-sm z-50">
       <div className="flex justify-center mt-6 mb-14">
         <Link href="/">
           <Image
@@ -100,21 +100,6 @@ const SideBar = forwardRef(({ setActive }, ref) => {
             <div>
               <p>Products</p>
             </div>
-          </div>
-        </Link>
-        <Link
-          href="/admin/reviews"
-          className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
-            router.pathname == "/admin/reviews"
-              ? "bg-fondo-100 text-fondo-500"
-              : "text-gray-400 hover:bg-fondo-100 hover:text-fondo-500"
-          }`}
-        >
-          <div className="mr-2">
-            <MdRateReview className="h-5 w-5" />
-          </div>
-          <div>
-            <p>Reviews</p>
           </div>
         </Link>
         <Link
