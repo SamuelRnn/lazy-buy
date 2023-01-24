@@ -97,12 +97,27 @@ export const authOptions = {
             userName: userData.name,
           },
         });
+        console.log(userData.email);
+        console.log(userData.name);
+        console.log(jsonProfilePicture.url)
+          
         try {
           await transporter.sendMail({
             from: '"Lazy Buy" <lazybuy23.gmail.com>', // sender address
             to: userData.email, // list of receivers
             subject: "Company Register", // Subject line
-            text: "Welcome to Lazy Buy! Thank you for registering with your Google account. You can now enjoy a faster and safer shopping experience. Start browsing and find the best products at the best price! We're excited to have you as part of our community!", // plain text body
+            html: `
+            <div style="align-items: center;">
+            <h3 style="color: #e29c9c; font-size: 20px; text-align: center">Google Registration Successful</h3>
+            <div >
+                <p style='color: #d77575; font-size: 15px'>Information: </p>
+                <p style='color: #eec4c4; font-size: 13px' >Name: ${userData.name}</p>
+                <p style='color: #eec4c4; font-size: 11px'>Email: ${userData.email}</p>
+                <img src="${jsonProfilePicture.url}" width='200' title='Profile style='color: #eec4c4; font-size: 8px'/>
+            </div>
+            <p style='color #b23434; font-size: 15px'>Welcome to Lazy Buy! Thank you for registering with your Google account. You can now enjoy a faster and safer shopping experience. Start browsing and find the best products at the best price! We're excited to have you as part of our community!<p>
+        </div>
+            `, // plain text body
           });
         } catch (e) {
           console.log(e);
