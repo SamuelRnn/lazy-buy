@@ -37,7 +37,7 @@ const DashboardNav = () => {
         <div className="hidden md:flex space-x-2 text-white text-lg font-semibold items-center mt-2">
           <Link
             className="hover:bg-fondo-50 hover:text-fondo-300 p-2 rounded-lg transition-all"
-            href="#"
+            href="mailto:lazybuy23@gmail.com?subject=What%20is%20your%20inconvenient"
           >
             Support
           </Link>

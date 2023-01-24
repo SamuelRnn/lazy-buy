@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <div className="bg-zinc-100 w-full py-8">
+    <div className="bg-fondo-50 w-full py-8">
       <div className="main grid grid-rows-1 gap-8 md:grid-cols-12 xl:gap-8">
         <div className="md:col-span-12 xl:col-span-4 flex flex-col gap-4">
           <h1 className="text-3xl font-bold text-fondo-400 ">Lazy Buy</h1>
@@ -27,9 +27,6 @@ const Footer = () => {
               className="hover:underline hover:text-fondo-300"
             >
               About
-            </Link>
-            <Link href="/faqs" className="hover:underline hover:text-fondo-300">
-              FAQ
             </Link>
           </nav>
         </div>
