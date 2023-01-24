@@ -124,7 +124,7 @@ const Footer = () => {
               </svg>
               lazy_buy@gmail.com
             </p>
-            <p className="flex items-center gap-2">
+            <Link href='tel:+5491123376862' className="flex items-center gap-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6 text-fondo-300"
@@ -139,8 +139,8 @@ const Footer = () => {
                   d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
                 />
               </svg>
-              (+52) 614 1 55 55 55
-            </p>
+              (+54) 9 11 23 37 68 62
+            </Link>
           </div>
         </div>
       </div>

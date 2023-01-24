@@ -9,32 +9,38 @@ const integrantes = [
     name: "Franco",
     linkedIn: "https://www.linkedin.com/in/francomodarelli/",
     github: "https://github.com/ModarelliFranco",
+    roll: "Full-Stack Developer"
   },
   {
     img: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673145980/lazy-buy/103448999_f82g57.jpg",
     name: "Brayan",
     linkedIn: "https://www.linkedin.com/in/brayan-bravo-ramos56/",
+    roll: "Full-Stack Developer"
   },
   {
     img: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673147022/lazy-buy/Imagen_de_WhatsApp_2023-01-07_a_las_21.57.07_enidiz.jpg",
     name: "Juampi",
     linkedIn: "https://www.linkedin.com/in/juan-pablo-matarazzo-202409224/",
+    roll: "Full-Stack Developer"
   },
   {
     img: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673146181/lazy-buy/fotoSamuel_rbdz1h.jpg",
     name: "Samuel",
     linkedIn: "https://www.linkedin.com/in/sam-p-quino/",
     github: "https://github.com/SamuelRnn",
+    roll: "Full-Stack Developer"
   },
   {
     img: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673145993/lazy-buy/65221822_378571466127530_2046529064859122346_n.jpg_qrpfrc.jpg",
     name: "Agus",
     linkedIn: "https://www.linkedin.com/in/agustin-delfino/",
+    roll: "Full-Stack Developer"
   },
   {
     img: "https://res.cloudinary.com/dl5hwebwa/image/upload/v1673146286/lazy-buy/Sojo_d0lgxo.jpg",
     name: "Sojo",
     linkedIn: "https://www.linkedin.com/in/fabi%C3%A1n-sojo-2a92a7224/",
+    roll: "Full-Stack Developer"
   },
 ];
 const Devs = () => {
@@ -59,8 +65,8 @@ const Devs = () => {
             <h3 className="font-semibold text-xl group-hover:text-white transition-all">
               {dev.name}
             </h3>
-            <p className="text-gray-600 group-hover:text-gray-300">
-            Design manager
+            <p className="text-gray-600 text-sm group-hover:text-gray-300">
+            {dev.roll}
             </p>
             <div className="flex items-center">
               <a
