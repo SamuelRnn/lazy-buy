@@ -26,85 +26,72 @@ export default async function success(req, res) {
     let { emailUser } = req.body[0];
     let arr = [];
 
-    req.body.forEach(async ({ id, quantity }) => {
-      const producto = await product.findUnique({
-        where: { id },
-        include: { company: { select: { name: true } } },
-      });
-      const { companyId, id: productId } = producto;
-      const { id: userId } = await user.findUnique({
-        where: { email: emailUser },
-      });
+    let html =
+      "<h2>Payment completed successfully!</h2> </br> <p>Purchased Products: <p/> </br> ";
+    let namesproduct = "";
 
-      const tr = await transaction.create({
-        data: {
-          userId,
-          companyId,
-          productId,
-          productAmount: quantity,
-        },
-      });
-      
-
-      const data = await product.findUnique({
-        where: { id: tr.productId },
-        select: {
-          name: true,
-        },
-      });
-      
-      arr.push(data);
-
-      let names = arr.map((item) => item.name);
-      let namesproduct = `<ul>${names
-        .map((name) => `<li>${name}</li>`)
-        .join("")}</ul>`;
-
-       await transporter.sendMail({
-        from: '"Payment Completed" <lazybuy23.gmail.com>', // sender address
-        to: emailUser, // list of receivers
-        subject: "Payment Completed", // Subject line
-        html: `<h2>Payment completed successfully!</h2> </br> <p>Purchased Products: <p/> </br> ${namesproduct}`,
-      });
-      
-
-      if (producto && producto.stock >= 1) {
-        await product.update({
+    await Promise.all(
+      req.body.map(async ({ id, quantity }) => {
+        const producto = await product.findUnique({
           where: { id },
-          data: { stock: producto.stock - quantity },
+          include: { company: { select: { name: true } } },
         });
-      }
-      const productoNew = await product.findUnique({ where: { id } });
+        const { companyId, id: productId } = producto;
+        const { id: userId } = await user.findUnique({
+          where: { email: emailUser },
+        });
 
-      if (productoNew.stock < 1) {
-        await product.update({
-          where: {
-            id,
+        const tr = await transaction.create({
+          data: {
+            userId,
+            companyId,
+            productId,
+            productAmount: quantity,
           },
-          data: { isVisible: false },
         });
-      }
+
+        const data = await product.findUnique({
+          where: { id: tr.productId },
+          select: {
+            name: true,
+          },
+        });
+
+        arr.push(data);
+
+        let names = arr.map((item) => item.name);
+        namesproduct = `<ul>${names
+          .map((name) => `<li>${name}</li>`)
+          .join("")}</ul>`;
+
+        if (producto && producto.stock >= 1) {
+          await product.update({
+            where: { id },
+            data: { stock: producto.stock - quantity },
+          });
+        }
+
+        const productoNew = await product.findUnique({ where: { id } });
+
+        if (productoNew.stock < 1) {
+          await product.update({
+            where: {
+              id,
+            },
+            data: { isVisible: false },
+          });
+        }
+      })
+    );
+
+    html += namesproduct;
+    console.log("🚀 ~ file: successPayment.js:88 ~ success ~ html", html)
+    await transporter.sendMail({
+      from: '"Payment Completed" <lazybuy23.gmail.com>', // sender address
+      to: emailUser, // list of receivers
+      subject: "Payment Completed", // Subject line
+      html,
     });
-
-    // const data = await product.findUnique({
-    //   where: { id: tr.productId },
-    //   select: {
-    //     name: true
-    //   },
-    // });
-    // console.log(data)
-    // arr.push(data);
-
-    // let names = arr.map((item) => item.name);
-    // let namesproduct = `<ul>${names.map(name => `<li>${name}</li>`).join('')}</ul>`
-
-    // const pago = await transporter.sendMail({
-    //   from: '"Payment Completed" <lazybuy23.gmail.com>', // sender address
-    //   to: emailUser, // list of receivers
-    //   subject: "Payment Completed", // Subject line
-    //   html: `<h2>Payment completed successfully!</h2> </br> <p>Purchased Products<p/> </br> ${namesproduct}`,
-    // });
-    // res.status(200).json(pago)
 
     res.status(200).json({ transactionCreate: true, modifiedStock: true });
   } catch (error) {
