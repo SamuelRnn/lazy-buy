@@ -7,6 +7,8 @@ import { useState } from 'react'
 import Image from 'next/image'
 import { MdInventory } from 'react-icons/md'
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
+import Spinner from "../../components/Spinners/Spinner"
+
 
 const Record = ({ user }) => {
   const [transactions, setTransactions] = useState(user.Transaction)
@@ -71,16 +73,13 @@ const Record = ({ user }) => {
   // console.log(transactions)
   return (
     <UserProfile user={user} title="Record"  headerTitle='Your last purchases!'>
-      {/* {transactions.map((transaction, i) => (
-        <div key={i}>
-        </div>
-      ))} */}
-
-      {/* <div className="grid gap-5 place-items-center grid-cols-2 p-10"> */}
+     {/* {console.log(products)} */}
+     { products.length > 0  ? (
+        <>
       <div className="grid-container gap-5 p-10">
         {products}
       </div>
-
+ 
       <div className="text-center d-flex justify-content-between">
         <div >
           <button
@@ -99,6 +98,12 @@ const Record = ({ user }) => {
           </button>
         </div>
       </div>
+      </>
+     ) : (
+      <div className='flex items-center justify-center mt-20 '>
+      <Spinner/>
+      </div>
+     )}
     </UserProfile>
   )
 }
