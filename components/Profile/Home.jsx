@@ -28,7 +28,7 @@ const Home = () => {
               className="flex flex-col justify-center items-center gap-4 cursor-pointer"
             >
               <Image
-                className="w-[300px]"
+                className="w-[300px] md:w-[500px]"
                 src={pic}
                 alt="image"
                 height={500}
