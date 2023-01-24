@@ -4,7 +4,7 @@ import profileMiddleware from "../../utils/profileMiddleware";
 
 const HomePage = ({ user }) => {
   return (
-    <UserProfile user={user} title="Home">
+    <UserProfile user={user}>
       <Home />
     </UserProfile>
   );
