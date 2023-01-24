@@ -69,7 +69,7 @@ const Plan = ({ company }) => {
     if (router.query.cancel) {
       toast.error("We are sorry your payment has failed", { duration: 5000 });
     }
-  }, []);
+  }, [router.query.planType]);
 
   return (
     <DashboardLayout>
