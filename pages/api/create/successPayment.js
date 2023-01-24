@@ -1,5 +1,20 @@
 import { throws } from "assert";
 import { product, transaction, user } from "../../../prisma";
+import nodemailer from "nodemailer";
+
+const transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
+  auth: {
+    user: "lazybuy23@gmail.com",
+    pass: "sngktitaklqmvliq",
+  },
+});
+
+transporter.verify().then(() => {
+  console.log("Mensaje enviado");
+});
 
 export default async function success(req, res) {
   if (req.method !== "POST") {
@@ -7,8 +22,10 @@ export default async function success(req, res) {
   }
 
   try {
-    if(!req.body.length) throw new Error("No products error");
+    if (!req.body.length) throw new Error("No products error");
     let { emailUser } = req.body[0];
+    let arr = [];
+
     req.body.forEach(async ({ id, quantity }) => {
       const producto = await product.findUnique({
         where: { id },
@@ -18,6 +35,7 @@ export default async function success(req, res) {
       const { id: userId } = await user.findUnique({
         where: { email: emailUser },
       });
+
       const tr = await transaction.create({
         data: {
           userId,
@@ -26,6 +44,30 @@ export default async function success(req, res) {
           productAmount: quantity,
         },
       });
+      
+
+      const data = await product.findUnique({
+        where: { id: tr.productId },
+        select: {
+          name: true,
+        },
+      });
+      
+      arr.push(data);
+
+      let names = arr.map((item) => item.name);
+      let namesproduct = `<ul>${names
+        .map((name) => `<li>${name}</li>`)
+        .join("")}</ul>`;
+
+       await transporter.sendMail({
+        from: '"Payment Completed" <lazybuy23.gmail.com>', // sender address
+        to: emailUser, // list of receivers
+        subject: "Payment Completed", // Subject line
+        html: `<h2>Payment completed successfully!</h2> </br> <p>Purchased Products: <p/> </br> ${namesproduct}`,
+      });
+      
+
       if (producto && producto.stock >= 1) {
         await product.update({
           where: { id },
@@ -43,8 +85,30 @@ export default async function success(req, res) {
         });
       }
     });
+
+    // const data = await product.findUnique({
+    //   where: { id: tr.productId },
+    //   select: {
+    //     name: true
+    //   },
+    // });
+    // console.log(data)
+    // arr.push(data);
+
+    // let names = arr.map((item) => item.name);
+    // let namesproduct = `<ul>${names.map(name => `<li>${name}</li>`).join('')}</ul>`
+
+    // const pago = await transporter.sendMail({
+    //   from: '"Payment Completed" <lazybuy23.gmail.com>', // sender address
+    //   to: emailUser, // list of receivers
+    //   subject: "Payment Completed", // Subject line
+    //   html: `<h2>Payment completed successfully!</h2> </br> <p>Purchased Products<p/> </br> ${namesproduct}`,
+    // });
+    // res.status(200).json(pago)
+
     res.status(200).json({ transactionCreate: true, modifiedStock: true });
   } catch (error) {
+    console.log(error);
     res.status(400).json({ transactionCreate: false, modifiedStock: false });
   }
 }

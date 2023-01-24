@@ -96,7 +96,7 @@ const Sidebar = ({ user }) => {
           <div className="bg-primary-900/50 text-white p-4 rounded-xl">
             <div className="mt-2">
               <Link
-                href="#"
+                href="mailto:lazybuy23@gmail.com"
                 className="flex items-center gap-4 text-white py-2 px-4 rounded-xl hover:bg-primary-900/50 transition-colors"
               >
                 <UserIcon className="h-5 w-5" /> Contact us
