@@ -17,15 +17,15 @@ const Filters = ({ setFilters, setActiveFiltersModal }) => {
   return (
     <div className="p-4 flex items-around">
       <form onSubmit={applyFilters}>
-        <div className="h-full">
-          {/* <select name="">
-            <option value="a"></option>
-            <option value="b"></option>
-            <option value="c"></option>
-            <option value="d"></option>
-          </select> */}
-          <input type="number" name="min" placeholder="min. price" />
-          <input type="number" name="max" placeholder="max. price" />
+        <div className="h-full flex-col flex text-zinc-600 gap-y-4">
+          <label className="mb-2">
+            Min. price
+            <input type="number" name="min" placeholder="0" />
+          </label>
+          <label className="mb-2">
+            Max. price
+            <input type="number" name="max" placeholder="9999" />
+          </label>
         </div>
         <button
           type="submit"

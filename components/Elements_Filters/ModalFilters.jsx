@@ -7,6 +7,8 @@ const ModalFilters = ({
   setActive,
   setFilters,
   setActiveFiltersModal,
+  filters,
+  productos,
 }) => {
   return (
     <>
@@ -40,6 +42,8 @@ const ModalFilters = ({
               className="filters_modal bg-zinc-200"
             >
               <Filters
+                productos={productos}
+                filters={filters}
                 setFilters={setFilters}
                 setActiveFiltersModal={setActiveFiltersModal}
               />

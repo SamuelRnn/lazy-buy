@@ -115,6 +115,8 @@ const Store = (initialParams) => {
         </section>
         {/* query filters */}
         <ModalFilters
+          productos={productos}
+          filters={filters}
           active={activeFiltersModal}
           setActive={setActiveFiltersModal}
           setActiveFiltersModal={setActiveFiltersModal}
