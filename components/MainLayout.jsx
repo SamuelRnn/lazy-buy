@@ -44,7 +44,7 @@ const Layout = ({ children, title = "Lazy Buy", noLayout = false }) => {
         )}
       </AnimatePresence>
       {!noLayout && <NavBar />}
-      <main>{children}</main>
+      <main className="overflow-hidden">{children}</main>
       {!noLayout && <Footer />}
     </>
   );
