@@ -24,7 +24,7 @@ export default function TopBar({ showNav, setShowNav }) {
         showNav ? "pl-56" : ""
       }`}
     >
-      <div className="pl-4 md:pl-16 backdrop-blur bg-transparent rounded">
+      <div className="pl-4 md:pl-16 backdrop-blur bg-white">
         <Bars3Icon
           className="h-8 w-8 text-gray-700 cursor-pointer"
           onClick={() => setShowNav(!showNav)}
