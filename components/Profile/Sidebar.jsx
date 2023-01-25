@@ -7,6 +7,7 @@ import {
   RiMore2Fill,
   RiCloseFill,
   RiServiceLine,
+  RiReplyLine
 } from "react-icons/ri";
 import Image from "next/image";
 import { BiLogIn } from "react-icons/bi";
@@ -110,6 +111,13 @@ const Sidebar = ({ user }) => {
             </div>
           </div>
         </div>
+        <Link href='/'>
+        <button
+          className=" lg:right-6 lg:bottom-1 lg:text-4xl fixed right-1 bottom-1 text-2xl	 bg-primary-900 p-2.5  text-black z-50 hover:text-fondo-200  "
+        >
+           <RiHome3Line /> 
+        </button>
+        </Link>
       </div>
       {/* Button mobile */}
     </>
