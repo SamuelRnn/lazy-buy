@@ -18,10 +18,10 @@ const About = () => {
           <div className="w-full lg:w-5/12 flex flex-col justify-center">
             <div className="font-normal text-base leading-6 text-zinc-700 ">
               <h3 className="text-3xl lg:text-4xl font-bold leading-9 text-fondo-400 pb-4">
-                <span className="text-fondo-500 uppercase">Lazzy Buy</span> is
+                <span className="text-fondo-500 uppercase">Lazy Buy</span> is
                 carried out by passionate developers.
               </h3>
-              Lazzy Buy is a project made by a group of 6 students from Henry
+              Lazy Buy is a project made by a group of 6 students from Henry
               Bootcamp. The project is based on creating a fully functional
               website. In our case, we decided to create an e-commerce that
               includes an intuitive interface, management tools, secure payment

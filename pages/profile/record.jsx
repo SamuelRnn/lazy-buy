@@ -8,6 +8,7 @@ import Image from 'next/image'
 import { MdInventory } from 'react-icons/md'
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 import Spinner from "../../components/Spinners/Spinner"
+import Link from 'next/link'
 
 
 const Record = ({ user }) => {
@@ -32,13 +33,15 @@ const Record = ({ user }) => {
 
   const products = paginatedCards.map((item) => {
     return (
+      
       <div
         key={item.id}
         className="relative bg-zinc-50 rounded-lg w-[100%] sm:w-[250px] md:w-[100%] shadow-md shadow-zinc-400"
       >
         <div className="relative bg-zinc-50 rounded-lg w-[100%] sm:w-[250px] md:w-[100%] shadow-md shadow-zinc-400 ">
+          <Link href={"/products/" + item.product.slug}>
           <div className="px-3 py-2  text-fondo-200">
-            <h2 className=" overflow-hidden whitespace-nowrap text-ellipsis font-bold w-3/4">
+            <h2 className=" overflow-hidden whitespace-nowrap text-ellipsis font-bold w-3/4 hover:text-fondo-500">
               {item.product.name}
             </h2>
           </div>
@@ -49,9 +52,10 @@ const Record = ({ user }) => {
               src={item.product.mainImage.url}
               width={320}
               height={100}
-              className="w-[160px] h-[160px] object-cover "
+              className="w-[160px] h-[160px] object-cover"
             />
           </div>
+          </Link>
           {/* <p>{item.product.category}</p>
         <p>{item.product.description}</p> */}
           <div className="bg-fondo-100 py-2 px-6 text-zinc-100 text-sm rounded-b-lg">

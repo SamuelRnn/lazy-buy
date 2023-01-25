@@ -46,7 +46,7 @@ const UserMenu = ({ showModal, setShowModal }) => {
             >
               <MdClose className="text-2xl" />
             </button>
-            <h2 className="text-3xl font-semibold text-white">
+            <h2 className="text-3xl font-semibold text-white overflow-hidden text-ellipsis whitespace-nowrap">
               Hi {session.name}
             </h2>
             {session.type === "user" && (

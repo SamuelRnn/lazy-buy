@@ -260,6 +260,8 @@ const Detail = ({ product, carousel }) => {
                     <button
                       className="text-gray-200 px-2 py-2 bg-zinc-500 hover:bg-fondo-300 transition-colors  rounded-md"
                       onClick={() => {
+                        if(quantity >= product.stock) return toast.error("You can't exceed the stock!")
+
                         setQuantity(quantity + 1);
                       }}
                     >
