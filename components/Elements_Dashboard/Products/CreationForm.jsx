@@ -7,6 +7,8 @@ import {
   useCreateProductMutation,
   useUpdateProductMutation,
 } from "../../../redux/companyApi";
+import validateProduct from "../../../utils/validateProductCreation";
+import { toast } from "react-hot-toast";
 
 function getFileAsDataURI(image) {
   return new Promise((resolve) => {
@@ -64,8 +66,19 @@ const CreationForm = ({ product, setActive, companyId, companyPlan }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     triggerSubmitLoading(true);
-
+    const validationResult = validateProduct(form);
     let file = document.getElementById("product_file").files[0];
+
+    if (!validationResult.ok) {
+      toast.error(validationResult.error);
+      triggerSubmitLoading(false);
+      return;
+    }
+    if (!file) {
+      toast.error("You must provide an image for your product");
+      triggerSubmitLoading(false);
+      return;
+    }
     file = await getFileAsDataURI(file);
 
     const newProduct = {
@@ -226,7 +239,14 @@ const CreationForm = ({ product, setActive, companyId, companyPlan }) => {
                 Return to products
               </button>
               <button
-                disabled={product && !hasChanged}
+                disabled={
+                  (product && !hasChanged) ||
+                  !form.name ||
+                  !form.description ||
+                  !form.name ||
+                  form.price <= 0 ||
+                  form.stock <= 0
+                }
                 type="submit"
                 className="bg-fondo-300 text-zinc-200 py-3 px-5 rounded flex items-center justify-center disabled:bg-zinc-300"
               >

@@ -67,38 +67,37 @@ export default async function getProduct(req, res) {
     return res.status(200).json(productDash.length);
   }
 
-  let searcyQuery = filters.category.split("-").map((param) => ({
-    OR: [
-      {
-        name: {
-          contains: param,
-          mode: "insensitive",
-        },
-      },
-      {
-        description: {
-          contains: param,
-          mode: "insensitive",
-        },
-      },
-      {
-        category: {
-          contains: param,
-          mode: "insensitive",
-        },
-      },
-      {
-        company: {
+  if (filters.search) {
+    let searcyQuery = filters.search.split("-").map((param) => ({
+      OR: [
+        {
           name: {
             contains: param,
             mode: "insensitive",
           },
         },
-      },
-    ],
-  }));
-
-  if (filters.search) {
+        {
+          description: {
+            contains: param,
+            mode: "insensitive",
+          },
+        },
+        {
+          category: {
+            contains: param,
+            mode: "insensitive",
+          },
+        },
+        {
+          company: {
+            name: {
+              contains: param,
+              mode: "insensitive",
+            },
+          },
+        },
+      ],
+    }));
     count = await product
       .findMany({
         where: {

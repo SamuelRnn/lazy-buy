@@ -31,6 +31,9 @@ export const authOptions = {
       async authorize(credentials, req) {
         const ERROR_MESSAGE =
           "Login failed, your email or password are incorrect, verify them before continue";
+        const AUTH_BAN_MESSAGE =
+          "There was an error while requesting your credentials, contact support";
+
         const got_company = await company.findUnique({
           where: { email: credentials.email },
           include: { access: true },
@@ -44,6 +47,7 @@ export const authOptions = {
         if (!got_company && !gotUser) throw new Error(ERROR_MESSAGE);
 
         if (got_company) {
+          if (got_company.isBanned) throw new Error(AUTH_BAN_MESSAGE);
           const checkedPassword = await compare(
             credentials.password,
             got_company.access.password
@@ -58,6 +62,7 @@ export const authOptions = {
         }
 
         if (gotUser) {
+          if (gotUser.isBanned) throw new Error(AUTH_BAN_MESSAGE);
           const checkedPassword = await compare(
             credentials.password,
             gotUser.access.password
@@ -99,8 +104,8 @@ export const authOptions = {
         });
         console.log(userData.email);
         console.log(userData.name);
-        console.log(jsonProfilePicture.url)
-          
+        console.log(jsonProfilePicture.url);
+
         try {
           await transporter.sendMail({
             from: '"Lazy Buy" <lazybuy23.gmail.com>', // sender address

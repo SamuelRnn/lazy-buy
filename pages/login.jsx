@@ -43,11 +43,14 @@ export default function Loading() {
   const submitForm = async (formValues, { resetForm }) => {
     resetForm();
     triggerLogin(true);
+
     const sessionStatus = await signIn("credentials", {
       ...formValues,
-      callbackUrl: "/",
+      redirect: false,
     });
+
     await simulateDelay(2);
+
     triggerLogin(false);
     if (!sessionStatus.ok) {
       toast.error(sessionStatus.error, {
