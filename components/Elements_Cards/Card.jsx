@@ -210,7 +210,7 @@ const Card = ({ product, style = "card" }) => {
                 <button
                   title="Add to my cart"
                   className="text-fondo-300 px-2 py-2 transition-colors rounded-md hover:text-zinc-100 hover:bg-fondo-300"
-                  onClick={addItemToWishList}
+                  onClick={addItemToCart}
                 >
                   <IoBagAdd className="transition-all text-2xl" />
                 </button>
