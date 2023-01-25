@@ -1,15 +1,13 @@
 import Link from "next/link";
 import { useState } from "react";
-import Image from "next/image";
 import AnimatedLogo from "../components/Elements/AnimatedLogo";
 import Layout from "../components/MainLayout";
 import SignUpCompany from "../components/Forms_SignUp/SignUpCompany";
-import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useFormik } from "formik";
 import { motion, AnimatePresence } from "framer-motion";
 import { registerValidate } from "../utils/validateForm";
-import { Formik } from "formik";
+import { HiArrowLeftOnRectangle } from "react-icons/hi2";
 
 const Signup = () => {
   const [typeAccount, setTypeAccount] = useState({
@@ -59,6 +57,12 @@ const Signup = () => {
       {!typeAccount.company ? (
         <AnimatePresence>
           <div>
+            <Link className="fixed top-0 right-2 lg:left-0 z-10 overflow-hidden" href="/">
+              <p className="bg-fondo-100 w-[115px] hover:bg-slate-800 hover:text-zinc-100 mt-2 ml-2 p-2 text-center rounded text-white transition-all font-semibold hidden lg:block">
+                Back to store
+              </p>
+              <HiArrowLeftOnRectangle className=" bg-fondo-100 hover:bg-slate-800 hover:text-zinc-100 mt-2 ml-2 p-2 text-center rounded text-white transition-all font-semibold text-4xl lg:hidden" />
+            </Link>
             <motion.div
               initial={{ x: 200, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}

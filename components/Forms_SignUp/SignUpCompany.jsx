@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useFormik } from "formik";
 import { registerValidateCompany } from "../../utils/validateFormCompany";
 import { useRouter } from "next/router";
+import { HiArrowLeftOnRectangle } from "react-icons/hi2";
 
 const SignUpCompany = ({ typeAccount, setTypeAccount }) => {
   const formik = useFormik({
@@ -48,6 +49,12 @@ const SignUpCompany = ({ typeAccount, setTypeAccount }) => {
   return (
     <AnimatePresence>
       <div className="overflow-hidden">
+      <Link className="fixed top-0 right-2 lg:left-0 z-10" href='/'>
+                      <p className="bg-fondo-100 w-[115px] hover:bg-slate-800 hover:text-zinc-100 mt-2 ml-2 p-2 text-center rounded text-white transition-all font-semibold hidden lg:block">
+                        Back to store
+                      </p>
+                      <HiArrowLeftOnRectangle className=" bg-fondo-100 hover:bg-slate-800 hover:text-zinc-100 mt-2 ml-2 p-2 text-center rounded text-white transition-all font-semibold text-4xl lg:hidden"/>
+                    </Link>
         <motion.div
           initial={{ x: -200, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
@@ -123,6 +130,7 @@ const SignUpCompany = ({ typeAccount, setTypeAccount }) => {
                         <span className="mx-2">Client</span>
                       </button>
                     </div>
+                    
                   </div>
 
                   {/* Form controlado */}
