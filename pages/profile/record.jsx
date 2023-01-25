@@ -39,6 +39,9 @@ const Record = ({ user }) => {
         key={item.id}
         whileHover={{ scale: 1.02 }}
         transition={{ bounce: false, duration: 0.30 }}
+        initial={{ x: -200, y: 10, opacity: 0 }}
+        whileInView={{ x: 2, opacity: 1 }}
+        viewport={{ once: true }}
         className="relative bg-zinc-50 rounded-lg w-[100%] sm:w-[250px] md:w-[100%] shadow-md shadow-zinc-400"
       >
         <div className="relative bg-zinc-50 rounded-lg w-[100%] sm:w-[250px] md:w-[100%] shadow-md shadow-zinc-400 ">
@@ -80,7 +83,7 @@ const Record = ({ user }) => {
   // }
   // console.log(transactions)
   return (
-    <UserProfile user={user} title="Record"  headerTitle='Your last purchases!'>
+    <UserProfile user={user}  headerTitle='Your last purchases!'>
      {/* {console.log(products)} */}
      { products.length > 0  ? (
         <>
