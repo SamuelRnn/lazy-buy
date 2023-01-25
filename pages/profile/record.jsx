@@ -3,6 +3,7 @@ import Profile from '.'
 import profileRecordMiddleware from '../../utils/profileRecordMiddleware'
 import UserProfile from '../../components/Profile/UserProfile'
 // import { useGetTransactionQuery } from '../../redux/userTransaction'
+import { motion } from "framer-motion";
 import { useState } from 'react'
 import Image from 'next/image'
 import { MdInventory } from 'react-icons/md'
@@ -33,9 +34,11 @@ const Record = ({ user }) => {
 
   const products = paginatedCards.map((item) => {
     return (
-      
-      <div
+
+      <motion.div
         key={item.id}
+        whileHover={{ scale: 1.02 }}
+        transition={{ bounce: false, duration: 0.30 }}
         className="relative bg-zinc-50 rounded-lg w-[100%] sm:w-[250px] md:w-[100%] shadow-md shadow-zinc-400"
       >
         <div className="relative bg-zinc-50 rounded-lg w-[100%] sm:w-[250px] md:w-[100%] shadow-md shadow-zinc-400 ">
@@ -45,7 +48,8 @@ const Record = ({ user }) => {
               {item.product.name}
             </h2>
           </div>
-          <div>
+          <div
+          >
             <Image
               alt={item.product.name}
               title={item.product.name}
@@ -67,7 +71,7 @@ const Record = ({ user }) => {
             {/* <p>{item.product.description}</p>  */}
           </div>
         </div>
-      </div>
+      </motion.div>
     )
   })
 

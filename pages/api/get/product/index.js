@@ -67,7 +67,7 @@ export default async function getProduct(req, res) {
     return res.status(200).json(productDash.length);
   }
 
-  let searcyQuery = filters.search.split("-").map((param) => ({
+  let searcyQuery = filters.category.split("-").map((param) => ({
     OR: [
       {
         name: {
