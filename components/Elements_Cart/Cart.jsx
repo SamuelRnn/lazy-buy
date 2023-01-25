@@ -36,7 +36,12 @@ const Cart = ({ setActive }) => {
               <div className="w-8 flex flex-col items-center justify-between mr-2">
                 <button
                   className="text-lg w-5 h-5"
-                  onClick={() => dispatch(increaseItemQuantity(product.id))}
+                  onClick={() => {
+                    if (product?.quantity >= product.stock)
+                      return toast.error("You can't exceed the stock!");
+
+                    dispatch(increaseItemQuantity(product.id));
+                  }}
                 >
                   <ChevronUpIcon />
                 </button>
