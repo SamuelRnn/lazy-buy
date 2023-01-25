@@ -1,22 +1,21 @@
-import React from 'react'
-import Image from "next/image"
+import React from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 
-
-const SuccessComponent = ({btn}) => {
-    const router = useRouter()
-    let arr = [
-        "md:block hidden fixed h-full -left-20 -bottom-20",
-        "md:block hidden fixed h-full -left-20 -top-28",
-        "md:block hidden fixed h-full -right-20 -bottom-20",
-        "md:block hidden fixed h-full -right-20 -top-28",
-        "md:block hidden fixed h-full  ",
-      ];
+const SuccessComponent = ({ btn }) => {
+  const router = useRouter();
+  let arr = [
+    "md:block hidden fixed h-full -left-20 -bottom-20",
+    "md:block hidden fixed h-full -left-20 -top-28",
+    "md:block hidden fixed h-full -right-20 -bottom-20",
+    "md:block hidden fixed h-full -right-20 -top-28",
+    "md:block hidden fixed h-full  ",
+  ];
   return (
     <div className="h-screen w-screen flex md:flex-row flex-col bg-white items-center justify-center">
-      <div className="w-4/5 flex items-center justify-end z-50">
-        <div className="mr-10 pay gap-5 flex flex-col items-center p-11 justify-end  rounded-3xl shadow-lg">
+      <div className="w-4/5 flex items-center md:justify-end  z-50">
+        <div className="md:mr-10 pay gap-5 flex flex-col items-center p-11 justify-end  rounded-3xl shadow-lg">
           <Image
             width={200}
             height={200}
@@ -24,8 +23,10 @@ const SuccessComponent = ({btn}) => {
             src="https://drikung.cl/wp-content/uploads/2020/06/Pago-exitoso.png"
             alt="succes"
           />
-          <h1 className="text-fondo-1000 text-4xl">Payment Successful!!</h1>
+
+          <h1 className="text-fondo-1000 mx-7 text-4xl ">Payment Successful!!</h1>
           <h2 className="text-zinc-500">Thank you for choosing us</h2>
+
           {btn && (
             <motion.button
               initial={{ scale: 0, opacity: 0 }}
@@ -46,7 +47,7 @@ const SuccessComponent = ({btn}) => {
           height={200}
           src="https://images.vexels.com/media/users/3/210362/isolated/preview/44acab728548ca17f29211eeda51f2e3-hombre-reclinado-con-caracter-de-telefono-celular.png"
           alt="men"
-          className="-scale-x-100 w-[380px]"
+          className="-scale-x-100 md:block hidden w-[380px]"
         />
       </div>
       {arr?.map((str, i) => (
@@ -61,7 +62,7 @@ const SuccessComponent = ({btn}) => {
         />
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default SuccessComponent
+export default SuccessComponent;

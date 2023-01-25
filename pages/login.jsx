@@ -11,6 +11,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "react-hot-toast";
 import { useEffect, useState } from "react";
 import simulateDelay from "../utils/simulateDelay";
+import { HiArrowLeftOnRectangle } from "react-icons/hi2";
 //-----------------------------------------
 
 const EMAIL_REGEX = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
@@ -70,6 +71,15 @@ export default function Loading() {
   };
   return (
     <Layout noLayout={true} title="Lazy Buy | LogIn">
+           <Link
+                className="fixed top-0 right-2 lg:right-3 z-10"
+                href="/"
+              >
+                <p className="bg-fondo-100 w-[115px] hover:bg-slate-800 hover:text-zinc-100 mt-2 ml-2 p-2 text-center rounded text-white transition-all font-semibold hidden lg:block">
+                  Back to store
+                </p>
+                <HiArrowLeftOnRectangle className=" bg-fondo-100 hover:bg-slate-800 hover:text-zinc-100 mt-2 ml-2 p-2 text-center rounded text-white transition-all font-semibold text-4xl lg:hidden" />
+              </Link>
       <div className="bg-fondo-50 grid grid-cols-1 lg:grid-cols-2 min-h-screen overflow-hidden relative">
         {/* waiting auth */}
         <WaitingAuthModal loadingToggle={loginIsProccesing} />
