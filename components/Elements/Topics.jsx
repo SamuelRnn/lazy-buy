@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const Topics = () => {
   return (
-    <div>
+    <div className="overflow-hidden">
       <motion.div
         initial={{ x: -500, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
