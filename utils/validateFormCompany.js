@@ -11,27 +11,27 @@ export function registerValidateCompany(values) {
     const errors = {};
   //Company Name
     if (!values.name) {
-      errors.name = "Required Company Name";
+      errors.name = "Company Name Required";
     }
   
   //Country
   if (!values.country) {
-    errors.country = "Required Country";
+    errors.country = "Country Required";
   }
 
 //   Owner
   if (!values.owner) {
-    errors.owner = "Required Owner";
+    errors.owner = "Owner Required";
   }
   
   //City
   if (!values.city) {
-    errors.city = "Required City";
+    errors.city = "City Required";
   } 
   
     // Email
     if (!values.email) {
-      errors.email = "Required Email address";
+      errors.email = "Email address Required";
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
       errors.email = "Invalid email address";
     }
@@ -39,7 +39,7 @@ export function registerValidateCompany(values) {
   
   // Password
     if (!values.password) {
-      errors.password = "Required Password";
+      errors.password = "Password Required";
     } else if (values.password.length < 8 || values.password.length > 20) {
       errors.password = "Must be greater than 8 and less than 20 characters long";
     } else if (values.password.includes(" ")) {
@@ -50,7 +50,7 @@ export function registerValidateCompany(values) {
   
     //cpasword
     if (!values.cpassword) {
-      errors.cpassword = "Required Password";
+      errors.cpassword = "Password Required";
     } else if (values.password !== values.cpassword) {
       errors.cpassword = "Password Doesn't Match...!";
     } else if (values.cpassword.includes(" ")) {
