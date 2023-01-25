@@ -17,6 +17,7 @@ import { clearSession } from "../../redux/accountSlice";
 import { HomeIcon, UserIcon } from "@heroicons/react/24/solid";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/router";
+import { GiMilkCarton } from 'react-icons/gi'
 
 const Sidebar = ({ user }) => {
   const [showMenu, setShowMenu] = useState(false);
@@ -93,6 +94,12 @@ const Sidebar = ({ user }) => {
             >
               <RiServiceLine /> Like
             </Link>
+            <Link
+              href="/"
+              className={`flex items-center gap-4 text-white py-2 px-4 rounded-xl hover:bg-primary-900/50 transition-colors`}
+            >
+              <GiMilkCarton /> Go to store
+            </Link>
           </nav>
           <div className="bg-primary-900/50 text-white p-4 rounded-xl">
             <div className="mt-2">
@@ -111,13 +118,6 @@ const Sidebar = ({ user }) => {
             </div>
           </div>
         </div>
-        <Link href='/'>
-        <button
-          className=" lg:right-6 lg:bottom-1 lg:text-4xl fixed right-1 bottom-1 text-2xl	 bg-primary-900 p-2.5  text-black z-50 hover:text-fondo-200  "
-        >
-           <RiHome3Line /> 
-        </button>
-        </Link>
       </div>
       {/* Button mobile */}
     </>
