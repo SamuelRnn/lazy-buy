@@ -23,6 +23,7 @@ const UserMenu = ({ showModal, setShowModal }) => {
   const session = useSelector((state) => state.account.session);
 
   const handleSignOut = async () => {
+    setShowModal(false)
     dispatch(clearSession());
     await signOut({
       callbackUrl: "/login?session=signed-out",
@@ -47,7 +48,7 @@ const UserMenu = ({ showModal, setShowModal }) => {
               <MdClose className="text-2xl" />
             </button>
             <h2 className="text-3xl font-semibold text-white overflow-hidden text-ellipsis whitespace-nowrap">
-              Hi {session.name}
+              Hello Champ!
             </h2>
             {session.type === "user" && (
               <div className="flex w-[80%] text-black justify-evenly">
