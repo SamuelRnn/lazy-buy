@@ -17,7 +17,7 @@ const CancelComponent = ({ btn }) => {
             src="https://cdn-icons-png.flaticon.com/512/564/564619.png"
             alt="cancel"
           />
-          <h1 className="text-red-700 text-4xl">Payment Error!!</h1>
+          <h1 className="text-red-700 mx-10 text-4xl">Payment Error!!</h1>
           <h2 className="text-zinc-500">
             We&apos;re sorry your payment has been declined
           </h2>
