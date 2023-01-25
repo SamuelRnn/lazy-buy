@@ -49,7 +49,7 @@ const SignUpCompany = ({ typeAccount, setTypeAccount }) => {
   return (
     <AnimatePresence>
       <div className="overflow-hidden">
-      <Link className="fixed top-0 right-2 lg:left-0 z-10" href='/'>
+      <Link className="absolute top-0 right-2 lg:left-0 z-10" href='/'>
                       <p className="bg-fondo-100 w-[115px] hover:bg-slate-800 hover:text-zinc-100 mt-2 ml-2 p-2 text-center rounded text-white transition-all font-semibold hidden lg:block">
                         Back to store
                       </p>

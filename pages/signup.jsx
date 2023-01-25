@@ -56,13 +56,16 @@ const Signup = () => {
     <Layout noLayout={true} title="Lazy Buy | SignUp">
       {!typeAccount.company ? (
         <AnimatePresence>
-          <div>
-            <Link className="fixed top-0 right-2 lg:left-0 z-10 overflow-hidden" href="/">
-              <p className="bg-fondo-100 w-[115px] hover:bg-slate-800 hover:text-zinc-100 mt-2 ml-2 p-2 text-center rounded text-white transition-all font-semibold hidden lg:block">
-                Back to store
-              </p>
-              <HiArrowLeftOnRectangle className=" bg-fondo-100 hover:bg-slate-800 hover:text-zinc-100 mt-2 ml-2 p-2 text-center rounded text-white transition-all font-semibold text-4xl lg:hidden" />
-            </Link>
+          <div className="relative overflow-x-hidden">
+              <Link
+                className="fixed top-0 right-2 lg:left-0 z-10"
+                href="/"
+              >
+                <p className="bg-fondo-100 w-[115px] hover:bg-slate-800 hover:text-zinc-100 mt-2 ml-2 p-2 text-center rounded text-white transition-all font-semibold hidden lg:block">
+                  Back to store
+                </p>
+                <HiArrowLeftOnRectangle className=" bg-fondo-100 hover:bg-slate-800 hover:text-zinc-100 mt-2 ml-2 p-2 text-center rounded text-white transition-all font-semibold text-4xl lg:hidden" />
+              </Link>
             <motion.div
               initial={{ x: 200, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
