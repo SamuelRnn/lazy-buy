@@ -7,8 +7,8 @@ const transporter = nodemailer.createTransport({
   port: 465,
   secure: true,
   auth: {
-    user: "lazybuy23@gmail.com",
-    pass: "sngktitaklqmvliq",
+    user: "lazybuy24@gmail.com",
+    pass: "fefqdqzlyfndngxv",
   },
 });
 
@@ -85,9 +85,9 @@ export default async function success(req, res) {
     );
 
     html += namesproduct;
-    console.log("🚀 ~ file: successPayment.js:88 ~ success ~ html", html)
+    // console.log("🚀 ~ file: successPayment.js:88 ~ success ~ html", html)
     await transporter.sendMail({
-      from: '"Payment Completed" <lazybuy23.gmail.com>', // sender address
+      from: '"Payment Completed" <lazybuy24.gmail.com>', // sender address
       to: emailUser, // list of receivers
       subject: "Payment Completed", // Subject line
       html,

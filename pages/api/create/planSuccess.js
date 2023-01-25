@@ -6,8 +6,8 @@ const transporter = nodemailer.createTransport({
   port: 465,
   secure: true,
   auth: {
-    user: "lazybuy23@gmail.com",
-    pass: "sngktitaklqmvliq",
+    user: "lazybuy24@gmail.com",
+    pass: "fefqdqzlyfndngxv",
   },
 });
 
@@ -29,10 +29,10 @@ export default async function handleSuccess(req, res) {
       plan: req.body.planType,
     },
   });
-  // console.log(req.body.email)
-  // console.log(req.body.planType)
+  console.log(req.body.email)
+  console.log(req.body.planType) //---> encriptacion 
   await transporter.sendMail({
-    from: '"Lazy Buy" <lazybuy23.gmail.com>', // sender address
+    from: '"Lazy Buy" <lazybuy24@gmail.com>', // sender address
     to: req.body.email, // list of receivers
     subject: "Subcription payment ", // Subject line
     html: ` <h3>Subscription Payment Successful!</h3> <br/> <h4>Subscription:</h4>   ${req.body.planType} 
