@@ -7,7 +7,7 @@ import {
   RiMore2Fill,
   RiCloseFill,
   RiServiceLine,
-  RiReplyLine
+  RiReplyLine,
 } from "react-icons/ri";
 import Image from "next/image";
 import { BiLogIn } from "react-icons/bi";
@@ -17,7 +17,7 @@ import { clearSession } from "../../redux/accountSlice";
 import { HomeIcon, UserIcon } from "@heroicons/react/24/solid";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/router";
-import { GiMilkCarton } from 'react-icons/gi'
+import { GiMilkCarton } from "react-icons/gi";
 
 const Sidebar = ({ user }) => {
   const [showMenu, setShowMenu] = useState(false);
@@ -35,7 +35,7 @@ const Sidebar = ({ user }) => {
   return (
     <>
       <div
-        className={`bg-primary-900 h-full fixed lg:static w-[80%] md:w-[40%] lg:w-full transition-all z-50 duration-300 bg-gray-400  ${
+        className={`bg-primary-900 h-full fixed lg:static w-[80%] md:w-[40%] lg:w-full transition-all z-50 duration-300 bg-zinc-600  ${
           showMenu ? "left-0" : "-left-full"
         }`}
       >
@@ -62,14 +62,14 @@ const Sidebar = ({ user }) => {
           </p>
         </div>
         {/* Nav */}
-        <div className="bg-primary-300 p-8 rounded-tr-[100px] h-[70vh]  flex flex-col justify-between gap-8 bg-fondo-100">
+        <div className="bg-primary-300 p-8 rounded-tr-[100px] h-[70vh]  flex flex-col justify-between gap-8 bg-fondo-300">
           <nav className="flex flex-col gap-8">
             <Link
               href="/profile"
               className={`flex items-center gap-4 text-white py-2 px-4 rounded-xl hover:bg-primary-900/50 transition-colors ${
                 router.pathname === "/profile"
-                  ? "bg-fondo-100 text-fondo-500 "
-                  : "text-white hover:bg-fondo-100 hover:text-fondo-200"
+                  ? "bg-zinc-800"
+                  : "text-white hover:bg-zinc-800 hover:text-fondo-300"
               }`}
             >
               <RiHome3Line /> Home
@@ -78,8 +78,8 @@ const Sidebar = ({ user }) => {
               href="/profile/record"
               className={`flex items-center gap-4 text-white py-2 px-4 rounded-xl hover:bg-primary-900/50 transition-colors ${
                 router.pathname === "/profile/record"
-                  ? "bg-fondo-100 text-fondo-500 "
-                  : "text-white hover:bg-fondo-100 hover:text-fondo-200"
+                  ? "bg-zinc-800"
+                  : "text-white hover:bg-zinc-800 hover:text-fondo-300"
               }`}
             >
               <RiFileCopyLine /> Record
@@ -88,15 +88,15 @@ const Sidebar = ({ user }) => {
               href="/profile/like"
               className={`flex items-center gap-4 text-white py-2 px-4 rounded-xl hover:bg-primary-900/50 transition-colors ${
                 router.pathname === "/profile/like"
-                  ? "bg-fondo-100 text-fondo-500 "
-                  : "text-white hover:bg-fondo-100 hover:text-fondo-200"
+                  ? "bg-zinc-800"
+                  : "text-white hover:bg-zinc-800 hover:text-fondo-300"
               }`}
             >
               <RiServiceLine /> Like
             </Link>
             <Link
               href="/"
-              className={`flex items-center gap-4 text-white py-2 px-4 rounded-xl hover:bg-primary-900/50 transition-colors`}
+              className={`flex items-center gap-4 text-white py-2 px-4 rounded-xl hover:bg-primary-900/50 transition-colors text-white hover:bg-zinc-800 hover:text-fondo-300`}
             >
               <GiMilkCarton /> Go to store
             </Link>

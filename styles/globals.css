@@ -22,7 +22,6 @@
   @apply w-[150px] h-12 px-2 text-zinc-600 bg-zinc-200 rounded justify-between items-center transition-colors cursor-pointer;
 }
 
-
 .filter_btn:disabled {
   @apply bg-fondo-100 text-zinc-50;
   pointer-events: none;
@@ -200,10 +199,10 @@
   transform: translateY(-100);
 }
 
-.grid_order{
-display: grid;
-grid-template-columns: auto 400px;
-gap: 1rem;
+.grid_order {
+  display: grid;
+  grid-template-columns: auto 400px;
+  gap: 1rem;
 }
 .grid_products_order {
   grid-template-columns: repeat(auto-fill, 160px);
@@ -216,12 +215,10 @@ gap: 1rem;
   }
 }
 
-
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  /* grid-gap: 8px; */
-  place-items: center;
+  grid-template-columns: repeat(auto-fill, 160px);
+  gap: 8rem;
 }
 
 @media only screen and (max-width: 600px) {
