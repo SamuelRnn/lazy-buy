@@ -8,8 +8,8 @@ const transporter = nodemailer.createTransport({
   port: 465,
   secure: true,
   auth: {
-    user: "lazybuy02@gmail.com",
-    pass: "yctqpuqbiutnfebc",
+    user: "lazybuy03@gmail.com",
+    pass: "nxdrucgjlgvitpms",
   },
 });
 
@@ -71,10 +71,10 @@ export default async function createUser(req, res) {
       },
     },
   });
-
+  // {console.log(email)}
   try {
     await transporter.sendMail({
-      from: '"Lazy Buy" <lazybuy02@gmail.com>', // sender address
+      from: '"Lazy Buy" <lazybuy03@gmail.com>', // sender address
       to: email, // list of receivers
       subject: "User register", // Subject line
       html: `
