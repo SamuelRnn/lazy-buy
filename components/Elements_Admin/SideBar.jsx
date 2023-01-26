@@ -50,7 +50,7 @@ const SideBar = forwardRef(({ setActive }, ref) => {
               <HomeIcon className="h-5 w-5" />
             </div>
             <div>
-              <p>Home</p>
+              <p>Go back to store</p>
             </div>
           </div>
         </Link>
