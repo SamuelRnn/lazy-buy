@@ -20,15 +20,14 @@ const BarChart = ({ days }) => {
     ],
     datasets: [
       {
-        label: "Bill",
+        label: "Daily payments",
         backgroundColor: "rgb(255, 99, 132)",
-        borderColor: "black",
         data: [...daysAux],
       },
     ],
   };
   const options = {
-    mainAspectRatio: false,
+    maintainAspectRatio: true,
     responsive: true,
     scales: {
       y: {

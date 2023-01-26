@@ -14,15 +14,14 @@ const PieChart = ({ years }) => {
     labels: [...yearsLabel],
     datasets: [
       {
-        label: "Bill",
-        backgroundColor: ["rgba(75,192,192,1)"],
-        borderColor: "black",
+        label: "Yearly payments",
+        backgroundColor: ["rgba(75,55,100,1)"],
         data: [...yearsAux],
       },
     ],
   };
   const options = {
-    mainAspectRatio: false,
+    maintainAspectRatio: true,
     responsive: true,
     scales: {
       y: {

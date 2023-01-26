@@ -39,7 +39,7 @@ const Performance = () => {
         <div className="w-[320px] md:w-[720px] lg:w-[920px]">
           <LineChart months={months} />
         </div>
-        <div className="w-[320px] md:w-[720px] lg:w-[920px] mb-1">
+        <div className="w-[320px] md:w-[720px] mb-1 ">
           <PieChart years={years} />
         </div>
       </div>
