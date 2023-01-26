@@ -11,8 +11,8 @@ const transporter = nodemailer.createTransport({
   port: 465,
   secure: true,
   auth: {
-    user: "lazybuy24@gmail.com",
-    pass: "fefqdqzlyfndngxv",
+    user: "lazybuy02@gmail.com",
+    pass: "yctqpuqbiutnfebc",
   },
 });
 
@@ -102,13 +102,13 @@ export const authOptions = {
             userName: userData.name,
           },
         });
-        console.log(userData.email);
-        console.log(userData.name);
-        console.log(jsonProfilePicture.url);
+        // console.log(userData.email);
+        // console.log(userData.name);
+        // console.log(jsonProfilePicture.url);
 
         try {
           await transporter.sendMail({
-            from: '"Lazy Buy" <lazybuy24.gmail.com>', // sender address
+            from: '"Lazy Buy" <lazybuy02@gmail.com>', // sender address
             to: userData.email, // list of receivers
             subject: "Company Register", // Subject line
             html: `
