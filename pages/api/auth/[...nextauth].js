@@ -16,9 +16,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-transporter.verify().then(() => {
-  console.log("Mensaje google enviado");
-});
+transporter.send;
 
 export const authOptions = {
   providers: [
@@ -112,17 +110,50 @@ export const authOptions = {
             to: userData.email, // list of receivers
             subject: "Company Register", // Subject line
             html: `
-            <div style="align-items: center;">
-            <h3 style="color: #e29c9c; font-size: 20px; text-align: center">Google Registration Successful</h3>
-            <div >
-                <p style='color: #d77575; font-size: 15px'>Information: </p>
-                <p style='color: #eec4c4; font-size: 13px' >Name: ${userData.name}</p>
-                <p style='color: #eec4c4; font-size: 11px'>Email: ${userData.email}</p>
-                <img src="${jsonProfilePicture.url}" width='200' title='Profile style='color: #eec4c4; font-size: 8px'/>
-            </div>
-            <p style='color #b23434; font-size: 15px'>Welcome to Lazy Buy! Thank you for registering with your Google account. You can now enjoy a faster and safer shopping experience. Start browsing and find the best products at the best price! We're excited to have you as part of our community!<p>
-        </div>
-            `, // plain text body
+            <html>
+  <head>
+    <style>
+      /* Crear una clase para la card */
+      .card {
+        /* Añadir sombra de caja */
+        box-shadow: 0px 0px 10px #ccc;
+        /* Añadir estilos adicionales */
+        padding: 20px;
+        background-color: #fff;
+        width: 400px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      /* Crear una clase para el título */
+      .card-title {
+        /* Añadir estilos adicionales */
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+
+      /* Crear una clase para la imagen */
+      .card-img {
+        /* Añadir estilos adicionales */
+        width: 200px;
+        height: 200px;
+        margin: 0 auto;
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h1 class="card-title">Google Registration Successful</h1>
+      <p>Information: </p>
+      <p>Name: ${userData.name}</p>
+      <p>Email: ${userData.email}</p>
+      <img class="card-img" src="${jsonProfilePicture.url}" alt="image">
+      <p>Welcome to Lazy Buy! Thank you for registering with your Google account. You can now enjoy a faster and safer shopping experience. Start browsing and find the best products at the best price! We're excited to have you as part of our community!</p>
+    </div>
+  </body>
+  </html>`, // plain text body
           });
         } catch (e) {
           console.log(e);

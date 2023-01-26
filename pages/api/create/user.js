@@ -72,18 +72,55 @@ export default async function createUser(req, res) {
     },
   });
 
-
   try {
     await transporter.sendMail({
       from: '"Lazy Buy" <lazybuy02@gmail.com>', // sender address
       to: email, // list of receivers
       subject: "User register", // Subject line
-      html: `<h3>Registration Completed<h3> 
-      <h6>Information: <h6/> 
-      <p>UserName: ${userName}</p>
-      <p>Email: ${email}</p>
+      html: `
+      <html>
+  <head>
+    <style>
+      /* Crear una clase para la card */
+      .card {
+        /* Añadir sombra de caja */
+        box-shadow: 0px 0px 10px #ccc;
+        /* Añadir estilos adicionales */
+        padding: 20px;
+        background-color: #fff;
+        width: 400px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      /* Crear una clase para el título */
+      .card-title {
+        /* Añadir estilos adicionales */
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+
+      /* Crear una clase para la imagen */
+      .card-img {
+        /* Añadir estilos adicionales */
+        width: 200px;
+        height: 200px;
+        margin: 0 auto;
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h1 class="card-title">Registration Completed</h1>
+      <p>${userName}</p>
+      <p>${email}</p>
+      <img class="card-img" src="https://res.cloudinary.com/dl5hwebwa/image/upload/v1673480864/lazy-buy/Dise%C3%B1o_sin_t%C3%ADtulo_r4admw.png" alt="image">
       <p>Welcome to Lazy Buy! We are excited to have you as a part of our lazy shoppers community. You can now enjoy a comfortable and effortless shopping experience on our platform. Take advantage of our exclusive deals and promotions to make your purchases in style! If you have any questions or need help, don't hesitate to reach out to our customer service team. Thank you for choosing Lazy Buy!</p>
-      `, // plain text body
+    </div>
+  </body>
+  </html>`, // plain text body
     });
   } catch (e) {
     console.log(e);

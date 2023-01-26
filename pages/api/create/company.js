@@ -68,11 +68,56 @@ export default async function createCompany(req, res) {
         },
       },
     });
+
+
     await transporter.sendMail({
       from: '"Lazy Buy" <lazybuy02@gmail.com>', // sender address
       to: companyData.email, // list of receivers
       subject: "Company register", // Subject line
-      text: "Welcome to Lazy Buy Corporation! We are thrilled to have you on board as a valued member of our team. We are confident that your skills and expertise will help us continue to provide top-notch service to our customers. We believe that our company culture is the key to our success, and we strive to create a positive and productive work environment. We value communication and teamwork, and we are here to support you in any way we can. Thank you for joining us, we can't wait to see the great things you will achieve here at Lazy Buy Corporation", // plain text body
+      html:`
+      <html>
+  <head>
+    <style>
+      /* Crear una clase para la card */
+      .card {
+        /* Añadir sombra de caja */
+        box-shadow: 0px 0px 10px #ccc;
+        /* Añadir estilos adicionales */
+        padding: 20px;
+        background-color: #fff;
+        width: 400px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      /* Crear una clase para el título */
+      .card-title {
+        /* Añadir estilos adicionales */
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+
+      /* Crear una clase para la imagen */
+      .card-img {
+        /* Añadir estilos adicionales */
+        width: 200px;
+        height: 200px;
+        margin: 0 auto;
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h1 class="card-title">Registration Completed</h1>
+      <p>${companyData.name}</p>
+      <p>${companyData.email}</p>
+      <img class="card-img" src="https://res.cloudinary.com/dl5hwebwa/image/upload/v1673480864/lazy-buy/Dise%C3%B1o_sin_t%C3%ADtulo_r4admw.png" alt="image">
+      <p>Welcome to Lazy Buy Corporation! We are thrilled to have you on board as a valued member of our team. We are confident that your skills and expertise will help us continue to provide top-notch service to our customers. We believe that our company culture is the key to our success, and we strive to create a positive and productive work environment. We value communication and teamwork, and we are here to support you in any way we can. Thank you for joining us, we can't wait to see the great things you will achieve here at Lazy Buy Corporation</p>
+    </div>
+  </body>
+  </html>`, // plain text body
     });
 
     return res.status(200).json(newCompany);
