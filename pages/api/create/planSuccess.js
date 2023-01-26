@@ -29,16 +29,45 @@ export default async function handleSuccess(req, res) {
       plan: req.body.planType,
     },
   });
-  console.log(req.body.email)
-  console.log(req.body.planType) //---> encriptacion 
+  // console.log(req.body.email)
+  // console.log(req.body.planType) //---> encriptacion 
   await transporter.sendMail({
     from: '"Lazy Buy" <lazybuy02@gmail.com>', // sender address
     to: req.body.email, // list of receivers
     subject: "Subcription payment ", // Subject line
-    html: ` <h3>Subscription Payment Successful!</h3> <br/> <h4>Subscription:</h4>   ${req.body.planType} 
-    <br/> <p>
-    Thank you for choosing Lazy Buy! Your subscription has been received and processed successfully. You can now enjoy the exclusive benefits of having a subscription, such as expanding the limit of products published on our platform. We hope to continue providing you with an excellent shopping experience. Thank you again for choosing Lazy Buy!
-    </p>`, // plain text body
+    html: `
+    <html>
+<head>
+  <style>
+    /* Crear una clase para la card */
+    .card {
+      /* Añadir sombra de caja */
+      box-shadow: 0px 0px 10px #ccc;
+      /* Añadir estilos adicionales */
+      padding: 20px;
+      background-color: #fff;
+      width: 400px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    /* Crear una clase para el título */
+    .card-title {
+      /* Añadir estilos adicionales */
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1 class="card-title">Successful Payment</h1>
+    <p>Plan: ${req.body.planType}</p>
+    <p>Thank you for choosing Lazy Buy! Your subscription has been received and processed successfully. You can now enjoy the exclusive benefits of having a subscription, such as expanding the limit of products published on our platform. We hope to continue providing you with an excellent shopping experience. Thank you again for choosing Lazy Buy!</p>
+  </div>
+</body>
+</html>`, // plain text body
   });
 
   return res.status(200).json(contante);
