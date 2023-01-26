@@ -9,7 +9,6 @@ const Like = ({ user }) => {
   return (
     <UserProfile
       user={user}
-      title="Likes"
       headerTitle="Your favorite products!"
     >
       {/* {console.log(data)} */}
