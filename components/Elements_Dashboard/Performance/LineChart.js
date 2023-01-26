@@ -24,15 +24,14 @@ const LineChart = ({ months }) => {
     ],
     datasets: [
       {
-        label: "Bill",
-        backgroundColor: "rgb(255, 99, 132)",
-        borderColor: "black",
+        label: "Monthly payments",
+        backgroundColor: "rgb(71 85 105)",
         data: [...monthsAux],
       },
     ],
   };
   const options = {
-    mainAspectRatio: false,
+    maintainAspectRatio: true,
     responsive: true,
     scales: {
       y: {
