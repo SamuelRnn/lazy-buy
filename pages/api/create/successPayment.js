@@ -7,14 +7,14 @@ const transporter = nodemailer.createTransport({
   port: 465,
   secure: true,
   auth: {
-    user: "lazybuy24@gmail.com",
-    pass: "fefqdqzlyfndngxv",
+    user: "lazybuy02@gmail.com",
+    pass: "yctqpuqbiutnfebc",
   },
 });
 
-transporter.verify().then(() => {
-  console.log("Mensaje enviado");
-});
+// transporter.verify().then(() => {
+//   console.log("Mensaje enviado");
+// });
 
 export default async function success(req, res) {
   if (req.method !== "POST") {
@@ -87,7 +87,7 @@ export default async function success(req, res) {
     html += namesproduct;
     // console.log("🚀 ~ file: successPayment.js:88 ~ success ~ html", html)
     await transporter.sendMail({
-      from: '"Payment Completed" <lazybuy24.gmail.com>', // sender address
+      from: '"Payment Completed" <lazybuy02@gmail.com>', // sender address
       to: emailUser, // list of receivers
       subject: "Payment Completed", // Subject line
       html,
