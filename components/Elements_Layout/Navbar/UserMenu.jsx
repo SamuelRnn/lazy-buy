@@ -61,7 +61,7 @@ const UserMenu = ({ showModal, setShowModal }) => {
                 </Link>
                 {session.isAdmin && (
                   <Link
-                    href="/admin"
+                    href="/admin/companies"
                     className="flex items-center p-4 cursor-pointer bg-slate-500 text-white rounded-lg hover:bg-zinc-50 transition-all hover:text-fondo-300 shadow-lg"
                   >
                     <RiAdminLine className="mr-2" />
