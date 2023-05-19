@@ -381,13 +381,13 @@ export async function getServerSideProps({ res, query: { slug } }) {
 
   const carousel = await product.findMany({
     where: {
-      OR: [
-        {
-          category: {
-            contains: fetchedProduct.category,
-          },
+      where: {
+        category: {
+          contains: fetchedProduct.category,
         },
-      ],
+        isActive: true,
+        isVisible: true,
+      },
       NOT: {
         name: {
           contains: fetchedProduct.name,
