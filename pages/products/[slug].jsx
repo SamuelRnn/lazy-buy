@@ -44,8 +44,7 @@ const Detail = ({ product, carousel }) => {
     if (session.type === "company") {
       return toast.error("Company accounts can't give reviews!");
     }
-    if (!input.commentBody)
-      return toast.error("Invalid comment, please write something!");
+    if (!input.commentBody) return toast.error("Invalid comment, please write something!");
 
     let aux = 0;
     let checkProductTransaction;
@@ -101,94 +100,88 @@ const Detail = ({ product, carousel }) => {
       <br />
       <br />
       <br />
-      <div className="main">
+      <div className='main'>
         <button
-          className="block px-5 py-3 ml-3 text-xs font-medium text-white bg-fondo-300 rounded hover:bg-fondo-500 active:scale-75 transition-all ease-out"
+          className='block px-5 py-3 ml-3 text-xs font-medium text-white bg-fondo-300 rounded hover:bg-fondo-500 active:scale-75 transition-all ease-out'
           onClick={() => router.back()}
         >
           Back
         </button>
       </div>
       <section>
-        <div className="relative max-w-screen-xl px-1 py-8 mx-auto">
-          <div className="grid items-start grid-cols-1 gap-8 md:grid-cols-2">
-            <div className="grid grid-cols-2 gap-4 md:grid-cols-1">
+        <div className='relative max-w-screen-xl px-1 py-8 mx-auto'>
+          <div className='grid items-start grid-cols-1 gap-8 md:grid-cols-2'>
+            <div className='grid grid-cols-2 gap-4 md:grid-cols-1'>
               <Image
                 width={400}
                 height={400}
-                alt="Les Paul"
+                alt='Les Paul'
                 src={product.mainImage.url}
-                className="object-cover w-full aspect-square rounded-xl"
+                className='object-cover w-full aspect-square rounded-xl'
               />
 
-              <div className="grid grid-cols-2 gap-4 lg:mt-4">
+              <div className='grid grid-cols-2 gap-4 lg:mt-4'>
                 <Image
                   width={1500}
                   height={1000}
-                  alt="Les Paul"
+                  alt='Les Paul'
                   src={product.mainImage.url}
-                  className="object-cover w-full aspect-square rounded-xl"
+                  className='object-cover w-full aspect-square rounded-xl'
                 />
 
                 <Image
                   width={1500}
                   height={1000}
-                  alt="Les Paul"
+                  alt='Les Paul'
                   src={product.mainImage.url}
-                  className="object-cover w-full aspect-square rounded-xl"
+                  className='object-cover w-full aspect-square rounded-xl'
                 />
 
                 <Image
                   width={1500}
                   height={1000}
-                  alt="Les Paul"
+                  alt='Les Paul'
                   src={product.mainImage.url}
-                  className="object-cover w-full aspect-square rounded-xl"
+                  className='object-cover w-full aspect-square rounded-xl'
                 />
 
                 <Image
                   width={1500}
                   height={1000}
-                  alt="Les Paul"
+                  alt='Les Paul'
                   src={product.mainImage.url}
-                  className="object-cover w-full aspect-square rounded-xl"
+                  className='object-cover w-full aspect-square rounded-xl'
                 />
               </div>
             </div>
 
-            <div className="sticky top-10">
-              <div className="flex justify-between mt-8">
-                <div className="max-w-[35ch]">
-                  <h1 className="text-2xl font-bold">{product.name}</h1>
+            <div className='sticky top-10'>
+              <div className='flex justify-between mt-8'>
+                <div className='max-w-[35ch]'>
+                  <h1 className='text-2xl font-bold'>{product.name}</h1>
 
-                  <p className="mt-0.5 text-sm text-zinc-700">
-                    {product.company.name}
-                  </p>
+                  <p className='mt-0.5 text-sm text-zinc-700'>{product.company.name}</p>
 
-                  <div className="mt-2 -ml-0.5 flex">
-                    <span className="flex">
-                      {Array.from(
-                        "*".repeat(Math.round(product.averageRating))
-                      ).map((star, i) => (
-                        <AiFillStar key={i} className="text-yellow-500" />
+                  <div className='mt-2 -ml-0.5 flex'>
+                    <span className='flex'>
+                      {Array.from("*".repeat(Math.round(product.averageRating))).map((star, i) => (
+                        <AiFillStar key={i} className='text-yellow-500' />
                       ))}
-                      {Array.from(
-                        "*".repeat(5 - Math.round(product.averageRating))
-                      ).map((star, i) => (
-                        <AiFillStar key={i} className="text-zinc-300" />
-                      ))}
+                      {Array.from("*".repeat(5 - Math.round(product.averageRating))).map(
+                        (star, i) => (
+                          <AiFillStar key={i} className='text-zinc-300' />
+                        )
+                      )}
                     </span>
                   </div>
                 </div>
 
-                <p className="text-lg font-bold">${product.price.toFixed(2)}</p>
+                <p className='text-lg font-bold'>${product.price.toFixed(2)}</p>
               </div>
 
-              <div className="prose max-w-none mt-10">
+              <div className='prose max-w-none mt-10'>
                 <p>{product.description}</p>
-                <p className="mt-8 text-zinc-600">
-                  available stock: {product.stock}
-                </p>
+                <p className='mt-8 text-zinc-600'>available stock: {product.stock}</p>
               </div>
 
               {/* <div className="pb-6 prose max-w-none">
@@ -202,7 +195,7 @@ const Detail = ({ product, carousel }) => {
                   </p>
                 </div> */}
 
-              <div className="mt-8">
+              <div className='mt-8'>
                 {/* //add props extra to model  */}
                 {/* <fieldset>
                   <legend className="mb-1 text-sm font-medium">Color</legend>
@@ -234,7 +227,7 @@ const Detail = ({ product, carousel }) => {
                   <legend className="mb-1 text-sm font-medium">Size</legend>
                 </fieldset> */}
 
-                <div className="flex mt-8 flex-col gap-4">
+                <div className='flex mt-8 flex-col gap-4'>
                   <div>
                     {/*  <input
                       type="number"
@@ -242,9 +235,9 @@ const Detail = ({ product, carousel }) => {
                       className="w-12 rounded border-gray-200 py-3 text-center text-xs [-moz-appearance:_textfield] [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
                     /> */}
                   </div>
-                  <div className="flex justify-between items-center mb-5 px-5">
+                  <div className='flex justify-between items-center mb-5 px-5'>
                     <button
-                      className="text-gray-200 px-2 py-2 bg-zinc-500 hover:bg-fondo-300 transition-colors  rounded-md"
+                      className='text-gray-200 px-2 py-2 bg-zinc-500 hover:bg-fondo-300 transition-colors  rounded-md'
                       onClick={() => {
                         if (quantity === 1)
                           return toast.error(
@@ -254,38 +247,39 @@ const Detail = ({ product, carousel }) => {
                         setQuantity(quantity - 1);
                       }}
                     >
-                      <FiMinus className="text-xl" />
+                      <FiMinus className='text-xl' />
                     </button>
-                    <span className="font-bold text-2xl">{quantity}</span>
+                    <span className='font-bold text-2xl'>{quantity}</span>
                     <button
-                      className="text-gray-200 px-2 py-2 bg-zinc-500 hover:bg-fondo-300 transition-colors  rounded-md"
+                      className='text-gray-200 px-2 py-2 bg-zinc-500 hover:bg-fondo-300 transition-colors  rounded-md'
                       onClick={() => {
-                        if(quantity >= product.stock) return toast.error("You can't exceed the stock!")
+                        if (quantity >= product.stock)
+                          return toast.error("You can't exceed the stock!");
 
                         setQuantity(quantity + 1);
                       }}
                     >
-                      <FiPlus className="text-xl" />
+                      <FiPlus className='text-xl' />
                     </button>
                   </div>
 
                   <button
                     disabled={cart.find((item) => item.id === product.id)}
-                    className="block px-5 py-3 sm:ml-3 font-medium text-white bg-fondo-300 rounded hover:bg-fondo-500 active:scale-75 transition-all ease-out disabled:pointer-events-none disabled:bg-zinc-400 text-lg"
+                    className='block px-5 py-3 sm:ml-3 font-medium text-white bg-fondo-300 rounded hover:bg-fondo-500 active:scale-75 transition-all ease-out disabled:pointer-events-none disabled:bg-zinc-400 text-lg'
                     onClick={addItemToCart}
                   >
                     Add to cart
                   </button>
-                  <form onSubmit={addReviewToProduct} className="mb-5">
-                    <div className="flex justify-center items-center gap-2">
+                  <form onSubmit={addReviewToProduct} className='mb-5'>
+                    <div className='flex justify-center items-center gap-2'>
                       <textarea
                         disabled={session.type === "user" ? false : true}
-                        placeholder="Rate this product!"
+                        placeholder='Rate this product!'
                         rows={3}
                         cols={50}
                         maxLength={119}
-                        className="resize-none p-1 border-solid border-2 border-slate-900 outline-none rounded disabled:cursor-not-allowed"
-                        name="commentBody"
+                        className='resize-none p-1 border-solid border-2 border-slate-900 outline-none rounded disabled:cursor-not-allowed'
+                        name='commentBody'
                         value={input.commentBody}
                         onChange={(e) =>
                           setInput({
@@ -296,8 +290,8 @@ const Detail = ({ product, carousel }) => {
                       />
                       <button
                         disabled={session.type === "user" ? false : true}
-                        type="submit"
-                        className="px-5 py-7 bg-fondo-300 hover:bg-fondo-500 active:scale-75 disabled:pointer-events-none disabled:bg-zinc-400 text-lg rounded font-medium text-white cursor-pointer"
+                        type='submit'
+                        className='px-5 py-7 bg-fondo-300 hover:bg-fondo-500 active:scale-75 disabled:pointer-events-none disabled:bg-zinc-400 text-lg rounded font-medium text-white cursor-pointer'
                       >
                         Post
                       </button>
@@ -306,34 +300,34 @@ const Detail = ({ product, carousel }) => {
                       disabled={session.type === "user" ? false : true}
                       defaultValue={input.rating}
                       onChange={(e) => setInput({ ...input, rating: e })}
-                      className="flex justify-center"
+                      className='flex justify-center'
                     />
                   </form>
-                  <div className="grid gap-4 place-content-center">
+                  <div className='grid gap-4 place-content-center'>
                     {reviews &&
                       reviews.map((r) => (
                         <div
                           key={r.id}
-                          className="bg-slate-300 rounded p-2 relative w-[320px] sm:w-[420px]"
+                          className='bg-slate-300 rounded p-2 relative w-[320px] sm:w-[420px]'
                         >
-                          <div className="flex items-center gap-3">
+                          <div className='flex items-center gap-3'>
                             <Image
                               src={r.user.profilePicture.url}
                               alt={r.user.userName}
                               width={64}
                               height={64}
-                              className="object-cover rounded-full"
+                              className='object-cover rounded-full'
                             />
                             <p>{r.commentBody}</p>
                           </div>
                           <Rate
                             disabled={true}
                             defaultValue={r.rating}
-                            className="flex justify-center"
+                            className='flex justify-center'
                           />
                           {session.isAdmin && (
                             <BsEraserFill
-                              className="absolute top-[-10px] right-1 text-3xl hover:cursor-pointer hover:text-fondo-500"
+                              className='absolute top-[-10px] right-1 text-3xl hover:cursor-pointer hover:text-fondo-500'
                               onClick={() => eraseComment(r.id)}
                             />
                           )}
@@ -350,7 +344,7 @@ const Detail = ({ product, carousel }) => {
       <br />
       {carousel.length ? (
         <>
-          <h1 className="main home_titles">Related products</h1>
+          <h1 className='main home_titles'>Related products</h1>
           <CardCarousel productArray={carousel} />
         </>
       ) : null}
@@ -381,13 +375,11 @@ export async function getServerSideProps({ res, query: { slug } }) {
 
   const carousel = await product.findMany({
     where: {
-      where: {
-        category: {
-          contains: fetchedProduct.category,
-        },
-        isActive: true,
-        isVisible: true,
+      category: {
+        contains: fetchedProduct.category,
       },
+      isActive: true,
+      isVisible: true,
       NOT: {
         name: {
           contains: fetchedProduct.name,
